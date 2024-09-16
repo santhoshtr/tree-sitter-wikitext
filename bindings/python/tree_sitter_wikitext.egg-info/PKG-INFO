@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: tree-sitter-wikitext
+Version: 0.0.1
+Summary: Wikitext grammar for tree-sitter
+License: MIT
+Project-URL: Homepage, https://github.com/tree-sitter/tree-sitter-wikitext
+Keywords: incremental,parsing,tree-sitter,wikitext
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Software Development :: Compilers
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Typing :: Typed
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: core
+Requires-Dist: tree-sitter~=0.21; extra == "core"
