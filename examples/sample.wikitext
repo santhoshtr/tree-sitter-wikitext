@@ -1,0 +1,97 @@
+
+= Heading 1 =
+
+This is a line.
+This is still part of the same paragraph.
+
+This is a paragraph.<p>This is a continuation of the paragraph. But it appears after an empty line due to the &lt;p> and &lt;/p> tags.</p>
+
+This is a line.<div>This is another line appearing as a second new paragraph instead of a third paragraph due to the &lt;div> and &lt;/div> tags.</div>
+
+== Unordered lists == 
+
+* Start a line with asterisks (<code>*</code>) to create the first item in an unordered list.
+** Use two asterisks for a sub-item.
+*** Increase the number of asterisks for deeper levels.
+* Each line break signifies a new item in the list.
+A line starting without a star marks the end of the list.
+* You can start over with a new list
+
+Now you are ready to create well-structured unordered lists.
+
+== Ordered lists ==
+
+# Use a hashtag (<code>#</code>) at the beginning of each line to signify the order.
+## Use two hashtags (<code>##</code>) for a sub-item.
+## Continue numbering to maintain the sequence and logical flow of information.
+# Add a new line between each item for improved readability.
+A line starting without a hashtag marks the end of the list.
+# An ordered list starts with 1.
+# Then 2, etc
+
+== Definition Lists ==
+
+; Wiki
+: A wiki (/ˈwɪki/ ⓘ WI-kee) is a form of online hypertext publication that is collaboratively edited and managed by its own audience directly through a web browser. See [[w:Wiki]].
+; Web Browser
+: A web browser is an application for accessing websites. See [[w:Web browser]]
+
+
+: An indented line.
+A new line starts a new non-indented paragraph.
+
+
+<blockquote>
+This is a blockquote. It is used to highlight quoted text or separate specific content.
+</blockquote>
+
+
+Text above dividing line
+----
+Text below dividing line
+
+''[[MediaWiki]]''
+
+== Links ==
+
+This interwiki link points to [[w:Documentation]] on Wikipedia.
+
+Its Esperanto word equivalent is [[:eo:Dokumentaro]].
+
+[[Help:Special pages#Editing Special namespace pages|Help:Special pages]]
+
+* [[Help:Link|About links]]
+* Parentheses: [[kingdom (biology)|]].
+* Colon: [[Help:Pipe|]].
+
+
+#REDIRECT [[United States of America]]
+
+[[media:Test.ogg|Audio]]
+
+[[:Category:Documentation]]
+
+[[Special:Whatlinkshere/Help:Editing]]
+
+<nowiki>
+The nowiki tag prevents 
+[[Wiki]] ''markup'' from rendering.
+It adjusts text by
+eliminating
+newlines and multiple
+spaces.
+It still processes special
+characters: &rarr;
+</nowiki>
+
+
+<pre>
+The pre tag bypasses [[Wiki]]
+ ''markup''.
+It also maintains     text
+ format.
+It still recognizes special
+characters: &rarr;
+</pre>
+
+

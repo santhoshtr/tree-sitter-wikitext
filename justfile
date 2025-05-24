@@ -7,4 +7,4 @@ gen:
     tree-sitter generate
 
 see: gen
-    tree-sitter parse ./test.txt | batcat
+    tree-sitter parse examples/sample.wikitext | batcat
