@@ -18,7 +18,7 @@ class BdistWheel(bdist_wheel):
     def get_tag(self):
         python, abi, platform = super().get_tag()
         if python.startswith("cp"):
-            python, abi = "cp38", "abi3"
+            python, abi = "cp39", "abi3"
         return python, abi, platform
 
 
@@ -38,23 +38,24 @@ setup(
                 "src/parser.c",
                 # NOTE: if your language uses an external scanner, add it here.
             ],
-            extra_compile_args=[
-                "-std=c11",
-            ] if system() != "Windows" else [
-                "/std:c11",
-                "/utf-8",
-            ],
+            extra_compile_args=(
+                [
+                    "-std=c11",
+                ]
+                if system() != "Windows"
+                else [
+                    "/std:c11",
+                    "/utf-8",
+                ]
+            ),
             define_macros=[
-                ("Py_LIMITED_API", "0x03080000"),
-                ("PY_SSIZE_T_CLEAN", None)
+                ("Py_LIMITED_API", "0x03090000"),
+                ("PY_SSIZE_T_CLEAN", None),
             ],
             include_dirs=["src"],
             py_limited_api=True,
         )
     ],
-    cmdclass={
-        "build": Build,
-        "bdist_wheel": BdistWheel
-    },
-    zip_safe=False
+    cmdclass={"build": Build, "bdist_wheel": BdistWheel},
+    zip_safe=False,
 )
