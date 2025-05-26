@@ -1,0 +1,170 @@
+================================================================================
+Basic redirects
+================================================================================
+
+#REDIRECT[[Target Page]]
+#redirect [[Target Page]]
+#REDIRECT [[Target Page]]
+#REDIRECT[[Target_Page]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (page_link_brackets)))
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (page_link_brackets)))
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (page_link_brackets)))
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (page_link_brackets))))
+
+================================================================================
+Redirects with namespaces
+================================================================================
+
+#REDIRECT[[Category:Target Page]]
+#REDIRECT[[User talk:Username]]
+#REDIRECT[[File:Image.jpg]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title
+        (namespace)
+        (page_title))
+      (page_link_brackets)))
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title
+        (namespace)
+        (page_title))
+      (page_link_brackets)))
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title
+        (namespace)
+        (page_title))
+      (page_link_brackets))))
+
+================================================================================
+Redirects with section links
+================================================================================
+
+#REDIRECT[[Target Page#Section]]
+#REDIRECT[[Target Page#Section name with spaces]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (section_link)
+      (page_link_brackets)))
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (section_link)
+      (page_link_brackets))))
+
+================================================================================
+Invalid or malformed redirects
+================================================================================
+
+#REDIRECT Target Page
+#REDIRECT[Target Page]
+#REDIRECT [Target Page]
+Text #REDIRECT[[Target Page]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text)))
+
+================================================================================
+Redirects with comments
+================================================================================
+
+#REDIRECT[[Target Page]] <!-- Comment after redirect -->
+<!-- Comment before redirect --> #REDIRECT[[Target Page]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (page_link_brackets))
+    (comment))
+  (comment)
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title)
+      (page_link_brackets))))
+
+================================================================================
+Redirects with interwiki links
+================================================================================
+
+#REDIRECT[[:en:Target Page]]
+#REDIRECT[[w:Target Page]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title
+        (interwiki_prefix)
+        (page_title))
+      (page_link_brackets)))
+  (redirect
+    (redirect_marker)
+    (page_link
+      (page_link_brackets)
+      (page_title
+        (interwiki_prefix)
+        (page_title))
+      (page_link_brackets))))
