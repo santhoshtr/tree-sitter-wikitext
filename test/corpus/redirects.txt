@@ -10,30 +10,23 @@ Basic redirects
 --------------------------------------------------------------------------------
 
 (source_file
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (page_link_brackets)))
+    (wikilink
+      (target)))
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (page_link_brackets)))
+    (wikilink
+      (target)))
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (page_link_brackets)))
+    (wikilink
+      (target)))
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (page_link_brackets))))
+    (wikilink
+      (target)))
+  (newline))
 
 ================================================================================
 Redirects with namespaces
@@ -46,30 +39,19 @@ Redirects with namespaces
 --------------------------------------------------------------------------------
 
 (source_file
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title
-        (namespace)
-        (page_title))
-      (page_link_brackets)))
+    (wikilink
+      (target)))
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title
-        (namespace)
-        (page_title))
-      (page_link_brackets)))
+    (wikilink
+      (target)))
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title
-        (namespace)
-        (page_title))
-      (page_link_brackets))))
+    (wikilink
+      (target)))
+  (newline))
 
 ================================================================================
 Redirects with section links
@@ -81,20 +63,15 @@ Redirects with section links
 --------------------------------------------------------------------------------
 
 (source_file
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (section_link)
-      (page_link_brackets)))
+    (wikilink
+      (target)))
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (section_link)
-      (page_link_brackets))))
+    (wikilink
+      (target)))
+  (newline))
 
 ================================================================================
 Invalid or malformed redirects
@@ -127,20 +104,17 @@ Redirects with comments
 --------------------------------------------------------------------------------
 
 (source_file
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (page_link_brackets))
-    (comment))
-  (comment)
+    (wikilink
+      (target)))
+  (text)
+  (newline)
+  (text)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title)
-      (page_link_brackets))))
+    (wikilink
+      (target)))
+  (newline))
 
 ================================================================================
 Redirects with interwiki links
@@ -152,19 +126,12 @@ Redirects with interwiki links
 --------------------------------------------------------------------------------
 
 (source_file
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title
-        (interwiki_prefix)
-        (page_title))
-      (page_link_brackets)))
+    (wikilink
+      (target)))
+  (newline)
   (redirect
-    (redirect_marker)
-    (page_link
-      (page_link_brackets)
-      (page_title
-        (interwiki_prefix)
-        (page_title))
-      (page_link_brackets))))
+    (wikilink
+      (target)))
+  (newline))

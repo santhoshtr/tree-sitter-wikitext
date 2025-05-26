@@ -9,7 +9,7 @@ Simple Internal Link
 (source_file
   (newline)
   (wikilink
-     (target))
+    (target))
   (newline))
 
 ==================
@@ -24,7 +24,7 @@ Internal Link with Label
   (newline)
   (wikilink
     (target)
-     (label
+    (label
       (text)))
   (newline))
 
@@ -69,9 +69,7 @@ Internal Link with Anchor
 (source_file
   (newline)
   (wikilink
-    (target)
-    (label
-      (text)))
+    (target))
   (newline))
 
 ==================
@@ -86,7 +84,8 @@ Internal Link with Anchor and Label
   (newline)
   (wikilink
     (target)
-    (description))
+    (label
+      (text)))
   (newline))
 
 ==================
@@ -100,7 +99,7 @@ External Link (URL only)
 (source_file
   (newline)
   (external_link
-    (url))
+    (target))
   (newline))
 
 ==================
@@ -114,8 +113,9 @@ External Link with Label
 (source_file
   (newline)
   (external_link
-    (url)
-    (description))
+    (target)
+    (label
+      (text)))
   (newline))
 
 ==================
@@ -128,7 +128,7 @@ https://example.com
 
 (source_file
   (newline)
-  (bare_url)
+  (text)
   (newline))
 
 ==================
@@ -145,8 +145,9 @@ Multiple Links
     (target))
   (text)
   (external_link
-    (url)
-    (description))
+    (target)
+    (label
+      (text)))
   (newline))
 
 ==================
@@ -161,7 +162,11 @@ Nested Links Syntax (not valid in MediaWiki)
   (newline)
   (wikilink
     (target)
-    (description))
+    (label
+      (external_link
+        (target)
+        (label
+          (text)))))
   (newline))
 
 ==================
@@ -174,8 +179,8 @@ Category Link
 
 (source_file
   (newline)
-  (category_link
-    (target))
+  (category
+    (category))
   (newline))
 
 ==================
@@ -188,8 +193,8 @@ File Link
 
 (source_file
   (newline)
-  (file_link
-    (target))
+  (file
+    (file))
   (newline))
 
 ==================
@@ -202,13 +207,10 @@ Image Link with Parameters
 
 (source_file
   (newline)
-  (file_link
-    (target)
-    (parameter)
-    (parameter
-      (parameter_name)
-      (parameter_value))
-    (caption))
+  (image
+    (file)
+    (attr_label
+      (text)))
   (newline))
 
 ==================

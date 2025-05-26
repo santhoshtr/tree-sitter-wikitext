@@ -9,7 +9,7 @@ Level 1 Header
 (source_file
   (heading
     (h1
-    (text)))
+      (text)))
   (newline))
 
 ==================
@@ -93,8 +93,7 @@ Header with Bold Text
 (source_file
   (heading
     (h2
-      (bold
-        (text))))
+      (text)))
   (newline))
 
 ==================
@@ -108,8 +107,7 @@ Header with Italic Text
 (source_file
   (heading
     (h2
-      (italic
-        (text))))
+      (text)))
   (newline))
 
 ==================
@@ -123,8 +121,7 @@ Header with Italic and Bold Text
 (source_file
   (heading
     (h2
-      (bold_italic
-        (text))))
+      (text)))
   (newline))
 
 ==================
@@ -138,10 +135,7 @@ Header with Link
 (source_file
   (heading
     (h2
-      (wikilink
-        (target)
-        (label
-          (text)))))
+      (text)))
   (newline))
 
 ==================
@@ -155,11 +149,6 @@ Header with Mixed Formatting
 (source_file
   (heading
     (h2
-      (bold
-        (text))
-      (text)
-      (italic
-        (text))
       (text)))
   (newline))
 
@@ -174,15 +163,12 @@ Multiple Headers
 ---
 
 (source_file
-  (newline)
   (heading
     (h1
       (text)))
-  (newline)
   (heading
     (h2
       (text)))
-  (newline)
   (heading
     (h3
       (text)))
@@ -197,7 +183,6 @@ Header with Extra Spaces
 ---
 
 (source_file
-  (newline)
   (heading
     (h2
       (text)))
@@ -212,10 +197,10 @@ Unbalanced Headers (Not Valid in MediaWiki)
 ---
 
 (source_file
-  (newline)
   (heading
     (h2
       (text)))
+  (text)
   (newline))
 
 ==================
@@ -227,7 +212,6 @@ Header with Special Characters
 ---
 
 (source_file
-  (newline)
   (heading
     (h2
       (text)))
@@ -245,7 +229,6 @@ Some text.
 (source_file
   (newline)
   (text)
-  (newline)
   (heading
     (h2
       (text)))

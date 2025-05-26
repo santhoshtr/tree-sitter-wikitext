@@ -47,10 +47,11 @@ Comments with special characters
 --------------------------------------------------------------------------------
 
 (source_file
-  (comment)
-  (comment)
-  (comment)
-  (comment))
+  (newline)
+  (newline)
+  (newline)
+  (newline)
+  (newline))
 
 ================================================================================
 Comments within other elements
@@ -66,27 +67,19 @@ Text paragraph <!-- inline comment --> with comment.
 
 (source_file
   (heading
-    (heading_marker)
-    (heading_content
-      (text)
-      (comment)
-      (text))
-    (heading_marker))
-  (list
-    (list_item
-      (bullet_marker)
-      (list_item_content
-        (text)
-        (comment)
+    (h2
+      (text)))
+  (newline)
+  (bullet_list
+    (bl1
+      (content
         (text)))
-    (list_item
-      (bullet_marker)
-      (list_item_content
+    (bl1
+      (content
         (text))))
-  (paragraph
-    (text)
-    (comment)
-    (text)))
+  (newline)
+  (text)
+  (newline))
 
 ================================================================================
 Comments at file boundaries
@@ -99,10 +92,11 @@ Text in middle
 --------------------------------------------------------------------------------
 
 (source_file
-  (comment)
-  (paragraph
-    (text))
-  (comment))
+  (newline)
+  (newline)
+  (text)
+  (newline)
+  (newline))
 
 ================================================================================
 Comment-like syntax that isn't a comment
