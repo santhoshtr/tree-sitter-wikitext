@@ -1,5 +1,5 @@
 ==================
-Internal Link
+Simple Internal Link
 ==================
 
 [[Title]]
@@ -11,4 +11,226 @@ Internal Link
   (wikilink
      (target))
   (newline))
- 
+
+==================
+Internal Link with Label
+==================
+
+[[Title|Label]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target)
+    (description))
+  (newline))
+
+==================
+Internal Link with Namespace
+==================
+
+[[Namespace:Title]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target))
+  (newline))
+
+==================
+Internal Link with Namespace and Label
+==================
+
+[[Namespace:Title|Label]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target)
+    (description))
+  (newline))
+
+==================
+Internal Link with Anchor
+==================
+
+[[Title#Anchor]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target))
+  (newline))
+
+==================
+Internal Link with Anchor and Label
+==================
+
+[[Title#Anchor|Label]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target)
+    (description))
+  (newline))
+
+==================
+External Link (URL only)
+==================
+
+[https://example.com]
+
+---
+
+(source_file
+  (newline)
+  (external_link
+    (url))
+  (newline))
+
+==================
+External Link with Label
+==================
+
+[https://example.com Label]
+
+---
+
+(source_file
+  (newline)
+  (external_link
+    (url)
+    (description))
+  (newline))
+
+==================
+Bare URL
+==================
+
+https://example.com
+
+---
+
+(source_file
+  (newline)
+  (bare_url)
+  (newline))
+
+==================
+Multiple Links
+==================
+
+[[Internal Link]] and [https://example.com External Link]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target))
+  (text)
+  (external_link
+    (url)
+    (description))
+  (newline))
+
+==================
+Nested Links Syntax (not valid in MediaWiki)
+==================
+
+[[Outer Link|[Inner Link]]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target)
+    (description))
+  (newline))
+
+==================
+Category Link
+==================
+
+[[Category:Example]]
+
+---
+
+(source_file
+  (newline)
+  (category_link
+    (target))
+  (newline))
+
+==================
+File Link
+==================
+
+[[File:Example.jpg]]
+
+---
+
+(source_file
+  (newline)
+  (file_link
+    (target))
+  (newline))
+
+==================
+Image Link with Parameters
+==================
+
+[[Image:Example.jpg|thumb|alt=Alt text|Caption]]
+
+---
+
+(source_file
+  (newline)
+  (file_link
+    (target)
+    (parameter)
+    (parameter
+      (parameter_name)
+      (parameter_value))
+    (caption))
+  (newline))
+
+==================
+Interwiki Link
+==================
+
+[[wikt:example]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target))
+  (newline))
+
+==================
+Link with Subpage
+==================
+
+[[Main Page/Subpage]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+    (target))
+  (newline))
