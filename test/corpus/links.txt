@@ -24,7 +24,8 @@ Internal Link with Label
   (newline)
   (wikilink
     (target)
-    (description))
+     (label
+      (text)))
   (newline))
 
 ==================
@@ -53,7 +54,8 @@ Internal Link with Namespace and Label
   (newline)
   (wikilink
     (target)
-    (description))
+    (label
+      (text)))
   (newline))
 
 ==================
@@ -67,7 +69,9 @@ Internal Link with Anchor
 (source_file
   (newline)
   (wikilink
-    (target))
+    (target)
+    (label
+      (text)))
   (newline))
 
 ==================
