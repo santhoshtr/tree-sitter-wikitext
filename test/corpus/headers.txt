@@ -7,9 +7,9 @@ Level 1 Header
 ---
 
 (source_file
-  (newline)
-  (heading1
-    (text))
+  (heading
+    (h1
+    (text)))
   (newline))
 
 ==================
