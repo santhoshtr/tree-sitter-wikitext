@@ -4,5 +4,8 @@
     "rules": {
       "recommended": true
     }
+  },
+  "formatter": {
+    "useEditorconfig": true
   }
 }
