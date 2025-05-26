@@ -1,0 +1,245 @@
+==================
+Level 1 Header
+==================
+
+= Heading 1 =
+
+---
+
+(source_file
+  (newline)
+  (heading1
+    (text))
+  (newline))
+
+==================
+Level 2 Header
+==================
+
+== Heading 2 ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (text))
+  (newline))
+
+==================
+Level 3 Header
+==================
+
+=== Heading 3 ===
+
+---
+
+(source_file
+  (newline)
+  (heading3
+    (text))
+  (newline))
+
+==================
+Level 4 Header
+==================
+
+==== Heading 4 ====
+
+---
+
+(source_file
+  (newline)
+  (heading4
+    (text))
+  (newline))
+
+==================
+Level 5 Header
+==================
+
+===== Heading 5 =====
+
+---
+
+(source_file
+  (newline)
+  (heading5
+    (text))
+  (newline))
+
+==================
+Level 6 Header
+==================
+
+====== Heading 6 ======
+
+---
+
+(source_file
+  (newline)
+  (heading6
+    (text))
+  (newline))
+
+==================
+Header with Bold Text
+==================
+
+== '''Bold Header''' ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (bold
+      (text)))
+  (newline))
+
+==================
+Header with Italic Text
+==================
+
+== ''Italic Header'' ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (italic
+      (text)))
+  (newline))
+
+==================
+Header with Italic and Bold Text
+==================
+
+== '''''Bold and Italic Header''''' ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (bold_italic
+      (text)))
+  (newline))
+
+==================
+Header with Link
+==================
+
+== [[Link|Header with Link]] ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (wikilink
+      (target)
+      (label
+        (text))))
+  (newline))
+
+==================
+Header with Mixed Formatting
+==================
+
+== '''Bold''' and ''Italic'' in Header ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (bold
+      (text))
+    (text)
+    (italic
+      (text))
+    (text))
+  (newline))
+
+==================
+Multiple Headers
+==================
+
+= Header 1 =
+== Header 2 ==
+=== Header 3 ===
+
+---
+
+(source_file
+  (newline)
+  (heading1
+    (text))
+  (newline)
+  (heading2
+    (text))
+  (newline)
+  (heading3
+    (text))
+  (newline))
+
+==================
+Header with Extra Spaces
+==================
+
+==  Header with spaces  ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (text))
+  (newline))
+
+==================
+Unbalanced Headers (Not Valid in MediaWiki)
+==================
+
+== Unbalanced Header ===
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (text))
+  (newline))
+
+==================
+Header with Special Characters
+==================
+
+== Header with #$%^&*() ==
+
+---
+
+(source_file
+  (newline)
+  (heading2
+    (text))
+  (newline))
+
+==================
+Header at the End of Document
+==================
+
+Some text.
+== Header at End ==
+
+---
+
+(source_file
+  (newline)
+  (text)
+  (newline)
+  (heading2
+    (text))
+  (newline))
