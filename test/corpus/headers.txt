@@ -22,8 +22,9 @@ Level 2 Header
 
 (source_file
   (newline)
-  (heading2
-    (text))
+  (heading
+    (h2
+      (text)))
   (newline))
 
 ==================
@@ -36,8 +37,9 @@ Level 3 Header
 
 (source_file
   (newline)
-  (heading3
-    (text))
+  (heading
+    (h3
+      (text)))
   (newline))
 
 ==================
@@ -50,8 +52,9 @@ Level 4 Header
 
 (source_file
   (newline)
-  (heading4
-    (text))
+  (heading
+    (h4
+      (text)))
   (newline))
 
 ==================
@@ -64,8 +67,9 @@ Level 5 Header
 
 (source_file
   (newline)
-  (heading5
-    (text))
+  (heading
+    (h5
+      (text)))
   (newline))
 
 ==================
@@ -78,8 +82,9 @@ Level 6 Header
 
 (source_file
   (newline)
-  (heading6
-    (text))
+  (heading
+    (h6
+      (text)))
   (newline))
 
 ==================
@@ -92,9 +97,10 @@ Header with Bold Text
 
 (source_file
   (newline)
-  (heading2
-    (bold
-      (text)))
+  (heading
+    (h2
+      (bold
+        (text))))
   (newline))
 
 ==================
@@ -107,9 +113,10 @@ Header with Italic Text
 
 (source_file
   (newline)
-  (heading2
-    (italic
-      (text)))
+  (heading
+    (h2
+      (italic
+        (text))))
   (newline))
 
 ==================
@@ -122,9 +129,10 @@ Header with Italic and Bold Text
 
 (source_file
   (newline)
-  (heading2
-    (bold_italic
-      (text)))
+  (heading
+    (h2
+      (bold_italic
+        (text))))
   (newline))
 
 ==================
@@ -137,11 +145,12 @@ Header with Link
 
 (source_file
   (newline)
-  (heading2
-    (wikilink
-      (target)
-      (label
-        (text))))
+  (heading
+    (h2
+      (wikilink
+        (target)
+        (label
+          (text)))))
   (newline))
 
 ==================
@@ -154,13 +163,14 @@ Header with Mixed Formatting
 
 (source_file
   (newline)
-  (heading2
-    (bold
-      (text))
-    (text)
-    (italic
-      (text))
-    (text))
+  (heading
+    (h2
+      (bold
+        (text))
+      (text)
+      (italic
+        (text))
+      (text)))
   (newline))
 
 ==================
@@ -175,14 +185,17 @@ Multiple Headers
 
 (source_file
   (newline)
-  (heading1
-    (text))
+  (heading
+    (h1
+      (text)))
   (newline)
-  (heading2
-    (text))
+  (heading
+    (h2
+      (text)))
   (newline)
-  (heading3
-    (text))
+  (heading
+    (h3
+      (text)))
   (newline))
 
 ==================
@@ -195,8 +208,9 @@ Header with Extra Spaces
 
 (source_file
   (newline)
-  (heading2
-    (text))
+  (heading
+    (h2
+      (text)))
   (newline))
 
 ==================
@@ -209,8 +223,9 @@ Unbalanced Headers (Not Valid in MediaWiki)
 
 (source_file
   (newline)
-  (heading2
-    (text))
+  (heading
+    (h2
+      (text)))
   (newline))
 
 ==================
@@ -223,8 +238,9 @@ Header with Special Characters
 
 (source_file
   (newline)
-  (heading2
-    (text))
+  (heading
+    (h2
+      (text)))
   (newline))
 
 ==================
@@ -240,6 +256,7 @@ Some text.
   (newline)
   (text)
   (newline)
-  (heading2
-    (text))
+  (heading
+    (h2
+      (text)))
   (newline))
