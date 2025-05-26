@@ -1,0 +1,123 @@
+================================================================================
+Basic comments
+================================================================================
+
+<!-- This is a comment -->
+Text outside comment
+<!-- Multi-line
+     comment that spans
+     several lines -->
+Text after multi-line comment
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (paragraph
+    (text))
+  (comment)
+  (paragraph
+    (text)))
+
+================================================================================
+Nested comments
+================================================================================
+
+<!-- Outer comment <!-- Nested comment --> still in outer comment -->
+Text between comments
+<!-- Another <!-- complex <!-- nesting --> example --> -->
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (paragraph
+    (text))
+  (comment))
+
+================================================================================
+Comments with special characters
+================================================================================
+
+<!-- Comment with * bold * markup -->
+<!-- Comment with [[ links ]] -->
+<!-- Comment with == headings == -->
+<!-- Comment with {| table |} syntax -->
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (comment)
+  (comment)
+  (comment))
+
+================================================================================
+Comments within other elements
+================================================================================
+
+== Heading <!-- with comment --> ==
+* List item <!-- comment in list -->
+* Second item
+
+Text paragraph <!-- inline comment --> with comment.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (heading_content
+      (text)
+      (comment)
+      (text))
+    (heading_marker))
+  (list
+    (list_item
+      (bullet_marker)
+      (list_item_content
+        (text)
+        (comment)
+        (text)))
+    (list_item
+      (bullet_marker)
+      (list_item_content
+        (text))))
+  (paragraph
+    (text)
+    (comment)
+    (text)))
+
+================================================================================
+Comments at file boundaries
+================================================================================
+
+<!-- Comment at the start -->
+Text in middle
+<!-- Comment at the end -->
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (paragraph
+    (text))
+  (comment))
+
+================================================================================
+Comment-like syntax that isn't a comment
+================================================================================
+
+Text with < and > characters
+Text with <!-- incomplete comment
+Text with <!- not quite a comment ->
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text)))
