@@ -1,0 +1,14 @@
+==================
+Internal Link
+==================
+
+[[Title]]
+
+---
+
+(source_file
+  (newline)
+  (wikilink
+     (target))
+  (newline))
+ 
