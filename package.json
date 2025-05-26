@@ -7,6 +7,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"install": "node-gyp-build",
+		"lint": "npx @biomejs/biome format --write grammar.js",
 		"prebuildify": "prebuildify --napi --strip"
 	},
 	"keywords": ["tree-sitter", "wikitext", "parser"],
@@ -33,9 +34,9 @@
 		}
 	},
 	"devDependencies": {
-		"tree-sitter-cli": "^0.24.0",
-		"eslint-config-treesitter": "^1.0.2",
-		"prebuildify": "^6.0.0"
+		"@biomejs/biome": "1.9.4",
+		"prebuildify": "^6.0.0",
+		"tree-sitter-cli": "^0.24.0"
 	},
 	"tree-sitter": [
 		{
