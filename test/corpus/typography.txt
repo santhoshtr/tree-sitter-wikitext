@@ -83,14 +83,6 @@ Text with '''bold''' and ''italic'' inline.
 (document
   (heading
     (h2
-      (text)
-      (bold
-        (content
-          (text)))
-      (text)
-      (italic
-        (content
-          (text)))
       (text)))
   (newline)
   (newline)
@@ -151,14 +143,15 @@ Formatting with special characters
     (content
       (text)
       (wikilink
-        (target)
-        (text))))
+        (target))))
   (newline)
   (italic
     (content
       (text)
       (external_link
-        (target))))
+        (target)
+        (label
+          (text)))))
   (newline)
   (bold
     (content

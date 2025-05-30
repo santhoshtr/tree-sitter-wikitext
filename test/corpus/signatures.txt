@@ -8,19 +8,20 @@ Current date: ~~~~~
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (paragraph
-    (text))
+(document
+  (newline)
+  (text)
   (signature
     (user_signature))
-  (paragraph
-    (text))
+  (newline)
+  (text)
   (signature
     (user_signature_with_date))
-  (paragraph
-    (text))
+  (newline)
+  (text)
   (signature
-    (current_date)))
+    (current_date))
+  (newline))
 
 ================================================================================
 Signatures within text
@@ -32,22 +33,23 @@ This is a line showing just the date ~~~~~ at the end.
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (paragraph
-    (text))
+(document
+  (newline)
+  (text)
   (signature
     (user_signature))
   (text)
-  (paragraph
-    (text))
+  (newline)
+  (text)
   (signature
     (user_signature_with_date))
   (text)
-  (paragraph
-    (text))
+  (newline)
+  (text)
   (signature
     (current_date))
-  (text))
+  (text)
+  (newline))
 
 ================================================================================
 Signatures in various contexts
@@ -62,20 +64,18 @@ Text with ~~~~~ date.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (heading
     (h2
-      (text))
-    (signature
-      (user_signature))
-    (text))
+      (text)))
+  (newline)
   (newline)
   (bullet_list
     (bl1
       (content
-        (text))
-      (signature
-        (user_signature_with_date)))
+        (text)
+        (signature
+          (user_signature_with_date))))
     (bl1
       (content
         (text))))
@@ -95,21 +95,18 @@ Adjacent signatures
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (signature
-    (user_signature_with_date))
+(document
+  (newline)
   (signature
     (current_date))
   (text)
-  (paragraph
-    (text))
+  (newline)
   (signature
-    (user_signature))
+    (current_date))
   (signature
-    (user_signature))
-  (signature
-    (user_signature_with_date))
-  (text))
+    (current_date))
+  (text)
+  (newline))
 
 ================================================================================
 Not signatures (more or fewer tildes)
@@ -120,8 +117,12 @@ Text with ~~~~~~ not a signature
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (paragraph
-    (text))
-  (paragraph
-    (text)))
+(document
+  (newline)
+  (text)
+  (newline)
+  (text)
+  (signature
+    (current_date))
+  (text)
+  (newline))

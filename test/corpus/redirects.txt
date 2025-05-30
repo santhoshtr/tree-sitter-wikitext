@@ -9,7 +9,7 @@ Basic redirects
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (newline)
   (redirect
     (wikilink
@@ -38,7 +38,7 @@ Redirects with namespaces
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (newline)
   (redirect
     (wikilink
@@ -62,7 +62,7 @@ Redirects with section links
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (newline)
   (redirect
     (wikilink
@@ -84,7 +84,7 @@ Text #REDIRECT[[Target Page]]
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (paragraph
     (text))
   (paragraph
@@ -103,7 +103,7 @@ Redirects with comments
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (newline)
   (redirect
     (wikilink
@@ -125,7 +125,7 @@ Redirects with interwiki links
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (newline)
   (redirect
     (wikilink

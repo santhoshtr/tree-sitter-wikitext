@@ -12,6 +12,7 @@ Basic table
 (document
   (newline)
   (table
+    (attribute)
     (tablecell
       (content
         (text)))
@@ -109,7 +110,8 @@ Table with attributes
       (content
         (text)))
     (tablecell
-      (attribute)
+      (attribute
+        (text))
       (content
         (text)))
     (tablerow
@@ -140,23 +142,29 @@ Table with formatting inside cells
   (table
     (tablecell
       (content
+        (text)
         (bold
           (content
             (text)))))
     (tablecell
       (content
+        (text)
         (italic
           (content
             (text)))))
     (tablerow
       (tablecell
         (content
+          (text)
           (wikilink
             (target))))
       (tablecell
         (content
+          (text)
           (external_link
-            (target))))))
+            (target)
+            (label
+              (text)))))))
   (newline))
 
 ================================================================================
@@ -179,14 +187,14 @@ Nested tables
   (table
     (tablecell
       (content
-        (text)
+        (newline)
         (table
           (tablecell
             (content
-              (text))))
-        (text)))
+              (text))))))
     (tablecell
       (content
+        (newline)
         (text))))
   (newline))
 
@@ -206,12 +214,13 @@ Table with row attributes
 (document
   (newline)
   (table
-    (tablerow)
-    (tablecell
-      (content
-        (text)))
     (tablerow
-      (attribute)
+      (tablecell
+        (content
+          (text))))
+    (tablerow
+      (attribute
+        (text))
       (tablecell
         (content
           (text)))))

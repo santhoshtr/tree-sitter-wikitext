@@ -6,7 +6,7 @@ Simple Internal Link
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target))
@@ -20,7 +20,7 @@ Internal Link with Label
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target)
@@ -36,7 +36,7 @@ Internal Link with Namespace
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target))
@@ -50,7 +50,7 @@ Internal Link with Namespace and Label
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target)
@@ -66,7 +66,7 @@ Internal Link with Anchor
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target))
@@ -80,7 +80,7 @@ Internal Link with Anchor and Label
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target)
@@ -96,7 +96,7 @@ External Link (URL only)
 
 ---
 
-(source_file
+(document
   (newline)
   (external_link
     (target))
@@ -110,7 +110,7 @@ External Link with Label
 
 ---
 
-(source_file
+(document
   (newline)
   (external_link
     (target)
@@ -126,7 +126,7 @@ https://example.com
 
 ---
 
-(source_file
+(document
   (newline)
   (text)
   (newline))
@@ -139,7 +139,7 @@ Multiple Links
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target))
@@ -158,7 +158,7 @@ Nested Links Syntax (not valid in MediaWiki)
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target)
@@ -177,7 +177,7 @@ Category Link
 
 ---
 
-(source_file
+(document
   (newline)
   (category
     (category))
@@ -191,7 +191,7 @@ File Link
 
 ---
 
-(source_file
+(document
   (newline)
   (file
     (file))
@@ -205,7 +205,7 @@ Image Link with Parameters
 
 ---
 
-(source_file
+(document
   (newline)
   (image
     (file)
@@ -221,7 +221,7 @@ Interwiki Link
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target))
@@ -235,7 +235,7 @@ Link with Subpage
 
 ---
 
-(source_file
+(document
   (newline)
   (wikilink
     (target))
