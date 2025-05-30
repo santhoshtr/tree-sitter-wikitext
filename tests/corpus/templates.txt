@@ -1,0 +1,149 @@
+==================
+Basic template
+==================
+
+{{Template}}
+
+---
+
+(document
+  (template
+    template_name: (text)))
+
+==================
+Template with unnamed parameters
+==================
+
+{{Template|parameter1|parameter2}}
+
+---
+
+(document
+  (template
+    template_name: (text)
+    template_parameter: (param_value (text))
+    template_parameter: (param_value (text))))
+
+==================
+Template with named parameters
+==================
+
+{{Template|name1=value1|name2=value2}}
+
+---
+
+(document
+  (template
+    template_name: (text)
+    template_parameter: 
+      (param_name (text))
+      (param_value (text))
+    template_parameter: 
+      (param_name (text))
+      (param_value (text))))
+
+==================
+Template with mixed parameters
+==================
+
+{{Template|first parameter|name=value}}
+
+---
+
+(document
+  (template
+    template_name: (text)
+    template_parameter: (param_value (text))
+    template_parameter: 
+      (param_name (text))
+      (param_value (text))))
+
+==================
+Template with internal link in parameter
+==================
+
+{{Template|parameter with [[Link|display text]]}}
+
+---
+
+(document
+  (template
+    template_name: (text)
+    template_parameter: (param_value 
+      (text)
+      (wikilink
+        target: (text)
+        label: (text))
+      (text))))
+
+==================
+Templates with complex content
+==================
+
+{{Template|This is text with '''bold''' and ''italic'' content}}
+
+---
+
+(document
+  (template
+    template_name: (text)
+    template_parameter: (param_value 
+      (text)
+      (bold
+        content: (text))
+      (text)
+      (italic
+        content: (text))
+      (text))))
+
+==================
+Nested templates
+==================
+
+{{Outer|{{Inner|parameter}}}}
+
+---
+
+(document
+  (template
+    template_name: (text)
+    template_parameter: (param_value
+      (template
+        template_name: (text)
+        template_parameter: (param_value (text))))))
+
+==================
+Templates in context
+==================
+
+Some text before {{Template|param}} and some text after.
+
+---
+
+(document
+  (text)
+  (template
+    template_name: (text)
+    template_parameter: (param_value (text)))
+  (text)
+  (newline))
+
+==================
+Multiple templates
+==================
+
+{{First|param1}}
+{{Second|name=value}}
+
+---
+
+(document
+  (template
+    template_name: (text)
+    template_parameter: (param_value (text)))
+  (newline)
+  (template
+    template_name: (text)
+    template_parameter: 
+      (param_name (text))
+      (param_value (text))))
