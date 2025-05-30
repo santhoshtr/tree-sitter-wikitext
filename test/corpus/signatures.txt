@@ -1,0 +1,127 @@
+================================================================================
+Basic signatures
+================================================================================
+
+User signature: ~~~
+User signature with date: ~~~~
+Current date: ~~~~~
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (signature
+    (user_signature))
+  (paragraph
+    (text))
+  (signature
+    (user_signature_with_date))
+  (paragraph
+    (text))
+  (signature
+    (current_date)))
+
+================================================================================
+Signatures within text
+================================================================================
+
+This is a line with a signature ~~~ at the end.
+This is a line with a signature ~~~~ with date at the end.
+This is a line showing just the date ~~~~~ at the end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (signature
+    (user_signature))
+  (text)
+  (paragraph
+    (text))
+  (signature
+    (user_signature_with_date))
+  (text)
+  (paragraph
+    (text))
+  (signature
+    (current_date))
+  (text))
+
+================================================================================
+Signatures in various contexts
+================================================================================
+
+== Heading with signature ~~~ ==
+
+* List item with signature ~~~~
+* Another item
+
+Text with ~~~~~ date.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (h2
+      (text))
+    (signature
+      (user_signature))
+    (text))
+  (newline)
+  (bullet_list
+    (bl1
+      (content
+        (text))
+      (signature
+        (user_signature_with_date)))
+    (bl1
+      (content
+        (text))))
+  (newline)
+  (text)
+  (signature
+    (current_date))
+  (text)
+  (newline))
+
+================================================================================
+Adjacent signatures
+================================================================================
+
+~~~~~~~ (User + date followed by date)
+~~~~~~~~~~~~ (Multiple signatures in a row)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (signature
+    (user_signature_with_date))
+  (signature
+    (current_date))
+  (text)
+  (paragraph
+    (text))
+  (signature
+    (user_signature))
+  (signature
+    (user_signature))
+  (signature
+    (user_signature_with_date))
+  (text))
+
+================================================================================
+Not signatures (more or fewer tildes)
+================================================================================
+
+Text with ~~ not a signature
+Text with ~~~~~~ not a signature
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text)))
