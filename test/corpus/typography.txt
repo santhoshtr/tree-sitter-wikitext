@@ -1,0 +1,188 @@
+================================================================================
+Basic typography formatting
+================================================================================
+
+'''Bold text'''
+''Italic text''
+'''''Bold and italic text'''''
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (bold
+    (content
+      (text)))
+  (newline)
+  (italic
+    (content
+      (text)))
+  (newline)
+  (bold
+    (content
+      (italic
+        (content
+          (text)))))
+  (newline))
+
+================================================================================
+Mixed formatting
+================================================================================
+
+Normal '''bold''' normal
+Normal ''italic'' normal
+'''Bold with ''italic'' inside'''
+''Italic with '''bold''' inside''
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (text)
+  (bold
+    (content
+      (text)))
+  (text)
+  (newline)
+  (text)
+  (italic
+    (content
+      (text)))
+  (text)
+  (newline)
+  (bold
+    (content
+      (text)
+      (italic
+        (content
+          (text)))
+      (text)))
+  (newline)
+  (italic
+    (content
+      (text)
+      (bold
+        (content
+          (text)))
+      (text)))
+  (newline))
+
+================================================================================
+Typography in other contexts
+================================================================================
+
+== Heading with '''bold''' and ''italic'' ==
+
+* List item with '''bold text'''
+* List item with ''italic text''
+
+Text with '''bold''' and ''italic'' inline.
+
+--------------------------------------------------------------------------------
+
+(document
+  (heading
+    (h2
+      (text)
+      (bold
+        (content
+          (text)))
+      (text)
+      (italic
+        (content
+          (text)))
+      (text)))
+  (newline)
+  (newline)
+  (bullet_list
+    (bl1
+      (content
+        (text)
+        (bold
+          (content
+            (text)))))
+    (bl1
+      (content
+        (text)
+        (italic
+          (content
+            (text))))))
+  (newline)
+  (text)
+  (bold
+    (content
+      (text)))
+  (text)
+  (italic
+    (content
+      (text)))
+  (text)
+  (newline))
+
+================================================================================
+Unclosed formatting
+================================================================================
+
+'''Unclosed bold
+''Unclosed italic
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (text)
+  (newline)
+  (text)
+  (newline))
+
+================================================================================
+Formatting with special characters
+================================================================================
+
+'''Bold with [[wikilink]]'''
+''Italic with [external link]''
+'''Bold with <!-- comment -->'''
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (bold
+    (content
+      (text)
+      (wikilink
+        (target)
+        (text))))
+  (newline)
+  (italic
+    (content
+      (text)
+      (external_link
+        (target))))
+  (newline)
+  (bold
+    (content
+      (text)))
+  (newline))
+
+================================================================================
+Multiple formatting in a row
+================================================================================
+
+''''''Bold text with extra apostrophes''''''
+''''''Ambiguous formatting''''''''
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (bold
+    (content
+      (text)))
+  (text)
+  (newline)
+  (bold
+    (content
+      (text)))
+  (text)
+  (newline))
