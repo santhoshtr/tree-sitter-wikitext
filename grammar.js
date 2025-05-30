@@ -45,7 +45,7 @@ module.exports = grammar({
     // --------------------------------------------------------------------------------- COMMENT
     // -----------------------------------------------------------------------------------------
 
-    _comment: ($) => seq("<!--", $._textrange, "-->"),
+    _comment: (_) => token(seq("<!--", /([^-]|(-[^-])|(-(-[^>])))*/, "-->")),
 
     // the repeat1 generates a node for each character but allows
     // rules to be identified at each new character
@@ -248,16 +248,10 @@ module.exports = grammar({
     // -----------------------------------------------------------------------------------------
 
     bold: ($) =>
-      prec.left(
-        1,
-        seq("'''", alias(repeat1($._node), $.content), choice("'''", "'''")),
-      ),
+      prec.left(1, seq("'''", alias(repeat1($._node), $.content), "'''")),
 
     italic: ($) =>
-      prec.left(
-        2,
-        seq("''", alias(repeat1($._node), $.content), choice("''", "''")),
-      ),
+      prec.left(2, seq("''", alias(repeat1($._node), $.content), "''")),
 
     // -----------------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------ SIGNATURES
