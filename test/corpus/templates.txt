@@ -25,9 +25,9 @@ Template with unnamed parameters
   (template
     (template_name)
     (template_parameter
-      (param_value))
+      (param_name))
     (template_parameter
-      (param_value))
+      (param_name))
    )
   (newline)
 )
@@ -48,6 +48,7 @@ Template with named parameters
       (param_name)
       (param_value))
     (template_parameter
+      (param_name)
       (param_value))
    )
   (newline)
@@ -66,7 +67,7 @@ Template with mixed parameters
   (template
     (template_name)
     (template_parameter
-      (param_value))
+      (param_name))
     (template_parameter
       (param_name)
       (param_value))
@@ -87,9 +88,9 @@ Template with internal link in parameter name
   (template
     (template_name)
     (template_parameter
-      (param_value))
+      (param_name))
     (template_parameter
-      (param_value)))
+      (param_name)))
   (newline))
 
 ==================
@@ -105,9 +106,10 @@ Template with internal link in parameter value
   (template
     (template_name)
     (template_parameter
+      (param_name)
       (param_value))
     (template_parameter
-      (param_value)))
+      (param_name)))
   (newline))
 
 
@@ -120,10 +122,11 @@ Templates with complex content
 ---
 
 (document
+  (newline)
   (template
-    template_name: (text)
-    template_parameter: (param_value 
-      (text)
+    (template_name)
+    (template_parameter
+      (param_name)
       (bold
         content: (text))
       (text)
@@ -141,11 +144,15 @@ Nested templates
 
 (document
   (template
-    template_name: (text)
-    template_parameter: (param_value
+  (template_name)
+        (template_parameter)
+        (MISSING "}}"))
       (template
-        template_name: (text)
-        template_parameter: (param_value (text))))))
+        (template_name)
+        (template_parameter
+          (param_name)))
+      (text)
+      (newline))
 
 ==================
 Templates in context
