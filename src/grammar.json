@@ -2,7 +2,7 @@
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "wikitext",
   "rules": {
-    "source_file": {
+    "document": {
       "type": "REPEAT",
       "content": {
         "type": "SYMBOL",
@@ -22,6 +22,10 @@
               "type": "SYMBOL",
               "name": "heading"
             }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_comment"
           },
           {
             "type": "SYMBOL",
@@ -58,6 +62,10 @@
           {
             "type": "SYMBOL",
             "name": "redirect"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "signature"
           },
           {
             "type": "SYMBOL",
@@ -119,7 +127,7 @@
           },
           {
             "type": "PATTERN",
-            "value": "[^-]+"
+            "value": "([^-]|(-[^-])|(-(-[^>])))*"
           },
           {
             "type": "STRING",
@@ -1232,17 +1240,8 @@
             "value": "content"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "'''"
-              },
-              {
-                "type": "STRING",
-                "value": "’’’"
-              }
-            ]
+            "type": "STRING",
+            "value": "'''"
           }
         ]
       }
@@ -1270,26 +1269,49 @@
             "value": "content"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "''"
-              },
-              {
-                "type": "STRING",
-                "value": "’’"
-              }
-            ]
+            "type": "STRING",
+            "value": "''"
           }
         ]
       }
+    },
+    "signature": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "~~~"
+          },
+          "named": true,
+          "value": "user_signature"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "~~~~"
+          },
+          "named": true,
+          "value": "user_signature_with_date"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "~~~~~"
+          },
+          "named": true,
+          "value": "current_date"
+        }
+      ]
     }
   },
   "extras": [
     {
-      "type": "SYMBOL",
-      "name": "_comment"
+      "type": "STRING",
+      "value": "\r"
     }
   ],
   "conflicts": [],

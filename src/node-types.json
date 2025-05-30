@@ -159,7 +159,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "bold",
@@ -219,6 +219,98 @@
         },
         {
           "type": "redirect",
+          "named": true
+        },
+        {
+          "type": "signature",
+          "named": true
+        },
+        {
+          "type": "table",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "wikilink",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "bullet_list",
+          "named": true
+        },
+        {
+          "type": "category",
+          "named": true
+        },
+        {
+          "type": "external_link",
+          "named": true
+        },
+        {
+          "type": "file",
+          "named": true
+        },
+        {
+          "type": "heading",
+          "named": true
+        },
+        {
+          "type": "htmlclose",
+          "named": true
+        },
+        {
+          "type": "htmlopen",
+          "named": true
+        },
+        {
+          "type": "htmlopenclose",
+          "named": true
+        },
+        {
+          "type": "image",
+          "named": true
+        },
+        {
+          "type": "indent",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "number_list",
+          "named": true
+        },
+        {
+          "type": "redirect",
+          "named": true
+        },
+        {
+          "type": "signature",
           "named": true
         },
         {
@@ -512,7 +604,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "bold",
@@ -572,6 +664,10 @@
         },
         {
           "type": "redirect",
+          "named": true
+        },
+        {
+          "type": "signature",
           "named": true
         },
         {
@@ -678,84 +774,23 @@
     }
   },
   {
-    "type": "source_file",
+    "type": "signature",
     "named": true,
-    "root": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "bold",
+          "type": "current_date",
           "named": true
         },
         {
-          "type": "bullet_list",
+          "type": "user_signature",
           "named": true
         },
         {
-          "type": "category",
-          "named": true
-        },
-        {
-          "type": "external_link",
-          "named": true
-        },
-        {
-          "type": "file",
-          "named": true
-        },
-        {
-          "type": "heading",
-          "named": true
-        },
-        {
-          "type": "htmlclose",
-          "named": true
-        },
-        {
-          "type": "htmlopen",
-          "named": true
-        },
-        {
-          "type": "htmlopenclose",
-          "named": true
-        },
-        {
-          "type": "image",
-          "named": true
-        },
-        {
-          "type": "indent",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "newline",
-          "named": true
-        },
-        {
-          "type": "number_list",
-          "named": true
-        },
-        {
-          "type": "redirect",
-          "named": true
-        },
-        {
-          "type": "table",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        },
-        {
-          "type": "wikilink",
+          "type": "user_signature_with_date",
           "named": true
         }
       ]
@@ -1035,7 +1070,19 @@
     "named": false
   },
   {
+    "type": "current_date",
+    "named": true
+  },
+  {
     "type": "tagname",
+    "named": true
+  },
+  {
+    "type": "user_signature",
+    "named": true
+  },
+  {
+    "type": "user_signature_with_date",
     "named": true
   },
   {
@@ -1056,14 +1103,6 @@
   },
   {
     "type": "|}",
-    "named": false
-  },
-  {
-    "type": "’’",
-    "named": false
-  },
-  {
-    "type": "’’’",
     "named": false
   }
 ]
