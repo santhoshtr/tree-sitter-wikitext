@@ -144,35 +144,45 @@ module.exports = grammar({
     // ----------------------------------------------------------------------------- TEMPLATES
     // -----------------------------------------------------------------------------------------
 
-    template: ($) => 
+    template: ($) =>
       seq(
         "{{",
         alias($._template_name, $.template_name),
-        optional(repeat(seq("|", alias($._template_parameter, $.template_parameter)))),
+        optional(
+          repeat(seq("|", alias($._template_parameter, $.template_parameter))),
+        ),
         "}}",
       ),
-    
+
     _template_name: (_) => /[^{}\|\n]+/,
-    
-    _template_parameter: ($) => 
+    _template_parameter: ($) =>
       choice(
+        // Named parameter case: name=value
         seq(
           alias($._template_param_name, $.param_name),
           "=",
-          alias($._template_param_value, $.param_value)
+          alias($._template_param_value, $.param_value),
         ),
-        // Unnamed/positional parameter
-        alias($._template_param_value, $.param_value)
+        // Unnamed parameter case: just value
+        alias($._template_param_value, $.param_value),
       ),
-    
+
     _template_param_name: (_) => /[^=\|\n{}]+/,
-    
-    _template_param_value: ($) => 
-      choice(
-        // For simple values
-        /[^{}\|\n]+/,
-        // For nested content (support recursive nodes within parameter values)
-        repeat1($._node)
+
+    _template_param_value: ($) =>
+      prec.right(
+        choice(
+          // All the regular nodes that might contain protected pipes
+          $._comment,
+          $.wikilink, // [[links|with pipes]] are ok
+          $.template, // {{template|with|pipes}} are ok
+          $.table, // Tables have protected pipes
+          $._htmltag,
+          $.bold,
+          $.italic,
+          // Text that's not a pipe or template closer
+          token(prec(1, /[^{}\|]+/)),
+        ),
       ),
 
     // -----------------------------------------------------------------------------------------
