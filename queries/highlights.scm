@@ -1,8 +1,23 @@
-(pair
-  key: (_) @string.special.key)
+[
+  (wikilink (target))
+] @text.uri
 
-(string) @string
+[
+  (wikilink (label))
+] @text.reference
 
-(number) @number
+(italic) @text.emphasis
 
-(comment) @comment
+(bold) @text.strong
+
+[
+  (external_link (target))
+] @text.uri
+
+[
+  (external_link (label))
+] @text.reference
+
+[
+  (wikilink (label (text)))
+] @text.literal
