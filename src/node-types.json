@@ -230,6 +230,10 @@
           "named": true
         },
         {
+          "type": "template",
+          "named": true
+        },
+        {
           "type": "text",
           "named": true
         },
@@ -315,6 +319,10 @@
         },
         {
           "type": "table",
+          "named": true
+        },
+        {
+          "type": "template",
           "named": true
         },
         {
@@ -675,6 +683,10 @@
           "named": true
         },
         {
+          "type": "template",
+          "named": true
+        },
+        {
           "type": "text",
           "named": true
         },
@@ -753,6 +765,49 @@
         },
         {
           "type": "nl3",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "param_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "htmlclose",
+          "named": true
+        },
+        {
+          "type": "htmlopen",
+          "named": true
+        },
+        {
+          "type": "htmlopenclose",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "table",
+          "named": true
+        },
+        {
+          "type": "template",
+          "named": true
+        },
+        {
+          "type": "wikilink",
           "named": true
         }
       ]
@@ -903,6 +958,44 @@
     "type": "target",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "template",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "template_name",
+          "named": true
+        },
+        {
+          "type": "template_parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "template_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "param_name",
+          "named": true
+        },
+        {
+          "type": "param_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "text",
@@ -1074,7 +1167,15 @@
     "named": true
   },
   {
+    "type": "param_name",
+    "named": true
+  },
+  {
     "type": "tagname",
+    "named": true
+  },
+  {
+    "type": "template_name",
     "named": true
   },
   {
@@ -1084,6 +1185,10 @@
   {
     "type": "user_signature_with_date",
     "named": true
+  },
+  {
+    "type": "{{",
+    "named": false
   },
   {
     "type": "{|",
@@ -1103,6 +1208,10 @@
   },
   {
     "type": "|}",
+    "named": false
+  },
+  {
+    "type": "}}",
     "named": false
   }
 ]

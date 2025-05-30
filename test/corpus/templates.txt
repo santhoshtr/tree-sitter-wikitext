@@ -7,8 +7,10 @@ Basic template
 ---
 
 (document
+  (newline)
   (template
-    template_name: (text)))
+    (template_name))
+  (newline))
 
 ==================
 Template with unnamed parameters
@@ -19,10 +21,16 @@ Template with unnamed parameters
 ---
 
 (document
+  (newline)
   (template
-    template_name: (text)
-    template_parameter: (param_value (text))
-    template_parameter: (param_value (text))))
+    (template_name)
+    (template_parameter
+      (param_value))
+    (template_parameter
+      (param_value))
+   )
+  (newline)
+)
 
 ==================
 Template with named parameters
@@ -33,14 +41,17 @@ Template with named parameters
 ---
 
 (document
+  (newline)
   (template
-    template_name: (text)
-    template_parameter: 
-      (param_name (text))
-      (param_value (text))
-    template_parameter: 
-      (param_name (text))
-      (param_value (text))))
+    (template_name)
+    (template_parameter
+      (param_name)
+      (param_value))
+    (template_parameter
+      (param_value))
+   )
+  (newline)
+)
 
 ==================
 Template with mixed parameters
@@ -51,15 +62,20 @@ Template with mixed parameters
 ---
 
 (document
+  (newline)
   (template
-    template_name: (text)
-    template_parameter: (param_value (text))
-    template_parameter: 
-      (param_name (text))
-      (param_value (text))))
+    (template_name)
+    (template_parameter
+      (param_value))
+    (template_parameter
+      (param_name)
+      (param_value))
+   )
+  (newline)
+)
 
 ==================
-Template with internal link in parameter
+Template with internal link in parameter name
 ==================
 
 {{Template|parameter with [[Link|display text]]}}
@@ -67,14 +83,33 @@ Template with internal link in parameter
 ---
 
 (document
+  (newline)
   (template
-    template_name: (text)
-    template_parameter: (param_value 
-      (text)
-      (wikilink
-        target: (text)
-        label: (text))
-      (text))))
+    (template_name)
+    (template_parameter
+      (param_value))
+    (template_parameter
+      (param_value)))
+  (newline))
+
+==================
+Template with internal link in parameter value
+==================
+
+{{Template|pname=parameter with [[Link|display text]]}}
+
+---
+
+(document
+  (newline)
+  (template
+    (template_name)
+    (template_parameter
+      (param_value))
+    (template_parameter
+      (param_value)))
+  (newline))
+
 
 ==================
 Templates with complex content
