@@ -22,6 +22,7 @@ module.exports = grammar({
           $.bold,
           $.italic,
           $.redirect,
+          $.signature,
           $.newline,
           // everything else is text!
           $._textrange,
@@ -154,7 +155,7 @@ module.exports = grammar({
     external_link_target: (_) => /[^\|\n\[\]\s]+/,
 
     // -----------------------------------------------------------------------------------------
-    // ----------------------------------------------------------------------------------- LISTS
+    // ---------------------------------------------------------------------------------- LISTS
     // -----------------------------------------------------------------------------------------
 
     _list: ($) => choice($.bullet_list, $.number_list),
@@ -248,13 +249,23 @@ module.exports = grammar({
     bold: ($) =>
       prec.left(
         1,
-        seq("'''", alias(repeat1($._node), $.content), choice("'''", "’’’")),
+        seq("'''", alias(repeat1($._node), $.content), choice("'''", "'''")),
       ),
 
     italic: ($) =>
       prec.left(
         2,
-        seq("''", alias(repeat1($._node), $.content), choice("''", "’’")),
+        seq("''", alias(repeat1($._node), $.content), choice("''", "''")),
       ),
+
+    // -----------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------ SIGNATURES
+    // -----------------------------------------------------------------------------------------
+
+    signature: ($) => choice(
+      alias("~~~", $.user_signature),
+      alias("~~~~", $.user_signature_with_date),
+      alias("~~~~~", $.current_date)
+    ),
   },
 });
