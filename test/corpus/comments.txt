@@ -11,7 +11,7 @@ Text after multi-line comment
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (comment)
   (paragraph
     (text))
@@ -29,11 +29,16 @@ Text between comments
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (comment)
-  (paragraph
-    (text))
-  (comment))
+(document
+  (newline)
+  (text)
+  (text)
+  (newline)
+  (text)
+  (newline)
+  (text)
+  (text)
+  (newline))
 
 ================================================================================
 Comments with special characters
@@ -46,11 +51,15 @@ Comments with special characters
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (newline)
+  (text)
   (newline)
+  (text)
   (newline)
+  (text)
   (newline)
+  (text)
   (newline))
 
 ================================================================================
@@ -65,7 +74,7 @@ Text paragraph <!-- inline comment --> with comment.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (heading
     (h2
       (text)))
@@ -73,11 +82,14 @@ Text paragraph <!-- inline comment --> with comment.
   (bullet_list
     (bl1
       (content
+        (text)
         (text)))
     (bl1
       (content
         (text))))
   (newline)
+  (text)
+  (text)
   (text)
   (newline))
 
@@ -91,11 +103,13 @@ Text in middle
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (newline)
+(document
   (newline)
   (text)
   (newline)
+  (text)
+  (newline)
+  (text)
   (newline))
 
 ================================================================================
@@ -108,7 +122,7 @@ Text with <!- not quite a comment ->
 
 --------------------------------------------------------------------------------
 
-(source_file
+(document
   (paragraph
     (text))
   (paragraph

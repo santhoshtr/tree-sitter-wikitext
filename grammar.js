@@ -13,6 +13,7 @@ module.exports = grammar({
       prec.right(
         choice(
           prec(3, $.heading),
+          $._comment,
           $._internal_link,
           $._external_link,
           $._list,
@@ -44,7 +45,7 @@ module.exports = grammar({
     // --------------------------------------------------------------------------------- COMMENT
     // -----------------------------------------------------------------------------------------
 
-    _comment: (_) => token(seq("<!--", /[^-]+/, "-->")),
+    _comment: ($) => seq("<!--", $._textrange, "-->"),
 
     // the repeat1 generates a node for each character but allows
     // rules to be identified at each new character
@@ -262,10 +263,11 @@ module.exports = grammar({
     // ------------------------------------------------------------------------------ SIGNATURES
     // -----------------------------------------------------------------------------------------
 
-    signature: ($) => choice(
-      alias("~~~", $.user_signature),
-      alias("~~~~", $.user_signature_with_date),
-      alias("~~~~~", $.current_date)
-    ),
+    signature: ($) =>
+      choice(
+        alias("~~~", $.user_signature),
+        alias("~~~~", $.user_signature_with_date),
+        alias("~~~~~", $.current_date),
+      ),
   },
 });
