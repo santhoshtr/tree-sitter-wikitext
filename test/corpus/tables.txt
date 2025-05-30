@@ -1,0 +1,218 @@
+================================================================================
+Basic table
+================================================================================
+
+{| 
+|Cell 1
+|Cell 2
+|}
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (table
+    (tablecell
+      (content
+        (text)))
+    (tablecell
+      (content
+        (text))))
+  (newline))
+
+================================================================================
+Table with caption and headers
+================================================================================
+
+{|
+|+ Table caption
+! Header 1
+! Header 2
+| Cell 1
+| Cell 2
+|}
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (table
+    (tablecaption
+      (content
+        (text)))
+    (colheaders
+      (tableheader
+        (content
+          (text)))
+      (tableheader
+        (content
+          (text))))
+    (tablecell
+      (content
+        (text)))
+    (tablecell
+      (content
+        (text))))
+  (newline))
+
+================================================================================
+Table with rows
+================================================================================
+
+{|
+| Cell 1.1
+| Cell 1.2
+|-
+| Cell 2.1
+| Cell 2.2
+|}
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (table
+    (tablecell
+      (content
+        (text)))
+    (tablecell
+      (content
+        (text)))
+    (tablerow
+      (tablecell
+        (content
+          (text)))
+      (tablecell
+        (content
+          (text)))))
+  (newline))
+
+================================================================================
+Table with attributes
+================================================================================
+
+{| class="wikitable"
+| Cell 1
+| style="color: red" | Cell 2
+|-
+| Cell 3
+| Cell 4
+|}
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (table
+    (attribute)
+    (tablecell
+      (content
+        (text)))
+    (tablecell
+      (attribute)
+      (content
+        (text)))
+    (tablerow
+      (tablecell
+        (content
+          (text)))
+      (tablecell
+        (content
+          (text)))))
+  (newline))
+
+================================================================================
+Table with formatting inside cells
+================================================================================
+
+{|
+| '''Bold text'''
+| ''Italic text''
+|-
+| [[Wikilink]]
+| [http://example.com External link]
+|}
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (table
+    (tablecell
+      (content
+        (bold
+          (content
+            (text)))))
+    (tablecell
+      (content
+        (italic
+          (content
+            (text)))))
+    (tablerow
+      (tablecell
+        (content
+          (wikilink
+            (target))))
+      (tablecell
+        (content
+          (external_link
+            (target))))))
+  (newline))
+
+================================================================================
+Nested tables
+================================================================================
+
+{|
+|
+{|
+| Nested cell
+|}
+|
+| Outer cell
+|}
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (table
+    (tablecell
+      (content
+        (text)
+        (table
+          (tablecell
+            (content
+              (text))))
+        (text)))
+    (tablecell
+      (content
+        (text))))
+  (newline))
+
+================================================================================
+Table with row attributes
+================================================================================
+
+{|
+|-
+| Cell 1.1
+|-class="highlight"
+| Cell 2.1
+|}
+
+--------------------------------------------------------------------------------
+
+(document
+  (newline)
+  (table
+    (tablerow)
+    (tablecell
+      (content
+        (text)))
+    (tablerow
+      (attribute)
+      (tablecell
+        (content
+          (text)))))
+  (newline))
