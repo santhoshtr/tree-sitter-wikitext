@@ -12,12 +12,13 @@ Text after multi-line comment
 --------------------------------------------------------------------------------
 
 (document
-  (comment)
-  (paragraph
-    (text))
-  (comment)
-  (paragraph
-    (text)))
+  (newline)
+  (newline)
+  (text)
+  (newline)
+  (newline)
+  (text)
+  (newline))
 
 ================================================================================
 Nested comments
@@ -32,11 +33,9 @@ Text between comments
 (document
   (newline)
   (text)
-  (text)
   (newline)
   (text)
   (newline)
-  (text)
   (text)
   (newline))
 
@@ -53,13 +52,9 @@ Comments with special characters
 
 (document
   (newline)
-  (text)
   (newline)
-  (text)
   (newline)
-  (text)
   (newline)
-  (text)
   (newline))
 
 ================================================================================
@@ -82,13 +77,11 @@ Text paragraph <!-- inline comment --> with comment.
   (bullet_list
     (bl1
       (content
-        (text)
         (text)))
     (bl1
       (content
         (text))))
   (newline)
-  (text)
   (text)
   (text)
   (newline))
@@ -105,11 +98,9 @@ Text in middle
 
 (document
   (newline)
-  (text)
   (newline)
   (text)
   (newline)
-  (text)
   (newline))
 
 ================================================================================
