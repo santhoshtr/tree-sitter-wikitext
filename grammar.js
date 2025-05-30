@@ -4,10 +4,10 @@
 module.exports = grammar({
   name: "wikitext",
 
-  extras: ($) => [$._comment, "\r"],
+  extras: (_) => ["\r"],
 
   rules: {
-    source_file: ($) => repeat($._node),
+    document: ($) => repeat($._node),
 
     _node: ($) =>
       prec.right(
