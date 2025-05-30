@@ -16,6 +16,7 @@ module.exports = grammar({
           $._comment,
           $._internal_link,
           $._external_link,
+          $.template,
           $._list,
           $.indent,
           $.table,
@@ -138,6 +139,41 @@ module.exports = grammar({
     _categorytarget: (_) => /[^\|\n\[\]]+/,
 
     _wikilinktext: (_) => /[^\|\n\[\]]+/,
+
+    // -----------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------- TEMPLATES
+    // -----------------------------------------------------------------------------------------
+
+    template: ($) => 
+      seq(
+        "{{",
+        alias($._template_name, $.template_name),
+        optional(repeat(seq("|", alias($._template_parameter, $.template_parameter)))),
+        "}}",
+      ),
+    
+    _template_name: (_) => /[^{}\|\n]+/,
+    
+    _template_parameter: ($) => 
+      choice(
+        seq(
+          alias($._template_param_name, $.param_name),
+          "=",
+          alias($._template_param_value, $.param_value)
+        ),
+        // Unnamed/positional parameter
+        alias($._template_param_value, $.param_value)
+      ),
+    
+    _template_param_name: (_) => /[^=\|\n{}]+/,
+    
+    _template_param_value: ($) => 
+      choice(
+        // For simple values
+        /[^{}\|\n]+/,
+        // For nested content (support recursive nodes within parameter values)
+        repeat1($._node)
+      ),
 
     // -----------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------- EXTERNAL LINKS
