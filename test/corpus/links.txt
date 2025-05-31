@@ -6,11 +6,11 @@ Simple Internal Link
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))
 
 ==================
 Internal Link with Label
@@ -36,11 +36,11 @@ Internal Link with Namespace
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))
 
 ==================
 Internal Link with Namespace and Label
@@ -66,11 +66,11 @@ Internal Link with Anchor
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))
 
 ==================
 Internal Link with Anchor and Label
@@ -96,11 +96,10 @@ External Link (URL only)
 
 ---
 
-(document
-  (newline)
-  (external_link
-    (target))
-  (newline))
+(source_file
+  (paragraph
+    (external_link
+      (url))))
 
 ==================
 External Link with Label
@@ -126,10 +125,10 @@ https://example.com
 
 ---
 
-(document
-  (newline)
-  (text)
-  (newline))
+(source_file
+  (paragraph
+    (external_link
+      (url_bare))))
 
 ==================
 Multiple Links
@@ -177,11 +176,11 @@ Category Link
 
 ---
 
-(document
-  (newline)
-  (category
-    (category))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))
 
 ==================
 File Link
@@ -191,11 +190,11 @@ File Link
 
 ---
 
-(document
-  (newline)
-  (file
-    (file))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))
 
 ==================
 Image Link with Parameters
@@ -221,11 +220,11 @@ Interwiki Link
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))
 
 ==================
 Link with Subpage
@@ -235,8 +234,8 @@ Link with Subpage
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))

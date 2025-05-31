@@ -211,17 +211,19 @@ Table with row attributes
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
+(source_file
   (table
-    (tablerow
-      (tablecell
-        (content
+    (table_row
+      (table_cell
+        (table_cell_block
+          (cell_marker)
           (text))))
-    (tablerow
-      (attribute
-        (text))
-      (tablecell
-        (content
-          (text)))))
-  (newline))
+    (table_row
+      (table_attributes
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value)))
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text))))))

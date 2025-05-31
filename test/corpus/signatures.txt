@@ -33,23 +33,22 @@ This is a line showing just the date ~~~~~ at the end.
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (text)
-  (signature
-    (user_signature))
-  (text)
-  (newline)
-  (text)
-  (signature
-    (user_signature_with_date))
-  (text)
-  (newline)
-  (text)
-  (signature
-    (current_date))
-  (text)
-  (newline))
+(source_file
+  (paragraph
+    (text)
+    (signature
+      (user_signature))
+    (text))
+  (paragraph
+    (text)
+    (signature
+      (user_signature_with_date))
+    (text))
+  (paragraph
+    (text)
+    (signature
+      (current_date))
+    (text)))
 
 ================================================================================
 Signatures in various contexts
@@ -64,27 +63,29 @@ Text with ~~~~~ date.
 
 --------------------------------------------------------------------------------
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline)
-  (newline)
-  (bullet_list
-    (bl1
-      (content
-        (text)
-        (signature
-          (user_signature_with_date))))
-    (bl1
-      (content
+    (heading_marker)
+    (text)
+    (heading_marker))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
         (text))))
-  (newline)
-  (text)
-  (signature
-    (current_date))
-  (text)
-  (newline))
+  (paragraph
+    (signature
+      (user_signature_with_date)))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (paragraph
+    (text)
+    (signature
+      (current_date))
+    (text)))
 
 ================================================================================
 Adjacent signatures

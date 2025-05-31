@@ -8,22 +8,16 @@ Basic typography formatting
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (bold
-    (content
+(source_file
+  (paragraph
+    (bold
       (text)))
-  (newline)
-  (italic
-    (content
+  (paragraph
+    (italic
       (text)))
-  (newline)
-  (bold
-    (content
-      (italic
-        (content
-          (text)))))
-  (newline))
+  (paragraph
+    (bold_italic
+      (text))))
 
 ================================================================================
 Mixed formatting
@@ -36,36 +30,29 @@ Normal ''italic'' normal
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (text)
-  (bold
-    (content
-      (text)))
-  (text)
-  (newline)
-  (text)
-  (italic
-    (content
-      (text)))
-  (text)
-  (newline)
-  (bold
-    (content
+(source_file
+  (paragraph
+    (text)
+    (bold
+      (text))
+    (text))
+  (paragraph
+    (text)
+    (italic
+      (text))
+    (text))
+  (paragraph
+    (bold
       (text)
       (italic
-        (content
-          (text)))
+        (text))
       (text)))
-  (newline)
-  (italic
-    (content
+  (paragraph
+    (italic
       (text)
       (bold
-        (content
-          (text)))
-      (text)))
-  (newline))
+        (text))
+      (text))))
 
 ================================================================================
 Typography in other contexts
@@ -80,36 +67,35 @@ Text with '''bold''' and ''italic'' inline.
 
 --------------------------------------------------------------------------------
 
-(document
+(source_file
   (heading
-    (h2
+    (heading_marker)
+    (text)
+    (heading_marker))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (paragraph
+    (bold
       (text)))
-  (newline)
-  (newline)
-  (bullet_list
-    (bl1
-      (content
-        (text)
-        (bold
-          (content
-            (text)))))
-    (bl1
-      (content
-        (text)
-        (italic
-          (content
-            (text))))))
-  (newline)
-  (text)
-  (bold
-    (content
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (paragraph
+    (italic
       (text)))
-  (text)
-  (italic
-    (content
-      (text)))
-  (text)
-  (newline))
+  (paragraph
+    (text)
+    (bold
+      (text))
+    (text)
+    (italic
+      (text))
+    (text)))
 
 ================================================================================
 Unclosed formatting

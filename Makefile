@@ -87,6 +87,7 @@ uninstall:
 
 clean:
 	$(RM) $(OBJS) $(LANGUAGE_NAME).pc lib$(LANGUAGE_NAME).a lib$(LANGUAGE_NAME).$(SOEXT)
+	$(RM) -rf target build *.wasm
 
 test:
 	$(TS) test

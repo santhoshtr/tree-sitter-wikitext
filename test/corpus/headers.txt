@@ -2,15 +2,15 @@
 Level 1 Header
 ==================
 
-= Heading 1 =
+= [[Heading 1]] =
 
 ---
 
-(document
+(source_file
   (heading
-    (h1
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Level 2 Header
@@ -20,11 +20,11 @@ Level 2 Header
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Level 3 Header
@@ -34,11 +34,11 @@ Level 3 Header
 
 ---
 
-(document
+(source_file
   (heading
-    (h3
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Level 4 Header
@@ -48,11 +48,11 @@ Level 4 Header
 
 ---
 
-(document
+(source_file
   (heading
-    (h4
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Level 5 Header
@@ -62,11 +62,11 @@ Level 5 Header
 
 ---
 
-(document
+(source_file
   (heading
-    (h5
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Level 6 Header
@@ -76,11 +76,11 @@ Level 6 Header
 
 ---
 
-(document
+(source_file
   (heading
-    (h6
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Header with Bold Text
@@ -90,11 +90,11 @@ Header with Bold Text
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Header with Italic Text
@@ -104,11 +104,11 @@ Header with Italic Text
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Header with Italic and Bold Text
@@ -118,11 +118,11 @@ Header with Italic and Bold Text
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Header with Link
@@ -132,11 +132,11 @@ Header with Link
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Header with Mixed Formatting
@@ -146,11 +146,11 @@ Header with Mixed Formatting
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Multiple Headers
@@ -162,17 +162,19 @@ Multiple Headers
 
 ---
 
-(document
+(source_file
   (heading
-    (h1
-      (text)))
+    (heading_marker)
+    (text)
+    (heading_marker))
   (heading
-    (h2
-      (text)))
+    (heading_marker)
+    (text)
+    (heading_marker))
   (heading
-    (h3
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Header with Extra Spaces
@@ -182,11 +184,11 @@ Header with Extra Spaces
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Unbalanced Headers (Not Valid in MediaWiki)
@@ -211,11 +213,11 @@ Header with Special Characters
 
 ---
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))
 
 ==================
 Header at the End of Document
@@ -226,10 +228,10 @@ Some text.
 
 ---
 
-(document
-  (newline)
-  (text)
+(source_file
+  (paragraph
+    (text))
   (heading
-    (h2
-      (text)))
-  (newline))
+    (heading_marker)
+    (text)
+    (heading_marker)))

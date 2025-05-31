@@ -9,24 +9,27 @@ Basic redirects
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline))
+(source_file
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))))
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))))
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))))
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ================================================================================
 Redirects with namespaces
@@ -38,20 +41,22 @@ Redirects with namespaces
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline))
+(source_file
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))))
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))))
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ================================================================================
 Redirects with section links
@@ -62,16 +67,17 @@ Redirects with section links
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline))
+(source_file
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))))
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ================================================================================
 Invalid or malformed redirects
@@ -125,13 +131,15 @@ Redirects with interwiki links
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (newline))
+(source_file
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (namespace_separator)
+          (page_name_segment)))))
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))

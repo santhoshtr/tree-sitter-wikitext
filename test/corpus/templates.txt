@@ -6,11 +6,11 @@ Basic template
 
 ---
 
-(document
-  (newline)
-  (template
-    (template_name))
-  (newline))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part)))))
 
 ==================
 Template with unnamed parameters
@@ -27,10 +27,8 @@ Template with unnamed parameters
     (template_parameter
       (param_name))
     (template_parameter
-      (param_name))
-   )
-  (newline)
-)
+      (param_name)))
+  (newline))
 
 ==================
 Template with named parameters
@@ -49,10 +47,8 @@ Template with named parameters
       (param_value))
     (template_parameter
       (param_name)
-      (param_value))
-   )
-  (newline)
-)
+      (param_value)))
+  (newline))
 
 ==================
 Template with mixed parameters
@@ -70,10 +66,8 @@ Template with mixed parameters
       (param_name))
     (template_parameter
       (param_name)
-      (param_value))
-   )
-  (newline)
-)
+      (param_value)))
+  (newline))
 
 ==================
 Template with internal link in parameter name
@@ -112,7 +106,6 @@ Template with internal link in parameter value
       (param_name)))
   (newline))
 
-
 ==================
 Templates with complex content
 ==================
@@ -144,15 +137,15 @@ Nested templates
 
 (document
   (template
-  (template_name)
-        (template_parameter)
-        (MISSING "}}"))
-      (template
-        (template_name)
-        (template_parameter
-          (param_name)))
-      (text)
-      (newline))
+    (template_name)
+    (template_parameter)
+    (MISSING "}}"))
+  (template
+    (template_name)
+    (template_parameter
+      (param_name)))
+  (text)
+  (newline))
 
 ==================
 Templates in context
@@ -166,7 +159,8 @@ Some text before {{Template|param}} and some text after.
   (text)
   (template
     template_name: (text)
-    template_parameter: (param_value (text)))
+    template_parameter: (param_value
+      (text)))
   (text)
   (newline))
 
@@ -182,10 +176,12 @@ Multiple templates
 (document
   (template
     template_name: (text)
-    template_parameter: (param_value (text)))
+    template_parameter: (param_value
+      (text)))
   (newline)
   (template
     template_name: (text)
-    template_parameter: 
-      (param_name (text))
-      (param_value (text))))
+    template_parameter: (param_name
+      (text))
+    (param_value
+      (text))))
