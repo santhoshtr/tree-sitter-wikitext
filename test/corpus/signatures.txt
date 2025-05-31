@@ -8,20 +8,19 @@ Current date: ~~~~~
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (text)
-  (signature
-    (user_signature))
-  (newline)
-  (text)
-  (signature
-    (user_signature_with_date))
-  (newline)
-  (text)
-  (signature
-    (current_date))
-  (newline))
+(source_file
+  (paragraph
+    (text)
+    (signature
+      (user_signature)))
+  (paragraph
+    (text)
+    (signature
+      (user_signature_with_date)))
+  (paragraph
+    (text)
+    (signature
+      (current_date))))
 
 ================================================================================
 Signatures within text

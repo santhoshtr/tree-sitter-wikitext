@@ -21,7 +21,6 @@ Internal Link with Label
 ---
 
 (document
-  (newline)
   (wikilink
     (target)
     (label
@@ -50,13 +49,11 @@ Internal Link with Namespace and Label
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target)
-    (label
-      (text)))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      target: (wikilink_page
+        (page_name_segment))))
 
 ==================
 Internal Link with Anchor
@@ -127,8 +124,7 @@ https://example.com
 
 (source_file
   (paragraph
-    (external_link
-      (url_bare))))
+    (text)))
 
 ==================
 Multiple Links

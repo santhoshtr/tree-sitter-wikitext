@@ -109,18 +109,17 @@ Redirects with comments
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (redirect
-    (wikilink
-      (target)))
-  (text)
-  (newline)
-  (text)
-  (redirect
-    (wikilink
-      (target)))
-  (newline))
+(source_file
+  (paragraph
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))
+    (comment)
+    (redirect
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ================================================================================
 Redirects with interwiki links

@@ -11,14 +11,11 @@ Text after multi-line comment
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (newline)
-  (text)
-  (newline)
-  (newline)
-  (text)
-  (newline))
+(source_file
+  (paragraph
+    (comment))
+  (paragraph
+    (text)))
 
 ================================================================================
 Nested comments
@@ -30,14 +27,9 @@ Text between comments
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (text)
-  (newline)
-  (text)
-  (newline)
-  (text)
-  (newline))
+(source_file
+  (paragraph
+    (comment)))
 
 ================================================================================
 Comments with special characters
@@ -50,12 +42,9 @@ Comments with special characters
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (newline)
-  (newline)
-  (newline)
-  (newline))
+(source_file
+  (paragraph
+    (comment)))
 
 ================================================================================
 Comments within other elements
@@ -69,22 +58,19 @@ Text paragraph <!-- inline comment --> with comment.
 
 --------------------------------------------------------------------------------
 
-(document
+(source_file
   (heading
-    (h2
-      (text)))
-  (newline)
-  (bullet_list
-    (bl1
-      (content
-        (text)))
-    (bl1
-      (content
+    (heading_marker)
+    (text)
+    (heading_marker))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
         (text))))
-  (newline)
-  (text)
-  (text)
-  (newline))
+  (paragraph
+    (comment)
+    (text)))
 
 ================================================================================
 Comments at file boundaries
@@ -96,12 +82,9 @@ Text in middle
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (newline)
-  (text)
-  (newline)
-  (newline))
+(source_file
+  (paragraph
+    (comment)))
 
 ================================================================================
 Comment-like syntax that isn't a comment

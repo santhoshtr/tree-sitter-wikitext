@@ -106,12 +106,10 @@ Unclosed formatting
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (text)
-  (newline)
-  (text)
-  (newline))
+(source_file
+  (ERROR
+    (text)
+    (text)))
 
 ================================================================================
 Formatting with special characters

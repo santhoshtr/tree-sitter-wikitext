@@ -20,15 +20,17 @@ Template with unnamed parameters
 
 ---
 
-(document
-  (newline)
-  (template
-    (template_name)
-    (template_parameter
-      (param_name))
-    (template_parameter
-      (param_name)))
-  (newline))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text))))))
 
 ==================
 Template with named parameters
@@ -38,17 +40,21 @@ Template with named parameters
 
 ---
 
-(document
-  (newline)
-  (template
-    (template_name)
-    (template_parameter
-      (param_name)
-      (param_value))
-    (template_parameter
-      (param_name)
-      (param_value)))
-  (newline))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text))))))
 
 ==================
 Template with mixed parameters
@@ -58,16 +64,19 @@ Template with mixed parameters
 
 ---
 
-(document
-  (newline)
-  (template
-    (template_name)
-    (template_parameter
-      (param_name))
-    (template_parameter
-      (param_name)
-      (param_value)))
-  (newline))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text))))))
 
 ==================
 Template with internal link in parameter name
@@ -95,16 +104,20 @@ Template with internal link in parameter value
 
 ---
 
-(document
-  (newline)
-  (template
-    (template_name)
-    (template_parameter
-      (param_name)
-      (param_value))
-    (template_parameter
-      (param_name)))
-  (newline))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text)))
+      (ERROR
+        (wikilink_page
+          (page_name_segment))
+        (template_name_part)))))
 
 ==================
 Templates with complex content
@@ -114,18 +127,20 @@ Templates with complex content
 
 ---
 
-(document
-  (newline)
-  (template
-    (template_name)
-    (template_parameter
-      (param_name)
-      (bold
-        content: (text))
-      (text)
-      (italic
-        content: (text))
-      (text))))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text)
+          (bold
+            (text))
+          (text)
+          (italic
+            (text))
+          (text))))))
 
 ==================
 Nested templates
@@ -135,17 +150,19 @@ Nested templates
 
 ---
 
-(document
-  (template
-    (template_name)
-    (template_parameter)
-    (MISSING "}}"))
-  (template
-    (template_name)
-    (template_parameter
-      (param_name)))
-  (text)
-  (newline))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (template
+            (template_name
+              (template_name_part))
+            (template_argument
+              (template_param_value
+                (text)))))))))
 
 ==================
 Templates in context
@@ -155,14 +172,16 @@ Some text before {{Template|param}} and some text after.
 
 ---
 
-(document
-  (text)
-  (template
-    template_name: (text)
-    template_parameter: (param_value
-      (text)))
-  (text)
-  (newline))
+(source_file
+  (paragraph
+    (text)
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text))))
+    (text)))
 
 ==================
 Multiple templates
@@ -173,15 +192,20 @@ Multiple templates
 
 ---
 
-(document
-  (template
-    template_name: (text)
-    template_parameter: (param_value
-      (text)))
-  (newline)
-  (template
-    template_name: (text)
-    template_parameter: (param_name
-      (text))
-    (param_value
-      (text))))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text)))))
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text))))))

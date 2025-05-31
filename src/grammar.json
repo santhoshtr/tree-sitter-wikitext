@@ -59,6 +59,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
           "name": "text"
         },
         {
@@ -138,7 +142,7 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^\\n\\\\\\[\\\\\\]\\\\\\{\\\\\\}'\\|<>&!=\\*_#;:~]+"
+          "value": "[^\\n\\\\\\[\\\\\\]\\{\\}'\\|<>&!=\\*_#;~]+"
         }
       }
     },
@@ -1258,22 +1262,14 @@
           "value": "{{"
         },
         {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "template_name"
-          }
+          "type": "SYMBOL",
+          "name": "template_name"
         },
         {
           "type": "REPEAT",
           "content": {
-            "type": "FIELD",
-            "name": "argument",
-            "content": {
-              "type": "SYMBOL",
-              "name": "template_argument"
-            }
+            "type": "SYMBOL",
+            "name": "template_argument"
           }
         },
         {
@@ -1283,14 +1279,7 @@
       ]
     },
     "template_name": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_template_name_segment"
-      }
-    },
-    "_template_name_segment": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
@@ -1302,40 +1291,52 @@
           "value": "template_name_part"
         },
         {
-          "type": "SYMBOL",
-          "name": "template"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": ":"
+                  }
+                }
+              },
+              "named": true,
+              "value": "template_name_colon"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "IMMEDIATE_TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
               "content": {
-                "type": "STRING",
-                "value": ":"
-              }
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "#"
+                  }
+                }
+              },
+              "named": true,
+              "value": "template_name_hash"
+            },
+            {
+              "type": "BLANK"
             }
-          },
-          "named": true,
-          "value": "template_name_colon"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "IMMEDIATE_TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "STRING",
-                "value": "#"
-              }
-            }
-          },
-          "named": true,
-          "value": "template_name_hash"
+          ]
         }
       ]
     },
@@ -1346,7 +1347,7 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "[^\\|\\{\\}:#=\\s\\n][^\\|\\{\\}\\n]*"
+          "value": "[^\\|{}:#=\\s\\n]+"
         }
       }
     },
@@ -1361,21 +1362,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "param_name",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "template_param_name"
-                  }
-                },
-                {
-                  "type": "STRING",
-                  "value": "="
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "template_param_value"
             },
             {
               "type": "BLANK"
@@ -1383,39 +1371,31 @@
           ]
         },
         {
-          "type": "FIELD",
-          "name": "param_value",
-          "content": {
-            "type": "SYMBOL",
-            "name": "template_param_value"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "template_param_value"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
     "template_param_name": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_template_param_name_segment"
-      }
-    },
-    "_template_param_name_segment": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_text_no_pipes_braces_equals"
-          },
-          "named": true,
-          "value": "template_param_name_part"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "template"
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_text_no_pipes_braces_equals"
     },
     "_text_no_pipes_braces_equals": {
       "type": "TOKEN",
@@ -1424,148 +1404,108 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "[^\\|\\{\\}=][^\\|\\{\\}\\n]*"
+          "value": "[^\\|{}=]+"
         }
       }
     },
     "template_param_value": {
       "type": "REPEAT1",
       "content": {
-        "type": "SYMBOL",
-        "name": "_template_param_value_segment"
-      }
-    },
-    "_template_param_value_segment": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
+        "type": "CHOICE",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "_text_no_pipes_braces_strict"
+            "name": "wikilink"
           },
-          "named": true,
-          "value": "text"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "wikilink"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "external_link"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "template"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "bold"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "italic"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "bold_italic"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "html_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "magic_word"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "signature"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "nowiki_inline_element"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
+          {
             "type": "SYMBOL",
-            "name": "_param_value_text_content"
+            "name": "external_link"
           },
-          "named": true,
-          "value": "text"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
+          {
+            "type": "SYMBOL",
+            "name": "template"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "bold"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "italic"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "bold_italic"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "html_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "magic_word"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "signature"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "nowiki_inline_element"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "text"
+          },
+          {
+            "type": "ALIAS",
             "content": {
-              "type": "PREC",
-              "value": 0,
+              "type": "TOKEN",
               "content": {
-                "type": "STRING",
-                "value": "|"
+                "type": "PREC",
+                "value": 0,
+                "content": {
+                  "type": "STRING",
+                  "value": "|"
+                }
               }
-            }
+            },
+            "named": true,
+            "value": "pipe_literal"
           },
-          "named": true,
-          "value": "pipe_literal"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
+          {
+            "type": "ALIAS",
             "content": {
-              "type": "PREC",
-              "value": 0,
+              "type": "TOKEN",
               "content": {
-                "type": "STRING",
-                "value": "{"
+                "type": "PREC",
+                "value": 0,
+                "content": {
+                  "type": "STRING",
+                  "value": "{"
+                }
               }
-            }
+            },
+            "named": true,
+            "value": "lbrace_literal"
           },
-          "named": true,
-          "value": "lbrace_literal"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
+          {
+            "type": "ALIAS",
             "content": {
-              "type": "PREC",
-              "value": 0,
+              "type": "TOKEN",
               "content": {
-                "type": "STRING",
-                "value": "}"
+                "type": "PREC",
+                "value": 0,
+                "content": {
+                  "type": "STRING",
+                  "value": "}"
+                }
               }
-            }
-          },
-          "named": true,
-          "value": "rbrace_literal"
-        }
-      ]
-    },
-    "_param_value_text_content": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\\|\\{\\}\\n]+"
-        }
-      }
-    },
-    "_text_no_pipes_braces_strict": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\\|\\{\\}\\n]+"
-        }
+            },
+            "named": true,
+            "value": "rbrace_literal"
+          }
+        ]
       }
     },
     "list": {
@@ -3181,52 +3121,12 @@
   ],
   "conflicts": [
     [
-      "_inline_content",
-      "_table_cell_content_inline"
-    ],
-    [
-      "template_argument",
-      "_template_name_segment"
-    ],
-    [
-      "wikilink_page",
-      "_template_name_segment"
-    ],
-    [
-      "wikilink_page",
-      "_template_param_name_segment"
-    ],
-    [
       "paragraph",
       "_html_content"
     ],
     [
-      "table_cell",
-      "table_header_cell"
-    ],
-    [
       "_block_level_element",
       "_html_content"
-    ],
-    [
-      "_template_param_value_segment",
-      "template"
-    ],
-    [
-      "_template_param_value_segment",
-      "wikilink"
-    ],
-    [
-      "_template_param_value_segment",
-      "external_link"
-    ],
-    [
-      "_template_param_name_segment",
-      "template"
-    ],
-    [
-      "_inline_text_base",
-      "text"
     ],
     [
       "nowiki_tag_block",
@@ -3246,58 +3146,6 @@
       {
         "type": "SYMBOL",
         "name": "italic"
-      }
-    ],
-    [
-      {
-        "type": "SYMBOL",
-        "name": "wikilink"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "external_link"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "template"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "html_tag"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "horizontal_rule"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "text"
-      }
-    ],
-    [
-      {
-        "type": "SYMBOL",
-        "name": "heading"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "horizontal_rule"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "list"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "table"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "preformatted_block"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "paragraph"
       }
     ],
     [
@@ -3328,16 +3176,6 @@
       {
         "type": "SYMBOL",
         "name": "html_tag"
-      }
-    ],
-    [
-      {
-        "type": "SYMBOL",
-        "name": "_template_param_value_segment"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "_template_param_name_segment"
       }
     ]
   ],

@@ -135,7 +135,7 @@ const text_not_ending_with = (terminators) => {
 // Text that can appear inside most inline elements, carefully excluding delimiters
 // This is one of the hardest parts to get right.
 const create_inline_text_token = (additional_exclusions = "") => {
-  const base_exclusions = "\n\\[\\]\\{\\}'|<>&!=*_#;:~"; // Base special characters
+  const base_exclusions = "\n\\[\\]{}'|<>&!=*_#;~"; // Base special characters
   // Escape for regex character class
   const all_exclusions = (base_exclusions + additional_exclusions)
     .split("")
@@ -149,47 +149,16 @@ module.exports = grammar({
 
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [
-    [$._inline_content, $._table_cell_content_inline], // for precedence of formatting within cells
-    [$.template_argument, $._template_name_segment], // template names can look like unnamed args
-    [$.wikilink_page, $._template_name_segment],
-    [$.wikilink_page, $._template_param_name_segment],
     [$.paragraph, $._html_content],
-    [$.table_cell, $.table_header_cell],
     [$._block_level_element, $._html_content],
-    // Conflicts related to template parameter values and names containing other elements
-    [$._template_param_value_segment, $.template],
-    [$._template_param_value_segment, $.wikilink],
-    [$._template_param_value_segment, $.external_link],
-    [$._template_param_name_segment, $.template],
-    [$._inline_text_base, $.text], // Generic text conflict
-
     [$.nowiki_tag_block, $.nowiki_inline_element],
   ],
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)
     ["bold_italic_explicit", $.bold, $.italic],
-    // Prefer specific constructs over generic text
-    [
-      $.wikilink,
-      $.external_link,
-      $.template,
-      $.html_tag,
-      $.horizontal_rule,
-      $.text,
-    ],
-    [
-      $.heading,
-      $.horizontal_rule,
-      $.list,
-      $.table,
-      $.preformatted_block,
-      $.paragraph,
-    ],
     [$._table_cell_content_block, $._table_cell_content_inline], // Prefer block content if ambiguous
     [$._block_level_element, $.html_tag],
     [$._inline_content, $.html_tag],
-
-    [$._template_param_value_segment, $._template_param_name_segment],
   ],
   rules: {
     source_file: ($) => repeat($._block_level_element),
@@ -210,6 +179,7 @@ module.exports = grammar({
     // ==== Text and Inline Content ====
     _inline_content: ($) =>
       choice(
+        $.comment,
         $.text,
         $.bold_italic, // Must come before bold and italic
         $.bold,
@@ -480,78 +450,61 @@ module.exports = grammar({
 
     // ==== Templates ====
     template: ($) =>
+      seq("{{", $.template_name, repeat($.template_argument), "}}"),
+
+    template_name: ($) =>
       seq(
-        "{{",
-        field("name", $.template_name),
-        repeat(field("argument", $.template_argument)),
-        "}}",
-      ),
-    template_name: ($) => repeat1($._template_name_segment),
-    _template_name_segment: ($) =>
-      choice(
         // Text for template name, avoid | and }}
         // Can also contain other templates if they are part of the name (complex case)
         alias($._text_no_pipes_braces_colon_hash_equals, $.template_name_part), // Colon for magic words like {{PAGENAMEE}}, hash for parser functions, equals for parameter default
-        $.template, // Nested template in name part
-        alias(token.immediate(prec(1, ":")), $.template_name_colon),
-        alias(token.immediate(prec(1, "#")), $.template_name_hash),
+        optional(alias(token.immediate(prec(1, ":")), $.template_name_colon)),
+        optional(alias(token.immediate(prec(1, "#")), $.template_name_hash)),
       ),
     _text_no_pipes_braces_colon_hash_equals: ($) =>
-      token(prec(1, /[^\|\{\}:#=\s\n][^\|\{\}\n]*/)), // Allow spaces in name
+      token(prec(1, /[^\|{}:#=\s\n]+/)), // Allow spaces in name
 
     template_argument: ($) =>
       seq(
         "|",
-        optional(seq(field("param_name", $.template_param_name), "=")),
-        field("param_value", $.template_param_value),
+        optional($.template_param_value),
+        optional(seq("=", $.template_param_value)),
       ),
-    template_param_name: ($) => repeat1($._template_param_name_segment),
-    _template_param_name_segment: ($) =>
-      choice(
-        // Text for param name, avoid |, =, }}
-        alias($._text_no_pipes_braces_equals, $.template_param_name_part),
-        $.template, // Nested template in param name (rare but possible)
+    template_param_name: ($) => $._text_no_pipes_braces_equals,
+
+    _text_no_pipes_braces_equals: ($) => token(prec(1, /[^\|{}=]+/)),
+
+    template_param_value: ($) =>
+      repeat1(
+        choice(
+          // Text for param value, avoid | and }}
+          // This is where most inline content can appear within a template
+          $.wikilink,
+          $.external_link,
+          $.template, // Nested template in param value
+          $.bold,
+          $.italic,
+          $.bold_italic,
+          $.html_tag, // HTML tags can be in param values
+          $.magic_word,
+          $.signature,
+          $.nowiki_inline_element,
+          $.text,
+          // token(prec(1, /[^=\[\]{}\|]+/)),
+          // General text content within the parameter value.
+          // This token will match sequences of characters that are NOT |, {, }, or newline.
+          // It has lower precedence to allow specific tokens/rules to match first.
+          //alias($._param_value_text_content, $.text),
+
+          // If a single |, {, or } is encountered that wasn't part of the above
+          // constructs (e.g., not `{{..}}`, not the `|` that separates arguments for $.template_argument),
+          // then parse it as a literal character.
+          // These have slightly higher precedence than the general text to be picked
+          // when a single one of these characters is found.
+          alias(token(prec(0, "|")), $.pipe_literal), // Literal pipe character within a value
+          alias(token(prec(0, "{")), $.lbrace_literal), // Literal open brace within a value
+          alias(token(prec(0, "}")), $.rbrace_literal), // Literal close brace within a value
+        ),
       ),
-    _text_no_pipes_braces_equals: ($) =>
-      token(prec(1, /[^\|\{\}=][^\|\{\}\n]*/)),
-
-    template_param_value: ($) => repeat1($._template_param_value_segment),
-    _template_param_value_segment: ($) =>
-      choice(
-        // Text for param value, avoid | and }}
-        // This is where most inline content can appear within a template
-        alias($._text_no_pipes_braces_strict, $.text),
-        $.wikilink,
-        $.external_link,
-        $.template, // Nested template in param value
-        $.bold,
-        $.italic,
-        $.bold_italic,
-        $.html_tag, // HTML tags can be in param values
-        $.magic_word,
-        $.signature,
-        $.nowiki_inline_element,
-        // General text content within the parameter value.
-        // This token will match sequences of characters that are NOT |, {, }, or newline.
-        // It has lower precedence to allow specific tokens/rules to match first.
-        alias($._param_value_text_content, $.text),
-
-        // If a single |, {, or } is encountered that wasn't part of the above
-        // constructs (e.g., not `{{..}}`, not the `|` that separates arguments for $.template_argument),
-        // then parse it as a literal character.
-        // These have slightly higher precedence than the general text to be picked
-        // when a single one of these characters is found.
-        alias(token(prec(0, "|")), $.pipe_literal), // Literal pipe character within a value
-        alias(token(prec(0, "{")), $.lbrace_literal), // Literal open brace within a value
-        alias(token(prec(0, "}")), $.rbrace_literal), // Literal close brace within a value
-      ),
-    // Text for parameter values. Excludes |, {, }, \n to let them be handled
-    // by other rules in _template_param_value_segment (like $.template for {{...}})
-    // or as specific literal tokens (like $.pipe_literal for a single |).
-    // `prec(-1)` makes it a fallback if no other more specific token matches.
-    _param_value_text_content: ($) => token(prec(-1, /[^\|\{\}\n]+/)),
-    _text_no_pipes_braces_strict: ($) => token(prec(1, /[^\|\{\}\n]+/)), // Stricter text for values
-
     // ==== Lists ====
     list: ($) =>
       prec.left(
