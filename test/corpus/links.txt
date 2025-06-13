@@ -144,6 +144,7 @@ Multiple Links
 
 ==================
 Nested Links Syntax (not valid in MediaWiki)
+:error
 ==================
 
 [[Outer Link|[Inner Link]]]

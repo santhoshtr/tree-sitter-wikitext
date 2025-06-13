@@ -192,6 +192,7 @@ Header with Extra Spaces
 
 ==================
 Unbalanced Headers (Not Valid in MediaWiki)
+:error
 ==================
 
 == Unbalanced Header ===
