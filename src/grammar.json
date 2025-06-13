@@ -723,20 +723,28 @@
         }
       }
     },
+    "_text_no_brackets": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\[\\]\\{\\}]+"
+        }
+      }
+    },
     "_wikilink_display_content": {
       "type": "CHOICE",
       "members": [
         {
           "type": "ALIAS",
           "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "[^\\\\\\]\\\\\\[\\|\\{\\}\\n]+"
-            }
+            "type": "SYMBOL",
+            "name": "_text_no_brackets"
           },
           "named": true,
-          "value": "text"
+          "value": "page_name_segment"
         },
         {
           "type": "SYMBOL",
@@ -862,14 +870,11 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "[^\\\\\\]\\\\\\[\\|\\{\\}<>\\n]+"
-            }
+            "type": "SYMBOL",
+            "name": "_text_no_brackets"
           },
           "named": true,
-          "value": "text"
+          "value": "page_name_segment"
         },
         {
           "type": "SYMBOL",

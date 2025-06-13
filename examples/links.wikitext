@@ -1,0 +1,5 @@
+[[Title]]
+
+[[Title|Display text]]
+
+[http://external.com External Link]

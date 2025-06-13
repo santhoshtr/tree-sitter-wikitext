@@ -337,9 +337,10 @@ module.exports = grammar({
     _text_no_brackets_pipes_colon_hash: ($) =>
       token(prec(1, /[^\[\]\|\{\}:#\n][^\[\]\|\{\}\n]*/)),
 
+    _text_no_brackets: ($) => token(prec(1, /[^\[\]\{\}]+/)),
     _wikilink_display_content: ($) =>
       choice(
-        alias(text_not_ending_with("\\]\\[|{}"), $.text), // Avoid consuming ]] or other link/template starts
+        alias($._text_no_brackets, $.page_name_segment), // Colon for namespace, hash for section
         $.template,
         $.bold,
         $.italic,
@@ -372,7 +373,7 @@ module.exports = grammar({
     url_bare: ($) => token(prec(-1, /https?:\/\/[^\s\[\]\{\}<>'"]+/)), // Bare URLs should not be inside other constructs
     _external_link_display_content: ($) =>
       choice(
-        alias(text_not_ending_with("\\]\\[|{}<>"), $.text),
+        alias($._text_no_brackets, $.page_name_segment), // Colon for namespace, hash for section
         $.template,
         $.bold,
         $.italic,

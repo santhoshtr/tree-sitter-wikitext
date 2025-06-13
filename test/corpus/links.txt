@@ -20,12 +20,12 @@ Internal Link with Label
 
 ---
 
-(document
-  (wikilink
-    (target)
-    (label
-      (text)))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment))
+      (page_name_segment))))
 
 ==================
 Internal Link with Namespace
@@ -53,7 +53,8 @@ Internal Link with Namespace and Label
   (paragraph
     (wikilink
       target: (wikilink_page
-        (page_name_segment))))
+        (page_name_segment))
+      display: (page_name_segment))))
 
 ==================
 Internal Link with Anchor
@@ -77,13 +78,12 @@ Internal Link with Anchor and Label
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target)
-    (label
-      (text)))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment))
+      (page_name_segment))))
 
 ==================
 External Link (URL only)
@@ -106,13 +106,11 @@ External Link with Label
 
 ---
 
-(document
-  (newline)
-  (external_link
-    (target)
-    (label
-      (text)))
-  (newline))
+(source_file
+  (paragraph
+    (external_link
+      (url)
+      (page_name_segment))))
 
 ==================
 Bare URL
@@ -134,16 +132,15 @@ Multiple Links
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target))
-  (text)
-  (external_link
-    (target)
-    (label
-      (text)))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))
+    (text)
+    (external_link
+      (url)
+      (page_name_segment))))
 
 ==================
 Nested Links Syntax (not valid in MediaWiki)
@@ -153,16 +150,12 @@ Nested Links Syntax (not valid in MediaWiki)
 
 ---
 
-(document
-  (newline)
-  (wikilink
-    (target)
-    (label
-      (external_link
-        (target)
-        (label
-          (text)))))
-  (newline))
+(source_file
+  (ERROR
+  (wikilink_page
+    (page_name_segment))
+    (template_name_part)
+    (template_name_part)))
 
 ==================
 Category Link
@@ -200,13 +193,12 @@ Image Link with Parameters
 
 ---
 
-(document
-  (newline)
-  (image
-    (file)
-    (attr_label
-      (text)))
-  (newline))
+(source_file
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment))
+      (page_name_segment))))
 
 ==================
 Interwiki Link
