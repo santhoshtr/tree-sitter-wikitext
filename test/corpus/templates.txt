@@ -86,15 +86,18 @@ Template with internal link in parameter name
 
 ---
 
-(document
-  (newline)
-  (template
-    (template_name)
-    (template_parameter
-      (param_name))
-    (template_parameter
-      (param_name)))
-  (newline))
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))
+            (page_name_segment)))))))
 
 ==================
 Template with internal link in parameter value
@@ -113,11 +116,11 @@ Template with internal link in parameter value
         (template_param_value
           (text))
         (template_param_value
-          (text)))
-      (ERROR
-        (wikilink_page
-          (page_name_segment))
-        (template_name_part)))))
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))
+            (page_name_segment)))))))
 
 ==================
 Templates with complex content
