@@ -88,6 +88,7 @@ Text with ~~~~~ date.
 
 ================================================================================
 Adjacent signatures
+:error
 ================================================================================
 
 ~~~~~~~ (User + date followed by date)
@@ -95,21 +96,9 @@ Adjacent signatures
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (signature
-    (current_date))
-  (text)
-  (newline)
-  (signature
-    (current_date))
-  (signature
-    (current_date))
-  (text)
-  (newline))
-
 ================================================================================
 Not signatures (more or fewer tildes)
+:error
 ================================================================================
 
 Text with ~~ not a signature
@@ -117,12 +106,3 @@ Text with ~~~~~~ not a signature
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
-  (text)
-  (newline)
-  (text)
-  (signature
-    (current_date))
-  (text)
-  (newline))
