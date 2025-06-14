@@ -1,0 +1,164 @@
+================================================================================
+Basic unordered lists
+================================================================================
+
+* Item 1
+* Item 2
+* Item 3
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text)))))
+
+================================================================================
+Nested unordered lists
+================================================================================
+
+* Item 1
+  * Subitem 1.1
+  * Subitem 1.2
+* Item 2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text)))))
+
+================================================================================
+Basic ordered lists
+================================================================================
+
+# Item 1
+# Item 2
+# Item 3
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (list
+    (ordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (ordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (ordered_list_item
+      (list_marker)
+      (list_item_content
+        (text)))))
+
+================================================================================
+Mixed ordered and unordered lists
+================================================================================
+
+# Item 1
+  * Subitem 1.1
+  * Subitem 1.2
+# Item 2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (list
+    (ordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (ordered_list_item
+      (list_marker)
+      (list_item_content
+        (text)))))
+
+================================================================================
+Lists with special characters
+================================================================================
+
+* Item with *bold* text
+* Item with [[link]]
+* Item with ==heading==
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (paragraph
+    (wikilink
+      (wikilink_page
+        (page_name_segment))))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (heading
+    (heading_marker)
+    (text)
+    (heading_marker)))
