@@ -1,0 +1,35 @@
+{| 
+|Cell 1
+|Cell 2
+|}
+
+{| class="wikitable" style="margin:auto"
+|+ Caption text
+|-
+! Header text !! Header text !! Header text
+|-
+| Example || Example || Example
+|-
+| Example || Example || Example
+|-
+| Example || Example || Example
+|}
+
+{|
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream
+|}
+
+{|
+|Orange||Apple||more
+|-
+|Bread||Pie||more
+|-
+|Butter||Ice<br/>cream||and<br/>more
+|}

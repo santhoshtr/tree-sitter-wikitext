@@ -160,6 +160,21 @@
     }
   },
   {
+    "type": "colheaders",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "table_header_cell",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "definition_data",
     "named": true,
     "fields": {
@@ -1396,7 +1411,15 @@
       "required": false,
       "types": [
         {
+          "type": "colheaders",
+          "named": true
+        },
+        {
           "type": "table_caption",
+          "named": true
+        },
+        {
+          "type": "table_cell",
           "named": true
         },
         {

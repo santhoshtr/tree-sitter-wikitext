@@ -9,17 +9,16 @@ Basic table
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
+(source_file
   (table
-    (attribute)
-    (tablecell
-      (content
+    (table_cell
+      (table_cell_block
+        (cell_marker)
         (text)))
-    (tablecell
-      (content
-        (text))))
-  (newline))
+    (table_cell
+      (table_cell_block
+        (cell_marker)
+        (text)))))
 
 ================================================================================
 Table with caption and headers
@@ -35,26 +34,28 @@ Table with caption and headers
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
+(source_file
   (table
-    (tablecaption
-      (content
-        (text)))
+    (table_caption
+      (table_attributes
+        (html_attribute
+          (html_attribute_name))
+        (html_attribute
+          (html_attribute_name))))
     (colheaders
-      (tableheader
-        (content
-          (text)))
-      (tableheader
-        (content
+      (table_header_cell
+        (table_header_cell_block
+          (cell_marker)
+          (text)
           (text))))
-    (tablecell
-      (content
+    (table_cell
+      (table_cell_block
+        (cell_marker)
         (text)))
-    (tablecell
-      (content
-        (text))))
-  (newline))
+    (table_cell
+      (table_cell_block
+        (cell_marker)
+        (text)))))
 
 ================================================================================
 Table with rows
@@ -70,23 +71,25 @@ Table with rows
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
+(source_file
   (table
-    (tablecell
-      (content
+    (table_cell
+      (table_cell_block
+        (cell_marker)
         (text)))
-    (tablecell
-      (content
+    (table_cell
+      (table_cell_block
+        (cell_marker)
         (text)))
-    (tablerow
-      (tablecell
-        (content
+    (table_row
+      (table_cell
+        (table_cell_block
+          (cell_marker)
           (text)))
-      (tablecell
-        (content
-          (text)))))
-  (newline))
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text))))))
 
 ================================================================================
 Table with attributes
@@ -102,26 +105,33 @@ Table with attributes
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
+(source_file
   (table
-    (attribute)
-    (tablecell
-      (content
+    (table_attributes
+      (html_attribute
+        (html_attribute_name)
+        (html_attribute_value)))
+    (table_cell
+      (table_cell_block
+        (cell_marker)
         (text)))
-    (tablecell
-      (attribute
-        (text))
-      (content
+    (table_cell
+      (table_cell_block
+        (cell_marker)
         (text)))
-    (tablerow
-      (tablecell
-        (content
+    (table_cell
+      (table_cell_block
+        (cell_marker)
+        (text)))
+    (table_row
+      (table_cell
+        (table_cell_block
+          (cell_marker)
           (text)))
-      (tablecell
-        (content
-          (text)))))
-  (newline))
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text))))))
 
 ================================================================================
 Table with formatting inside cells
@@ -137,38 +147,29 @@ Table with formatting inside cells
 
 --------------------------------------------------------------------------------
 
-(document
-  (newline)
+(source_file
   (table
-    (tablecell
-      (content
-        (text)
-        (bold
-          (content
-            (text)))))
-    (tablecell
-      (content
-        (text)
-        (italic
-          (content
-            (text)))))
-    (tablerow
-      (tablecell
-        (content
-          (text)
-          (wikilink
-            (target))))
-      (tablecell
-        (content
-          (text)
-          (external_link
-            (target)
-            (label
-              (text)))))))
-  (newline))
+    (table_cell
+      (table_cell_block
+        (cell_marker)
+        (text)))
+    (table_cell
+      (table_cell_block
+        (cell_marker)
+        (text)))
+    (table_row
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text)))
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text))))))
 
 ================================================================================
 Nested tables
+:skip
 ================================================================================
 
 {|

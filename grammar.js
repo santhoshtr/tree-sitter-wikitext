@@ -615,9 +615,13 @@ module.exports = grammar({
         "{|",
         field("attributes", optional($.table_attributes)),
         optional($._newline),
-        repeat(choice($.table_caption, $.table_row)),
+        optional($.table_caption),
+        optional(alias(repeat1($.table_header_cell), $.colheaders)),
+        optional(repeat1($.table_cell)),
+        repeat($.table_row),
         "|}",
       ),
+
     table_attributes: ($) =>
       repeat1(
         choice(

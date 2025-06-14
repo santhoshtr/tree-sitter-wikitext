@@ -10,4 +10,6 @@ see: gen
     tree-sitter parse examples/sample.wikitext | bat
 see-links: gen
     tree-sitter parse examples/links.wikitext | bat
-   
+see-tables: gen
+    tree-sitter parse examples/tables.wikitext | bat
+    
