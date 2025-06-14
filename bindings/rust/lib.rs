@@ -4,9 +4,9 @@
 //! tree-sitter [Parser][], and then use the parser to parse some code:
 //!
 //! ```
-//! let code = "";
+//! let code = "\n[[Example Page|Example Title]]\n";
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_wikitext::LANGUAGE.into()).expect("Error loading wikitext grammar");
+//! parser.set_language(&tree_sitter_wikitext::LANGUAGE.into()).expect("Error loading wikitext grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
 //!
