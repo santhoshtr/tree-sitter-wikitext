@@ -622,6 +622,7 @@ module.exports = grammar({
         // Allow extra row starter, as observed in wikipedia content. It has no effect though
         optional(seq("|-", $._newline)),
         "|}",
+        /\s*/, // Allow trailing spaces
       ),
 
     table_attributes: ($) =>

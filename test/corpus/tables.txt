@@ -216,3 +216,23 @@ Table with extra row starter
         (table_cell_block
           (cell_marker)
           (text))))))
+
+=============================
+Table with extra whitespace after close 
+=============================
+
+{|
+|-
+| Row 1 Cell 1
+|} 
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (table
+    (table_row
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text))))))
+
