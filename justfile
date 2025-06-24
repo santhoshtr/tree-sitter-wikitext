@@ -1,5 +1,8 @@
-test: gen wasm
+test: gen
+    tree-sitter test
+playground: gen wasm
     tree-sitter playground
+
 wasm: gen
     tree-sitter build --wasm
 gen:
@@ -7,9 +10,10 @@ gen:
     tree-sitter build
 
 see: gen
-    tree-sitter parse examples/sample.wikitext | bat
+    tree-sitter parse --cst examples/sample.wikitext | bat
 see-links: gen
-    tree-sitter parse examples/links.wikitext | bat
+    tree-sitter parse --cst examples/links.wikitext | bat
 see-tables: gen
-    tree-sitter parse examples/tables.wikitext | bat
-    
+    tree-sitter parse --cst examples/tables.wikitext | bat
+see-templates: gen
+    tree-sitter parse --cst examples/templates.wikitext | bat
