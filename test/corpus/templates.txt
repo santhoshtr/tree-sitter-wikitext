@@ -212,3 +212,32 @@ Multiple templates
           (text))
         (template_param_value
           (text))))))
+
+=====================================
+Template with name having space in it
+=====================================
+
+{{Cite ref|url=someurl|title=some title|language=en}}
+
+---
+
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text))
+        (template_param_value
+          (text))))))

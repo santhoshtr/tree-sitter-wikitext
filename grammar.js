@@ -455,14 +455,14 @@ module.exports = grammar({
 
     template_name: ($) =>
       seq(
-        // Text for template name, avoid | and }}
+        // Text for template name, avoid | and }}. But space is allowed.
         // Can also contain other templates if they are part of the name (complex case)
         alias($._text_no_pipes_braces_colon_hash_equals, $.template_name_part), // Colon for magic words like {{PAGENAMEE}}, hash for parser functions, equals for parameter default
         optional(alias(token.immediate(prec(1, ":")), $.template_name_colon)),
         optional(alias(token.immediate(prec(1, "#")), $.template_name_hash)),
       ),
     _text_no_pipes_braces_colon_hash_equals: ($) =>
-      token(prec(1, /[^\|{}:#=\s\n]+/)), // Allow spaces in name
+      token(prec(1, /[^\|{}:#=]+/)), // Allow spaces in name. But not in the beginning.
 
     template_argument: ($) =>
       seq(
