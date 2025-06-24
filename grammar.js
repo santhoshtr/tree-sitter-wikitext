@@ -619,6 +619,8 @@ module.exports = grammar({
         optional(alias(repeat1($.table_header_cell), $.colheaders)),
         optional(repeat1($.table_cell)),
         repeat($.table_row),
+        // Allow extra row starter, as observed in wikipedia content. It has no effect though
+        optional(seq("|-", $._newline)),
         "|}",
       ),
 

@@ -168,38 +168,6 @@ Table with formatting inside cells
           (text))))))
 
 ================================================================================
-Nested tables
-:skip
-================================================================================
-
-{|
-|
-{|
-| Nested cell
-|}
-|
-| Outer cell
-|}
-
---------------------------------------------------------------------------------
-
-(document
-  (newline)
-  (table
-    (tablecell
-      (content
-        (newline)
-        (table
-          (tablecell
-            (content
-              (text))))))
-    (tablecell
-      (content
-        (newline)
-        (text))))
-  (newline))
-
-================================================================================
 Table with row attributes
 ================================================================================
 
@@ -224,6 +192,26 @@ Table with row attributes
         (html_attribute
           (html_attribute_name)
           (html_attribute_value)))
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text))))))
+
+=============================
+Table with extra row starter
+=============================
+
+{|
+|-
+| Row 1 Cell 1
+|-
+|}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (table
+    (table_row
       (table_cell
         (table_cell_block
           (cell_marker)
