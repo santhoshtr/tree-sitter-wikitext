@@ -620,7 +620,7 @@ module.exports = grammar({
         optional(repeat1($.table_cell)),
         repeat($.table_row),
         // Allow extra row starter, as observed in wikipedia content. It has no effect though
-        optional(seq("|-", $._newline)),
+        optional(seq("|-", optional($.table_attributes), $._newline)),
         "|}",
         /\s*/, // Allow trailing spaces
       ),

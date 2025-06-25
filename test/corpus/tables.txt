@@ -218,8 +218,32 @@ Table with extra row starter
           (text))))))
 
 =============================
-Table with extra whitespace after close 
+Table with extra row starter with attributes
 =============================
+
+{|
+|-
+| Row 1 Cell 1
+|- class="highlight"
+|}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (table
+    (table_row
+      (table_cell
+        (table_cell_block
+          (cell_marker)
+          (text))))
+    (table_attributes
+      (html_attribute
+        (html_attribute_name)
+        (html_attribute_value)))))
+
+=======================================
+Table with extra whitespace after close
+=======================================
 
 {|
 |-
@@ -235,4 +259,3 @@ Table with extra whitespace after close
         (table_cell_block
           (cell_marker)
           (text))))))
-

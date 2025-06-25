@@ -1415,6 +1415,10 @@
           "named": true
         },
         {
+          "type": "table_attributes",
+          "named": true
+        },
+        {
           "type": "table_caption",
           "named": true
         },
