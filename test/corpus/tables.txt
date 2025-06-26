@@ -11,13 +11,11 @@ Basic table
 
 (source_file
   (table
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (tablecell
+      (content
         (text)))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (tablecell
+      (content
         (text)))))
 
 ================================================================================
@@ -36,25 +34,21 @@ Table with caption and headers
 
 (source_file
   (table
-    (table_caption
-      (table_attributes
-        (html_attribute
-          (html_attribute_name))
-        (html_attribute
-          (html_attribute_name))))
-    (colheaders
-      (table_header_cell
-        (table_header_cell_block
-          (cell_marker)
-          (text)
-          (text))))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (tablecaption
+      (content
         (text)))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (colheaders
+      (tableheader
+        (content
+          (text)))
+      (tableheader
+        (content
+          (text))))
+    (tablecell
+      (content
+        (text)))
+    (tablecell
+      (content
         (text)))))
 
 ================================================================================
@@ -73,22 +67,18 @@ Table with rows
 
 (source_file
   (table
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (tablecell
+      (content
         (text)))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (tablecell
+      (content
         (text)))
-    (table_row
-      (table_cell
-        (table_cell_block
-          (cell_marker)
+    (tablerow
+      (tablecell
+        (content
           (text)))
-      (table_cell
-        (table_cell_block
-          (cell_marker)
+      (tablecell
+        (content
           (text))))))
 
 ================================================================================
@@ -97,7 +87,7 @@ Table with attributes
 
 {| class="wikitable"
 | Cell 1
-| style="color: red" | Cell 2
+| Cell 2
 |-
 | Cell 3
 | Cell 4
@@ -107,30 +97,22 @@ Table with attributes
 
 (source_file
   (table
-    (table_attributes
+    (table_attribute
       (html_attribute
         (html_attribute_name)
         (html_attribute_value)))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (tablecell
+      (content
         (text)))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
+    (tablecell
+      (content
         (text)))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
-        (text)))
-    (table_row
-      (table_cell
-        (table_cell_block
-          (cell_marker)
+    (tablerow
+      (tablecell
+        (content
           (text)))
-      (table_cell
-        (table_cell_block
-          (cell_marker)
+      (tablecell
+        (content
           (text))))))
 
 ================================================================================
@@ -149,23 +131,25 @@ Table with formatting inside cells
 
 (source_file
   (table
-    (table_cell
-      (table_cell_block
-        (cell_marker)
-        (text)))
-    (table_cell
-      (table_cell_block
-        (cell_marker)
-        (text)))
-    (table_row
-      (table_cell
-        (table_cell_block
-          (cell_marker)
-          (text)))
-      (table_cell
-        (table_cell_block
-          (cell_marker)
-          (text))))))
+    (tablecell
+      (content
+        (bold
+          (text))))
+    (tablecell
+      (content
+        (italic
+          (text))))
+    (tablerow
+      (tablecell
+        (content
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (tablecell
+        (content
+          (external_link
+            (url)
+            (page_name_segment)))))))
 
 ================================================================================
 Table with row attributes
@@ -182,19 +166,17 @@ Table with row attributes
 
 (source_file
   (table
-    (table_row
-      (table_cell
-        (table_cell_block
-          (cell_marker)
+    (tablerow
+      (tablecell
+        (content
           (text))))
-    (table_row
-      (table_attributes
+    (tablerow
+      (table_attribute
         (html_attribute
           (html_attribute_name)
           (html_attribute_value)))
-      (table_cell
-        (table_cell_block
-          (cell_marker)
+      (tablecell
+        (content
           (text))))))
 
 =============================
@@ -211,15 +193,15 @@ Table with extra row starter
 
 (source_file
   (table
-    (table_row
-      (table_cell
-        (table_cell_block
-          (cell_marker)
-          (text))))))
+    (tablerow
+      (tablecell
+        (content
+          (text))))
+    (tablerow)))
 
-=============================
+============================================
 Table with extra row starter with attributes
-=============================
+============================================
 
 {|
 |-
@@ -231,15 +213,15 @@ Table with extra row starter with attributes
 
 (source_file
   (table
-    (table_row
-      (table_cell
-        (table_cell_block
-          (cell_marker)
+    (tablerow
+      (tablecell
+        (content
           (text))))
-    (table_attributes
-      (html_attribute
-        (html_attribute_name)
-        (html_attribute_value)))))
+    (tablerow
+      (table_attribute
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))))))
 
 =======================================
 Table with extra whitespace after close
@@ -254,8 +236,8 @@ Table with extra whitespace after close
 
 (source_file
   (table
-    (table_row
-      (table_cell
-        (table_cell_block
-          (cell_marker)
-          (text))))))
+    (tablerow
+      (tablecell
+        (content
+          (text)))))
+  (ERROR))
