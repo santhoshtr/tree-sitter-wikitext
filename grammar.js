@@ -613,8 +613,8 @@ module.exports = grammar({
         optional(repeat1($.table_attribute)),
         "\n",
         optional($.tablecaption),
-        optional(alias(repeat1($.tableheader), $.colheaders)),
-        optional(repeat1($.tablecell)),
+        optional(alias(repeat1($.table_header), $.colheaders)),
+        optional(repeat1($.table_cell)),
         repeat($.tablerow),
         "|}",
       ),
@@ -631,24 +631,53 @@ module.exports = grammar({
     _table_attribute_text: ($) => token(prec(-1, /[^\n\|!}]+/)),
     tablecaption: ($) => seq("|+", alias($._table_node, $.content), "\n"),
 
-    tableheader: ($) => seq("!", alias($._table_node, $.content), "\n"),
+    table_header_block: ($) =>
+      seq(
+        "!",
+        // optional(seq(repeat1($.table_attribute), "|")),
+        alias($._table_node, $.content),
+        optional($._newline),
+      ),
+    table_header_inline: ($) =>
+      seq(
+        "!!",
+        // optional(seq(repeat1($.table_attribute), "|")),
+        alias($._table_node, $.content),
+      ),
 
-    tablecell: ($) =>
+    table_header: ($) =>
+      choice(
+        $.table_header_inline, // !! separated
+        $.table_header_block, // ! separated
+      ),
+
+    table_cell_block: ($) =>
       seq(
         "|",
         // optional(seq(repeat1($.table_attribute), "|")),
         alias($._table_node, $.content),
-        "\n",
+        optional($._newline),
+      ),
+    table_cell_inline: ($) =>
+      seq(
+        "||",
+        // optional(seq(repeat1($.table_attribute), "|")),
+        alias($._table_node, $.content),
       ),
 
+    table_cell: ($) =>
+      choice(
+        $.table_cell_inline, // || separated
+        $.table_cell_block, // | separated
+      ),
     _table_node: ($) => repeat1(choice($._inline_content)),
     tablerow: ($) =>
       seq(
         "|-",
         optional(repeat1($.table_attribute)),
         "\n",
-        optional(repeat1($.tableheader)),
-        repeat($.tablecell),
+        optional(repeat1($.table_header)),
+        repeat($.table_cell),
       ),
     // -----------------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------ SIGNATURES

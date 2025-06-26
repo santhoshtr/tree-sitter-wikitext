@@ -11,12 +11,14 @@ Basic table
 
 (source_file
   (table
-    (tablecell
-      (content
-        (text)))
-    (tablecell
-      (content
-        (text)))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))))
 
 ================================================================================
 Table with caption and headers
@@ -38,18 +40,22 @@ Table with caption and headers
       (content
         (text)))
     (colheaders
-      (tableheader
-        (content
-          (text)))
-      (tableheader
+      (table_header
+        (table_header_block
+          (content
+            (text))))
+      (table_header
+        (table_header_block
+          (content
+            (text)))))
+    (table_cell
+      (table_cell_block
         (content
           (text))))
-    (tablecell
-      (content
-        (text)))
-    (tablecell
-      (content
-        (text)))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))))
 
 ================================================================================
 Table with rows
@@ -67,19 +73,23 @@ Table with rows
 
 (source_file
   (table
-    (tablecell
-      (content
-        (text)))
-    (tablecell
-      (content
-        (text)))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
     (tablerow
-      (tablecell
-        (content
-          (text)))
-      (tablecell
-        (content
-          (text))))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))))
 
 ================================================================================
 Table with attributes
@@ -98,22 +108,25 @@ Table with attributes
 (source_file
   (table
     (table_attribute
-      (html_attribute
-        (html_attribute_name)
-        (html_attribute_value)))
-    (tablecell
-      (content
-        (text)))
-    (tablecell
-      (content
-        (text)))
+      (html_attribute_name)
+      (html_attribute_value))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
     (tablerow
-      (tablecell
-        (content
-          (text)))
-      (tablecell
-        (content
-          (text))))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))))
 
 ================================================================================
 Table with formatting inside cells
@@ -131,25 +144,29 @@ Table with formatting inside cells
 
 (source_file
   (table
-    (tablecell
-      (content
-        (bold
-          (text))))
-    (tablecell
-      (content
-        (italic
-          (text))))
+    (table_cell
+      (table_cell_block
+        (content
+          (bold
+            (text)))))
+    (table_cell
+      (table_cell_block
+        (content
+          (italic
+            (text)))))
     (tablerow
-      (tablecell
-        (content
-          (wikilink
-            (wikilink_page
-              (page_name_segment)))))
-      (tablecell
-        (content
-          (external_link
-            (url)
-            (page_name_segment)))))))
+      (table_cell
+        (table_cell_block
+          (content
+            (wikilink
+              (wikilink_page
+                (page_name_segment))))))
+      (table_cell
+        (table_cell_block
+          (content
+            (external_link
+              (url)
+              (page_name_segment))))))))
 
 ================================================================================
 Table with row attributes
@@ -167,17 +184,18 @@ Table with row attributes
 (source_file
   (table
     (tablerow
-      (tablecell
-        (content
-          (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))
     (tablerow
       (table_attribute
-        (html_attribute
-          (html_attribute_name)
-          (html_attribute_value)))
-      (tablecell
-        (content
-          (text))))))
+        (html_attribute_name)
+        (html_attribute_value))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))))
 
 =============================
 Table with extra row starter
@@ -194,9 +212,10 @@ Table with extra row starter
 (source_file
   (table
     (tablerow
-      (tablecell
-        (content
-          (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))
     (tablerow)))
 
 ============================================
@@ -214,14 +233,14 @@ Table with extra row starter with attributes
 (source_file
   (table
     (tablerow
-      (tablecell
-        (content
-          (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))
     (tablerow
       (table_attribute
-        (html_attribute
-          (html_attribute_name)
-          (html_attribute_value))))))
+        (html_attribute_name)
+        (html_attribute_value)))))
 
 =======================================
 Table with extra whitespace after close
@@ -237,7 +256,179 @@ Table with extra whitespace after close
 (source_file
   (table
     (tablerow
-      (tablecell
-        (content
-          (text)))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))))
   (ERROR))
+
+========================================================
+Table with attributes on rows
+========================================================
+
+{| class="wikitable"
+| Orange
+| Apple
+| style="text-align:right;"| 12,333.00
+|-
+| Bread
+| Pie
+| style="text-align:right;"| 500.00
+|- style="font-style: italic; color: green;"
+| Butter
+| Ice cream
+| style="text-align:right;"| 1.00
+|}
+
+-----------------------------------------------------------------
+
+(source_file)
+
+===============================
+Table with rows in same line
+===============================
+
+{| class="wikitable" style="margin:auto"
+|+ Caption text
+|-
+| Example || Example || Example
+|-
+| Example || Example || Example
+|-
+| Example || Example || Example
+|}
+
+--------------------------------------------------------------------------------------
+
+(source_file
+  (table
+    (table_attribute
+      (html_attribute_name)
+      (html_attribute_value))
+    (table_attribute
+      (html_attribute_name)
+      (html_attribute_value))
+    (tablecaption
+      (content
+        (text)))
+    (tablerow
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text)))))
+    (tablerow
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text)))))
+    (tablerow
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text)))))))
+
+==============================================
+Table with rows in same line, with headers too
+==============================================
+
+{| class="wikitable" style="margin:auto"
+|+ Caption text
+|-
+! Header text !! Header text !! Header text
+|-
+| Example || Example || Example
+|-
+| Example || Example || Example
+|-
+| Example || Example || Example
+|}
+
+--------------------------------------------------------------------------------------
+
+(source_file
+  (table
+    (table_attribute
+      (html_attribute_name)
+      (html_attribute_value))
+    (table_attribute
+      (html_attribute_name)
+      (html_attribute_value))
+    (tablecaption
+      (content
+        (text)))
+    (tablerow
+      (table_header
+        (table_header_block
+          (content
+            (text))))
+      (table_header
+        (table_header_inline
+          (content
+            (text))))
+      (table_header
+        (table_header_inline
+          (content
+            (text)))))
+    (tablerow
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text)))))
+    (tablerow
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text)))))
+    (tablerow
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text))))
+      (table_cell
+        (table_cell_inline
+          (content
+            (text)))))))
