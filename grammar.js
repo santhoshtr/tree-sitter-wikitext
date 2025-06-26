@@ -615,7 +615,7 @@ module.exports = grammar({
         optional($.tablecaption),
         optional(alias(repeat1($.table_header), $.colheaders)),
         optional(repeat1($.table_cell)),
-        repeat($.tablerow),
+        repeat($.table_row),
         "|}",
       ),
     table_attribute: ($) =>
@@ -671,7 +671,7 @@ module.exports = grammar({
         $.table_cell_block, // | separated
       ),
     _table_node: ($) => repeat1(choice($._inline_content)),
-    tablerow: ($) =>
+    table_row: ($) =>
       seq(
         "|-",
         optional(repeat1($.table_attribute)),

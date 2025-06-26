@@ -1938,7 +1938,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "tablerow"
+            "name": "table_row"
           }
         },
         {
@@ -2139,7 +2139,7 @@
         ]
       }
     },
-    "tablerow": {
+    "table_row": {
       "type": "SEQ",
       "members": [
         {

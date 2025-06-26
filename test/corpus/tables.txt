@@ -81,7 +81,7 @@ Table with rows
       (table_cell_block
         (content
           (text))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -118,7 +118,7 @@ Table with attributes
       (table_cell_block
         (content
           (text))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -154,7 +154,7 @@ Table with formatting inside cells
         (content
           (italic
             (text)))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -183,12 +183,12 @@ Table with row attributes
 
 (source_file
   (table
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
             (text)))))
-    (tablerow
+    (table_row
       (table_attribute
         (html_attribute_name)
         (html_attribute_value))
@@ -211,12 +211,12 @@ Table with extra row starter
 
 (source_file
   (table
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
             (text)))))
-    (tablerow)))
+    (table_row)))
 
 ============================================
 Table with extra row starter with attributes
@@ -232,12 +232,12 @@ Table with extra row starter with attributes
 
 (source_file
   (table
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
             (text)))))
-    (tablerow
+    (table_row
       (table_attribute
         (html_attribute_name)
         (html_attribute_value)))))
@@ -255,7 +255,7 @@ Table with extra whitespace after close
 
 (source_file
   (table
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -311,7 +311,7 @@ Table with rows in same line
     (tablecaption
       (content
         (text)))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -324,7 +324,7 @@ Table with rows in same line
         (table_cell_inline
           (content
             (text)))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -337,7 +337,7 @@ Table with rows in same line
         (table_cell_inline
           (content
             (text)))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -380,7 +380,7 @@ Table with rows in same line, with headers too
     (tablecaption
       (content
         (text)))
-    (tablerow
+    (table_row
       (table_header
         (table_header_block
           (content
@@ -393,7 +393,7 @@ Table with rows in same line, with headers too
         (table_header_inline
           (content
             (text)))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -406,7 +406,7 @@ Table with rows in same line, with headers too
         (table_cell_inline
           (content
             (text)))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
@@ -419,7 +419,7 @@ Table with rows in same line, with headers too
         (table_cell_inline
           (content
             (text)))))
-    (tablerow
+    (table_row
       (table_cell
         (table_cell_block
           (content
