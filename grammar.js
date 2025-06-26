@@ -156,7 +156,6 @@ module.exports = grammar({
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)
     ["bold_italic_explicit", $.bold, $.italic],
-    [$._table_cell_content_block, $._table_cell_content_inline], // Prefer block content if ambiguous
     [$._block_level_element, $.html_tag],
     [$._inline_content, $.html_tag],
   ],
@@ -320,9 +319,7 @@ module.exports = grammar({
       seq(
         "[[",
         field("target", $.wikilink_page),
-        optional(
-          seq("|", field("display", repeat($._wikilink_display_content))),
-        ),
+        optional(seq("|", field("display", $._wikilink_display_content))),
         "]]",
       ),
     wikilink_page: ($) =>
@@ -613,153 +610,46 @@ module.exports = grammar({
     table: ($) =>
       seq(
         "{|",
-        field("attributes", optional($.table_attributes)),
-        optional($._newline),
-        optional($.table_caption),
-        optional(alias(repeat1($.table_header_cell), $.colheaders)),
-        optional(repeat1($.table_cell)),
-        repeat($.table_row),
-        // Allow extra row starter, as observed in wikipedia content. It has no effect though
-        optional(seq("|-", optional($.table_attributes), $._newline)),
+        optional(repeat1($.table_attribute)),
+        "\n",
+        optional($.tablecaption),
+        optional(alias(repeat1($.tableheader), $.colheaders)),
+        optional(repeat1($.tablecell)),
+        repeat($.tablerow),
         "|}",
-        /\s*/, // Allow trailing spaces
       ),
-
-    table_attributes: ($) =>
-      repeat1(
-        choice(
-          $.html_attribute, // e.g., class="wikitable"
-          // _table_attribute_text captures other non-HTML attribute text
-          // that might appear in the attribute string of a table.
-          // It's a fallback due to prec(-1) and choice order.
-          alias($._table_attribute_text, $.text), // other text considered part of attributes
-        ),
+    table_attribute: ($) =>
+      seq(
+        field("name", $.html_attribute_name),
+        "=",
+        field("value", $.html_attribute_value),
       ),
 
     // This token matches any sequence of characters that are NOT the primary
     // table structure delimiters (\n, |, !, }).
     // It serves as a fallback for non-HTML attributes within the table declaration.
     _table_attribute_text: ($) => token(prec(-1, /[^\n\|!}]+/)),
+    tablecaption: ($) => seq("|+", alias($._table_node, $.content), "\n"),
 
-    table_caption: ($) =>
+    tableheader: ($) => seq("!", alias($._table_node, $.content), "\n"),
+
+    tablecell: ($) =>
       seq(
-        "|+",
-        field("attributes", optional($.table_attributes)),
-        field("content", repeat($._table_cell_content_inline)), // Captions are usually inline
-        optional($._newline),
+        "|",
+        // optional(seq(repeat1($.table_attribute), "|")),
+        alias($._table_node, $.content),
+        "\n",
       ),
 
-    table_row: ($) =>
+    _table_node: ($) => repeat1(choice($._inline_content)),
+    tablerow: ($) =>
       seq(
         "|-",
-        field("attributes", optional($.table_attributes)),
-        optional($._newline),
-        repeat1(choice($.table_header_cell, $.table_cell)), // Rows must have cells
+        optional(repeat1($.table_attribute)),
+        "\n",
+        optional(repeat1($.tableheader)),
+        repeat($.tablecell),
       ),
-
-    _table_cell_content_inline: ($) => $._inline_content, // For cells with primarily inline data
-    _table_cell_content_block: ($) => $._block_level_element, // For cells with block data (lists, paras)
-
-    table_header_cell: ($) =>
-      choice(
-        alias($._table_header_cell_pipe, $.table_header_cell_inline), // || separated
-        alias($._table_header_cell_newline, $.table_header_cell_block), // ! separated
-      ),
-
-    _table_header_cell_pipe: ($) =>
-      prec.left(
-        seq(
-          alias(token.immediate("!!"), $.cell_marker),
-          optional(
-            seq(
-              field("attributes", $.table_attributes),
-              token.immediate("|"), // attributes must be followed by a pipe
-            ),
-          ),
-          field(
-            "content",
-            repeat(
-              choice(
-                $._table_cell_content_inline, // Content for `!!` is typically inline
-                alias($._text_no_bar_newline, $.text), // Plain text until next pipe or newline
-              ),
-            ),
-          ),
-          // Cells separated by '||' or '!!' on same line, or newline for next row/cell type
-          optional(
-            choice(token.immediate("||"), token.immediate("!!"), $._newline),
-          ),
-        ),
-      ),
-    _table_header_cell_newline: ($) =>
-      seq(
-        // Starts with ! on a new line
-        alias(token.immediate("!"), $.cell_marker),
-        optional(
-          seq(field("attributes", $.table_attributes), token.immediate("|")),
-        ),
-        field(
-          "content",
-          repeat(
-            choice(
-              $._table_cell_content_block, // Block content is more likely with newline syntax
-              alias($._text_no_bar_newline, $.text),
-            ),
-          ),
-        ),
-        optional($._newline),
-      ),
-
-    table_cell: ($) =>
-      choice(
-        alias($._table_cell_pipe, $.table_cell_inline), // || separated
-        alias($._table_cell_newline, $.table_cell_block), // | separated
-      ),
-
-    _table_cell_pipe: ($) =>
-      prec.left(
-        seq(
-          alias(token.immediate("||"), $.cell_marker),
-          optional(
-            seq(
-              field("attributes", $.table_attributes),
-              token.immediate("|"), // attributes must be followed by a pipe
-            ),
-          ),
-          field(
-            "content",
-            repeat(
-              choice(
-                $._table_cell_content_inline, // Content for `||` is typically inline
-                alias($._text_no_bar_newline, $.text), // Plain text until next pipe or newline
-              ),
-            ),
-          ),
-          // Cells separated by '||' or '!!' on same line, or newline for next row/cell type
-          optional(
-            choice(token.immediate("||"), token.immediate("!!"), $._newline),
-          ),
-        ),
-      ),
-    _table_cell_newline: ($) =>
-      seq(
-        // Starts with | on a new line
-        alias(token.immediate("|"), $.cell_marker),
-        optional(
-          seq(field("attributes", $.table_attributes), token.immediate("|")),
-        ),
-        field(
-          "content",
-          repeat(
-            choice(
-              $._table_cell_content_block, // Block content is more likely with newline syntax
-              alias($._text_no_bar_newline, $.text),
-            ),
-          ),
-        ),
-        optional($._newline),
-      ),
-    _text_no_bar_newline: ($) => token(prec(1, /[^\|\n]+/)),
     // -----------------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------ SIGNATURES
     // -----------------------------------------------------------------------------------------

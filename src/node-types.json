@@ -168,7 +168,86 @@
       "required": true,
       "types": [
         {
-          "type": "table_header_cell",
+          "type": "tableheader",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "bold_italic",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "external_link",
+          "named": true
+        },
+        {
+          "type": "html_char_entity",
+          "named": true
+        },
+        {
+          "type": "html_decimal_entity",
+          "named": true
+        },
+        {
+          "type": "html_hex_entity",
+          "named": true
+        },
+        {
+          "type": "html_inline_tag",
+          "named": true
+        },
+        {
+          "type": "html_void_tag",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "magic_word",
+          "named": true
+        },
+        {
+          "type": "nowiki_inline_element",
+          "named": true
+        },
+        {
+          "type": "redirect",
+          "named": true
+        },
+        {
+          "type": "signature",
+          "named": true
+        },
+        {
+          "type": "template",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "wikilink",
           "named": true
         }
       ]
@@ -1394,18 +1473,7 @@
   {
     "type": "table",
     "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "table_attributes",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
@@ -1415,532 +1483,113 @@
           "named": true
         },
         {
-          "type": "table_attributes",
+          "type": "table_attribute",
           "named": true
         },
         {
-          "type": "table_caption",
+          "type": "tablecaption",
           "named": true
         },
         {
-          "type": "table_cell",
+          "type": "tablecell",
           "named": true
         },
         {
-          "type": "table_row",
+          "type": "tablerow",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "table_attributes",
+    "type": "table_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "html_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "html_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "tablecaption",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tablecell",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tableheader",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tablerow",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "html_attribute",
+          "type": "table_attribute",
           "named": true
         },
         {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "table_caption",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "table_attributes",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "bold",
-            "named": true
-          },
-          {
-            "type": "bold_italic",
-            "named": true
-          },
-          {
-            "type": "comment",
-            "named": true
-          },
-          {
-            "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
-            "named": true
-          },
-          {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
-            "named": true
-          },
-          {
-            "type": "italic",
-            "named": true
-          },
-          {
-            "type": "magic_word",
-            "named": true
-          },
-          {
-            "type": "nowiki_inline_element",
-            "named": true
-          },
-          {
-            "type": "redirect",
-            "named": true
-          },
-          {
-            "type": "signature",
-            "named": true
-          },
-          {
-            "type": "template",
-            "named": true
-          },
-          {
-            "type": "text",
-            "named": true
-          },
-          {
-            "type": "wikilink",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "table_cell",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "table_cell_block",
+          "type": "tablecell",
           "named": true
         },
         {
-          "type": "table_cell_inline",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "table_cell_block",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "table_attributes",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "heading",
-            "named": true
-          },
-          {
-            "type": "horizontal_rule",
-            "named": true
-          },
-          {
-            "type": "html_block_tag",
-            "named": true
-          },
-          {
-            "type": "html_tag",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "paragraph",
-            "named": true
-          },
-          {
-            "type": "preformatted_block",
-            "named": true
-          },
-          {
-            "type": "table",
-            "named": true
-          },
-          {
-            "type": "text",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "cell_marker",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "table_cell_inline",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "table_attributes",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "bold",
-            "named": true
-          },
-          {
-            "type": "bold_italic",
-            "named": true
-          },
-          {
-            "type": "comment",
-            "named": true
-          },
-          {
-            "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
-            "named": true
-          },
-          {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
-            "named": true
-          },
-          {
-            "type": "italic",
-            "named": true
-          },
-          {
-            "type": "magic_word",
-            "named": true
-          },
-          {
-            "type": "nowiki_inline_element",
-            "named": true
-          },
-          {
-            "type": "redirect",
-            "named": true
-          },
-          {
-            "type": "signature",
-            "named": true
-          },
-          {
-            "type": "template",
-            "named": true
-          },
-          {
-            "type": "text",
-            "named": true
-          },
-          {
-            "type": "wikilink",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "cell_marker",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "table_header_cell",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "table_header_cell_block",
-          "named": true
-        },
-        {
-          "type": "table_header_cell_inline",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "table_header_cell_block",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "table_attributes",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "heading",
-            "named": true
-          },
-          {
-            "type": "horizontal_rule",
-            "named": true
-          },
-          {
-            "type": "html_block_tag",
-            "named": true
-          },
-          {
-            "type": "html_tag",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "paragraph",
-            "named": true
-          },
-          {
-            "type": "preformatted_block",
-            "named": true
-          },
-          {
-            "type": "table",
-            "named": true
-          },
-          {
-            "type": "text",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "cell_marker",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "table_header_cell_inline",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "table_attributes",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "bold",
-            "named": true
-          },
-          {
-            "type": "bold_italic",
-            "named": true
-          },
-          {
-            "type": "comment",
-            "named": true
-          },
-          {
-            "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
-            "named": true
-          },
-          {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
-            "named": true
-          },
-          {
-            "type": "italic",
-            "named": true
-          },
-          {
-            "type": "magic_word",
-            "named": true
-          },
-          {
-            "type": "nowiki_inline_element",
-            "named": true
-          },
-          {
-            "type": "redirect",
-            "named": true
-          },
-          {
-            "type": "signature",
-            "named": true
-          },
-          {
-            "type": "template",
-            "named": true
-          },
-          {
-            "type": "text",
-            "named": true
-          },
-          {
-            "type": "wikilink",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "cell_marker",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "table_row",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "table_attributes",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "table_cell",
-          "named": true
-        },
-        {
-          "type": "table_header_cell",
+          "type": "tableheader",
           "named": true
         }
       ]
@@ -2111,7 +1760,7 @@
     "named": true,
     "fields": {
       "display": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
@@ -2200,7 +1849,7 @@
     "named": false
   },
   {
-    "type": "!!",
+    "type": "!",
     "named": false
   },
   {
@@ -2270,10 +1919,6 @@
   {
     "type": "]]",
     "named": false
-  },
-  {
-    "type": "cell_marker",
-    "named": true
   },
   {
     "type": "comment",
@@ -2401,10 +2046,6 @@
   },
   {
     "type": "|-",
-    "named": false
-  },
-  {
-    "type": "||",
     "named": false
   },
   {
