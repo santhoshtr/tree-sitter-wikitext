@@ -64,9 +64,10 @@ Text with ~~~~~ date.
 
 (source_file
   (heading
-    (heading_marker)
-    (text)
-    (heading_marker))
+    (heading2
+      (heading_marker)
+      (text)
+      (heading_marker)))
   (list
     (unordered_list_item
       (list_marker)
@@ -96,6 +97,8 @@ Adjacent signatures
 
 --------------------------------------------------------------------------------
 
+
+
 ================================================================================
 Not signatures (more or fewer tildes)
 :error
@@ -105,4 +108,5 @@ Text with ~~ not a signature
 Text with ~~~~~~ not a signature
 
 --------------------------------------------------------------------------------
+
 

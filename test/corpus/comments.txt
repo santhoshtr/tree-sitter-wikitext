@@ -60,9 +60,10 @@ Text paragraph <!-- inline comment --> with comment.
 
 (source_file
   (heading
-    (heading_marker)
-    (text)
-    (heading_marker))
+    (heading2
+      (heading_marker)
+      (text)
+      (heading_marker)))
   (list
     (unordered_list_item
       (list_marker)

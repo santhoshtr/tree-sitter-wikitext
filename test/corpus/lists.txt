@@ -159,6 +159,7 @@ Lists with special characters
       (list_item_content
         (text))))
   (heading
-    (heading_marker)
-    (text)
-    (heading_marker)))
+    (heading2
+      (heading_marker)
+      (text)
+      (heading_marker))))

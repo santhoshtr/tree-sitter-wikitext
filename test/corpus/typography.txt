@@ -69,9 +69,10 @@ Text with '''bold''' and ''italic'' inline.
 
 (source_file
   (heading
-    (heading_marker)
-    (text)
-    (heading_marker))
+    (heading2
+      (heading_marker)
+      (text)
+      (heading_marker)))
   (list
     (unordered_list_item
       (list_marker)
@@ -110,58 +111,3 @@ Unclosed formatting
   (ERROR
     (text)
     (text)))
-
-================================================================================
-Formatting with special characters
-:skip
-================================================================================
-
-'''Bold with [[wikilink]]'''
-''Italic with [external link]''
-'''Bold with <!-- comment -->'''
-
---------------------------------------------------------------------------------
-
-(document
-  (newline)
-  (bold
-    (content
-      (text)
-      (wikilink
-        (target))))
-  (newline)
-  (italic
-    (content
-      (text)
-      (external_link
-        (target)
-        (label
-          (text)))))
-  (newline)
-  (bold
-    (content
-      (text)))
-  (newline))
-
-================================================================================
-Multiple formatting in a row
-:skip
-================================================================================
-
-''''''Bold text with extra apostrophes''''''
-''''''Ambiguous formatting''''''''
-
---------------------------------------------------------------------------------
-
-(document
-  (newline)
-  (bold
-    (content
-      (text)))
-  (text)
-  (newline)
-  (bold
-    (content
-      (text)))
-  (text)
-  (newline))
