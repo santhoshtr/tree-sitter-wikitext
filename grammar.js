@@ -239,12 +239,12 @@ module.exports = grammar({
     // ==== Headings ====
     heading: ($) =>
       choice(
-        $._heading1,
-        $._heading2,
-        $._heading3,
-        $._heading4,
-        $._heading5,
-        $._heading6,
+        $.heading1,
+        $.heading2,
+        $.heading3,
+        $.heading4,
+        $.heading5,
+        $.heading6,
       ),
     _heading_content: ($) =>
       repeat1(
@@ -262,42 +262,42 @@ module.exports = grammar({
           // Cannot contain other headings or block elements easily
         ),
       ),
-    _heading1: ($) =>
+    heading1: ($) =>
       seq(
         alias("=", $.heading_marker),
         field("title", $._heading_content),
         alias("=", $.heading_marker),
         /\s*\n/,
       ),
-    _heading2: ($) =>
+    heading2: ($) =>
       seq(
         alias("==", $.heading_marker),
         field("title", $._heading_content),
         alias("==", $.heading_marker),
         /\s*\n/,
       ),
-    _heading3: ($) =>
+    heading3: ($) =>
       seq(
         alias("===", $.heading_marker),
         field("title", $._heading_content),
         alias("===", $.heading_marker),
         /\s*\n/,
       ),
-    _heading4: ($) =>
+    heading4: ($) =>
       seq(
         alias("====", $.heading_marker),
         field("title", $._heading_content),
         alias("====", $.heading_marker),
         /\s*\n/,
       ),
-    _heading5: ($) =>
+    heading5: ($) =>
       seq(
         alias("=====", $.heading_marker),
         field("title", $._heading_content),
         alias("=====", $.heading_marker),
         /\s*\n/,
       ),
-    _heading6: ($) =>
+    heading6: ($) =>
       seq(
         alias("======", $.heading_marker),
         field("title", $._heading_content),

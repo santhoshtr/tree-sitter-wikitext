@@ -382,6 +382,351 @@
   {
     "type": "heading",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "heading1",
+          "named": true
+        },
+        {
+          "type": "heading2",
+          "named": true
+        },
+        {
+          "type": "heading3",
+          "named": true
+        },
+        {
+          "type": "heading4",
+          "named": true
+        },
+        {
+          "type": "heading5",
+          "named": true
+        },
+        {
+          "type": "heading6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading1",
+    "named": true,
+    "fields": {
+      "title": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "bold",
+            "named": true
+          },
+          {
+            "type": "bold_italic",
+            "named": true
+          },
+          {
+            "type": "external_link",
+            "named": true
+          },
+          {
+            "type": "html_inline_tag",
+            "named": true
+          },
+          {
+            "type": "html_void_tag",
+            "named": true
+          },
+          {
+            "type": "italic",
+            "named": true
+          },
+          {
+            "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "template",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          },
+          {
+            "type": "wikilink",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "heading_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading2",
+    "named": true,
+    "fields": {
+      "title": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "bold",
+            "named": true
+          },
+          {
+            "type": "bold_italic",
+            "named": true
+          },
+          {
+            "type": "external_link",
+            "named": true
+          },
+          {
+            "type": "html_inline_tag",
+            "named": true
+          },
+          {
+            "type": "html_void_tag",
+            "named": true
+          },
+          {
+            "type": "italic",
+            "named": true
+          },
+          {
+            "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "template",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          },
+          {
+            "type": "wikilink",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "heading_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading3",
+    "named": true,
+    "fields": {
+      "title": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "bold",
+            "named": true
+          },
+          {
+            "type": "bold_italic",
+            "named": true
+          },
+          {
+            "type": "external_link",
+            "named": true
+          },
+          {
+            "type": "html_inline_tag",
+            "named": true
+          },
+          {
+            "type": "html_void_tag",
+            "named": true
+          },
+          {
+            "type": "italic",
+            "named": true
+          },
+          {
+            "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "template",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          },
+          {
+            "type": "wikilink",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "heading_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading4",
+    "named": true,
+    "fields": {
+      "title": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "bold",
+            "named": true
+          },
+          {
+            "type": "bold_italic",
+            "named": true
+          },
+          {
+            "type": "external_link",
+            "named": true
+          },
+          {
+            "type": "html_inline_tag",
+            "named": true
+          },
+          {
+            "type": "html_void_tag",
+            "named": true
+          },
+          {
+            "type": "italic",
+            "named": true
+          },
+          {
+            "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "template",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          },
+          {
+            "type": "wikilink",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "heading_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading5",
+    "named": true,
+    "fields": {
+      "title": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "bold",
+            "named": true
+          },
+          {
+            "type": "bold_italic",
+            "named": true
+          },
+          {
+            "type": "external_link",
+            "named": true
+          },
+          {
+            "type": "html_inline_tag",
+            "named": true
+          },
+          {
+            "type": "html_void_tag",
+            "named": true
+          },
+          {
+            "type": "italic",
+            "named": true
+          },
+          {
+            "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "template",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          },
+          {
+            "type": "wikilink",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "heading_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading6",
+    "named": true,
     "fields": {
       "title": {
         "multiple": true,
