@@ -78,6 +78,42 @@ fn main() {
 }
 ```
 
+### Using with Neovim
+
+Checkout the repo, add the following configuration to `init.lua` of your nvim installation.
+
+```lua
+--- Refer https://github.com/nvim-treesitter/nvim-treesitter
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.wikitext = {
+  install_info = {
+    url = "~/path/to/tree-sitter-wikitext", -- local path or git repo
+    files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+    -- optional entries:
+    branch = "main", -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+  },
+  filetype = "wikitext", -- if filetype does not match the parser name
+}
+
+vim.filetype.add({
+  pattern = {
+    [".*/*.wikitext"] = "wikitext",
+  },
+})
+```
+
+Link the queries folder of `tree-sitter-wikitext` to `queries/wikitext` folder of nvim
+
+```bash
+cd ~/.config/nvim
+mkdir -p queries
+ln -s path/to/tree-sitter-wikitext/queries queries/wikitext
+```
+
+Re-open nvim. Open any file with `.wikitext` extension. You should see syntax highlighting. You can also inspect the tree-sitter tree using `:InspectTree` command
+
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
