@@ -114,6 +114,8 @@ ln -s path/to/tree-sitter-wikitext/queries queries/wikitext
 
 Re-open nvim. Open any file with `.wikitext` extension. You should see syntax highlighting. You can also inspect the tree-sitter tree using `:InspectTree` command
 
+To run queries against a buffer, run `:EditQuery wikitext`. A scratch buffer will be opened. Write your Tree-Sitter query there, in normal node, move cursor over the capture names. You will see the correspoding text in the buffer get highlighted.
+
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
