@@ -35,11 +35,11 @@
 
 (wikilink
   (wikilink_page) @markup.link.url
-  (page_name_segment) @markup.link.label
+  (page_name_segment)? @markup.link.label
 )
 (external_link
   (url) @markup.link.url
-  (page_name_segment) @markup.link.label
+  (page_name_segment)? @markup.link.label
 )
 (template
   (template_name) @module
