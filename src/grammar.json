@@ -79,6 +79,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "single_quote_text"
+        },
+        {
+          "type": "SYMBOL",
           "name": "wikilink"
         },
         {
@@ -142,7 +146,7 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^\\n\\\\\\[\\\\\\]\\{\\}'\\|<>&!=\\*_#;~]+"
+          "value": "[^\\n\\[\\]{}|<>'&!=*_#;~]+"
         }
       }
     },
@@ -193,6 +197,13 @@
       "content": {
         "type": "PATTERN",
         "value": "[^\\n]+"
+      }
+    },
+    "single_quote_text": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "'"
       }
     },
     "redirect": {

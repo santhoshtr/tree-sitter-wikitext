@@ -64,6 +64,10 @@
             "named": true
           },
           {
+            "type": "single_quote_text",
+            "named": true
+          },
+          {
             "type": "template",
             "named": true
           },
@@ -141,6 +145,10 @@
           },
           {
             "type": "signature",
+            "named": true
+          },
+          {
+            "type": "single_quote_text",
             "named": true
           },
           {
@@ -236,6 +244,10 @@
         },
         {
           "type": "signature",
+          "named": true
+        },
+        {
+          "type": "single_quote_text",
           "named": true
         },
         {
@@ -920,6 +932,10 @@
             "named": true
           },
           {
+            "type": "single_quote_text",
+            "named": true
+          },
+          {
             "type": "table",
             "named": true
           },
@@ -1062,6 +1078,10 @@
             "named": true
           },
           {
+            "type": "single_quote_text",
+            "named": true
+          },
+          {
             "type": "table",
             "named": true
           },
@@ -1201,6 +1221,10 @@
           },
           {
             "type": "signature",
+            "named": true
+          },
+          {
+            "type": "single_quote_text",
             "named": true
           },
           {
@@ -1366,6 +1390,10 @@
             "named": true
           },
           {
+            "type": "single_quote_text",
+            "named": true
+          },
+          {
             "type": "template",
             "named": true
           },
@@ -1474,6 +1502,10 @@
         },
         {
           "type": "signature",
+          "named": true
+        },
+        {
+          "type": "single_quote_text",
           "named": true
         },
         {
@@ -1646,6 +1678,10 @@
           "named": true
         },
         {
+          "type": "single_quote_text",
+          "named": true
+        },
+        {
           "type": "template",
           "named": true
         },
@@ -1770,6 +1806,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "single_quote_text",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "source_file",
