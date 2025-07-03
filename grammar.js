@@ -135,12 +135,8 @@ const text_not_ending_with = (terminators) => {
 // Text that can appear inside most inline elements, carefully excluding delimiters
 // This is one of the hardest parts to get right.
 const create_inline_text_token = (additional_exclusions = "") => {
-  const base_exclusions = "\n\\[\\]{}'|<>&!=*_#;~"; // Base special characters
-  // Escape for regex character class
-  const all_exclusions = (base_exclusions + additional_exclusions)
-    .split("")
-    .map((char) => (/[.*+?^${}()|[\]\\]/.test(char) ? `\\${char}` : char))
-    .join("");
+  const base_exclusions = "\n\\[\\]{}|<>'&!=*_#;~";
+  const all_exclusions = base_exclusions + additional_exclusions;
   return token(prec(-1, new RegExp(`[^${all_exclusions}]+`)));
 };
 
@@ -183,6 +179,7 @@ module.exports = grammar({
         $.bold_italic, // Must come before bold and italic
         $.bold,
         $.italic,
+        $.single_quote_text,
         $.wikilink,
         $.external_link,
         $.template,
@@ -212,6 +209,11 @@ module.exports = grammar({
     _text_no_equals: ($) => text_not_ending_with("="),
     _text_no_bar: ($) => text_not_ending_with("|"),
     _text_no_newline: ($) => token(/[^\n]+/),
+
+    single_quote_text: ($) =>
+      token(
+        "'", // Single quote
+      ),
 
     // REDIRECT
 
