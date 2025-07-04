@@ -63,10 +63,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "text"
-        },
-        {
-          "type": "SYMBOL",
           "name": "bold_italic"
         },
         {
@@ -76,10 +72,6 @@
         {
           "type": "SYMBOL",
           "name": "italic"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "single_quote_text"
         },
         {
           "type": "SYMBOL",
@@ -127,7 +119,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "punctuations"
+        },
+        {
+          "type": "SYMBOL",
           "name": "nowiki_inline_element"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
         }
       ]
     },
@@ -146,7 +146,7 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^\\n\\[\\]{}|<>'&!=*_#;~]+"
+          "value": "[^\\n\\[\\]{}|<>'!=*_#~&;]+"
         }
       }
     },
@@ -205,6 +205,47 @@
         "type": "STRING",
         "value": "'"
       }
+    },
+    "punctuations": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "'"
+            }
+          },
+          "named": true,
+          "value": "single_quote"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": ";"
+            }
+          },
+          "named": true,
+          "value": "semicolon"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "&"
+            }
+          },
+          "named": true,
+          "value": "ampersand"
+        }
+      ]
     },
     "redirect": {
       "type": "SEQ",
@@ -1471,6 +1512,10 @@
             "name": "text"
           },
           {
+            "type": "SYMBOL",
+            "name": "punctuations"
+          },
+          {
             "type": "ALIAS",
             "content": {
               "type": "TOKEN",
@@ -1850,10 +1895,6 @@
           }
         ]
       }
-    },
-    "entity": {
-      "type": "PATTERN",
-      "value": "&[A-Za-z0-9#]+;"
     },
     "nowiki": {
       "type": "SEQ",

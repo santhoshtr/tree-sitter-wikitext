@@ -1,3 +1,5 @@
+default:
+    @just --choose
 test: gen
     tree-sitter test
 playground: gen wasm
@@ -16,4 +18,4 @@ see-links: gen
 see-tables: gen
     tree-sitter parse --cst examples/tables.wikitext | bat
 see-templates: gen
-    tree-sitter parse --cst examples/templates.wikitext | bat
+    tree-sitter parse --cst examples/templates.wikitext -d| bat

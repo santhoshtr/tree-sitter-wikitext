@@ -56,15 +56,15 @@
             "named": true
           },
           {
+            "type": "punctuations",
+            "named": true
+          },
+          {
             "type": "redirect",
             "named": true
           },
           {
             "type": "signature",
-            "named": true
-          },
-          {
-            "type": "single_quote_text",
             "named": true
           },
           {
@@ -140,15 +140,15 @@
             "named": true
           },
           {
+            "type": "punctuations",
+            "named": true
+          },
+          {
             "type": "redirect",
             "named": true
           },
           {
             "type": "signature",
-            "named": true
-          },
-          {
-            "type": "single_quote_text",
             "named": true
           },
           {
@@ -239,15 +239,15 @@
           "named": true
         },
         {
+          "type": "punctuations",
+          "named": true
+        },
+        {
           "type": "redirect",
           "named": true
         },
         {
           "type": "signature",
-          "named": true
-        },
-        {
-          "type": "single_quote_text",
           "named": true
         },
         {
@@ -924,15 +924,15 @@
             "named": true
           },
           {
+            "type": "punctuations",
+            "named": true
+          },
+          {
             "type": "redirect",
             "named": true
           },
           {
             "type": "signature",
-            "named": true
-          },
-          {
-            "type": "single_quote_text",
             "named": true
           },
           {
@@ -1070,15 +1070,15 @@
             "named": true
           },
           {
+            "type": "punctuations",
+            "named": true
+          },
+          {
             "type": "redirect",
             "named": true
           },
           {
             "type": "signature",
-            "named": true
-          },
-          {
-            "type": "single_quote_text",
             "named": true
           },
           {
@@ -1216,15 +1216,15 @@
             "named": true
           },
           {
+            "type": "punctuations",
+            "named": true
+          },
+          {
             "type": "redirect",
             "named": true
           },
           {
             "type": "signature",
-            "named": true
-          },
-          {
-            "type": "single_quote_text",
             "named": true
           },
           {
@@ -1382,15 +1382,15 @@
             "named": true
           },
           {
+            "type": "punctuations",
+            "named": true
+          },
+          {
             "type": "redirect",
             "named": true
           },
           {
             "type": "signature",
-            "named": true
-          },
-          {
-            "type": "single_quote_text",
             "named": true
           },
           {
@@ -1497,15 +1497,15 @@
           "named": true
         },
         {
+          "type": "punctuations",
+          "named": true
+        },
+        {
           "type": "redirect",
           "named": true
         },
         {
           "type": "signature",
-          "named": true
-        },
-        {
-          "type": "single_quote_text",
           "named": true
         },
         {
@@ -1670,15 +1670,15 @@
           "named": true
         },
         {
+          "type": "punctuations",
+          "named": true
+        },
+        {
           "type": "redirect",
           "named": true
         },
         {
           "type": "signature",
-          "named": true
-        },
-        {
-          "type": "single_quote_text",
           "named": true
         },
         {
@@ -1770,6 +1770,29 @@
     }
   },
   {
+    "type": "punctuations",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ampersand",
+          "named": true
+        },
+        {
+          "type": "semicolon",
+          "named": true
+        },
+        {
+          "type": "single_quote",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "redirect",
     "named": true,
     "fields": {},
@@ -1806,11 +1829,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "single_quote_text",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "source_file",
@@ -2156,6 +2174,10 @@
           "named": true
         },
         {
+          "type": "punctuations",
+          "named": true
+        },
+        {
           "type": "rbrace_literal",
           "named": true
         },
@@ -2379,6 +2401,10 @@
     "named": false
   },
   {
+    "type": "ampersand",
+    "named": true
+  },
+  {
     "type": "comment",
     "named": true
   },
@@ -2456,6 +2482,14 @@
   },
   {
     "type": "section_separator",
+    "named": true
+  },
+  {
+    "type": "semicolon",
+    "named": true
+  },
+  {
+    "type": "single_quote",
     "named": true
   },
   {

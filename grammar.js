@@ -135,7 +135,7 @@ const text_not_ending_with = (terminators) => {
 // Text that can appear inside most inline elements, carefully excluding delimiters
 // This is one of the hardest parts to get right.
 const create_inline_text_token = (additional_exclusions = "") => {
-  const base_exclusions = "\n\\[\\]{}|<>'&!=*_#;~";
+  const base_exclusions = "\n\\[\\]{}|<>'!=*_#~&;";
   const all_exclusions = base_exclusions + additional_exclusions;
   return token(prec(-1, new RegExp(`[^${all_exclusions}]+`)));
 };
@@ -175,11 +175,10 @@ module.exports = grammar({
     _inline_content: ($) =>
       choice(
         $.comment,
-        $.text,
+        // $.text,
         $.bold_italic, // Must come before bold and italic
         $.bold,
         $.italic,
-        $.single_quote_text,
         $.wikilink,
         $.external_link,
         $.template,
@@ -191,7 +190,10 @@ module.exports = grammar({
         $.html_char_entity,
         $.html_decimal_entity,
         $.html_hex_entity,
+        $.punctuations,
         $.nowiki_inline_element, // <nowiki>content</nowiki> or <nowiki />
+        // Everything else
+        $.text,
       ),
     // Text is a sequence of non-special characters or characters that don't form other tokens
     // This is a fallback and should have low precedence
@@ -214,7 +216,12 @@ module.exports = grammar({
       token(
         "'", // Single quote
       ),
-
+    punctuations: ($) =>
+      choice(
+        alias(token("'"), $.single_quote),
+        alias(token(";"), $.semicolon),
+        alias(token("&"), $.ampersand),
+      ),
     // REDIRECT
 
     redirect: ($) =>
@@ -489,6 +496,7 @@ module.exports = grammar({
           $.signature,
           $.nowiki_inline_element,
           $.text,
+          $.punctuations,
           // token(prec(1, /[^=\[\]{}\|]+/)),
           // General text content within the parameter value.
           // This token will match sequences of characters that are NOT |, {, }, or newline.
@@ -600,9 +608,6 @@ module.exports = grammar({
           "''",
         ),
       ),
-
-    // Entities
-    entity: ($) => /&[A-Za-z0-9#]+;/,
 
     // Nowiki
     nowiki: ($) => seq("<nowiki>", /[^<]+/, "</nowiki>"),
