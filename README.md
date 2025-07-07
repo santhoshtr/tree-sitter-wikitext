@@ -2,6 +2,8 @@
 
 This repository contains the implementation of a **Tree-Sitter** parser for **Wikitext**, a markup language used by MediaWiki.
 
+Try the parse in the [playground](https://tree-sitter-wikitext.toolforge.org/)
+
 ## Overview
 
 Tree-Sitter is a powerful parser generator tool and incremental parsing library. It is designed to build concrete syntax trees for source files and efficiently update them as the source changes. This project leverages Tree-Sitter to parse Wikitext, enabling structured analysis and manipulation of MediaWiki content.
