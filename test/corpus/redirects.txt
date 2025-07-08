@@ -117,6 +117,7 @@ Redirects with comments
         (wikilink_page
           (page_name_segment))))
     (comment)
+    (comment)
     (redirect
       (wikilink
         (wikilink_page

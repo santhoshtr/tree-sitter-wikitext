@@ -15,10 +15,14 @@ Text after multi-line comment
   (paragraph
     (comment))
   (paragraph
+    (text)
+    (comment))
+  (paragraph
     (text)))
 
 ================================================================================
 Nested comments
+:error
 ================================================================================
 
 <!-- Outer comment <!-- Nested comment --> still in outer comment -->
@@ -44,6 +48,9 @@ Comments with special characters
 
 (source_file
   (paragraph
+    (comment)
+    (comment)
+    (comment)
     (comment)))
 
 ================================================================================
@@ -70,6 +77,14 @@ Text paragraph <!-- inline comment --> with comment.
       (list_item_content
         (text))))
   (paragraph
+    (comment))
+  (list
+    (unordered_list_item
+      (list_marker)
+      (list_item_content
+        (text))))
+  (paragraph
+    (text)
     (comment)
     (text)))
 
@@ -85,6 +100,9 @@ Text in middle
 
 (source_file
   (paragraph
+    (comment))
+  (paragraph
+    (text)
     (comment)))
 
 ================================================================================

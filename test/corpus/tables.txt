@@ -264,6 +264,7 @@ Table with extra whitespace after close
 
 ========================================================
 Table with attributes on rows
+:error
 ========================================================
 
 {| class="wikitable"

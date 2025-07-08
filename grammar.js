@@ -175,7 +175,6 @@ module.exports = grammar({
     _inline_content: ($) =>
       choice(
         $.comment,
-        // $.text,
         $.bold_italic, // Must come before bold and italic
         $.bold,
         $.italic,
@@ -232,7 +231,7 @@ module.exports = grammar({
       ),
 
     // ==== Comment ====
-    comment: (_) => token(prec(10, /<!--[\s\S]*?-->/)), // High precedence to consume comments early
+    comment: (_) => token(prec(10, /<!--([^-]|-[^-]|--[^>])*-->/)),
 
     // ==== Horizontal Rule ====
     horizontal_rule: ($) =>

@@ -19,3 +19,5 @@ see-tables: gen
     tree-sitter parse --cst examples/tables.wikitext | bat
 see-templates: gen
     tree-sitter parse --cst examples/templates.wikitext -d| bat
+see-comments: gen
+    tree-sitter parse --cst examples/comment.wikitext -d| bat
