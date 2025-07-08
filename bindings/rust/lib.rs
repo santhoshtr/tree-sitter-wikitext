@@ -28,7 +28,7 @@ pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_wikit
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
-pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
+pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
 // Uncomment these to include any queries that this grammar contains
 
@@ -39,8 +39,6 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 
 #[cfg(test)]
 mod tests {
-    use crate::tree_sitter_wikitext;
-
     #[test]
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();
