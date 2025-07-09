@@ -20,19 +20,11 @@
             "named": true
           },
           {
+            "type": "entity",
+            "named": true
+          },
+          {
             "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
             "named": true
           },
           {
@@ -104,19 +96,11 @@
             "named": true
           },
           {
+            "type": "entity",
+            "named": true
+          },
+          {
             "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
             "named": true
           },
           {
@@ -203,19 +187,11 @@
           "named": true
         },
         {
+          "type": "entity",
+          "named": true
+        },
+        {
           "type": "external_link",
-          "named": true
-        },
-        {
-          "type": "html_char_entity",
-          "named": true
-        },
-        {
-          "type": "html_decimal_entity",
-          "named": true
-        },
-        {
-          "type": "html_hex_entity",
           "named": true
         },
         {
@@ -860,6 +836,10 @@
             "named": true
           },
           {
+            "type": "entity",
+            "named": true
+          },
+          {
             "type": "external_link",
             "named": true
           },
@@ -873,18 +853,6 @@
           },
           {
             "type": "html_block_tag",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
             "named": true
           },
           {
@@ -1006,6 +974,10 @@
             "named": true
           },
           {
+            "type": "entity",
+            "named": true
+          },
+          {
             "type": "external_link",
             "named": true
           },
@@ -1019,18 +991,6 @@
           },
           {
             "type": "html_block_tag",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
             "named": true
           },
           {
@@ -1152,6 +1112,10 @@
             "named": true
           },
           {
+            "type": "entity",
+            "named": true
+          },
+          {
             "type": "external_link",
             "named": true
           },
@@ -1165,18 +1129,6 @@
           },
           {
             "type": "html_block_tag",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
             "named": true
           },
           {
@@ -1346,19 +1298,11 @@
             "named": true
           },
           {
+            "type": "entity",
+            "named": true
+          },
+          {
             "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_char_entity",
-            "named": true
-          },
-          {
-            "type": "html_decimal_entity",
-            "named": true
-          },
-          {
-            "type": "html_hex_entity",
             "named": true
           },
           {
@@ -1457,19 +1401,11 @@
           "named": true
         },
         {
+          "type": "entity",
+          "named": true
+        },
+        {
           "type": "external_link",
-          "named": true
-        },
-        {
-          "type": "html_char_entity",
-          "named": true
-        },
-        {
-          "type": "html_decimal_entity",
-          "named": true
-        },
-        {
-          "type": "html_hex_entity",
           "named": true
         },
         {
@@ -1634,19 +1570,11 @@
           "named": true
         },
         {
+          "type": "entity",
+          "named": true
+        },
+        {
           "type": "external_link",
-          "named": true
-        },
-        {
-          "type": "html_char_entity",
-          "named": true
-        },
-        {
-          "type": "html_decimal_entity",
-          "named": true
-        },
-        {
-          "type": "html_hex_entity",
           "named": true
         },
         {
@@ -2413,6 +2341,10 @@
     "named": true
   },
   {
+    "type": "entity",
+    "named": true
+  },
+  {
     "type": "heading_marker",
     "named": true
   },
@@ -2422,18 +2354,6 @@
   },
   {
     "type": "html_attribute_name",
-    "named": true
-  },
-  {
-    "type": "html_char_entity",
-    "named": true
-  },
-  {
-    "type": "html_decimal_entity",
-    "named": true
-  },
-  {
-    "type": "html_hex_entity",
     "named": true
   },
   {

@@ -107,15 +107,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "html_char_entity"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "html_decimal_entity"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "html_hex_entity"
+          "name": "entity"
         },
         {
           "type": "SYMBOL",
@@ -2828,38 +2820,9 @@
         }
       ]
     },
-    "html_char_entity": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "&([a-zA-Z0-9]+);"
-        }
-      }
-    },
-    "html_decimal_entity": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "&#([0-9]+);"
-        }
-      }
-    },
-    "html_hex_entity": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "&#x([0-9a-fA-F]+);"
-        }
-      }
+    "entity": {
+      "type": "PATTERN",
+      "value": "&(#([xX][0-9a-fA-F]{1,6}|[0-9]{1,5})|[A-Za-z]{1,30});?"
     }
   },
   "extras": [

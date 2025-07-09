@@ -153,8 +153,8 @@ Nested Links Syntax (not valid in MediaWiki)
 
 (source_file
   (ERROR
-  (wikilink_page
-    (page_name_segment))
+    (wikilink_page
+      (page_name_segment))
     (template_name_part)
     (template_name_part)))
 

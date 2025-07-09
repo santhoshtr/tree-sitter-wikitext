@@ -186,9 +186,7 @@ module.exports = grammar({
         $.redirect,
         $.html_inline_tag, // HTML known to be inline
         $.html_void_tag, // E.g. <br />, <hr />
-        $.html_char_entity,
-        $.html_decimal_entity,
-        $.html_hex_entity,
+        $.entity,
         $.punctuations,
         $.nowiki_inline_element, // <nowiki>content</nowiki> or <nowiki />
         // Everything else
@@ -818,9 +816,9 @@ module.exports = grammar({
         choice(">", "/>"), // Void tags can be <tag> or <tag />
       ),
 
-    // HTML Entities
-    html_char_entity: ($) => token(prec(1, /&([a-zA-Z0-9]+);/)), // e.g.,   <
-    html_decimal_entity: ($) => token(prec(1, /&#([0-9]+);/)), // e.g.,
-    html_hex_entity: ($) => token(prec(1, /&#x([0-9a-fA-F]+);/)), // e.g.,
+    // An entity can be named, numeric (decimal), or numeric (hexacecimal). The
+    // longest entity name is 29 characters long, and the HTML spec says that
+    // no more will ever be added.
+    entity: (_) => /&(#([xX][0-9a-fA-F]{1,6}|[0-9]{1,5})|[A-Za-z]{1,30});?/,
   },
 });
