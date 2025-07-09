@@ -277,17 +277,6 @@
         }
       ]
     },
-    "comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 10,
-        "content": {
-          "type": "PATTERN",
-          "value": "<!--([^-]|-[^-]|--[^>])*-->"
-        }
-      }
-    },
     "horizontal_rule": {
       "type": "TOKEN",
       "content": {
@@ -2885,7 +2874,12 @@
       }
     ]
   ],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "comment"
+    }
+  ],
   "inline": [],
   "supertypes": [],
   "reserved": {}

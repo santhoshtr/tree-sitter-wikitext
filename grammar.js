@@ -142,7 +142,7 @@ const create_inline_text_token = (additional_exclusions = "") => {
 
 module.exports = grammar({
   name: "wikitext",
-
+  externals: ($) => [$.comment],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [
     [$.paragraph, $._html_content],
@@ -227,9 +227,6 @@ module.exports = grammar({
         optional(/\s+/),
         $.wikilink,
       ),
-
-    // ==== Comment ====
-    comment: (_) => token(prec(10, /<!--([^-]|-[^-]|--[^>])*-->/)),
 
     // ==== Horizontal Rule ====
     horizontal_rule: ($) =>
