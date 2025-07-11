@@ -48,9 +48,9 @@ static bool scan_comment(TSLexer *lexer) {
       break;
     case '>':
       if (dashes >= 2) {
-        lexer->result_symbol = COMMENT;
         advance(lexer);
         lexer->mark_end(lexer);
+        lexer->result_symbol = COMMENT;
         return true;
       }
     default:
