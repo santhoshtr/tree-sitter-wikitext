@@ -142,7 +142,7 @@ const create_inline_text_token = (additional_exclusions = "") => {
 
 module.exports = grammar({
   name: "wikitext",
-  externals: ($) => [$.comment],
+  externals: ($) => [$.comment, $._inline_text_base],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [
     [$.paragraph, $._html_content],
@@ -195,10 +195,6 @@ module.exports = grammar({
     // Text is a sequence of non-special characters or characters that don't form other tokens
     // This is a fallback and should have low precedence
     text: ($) => prec(-2, $._inline_text_base),
-
-    // Define a more specific token for inline text content to avoid conflicts
-    // This token explicitly avoids characters that start other inline elements.
-    _inline_text_base: ($) => create_inline_text_token(),
 
     // More specific text tokens for contexts where fewer delimiters apply
     _text_no_brackets_pipes: ($) => text_not_ending_with("\\[\\]|{}"),

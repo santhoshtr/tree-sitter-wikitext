@@ -6,7 +6,7 @@
 
 enum TokenType {
   COMMENT,
-  // TEXT
+  INLINE_TEXT_BASE,
 };
 
 void *tree_sitter_wikitext_external_scanner_create() { return NULL; }
@@ -61,11 +61,48 @@ static bool scan_comment(TSLexer *lexer) {
   return false;
 }
 
+static bool scan_inline_text_base(TSLexer *lexer) {
+  // Characters that should not be included in inline text
+  const char *exclusions = "\n[]{}'!=*|#~&;";
+
+  bool found_text = false;
+
+  while (lexer->lookahead) {
+    // Check if current character is in the exclusions
+    bool is_excluded = false;
+    for (const char *p = exclusions; *p; p++) {
+      if (lexer->lookahead == *p) {
+        is_excluded = true;
+        break;
+      }
+    }
+
+    if (is_excluded) {
+      break;
+    }
+
+    advance(lexer);
+    lexer->mark_end(lexer);
+    found_text = true;
+  }
+
+  if (found_text) {
+    lexer->result_symbol = INLINE_TEXT_BASE;
+    return true;
+  }
+
+  return false;
+}
+
 bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
                                                 const bool *valid_symbols) {
-  if (valid_symbols[COMMENT]) {
-    return scan_comment(lexer);
+  if (valid_symbols[COMMENT] && scan_comment(lexer)) {
+    return true;
   }
+
+  if (valid_symbols[INLINE_TEXT_BASE] && scan_inline_text_base(lexer)) {
+    return true;
+  };
 
   return false;
 }
