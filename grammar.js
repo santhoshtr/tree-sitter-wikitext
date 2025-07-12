@@ -248,44 +248,44 @@ module.exports = grammar({
       ),
     heading1: ($) =>
       seq(
-        alias("=", $.heading_marker),
+        alias(/={1}/, $.heading_marker),
         field("title", $._heading_content),
-        alias("=", $.heading_marker),
+        alias(/={1}/, $.heading_marker),
         /\s*\n/,
       ),
     heading2: ($) =>
       seq(
-        alias("==", $.heading_marker),
+        alias(/={2}/, $.heading_marker),
         field("title", $._heading_content),
-        alias("==", $.heading_marker),
+        alias(/={2}/, $.heading_marker),
         /\s*\n/,
       ),
     heading3: ($) =>
       seq(
-        alias("===", $.heading_marker),
+        alias(/={3}/, $.heading_marker),
         field("title", $._heading_content),
-        alias("===", $.heading_marker),
+        alias(/={3}/, $.heading_marker),
         /\s*\n/,
       ),
     heading4: ($) =>
       seq(
-        alias("====", $.heading_marker),
+        alias(/={4}/, $.heading_marker),
         field("title", $._heading_content),
-        alias("====", $.heading_marker),
+        alias(/={4}/, $.heading_marker),
         /\s*\n/,
       ),
     heading5: ($) =>
       seq(
-        alias("=====", $.heading_marker),
+        alias(/={5}/, $.heading_marker),
         field("title", $._heading_content),
-        alias("=====", $.heading_marker),
+        alias(/={5}/, $.heading_marker),
         /\s*\n/,
       ),
     heading6: ($) =>
       seq(
-        alias("======", $.heading_marker),
+        alias(/={6}/, $.heading_marker),
         field("title", $._heading_content),
-        alias("======", $.heading_marker),
+        alias(/={6}/, $.heading_marker),
         optional(/\s*\n/),
       ),
     _text_no_equals_newline: ($) => token(prec(1, /[^=\n]+/)),

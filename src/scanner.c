@@ -205,66 +205,69 @@ static bool is_mediawiki_header(TSLexer *lexer) {
   // Count initial '=' characters
   int initial_equals = 1;
   advance(lexer); // Skip the first '='
-  
+
   while (lexer->lookahead == '=') {
     initial_equals++;
     advance(lexer);
   }
-  
+
   // Must have at least one non-'=' character (the header text)
   if (lexer->lookahead == '\n' || lexer->lookahead == '\0') {
     return false;
   }
-  
+
   // Skip whitespace after initial '='
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
     advance(lexer);
   }
-  
+
   // Must have some header text
   bool has_text = false;
-  while (lexer->lookahead && lexer->lookahead != '\n' && lexer->lookahead != '=') {
+  while (lexer->lookahead && lexer->lookahead != '\n' &&
+         lexer->lookahead != '=') {
     if (lexer->lookahead != ' ' && lexer->lookahead != '\t') {
       has_text = true;
     }
     advance(lexer);
   }
-  
+
   if (!has_text) {
     return false;
   }
-  
+
   // Skip trailing whitespace
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
     advance(lexer);
   }
-  
+
   // Count trailing '=' characters
   int trailing_equals = 0;
   while (lexer->lookahead == '=') {
     trailing_equals++;
     advance(lexer);
   }
-  
+
   // MediaWiki headers typically have matching '=' counts at start and end
   // But they can also have just opening '=' characters
   // Valid if we have trailing equals that match, or if we reach end of line
   if (trailing_equals > 0 && trailing_equals == initial_equals) {
     return true;
   }
-  
+
   // Also valid if we just have opening '=' and reach end of line
-  if (trailing_equals == 0 && (lexer->lookahead == '\n' || lexer->lookahead == '\0')) {
+  if (trailing_equals == 0 &&
+      (lexer->lookahead == '\n' || lexer->lookahead == '\0')) {
     return true;
   }
-  
+
   return false;
 }
 
 static bool scan_inline_text_base(TSLexer *lexer) {
   bool found_text = false;
-
+  int char_index = -1;
   while (lexer->lookahead) {
+    char_index++;
     // Check for special sequences that need matching
     if (lexer->lookahead == '[') {
       // Check if this is [[ (wikilink) or [ (external link)
@@ -365,7 +368,7 @@ static bool scan_inline_text_base(TSLexer *lexer) {
       continue;
     }
 
-    if (lexer->lookahead == '=') {
+    if (lexer->lookahead == '=' && char_index == 0) {
       TSLexer saved_lexer = *lexer;
       // Check if this forms a MediaWiki header
       if (is_mediawiki_header(lexer)) {
@@ -381,11 +384,16 @@ static bool scan_inline_text_base(TSLexer *lexer) {
       found_text = true;
       continue;
     }
+    // Do not allow these chars if they are at beginning of text.
+    if ((lexer->lookahead == '*' || lexer->lookahead == '#') &&
+        char_index == 0) {
+      // should be handled separately
+      break;
+    }
 
-    // Skip * and # for now (will handle later with context tracking)
-    if (lexer->lookahead == '*' || lexer->lookahead == '#' ||
-        lexer->lookahead == '\n' || lexer->lookahead == '|' ||
-        lexer->lookahead == '<') {
+    // FIXME:This should be properly handled - tables and html
+    if (lexer->lookahead == '|' || lexer->lookahead == '<' ||
+        lexer->lookahead == '\n') {
       // should be handled separately
       break;
     }

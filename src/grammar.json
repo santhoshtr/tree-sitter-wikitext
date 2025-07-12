@@ -320,8 +320,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "="
+            "type": "PATTERN",
+            "value": "={1}"
           },
           "named": true,
           "value": "heading_marker"
@@ -337,8 +337,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "="
+            "type": "PATTERN",
+            "value": "={1}"
           },
           "named": true,
           "value": "heading_marker"
@@ -355,8 +355,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "=="
+            "type": "PATTERN",
+            "value": "={2}"
           },
           "named": true,
           "value": "heading_marker"
@@ -372,8 +372,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "=="
+            "type": "PATTERN",
+            "value": "={2}"
           },
           "named": true,
           "value": "heading_marker"
@@ -390,8 +390,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "==="
+            "type": "PATTERN",
+            "value": "={3}"
           },
           "named": true,
           "value": "heading_marker"
@@ -407,8 +407,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "==="
+            "type": "PATTERN",
+            "value": "={3}"
           },
           "named": true,
           "value": "heading_marker"
@@ -425,8 +425,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "===="
+            "type": "PATTERN",
+            "value": "={4}"
           },
           "named": true,
           "value": "heading_marker"
@@ -442,8 +442,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "===="
+            "type": "PATTERN",
+            "value": "={4}"
           },
           "named": true,
           "value": "heading_marker"
@@ -460,8 +460,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "====="
+            "type": "PATTERN",
+            "value": "={5}"
           },
           "named": true,
           "value": "heading_marker"
@@ -477,8 +477,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "====="
+            "type": "PATTERN",
+            "value": "={5}"
           },
           "named": true,
           "value": "heading_marker"
@@ -495,8 +495,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "======"
+            "type": "PATTERN",
+            "value": "={6}"
           },
           "named": true,
           "value": "heading_marker"
@@ -512,8 +512,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "======"
+            "type": "PATTERN",
+            "value": "={6}"
           },
           "named": true,
           "value": "heading_marker"
