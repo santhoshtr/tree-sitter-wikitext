@@ -179,40 +179,20 @@ static bool is_bold_italic(TSLexer *lexer) {
 }
 
 // Helper function to check if '{{' has a matching '}}'
-static bool has_matching_braces(TSLexer *lexer) {
+static bool is_opening_template(TSLexer *lexer) {
   int double_brace_count = 1;
+  int line_count = 0;
   advance(lexer); // Skip the first '{'
 
   if (lexer->lookahead != '{') {
     return false; // Not a double brace
   }
-  advance(lexer); // Skip the second '{'
-
-  while (lexer->lookahead && double_brace_count > 0) {
-    if (lexer->lookahead == '{') {
-      advance(lexer);
-      if (lexer->lookahead == '{') {
-        double_brace_count++;
-        advance(lexer);
-      }
-    } else if (lexer->lookahead == '}') {
-      advance(lexer);
-      if (lexer->lookahead == '}') {
-        double_brace_count--;
-        advance(lexer);
-      }
-    } else if (lexer->lookahead == '\n' || lexer->eof(lexer)) {
-      break;
-    }
-    advance(lexer);
-  }
-
-  return double_brace_count == 0;
+  return true;
 }
 
 static bool scan_inline_text_base(TSLexer *lexer) {
   // Characters that should not be included in inline text
-  const char *exclusions = "\n'!=;";
+  const char *exclusions = "\n!=;";
 
   bool found_text = false;
 
@@ -238,9 +218,8 @@ static bool scan_inline_text_base(TSLexer *lexer) {
 
     if (lexer->lookahead == '{') {
       // Check if this is {{
-
       TSLexer saved_lexer = *lexer;
-      if (has_matching_braces(lexer)) {
+      if (is_opening_template(lexer)) {
         // Has matching }}, so this should be handled as template
         *lexer = saved_lexer; // Restore position
         break;
@@ -255,7 +234,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
     }
 
     if (lexer->lookahead == '~') {
-
       TSLexer saved_lexer = *lexer;
       if (is_signature(lexer)) {
         // This is an signature, should be handled separately
@@ -304,23 +282,11 @@ static bool scan_inline_text_base(TSLexer *lexer) {
       continue;
     }
 
-    // Check for other exclusions (will handle * and # later with context
-    // tracking)
-    bool is_excluded = false;
-    for (const char *p = exclusions; *p; p++) {
-      if (lexer->lookahead == *p) {
-        is_excluded = true;
-        break;
-      }
-    }
-
-    if (is_excluded) {
-      break;
-    }
-
     // Skip * and # for now (will handle later with context tracking)
     if (lexer->lookahead == '*' || lexer->lookahead == '#' ||
-        lexer->lookahead == '|' || lexer->lookahead == '<') {
+        lexer->lookahead == '\n' || lexer->lookahead == '|' ||
+        lexer->lookahead == '<') {
+      // should be handled separately
       break;
     }
 

@@ -2183,7 +2183,8 @@
   },
   {
     "type": "\n",
-    "named": false
+    "named": false,
+    "extra": true
   },
   {
     "type": " ",
