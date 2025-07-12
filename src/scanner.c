@@ -200,9 +200,6 @@ static bool is_closing_template(TSLexer *lexer) {
 }
 
 static bool scan_inline_text_base(TSLexer *lexer) {
-  // Characters that should not be included in inline text
-  const char *exclusions = "\n!=;";
-
   bool found_text = false;
 
   while (lexer->lookahead) {
@@ -309,7 +306,7 @@ static bool scan_inline_text_base(TSLexer *lexer) {
     // Skip * and # for now (will handle later with context tracking)
     if (lexer->lookahead == '*' || lexer->lookahead == '#' ||
         lexer->lookahead == '\n' || lexer->lookahead == '|' ||
-        lexer->lookahead == '<') {
+        lexer->lookahead == '=' || lexer->lookahead == '<') {
       // should be handled separately
       break;
     }
