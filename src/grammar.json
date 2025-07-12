@@ -111,10 +111,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "punctuations"
-        },
-        {
-          "type": "SYMBOL",
           "name": "nowiki_inline_element"
         },
         {
@@ -129,17 +125,6 @@
       "content": {
         "type": "SYMBOL",
         "name": "_inline_text_base"
-      }
-    },
-    "_inline_text_base": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\\n\\[\\]{}|<>'!=*_#~&;]+"
-        }
       }
     },
     "_text_no_brackets_pipes": {
@@ -197,47 +182,6 @@
         "type": "STRING",
         "value": "'"
       }
-    },
-    "punctuations": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "'"
-            }
-          },
-          "named": true,
-          "value": "single_quote"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": ";"
-            }
-          },
-          "named": true,
-          "value": "semicolon"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "&"
-            }
-          },
-          "named": true,
-          "value": "ampersand"
-        }
-      ]
     },
     "redirect": {
       "type": "SEQ",
@@ -1491,10 +1435,6 @@
           {
             "type": "SYMBOL",
             "name": "text"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "punctuations"
           },
           {
             "type": "ALIAS",
@@ -2878,6 +2818,10 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_inline_text_base"
     }
   ],
   "inline": [],

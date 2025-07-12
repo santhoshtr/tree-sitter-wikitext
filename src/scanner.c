@@ -1,6 +1,7 @@
 
 #include "tree_sitter/parser.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <wctype.h>
 
@@ -118,22 +119,21 @@ static bool is_html_entity(TSLexer *lexer) {
 }
 
 // Helper function to check if '[' has a matching ']'
-static bool has_matching_bracket(TSLexer *lexer) {
+static bool has_matching_brackets(TSLexer *lexer) {
   int bracket_count = 1;
-  advance(lexer); // Skip the opening '['
 
-  while (lexer->lookahead && bracket_count > 0) {
+  advance(lexer);
+  while (lexer->lookahead) {
     if (lexer->lookahead == '[') {
       bracket_count++;
     } else if (lexer->lookahead == ']') {
       bracket_count--;
     } else if (lexer->lookahead == '\n') {
       // Brackets typically don't span multiple lines in wikitext
-      return false;
+      break;
     }
     advance(lexer);
   }
-
   return bracket_count == 0;
 }
 
@@ -157,10 +157,30 @@ static bool is_signature(TSLexer *lexer) {
 
   return tilda_count == 3 || tilda_count == 4 || tilda_count == 5;
 }
+// Helper function to check if consecutive ' make up bold or italic
+//
+// '''Bold text'''
+// ''Italic text''
+// '''''Bold and italic text'''''
+static bool is_bold_italic(TSLexer *lexer) {
+  int tick_count = 1;
+  advance(lexer); // Skip the opening '
+
+  while (lexer->lookahead && tick_count > 0) {
+    if (lexer->lookahead == '\'') {
+      tick_count++;
+    } else {
+      break;
+    }
+    advance(lexer);
+  }
+
+  return tick_count == 2 || tick_count == 3 || tick_count == 5;
+}
 
 // Helper function to check if '{{' has a matching '}}'
 static bool has_matching_braces(TSLexer *lexer) {
-  int brace_count = 1;
+  int double_brace_count = 1;
   advance(lexer); // Skip the first '{'
 
   if (lexer->lookahead != '{') {
@@ -168,64 +188,31 @@ static bool has_matching_braces(TSLexer *lexer) {
   }
   advance(lexer); // Skip the second '{'
 
-  while (lexer->lookahead && brace_count > 0) {
+  while (lexer->lookahead && double_brace_count > 0) {
     if (lexer->lookahead == '{') {
       advance(lexer);
       if (lexer->lookahead == '{') {
-        brace_count++;
+        double_brace_count++;
         advance(lexer);
       }
     } else if (lexer->lookahead == '}') {
       advance(lexer);
       if (lexer->lookahead == '}') {
-        brace_count--;
+        double_brace_count--;
         advance(lexer);
       }
-    } else {
-      advance(lexer);
+    } else if (lexer->lookahead == '\n' || lexer->eof(lexer)) {
+      break;
     }
+    advance(lexer);
   }
 
-  return brace_count == 0;
-}
-
-// Helper function to check if '[[' has a matching ']]'
-static bool has_matching_double_brackets(TSLexer *lexer) {
-  int bracket_count = 1;
-  advance(lexer); // Skip the first '['
-
-  if (lexer->lookahead != '[') {
-    return false; // Not a double bracket
-  }
-  advance(lexer); // Skip the second '['
-
-  while (lexer->lookahead && bracket_count > 0) {
-    if (lexer->lookahead == '[') {
-      advance(lexer);
-      if (lexer->lookahead == '[') {
-        bracket_count++;
-        advance(lexer);
-      }
-    } else if (lexer->lookahead == ']') {
-      advance(lexer);
-      if (lexer->lookahead == ']') {
-        bracket_count--;
-        advance(lexer);
-      }
-    } else if (lexer->lookahead == '\n') {
-      // Double brackets typically don't span multiple lines
-      return false;
-    } else {
-      advance(lexer);
-    }
-  }
-
-  return bracket_count == 0;
+  return double_brace_count == 0;
 }
 
 static bool scan_inline_text_base(TSLexer *lexer) {
   // Characters that should not be included in inline text
-  const char *exclusions = "\n'|!=;";
+  const char *exclusions = "\n'!=;";
 
   bool found_text = false;
 
@@ -233,25 +220,10 @@ static bool scan_inline_text_base(TSLexer *lexer) {
     // Check for special sequences that need matching
     if (lexer->lookahead == '[') {
       // Check if this is [[ (wikilink) or [ (external link)
+      // This is [, check if it has matching ]
       TSLexer saved_lexer = *lexer;
-
-      if (lexer->lookahead == '[') {
-        advance(lexer);
-        if (lexer->lookahead == '[') {
-          // This is [[, check if it has matching ]]
-          *lexer = saved_lexer; // Restore position
-          if (has_matching_double_brackets(lexer)) {
-            // Has matching ]], so this should be handled as wikilink
-            *lexer = saved_lexer; // Restore position
-            break;
-          }
-        }
-      }
-
-      // Restore and check for single bracket
-      *lexer = saved_lexer;
-      if (has_matching_bracket(lexer)) {
-        // Has matching ], so this should be handled as external link
+      if (has_matching_brackets(lexer)) {
+        // Has matching ], so this should be handled as wikilink
         *lexer = saved_lexer; // Restore position
         break;
       }
@@ -266,8 +238,8 @@ static bool scan_inline_text_base(TSLexer *lexer) {
 
     if (lexer->lookahead == '{') {
       // Check if this is {{
-      TSLexer saved_lexer = *lexer;
 
+      TSLexer saved_lexer = *lexer;
       if (has_matching_braces(lexer)) {
         // Has matching }}, so this should be handled as template
         *lexer = saved_lexer; // Restore position
@@ -283,9 +255,8 @@ static bool scan_inline_text_base(TSLexer *lexer) {
     }
 
     if (lexer->lookahead == '~') {
-      // Check if this forms an HTML entity
-      TSLexer saved_lexer = *lexer;
 
+      TSLexer saved_lexer = *lexer;
       if (is_signature(lexer)) {
         // This is an signature, should be handled separately
         *lexer = saved_lexer; // Restore position
@@ -301,16 +272,31 @@ static bool scan_inline_text_base(TSLexer *lexer) {
     }
 
     if (lexer->lookahead == '&') {
-      // Check if this forms an HTML entity
       TSLexer saved_lexer = *lexer;
-
+      // Check if this forms an HTML entity
       if (is_html_entity(lexer)) {
-        // This is an HTML entity, should be handled separately
         *lexer = saved_lexer; // Restore position
+        // This is an HTML entity, should be handled separately
         break;
       }
 
       // Not an HTML entity, treat as regular text
+      *lexer = saved_lexer; // Restore position
+      advance(lexer);
+      lexer->mark_end(lexer);
+      found_text = true;
+      continue;
+    }
+
+    if (lexer->lookahead == '\'') {
+      TSLexer saved_lexer = *lexer;
+      // Check if this forms an bold or italic
+      if (is_bold_italic(lexer)) {
+        *lexer = saved_lexer; // Restore position
+        // This is a bold or italic , should be handled separately
+        break;
+      }
+
       *lexer = saved_lexer; // Restore position
       advance(lexer);
       lexer->mark_end(lexer);

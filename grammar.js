@@ -187,7 +187,6 @@ module.exports = grammar({
         $.html_inline_tag, // HTML known to be inline
         $.html_void_tag, // E.g. <br />, <hr />
         $.entity,
-        $.punctuations,
         $.nowiki_inline_element, // <nowiki>content</nowiki> or <nowiki />
         // Everything else
         $.text,
@@ -208,12 +207,6 @@ module.exports = grammar({
     single_quote_text: ($) =>
       token(
         "'", // Single quote
-      ),
-    punctuations: ($) =>
-      choice(
-        alias(token("'"), $.single_quote),
-        alias(token(";"), $.semicolon),
-        alias(token("&"), $.ampersand),
       ),
     // REDIRECT
 
@@ -486,7 +479,6 @@ module.exports = grammar({
           $.signature,
           $.nowiki_inline_element,
           $.text,
-          $.punctuations,
           // token(prec(1, /[^=\[\]{}\|]+/)),
           // General text content within the parameter value.
           // This token will match sequences of characters that are NOT |, {, }, or newline.
