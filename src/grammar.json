@@ -2760,10 +2760,6 @@
       "value": "\r"
     },
     {
-      "type": "STRING",
-      "value": "\n"
-    },
-    {
       "type": "PATTERN",
       "value": "\\s"
     }

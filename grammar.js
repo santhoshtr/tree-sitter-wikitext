@@ -132,14 +132,6 @@ const text_not_ending_with = (terminators) => {
   return token(pattern);
 };
 
-// Text that can appear inside most inline elements, carefully excluding delimiters
-// This is one of the hardest parts to get right.
-const create_inline_text_token = (additional_exclusions = "") => {
-  const base_exclusions = "\n\\[\\]{}|<>'!=*_#~&;";
-  const all_exclusions = base_exclusions + additional_exclusions;
-  return token(prec(-1, new RegExp(`[^${all_exclusions}]+`)));
-};
-
 module.exports = grammar({
   name: "wikitext",
   externals: ($) => [$.comment, $._inline_text_base],

@@ -178,13 +178,22 @@ static bool is_bold_italic(TSLexer *lexer) {
   return tick_count == 2 || tick_count == 3 || tick_count == 5;
 }
 
-// Helper function to check if '{{' has a matching '}}'
 static bool is_opening_template(TSLexer *lexer) {
   int double_brace_count = 1;
   int line_count = 0;
   advance(lexer); // Skip the first '{'
 
   if (lexer->lookahead != '{') {
+    return false; // Not a double brace
+  }
+  return true;
+}
+static bool is_closing_template(TSLexer *lexer) {
+  int double_brace_count = 1;
+  int line_count = 0;
+  advance(lexer); // Skip the first '{'
+
+  if (lexer->lookahead != '}') {
     return false; // Not a double brace
   }
   return true;
@@ -232,7 +241,22 @@ static bool scan_inline_text_base(TSLexer *lexer) {
       found_text = true;
       continue;
     }
+    if (lexer->lookahead == '}') {
+      // Check if this is {{
+      TSLexer saved_lexer = *lexer;
+      if (is_closing_template(lexer)) {
+        // Has matching }}, so this should be handled as template
+        *lexer = saved_lexer; // Restore position
+        break;
+      }
 
+      // No matching braces, treat as regular text
+      *lexer = saved_lexer; // Restore position
+      advance(lexer);
+      lexer->mark_end(lexer);
+      found_text = true;
+      continue;
+    }
     if (lexer->lookahead == '~') {
       TSLexer saved_lexer = *lexer;
       if (is_signature(lexer)) {
