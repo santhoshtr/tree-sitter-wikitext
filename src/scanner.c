@@ -61,14 +61,223 @@ static bool scan_comment(TSLexer *lexer) {
   return false;
 }
 
+// Helper function to check if a character sequence forms a valid HTML entity
+static bool is_html_entity(TSLexer *lexer) {
+  // Save current position
+  uint32_t saved_position = lexer->get_column(lexer);
+  
+  // Skip the '&'
+  advance(lexer);
+  
+  // Check for numeric entity &#...;
+  if (lexer->lookahead == '#') {
+    advance(lexer);
+    
+    // Check for hex entity &#x...;
+    if (lexer->lookahead == 'x' || lexer->lookahead == 'X') {
+      advance(lexer);
+      int hex_digits = 0;
+      while (lexer->lookahead && 
+             ((lexer->lookahead >= '0' && lexer->lookahead <= '9') ||
+              (lexer->lookahead >= 'a' && lexer->lookahead <= 'f') ||
+              (lexer->lookahead >= 'A' && lexer->lookahead <= 'F'))) {
+        advance(lexer);
+        hex_digits++;
+      }
+      if (hex_digits > 0 && hex_digits <= 6 && lexer->lookahead == ';') {
+        return true;
+      }
+    } else {
+      // Check for decimal entity &#...;
+      int decimal_digits = 0;
+      while (lexer->lookahead && lexer->lookahead >= '0' && lexer->lookahead <= '9') {
+        advance(lexer);
+        decimal_digits++;
+      }
+      if (decimal_digits > 0 && decimal_digits <= 5 && lexer->lookahead == ';') {
+        return true;
+      }
+    }
+  } else {
+    // Check for named entity &name;
+    int name_chars = 0;
+    while (lexer->lookahead && 
+           ((lexer->lookahead >= 'a' && lexer->lookahead <= 'z') ||
+            (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z'))) {
+      advance(lexer);
+      name_chars++;
+    }
+    if (name_chars > 0 && name_chars <= 30 && lexer->lookahead == ';') {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+// Helper function to check if '[' has a matching ']'
+static bool has_matching_bracket(TSLexer *lexer) {
+  int bracket_count = 1;
+  advance(lexer); // Skip the opening '['
+  
+  while (lexer->lookahead && bracket_count > 0) {
+    if (lexer->lookahead == '[') {
+      bracket_count++;
+    } else if (lexer->lookahead == ']') {
+      bracket_count--;
+    } else if (lexer->lookahead == '\n') {
+      // Brackets typically don't span multiple lines in wikitext
+      return false;
+    }
+    advance(lexer);
+  }
+  
+  return bracket_count == 0;
+}
+
+// Helper function to check if '{{' has a matching '}}'
+static bool has_matching_braces(TSLexer *lexer) {
+  int brace_count = 1;
+  advance(lexer); // Skip the first '{'
+  
+  if (lexer->lookahead != '{') {
+    return false; // Not a double brace
+  }
+  advance(lexer); // Skip the second '{'
+  
+  while (lexer->lookahead && brace_count > 0) {
+    if (lexer->lookahead == '{') {
+      advance(lexer);
+      if (lexer->lookahead == '{') {
+        brace_count++;
+        advance(lexer);
+      }
+    } else if (lexer->lookahead == '}') {
+      advance(lexer);
+      if (lexer->lookahead == '}') {
+        brace_count--;
+        advance(lexer);
+      }
+    } else {
+      advance(lexer);
+    }
+  }
+  
+  return brace_count == 0;
+}
+
+// Helper function to check if '[[' has a matching ']]'
+static bool has_matching_double_brackets(TSLexer *lexer) {
+  int bracket_count = 1;
+  advance(lexer); // Skip the first '['
+  
+  if (lexer->lookahead != '[') {
+    return false; // Not a double bracket
+  }
+  advance(lexer); // Skip the second '['
+  
+  while (lexer->lookahead && bracket_count > 0) {
+    if (lexer->lookahead == '[') {
+      advance(lexer);
+      if (lexer->lookahead == '[') {
+        bracket_count++;
+        advance(lexer);
+      }
+    } else if (lexer->lookahead == ']') {
+      advance(lexer);
+      if (lexer->lookahead == ']') {
+        bracket_count--;
+        advance(lexer);
+      }
+    } else if (lexer->lookahead == '\n') {
+      // Double brackets typically don't span multiple lines
+      return false;
+    } else {
+      advance(lexer);
+    }
+  }
+  
+  return bracket_count == 0;
+}
+
 static bool scan_inline_text_base(TSLexer *lexer) {
   // Characters that should not be included in inline text
-  const char *exclusions = "\n[]{}'!=*|#~&;";
+  const char *exclusions = "\n'!=~;";
 
   bool found_text = false;
 
   while (lexer->lookahead) {
-    // Check if current character is in the exclusions
+    // Check for special sequences that need matching
+    if (lexer->lookahead == '[') {
+      // Check if this is [[ (wikilink) or [ (external link)
+      TSLexer saved_lexer = *lexer;
+      
+      if (lexer->lookahead == '[') {
+        advance(lexer);
+        if (lexer->lookahead == '[') {
+          // This is [[, check if it has matching ]]
+          *lexer = saved_lexer; // Restore position
+          if (has_matching_double_brackets(lexer)) {
+            // Has matching ]], so this should be handled as wikilink
+            *lexer = saved_lexer; // Restore position
+            break;
+          }
+        }
+      }
+      
+      // Restore and check for single bracket
+      *lexer = saved_lexer;
+      if (has_matching_bracket(lexer)) {
+        // Has matching ], so this should be handled as external link
+        *lexer = saved_lexer; // Restore position
+        break;
+      }
+      
+      // No matching bracket, treat as regular text
+      *lexer = saved_lexer; // Restore position
+      advance(lexer);
+      lexer->mark_end(lexer);
+      found_text = true;
+      continue;
+    }
+    
+    if (lexer->lookahead == '{') {
+      // Check if this is {{
+      TSLexer saved_lexer = *lexer;
+      
+      if (has_matching_braces(lexer)) {
+        // Has matching }}, so this should be handled as template
+        *lexer = saved_lexer; // Restore position
+        break;
+      }
+      
+      // No matching braces, treat as regular text
+      *lexer = saved_lexer; // Restore position
+      advance(lexer);
+      lexer->mark_end(lexer);
+      found_text = true;
+      continue;
+    }
+    
+    if (lexer->lookahead == '&') {
+      // Check if this forms an HTML entity
+      TSLexer saved_lexer = *lexer;
+      
+      if (is_html_entity(lexer)) {
+        // This is an HTML entity, should be handled separately
+        *lexer = saved_lexer; // Restore position
+        break;
+      }
+      
+      // Not an HTML entity, treat as regular text
+      *lexer = saved_lexer; // Restore position
+      advance(lexer);
+      lexer->mark_end(lexer);
+      found_text = true;
+      continue;
+    }
+    
+    // Check for other exclusions (will handle * and # later with context tracking)
     bool is_excluded = false;
     for (const char *p = exclusions; *p; p++) {
       if (lexer->lookahead == *p) {
@@ -76,8 +285,13 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         break;
       }
     }
-
+    
     if (is_excluded) {
+      break;
+    }
+    
+    // Skip * and # for now (will handle later with context tracking)
+    if (lexer->lookahead == '*' || lexer->lookahead == '#' || lexer->lookahead == '|' || lexer->lookahead == '<') {
       break;
     }
 
