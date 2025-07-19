@@ -2,8 +2,9 @@
 #include "tree_sitter/parser.h"
 
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
-#include <wctype.h>
+#include <string.h>
 
 enum TokenType {
   COMMENT,
@@ -26,7 +27,35 @@ static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
 static inline void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
-static bool scan_raw_text(TSLexer *lexer) { return false; }
+static inline bool consume_char(char c, TSLexer *lexer) {
+  if (lexer->lookahead != c) {
+    return false;
+  }
+
+  advance(lexer);
+  return true;
+}
+
+static inline bool consume_string(char *sequence, TSLexer *lexer) {
+  unsigned length = strlen(sequence);
+  for (unsigned i = 0; i < length; i++) {
+    if (lexer->lookahead != sequence[i]) {
+      return false;
+    }
+    advance(lexer);
+  }
+  advance(lexer);
+  return true;
+}
+
+static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
+  uint8_t count = 0;
+  while (lexer->lookahead == c) {
+    ++count;
+    advance(lexer);
+  }
+  return count;
+}
 
 static bool scan_comment(TSLexer *lexer) {
   const char *comment_start = "<!--";
@@ -268,119 +297,92 @@ static bool scan_inline_text_base(TSLexer *lexer) {
   int char_index = -1;
   while (lexer->lookahead) {
     char_index++;
+    lexer->mark_end(lexer);
     // Check for special sequences that need matching
     if (lexer->lookahead == '[') {
       // Check if this is [[ (wikilink) or [ (external link)
       // This is [, check if it has matching ]
-      TSLexer saved_lexer = *lexer;
       if (has_matching_brackets(lexer)) {
         // Has matching ], so this should be handled as wikilink
-        *lexer = saved_lexer; // Restore position
         break;
       }
 
       // No matching bracket, treat as regular text
-      *lexer = saved_lexer; // Restore position
       advance(lexer);
-      lexer->mark_end(lexer);
       found_text = true;
       continue;
     }
 
     if (lexer->lookahead == '{') {
       // Check if this is {{
-      TSLexer saved_lexer = *lexer;
       if (is_opening_template(lexer)) {
         // Has matching }}, so this should be handled as template
-        *lexer = saved_lexer; // Restore position
         break;
       }
 
       // No matching braces, treat as regular text
-      *lexer = saved_lexer; // Restore position
       advance(lexer);
-      lexer->mark_end(lexer);
       found_text = true;
       continue;
     }
     if (lexer->lookahead == '}') {
       // Check if this is {{
-      TSLexer saved_lexer = *lexer;
       if (is_closing_template(lexer)) {
         // Has matching }}, so this should be handled as template
-        *lexer = saved_lexer; // Restore position
         break;
       }
 
       // No matching braces, treat as regular text
-      *lexer = saved_lexer; // Restore position
       advance(lexer);
-      lexer->mark_end(lexer);
       found_text = true;
       continue;
     }
     if (lexer->lookahead == '~') {
-      TSLexer saved_lexer = *lexer;
       if (is_signature(lexer)) {
         // This is an signature, should be handled separately
-        *lexer = saved_lexer; // Restore position
         break;
       }
 
       // Not a signature, treat as regular text
-      *lexer = saved_lexer; // Restore position
       advance(lexer);
-      lexer->mark_end(lexer);
       found_text = true;
       continue;
     }
 
     if (lexer->lookahead == '&') {
-      TSLexer saved_lexer = *lexer;
       // Check if this forms an HTML entity
       if (is_html_entity(lexer)) {
-        *lexer = saved_lexer; // Restore position
         // This is an HTML entity, should be handled separately
         break;
       }
 
       // Not an HTML entity, treat as regular text
-      *lexer = saved_lexer; // Restore position
       advance(lexer);
-      lexer->mark_end(lexer);
       found_text = true;
       continue;
     }
 
     if (lexer->lookahead == '\'') {
-      TSLexer saved_lexer = *lexer;
       // Check if this forms an bold or italic
       if (is_bold_italic(lexer)) {
-        *lexer = saved_lexer; // Restore position
         // This is a bold or italic , should be handled separately
         break;
       }
 
-      *lexer = saved_lexer; // Restore position
       advance(lexer);
-      lexer->mark_end(lexer);
       found_text = true;
       continue;
     }
 
     if (lexer->lookahead == '=' && char_index == 0) {
-      TSLexer saved_lexer = *lexer;
       // Check if this forms a MediaWiki header
       if (is_mediawiki_header(lexer)) {
-        *lexer = saved_lexer; // Restore position
         // This is a MediaWiki header, should be handled separately
         break;
       }
 
       // Not a MediaWiki header, treat as regular text
-      *lexer = saved_lexer; // Restore position
       advance(lexer);
-      lexer->mark_end(lexer);
       found_text = true;
       continue;
     }
@@ -399,7 +401,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
     }
 
     advance(lexer);
-    lexer->mark_end(lexer);
     found_text = true;
   }
 
