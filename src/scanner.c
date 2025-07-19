@@ -58,18 +58,10 @@ static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
 }
 
 static bool scan_comment(TSLexer *lexer) {
-  const char *comment_start = "<!--";
-
-  if (lexer->lookahead == '<') {
-    for (unsigned i = 0; i < 4; i++) {
-      if (lexer->lookahead != comment_start[i]) {
-        return false;
-      }
-      advance(lexer);
-    }
-  } else {
+  if (!consume_string("<!--", lexer)) {
     return false;
   }
+
   unsigned dashes = 0;
   while (lexer->lookahead) {
     switch (lexer->lookahead) {
@@ -293,11 +285,12 @@ static bool is_mediawiki_header(TSLexer *lexer) {
 }
 
 static bool scan_inline_text_base(TSLexer *lexer) {
-  bool found_text = false;
+  int text_run_length = 0;
   int char_index = -1;
+
+  lexer->mark_end(lexer);
   while (lexer->lookahead) {
     char_index++;
-    lexer->mark_end(lexer);
     // Check for special sequences that need matching
     if (lexer->lookahead == '[') {
       // Check if this is [[ (wikilink) or [ (external link)
@@ -306,11 +299,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         // Has matching ], so this should be handled as wikilink
         break;
       }
-
-      // No matching bracket, treat as regular text
-      advance(lexer);
-      found_text = true;
-      continue;
     }
 
     if (lexer->lookahead == '{') {
@@ -319,11 +307,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         // Has matching }}, so this should be handled as template
         break;
       }
-
-      // No matching braces, treat as regular text
-      advance(lexer);
-      found_text = true;
-      continue;
     }
     if (lexer->lookahead == '}') {
       // Check if this is {{
@@ -331,22 +314,12 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         // Has matching }}, so this should be handled as template
         break;
       }
-
-      // No matching braces, treat as regular text
-      advance(lexer);
-      found_text = true;
-      continue;
     }
     if (lexer->lookahead == '~') {
       if (is_signature(lexer)) {
         // This is an signature, should be handled separately
         break;
       }
-
-      // Not a signature, treat as regular text
-      advance(lexer);
-      found_text = true;
-      continue;
     }
 
     if (lexer->lookahead == '&') {
@@ -355,11 +328,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         // This is an HTML entity, should be handled separately
         break;
       }
-
-      // Not an HTML entity, treat as regular text
-      advance(lexer);
-      found_text = true;
-      continue;
     }
 
     if (lexer->lookahead == '\'') {
@@ -368,10 +336,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         // This is a bold or italic , should be handled separately
         break;
       }
-
-      advance(lexer);
-      found_text = true;
-      continue;
     }
 
     if (lexer->lookahead == '=' && char_index == 0) {
@@ -380,11 +344,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         // This is a MediaWiki header, should be handled separately
         break;
       }
-
-      // Not a MediaWiki header, treat as regular text
-      advance(lexer);
-      found_text = true;
-      continue;
     }
     // Do not allow these chars if they are at beginning of text.
     if ((lexer->lookahead == '*' || lexer->lookahead == '#') &&
@@ -392,24 +351,38 @@ static bool scan_inline_text_base(TSLexer *lexer) {
       // should be handled separately
       break;
     }
-
+    if (lexer->lookahead == '<') {
+      if (consume_string("<!--", lexer)) {
+        break;
+      }
+    }
     // FIXME:This should be properly handled - tables and html
-    if (lexer->lookahead == '|' || lexer->lookahead == '<' ||
-        lexer->lookahead == '\n') {
+    if (lexer->lookahead == '|' || lexer->lookahead == '\n') {
       // should be handled separately
       break;
     }
-
     advance(lexer);
-    found_text = true;
+    text_run_length++;
+    lexer->mark_end(lexer);
   }
-
-  if (found_text) {
+  if (text_run_length > 0) {
     lexer->result_symbol = INLINE_TEXT_BASE;
     return true;
   }
 
   return false;
+}
+
+// Add this function before tree_sitter_wikitext_external_scanner_scan
+static void dump_valid_symbols(const bool *valid_symbols) {
+  printf("Valid symbols: ");
+  if (valid_symbols[COMMENT]) {
+    printf("COMMENT\n");
+  } else if (valid_symbols[INLINE_TEXT_BASE]) {
+    printf("INLINE_TEXT_BASE\n");
+  } else {
+    printf("UNKNOWN\n");
+  }
 }
 
 bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
@@ -421,6 +394,6 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
   if (valid_symbols[INLINE_TEXT_BASE] && scan_inline_text_base(lexer)) {
     return true;
   };
-
+  dump_valid_symbols(valid_symbols);
   return false;
 }
