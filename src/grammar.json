@@ -79,6 +79,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "medialink"
+        },
+        {
+          "type": "SYMBOL",
           "name": "external_link"
         },
         {
@@ -591,6 +595,10 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "_wiki_link_token"
+        },
+        {
           "type": "STRING",
           "value": "[["
         },
@@ -747,6 +755,213 @@
         {
           "type": "SYMBOL",
           "name": "nowiki_inline_element"
+        }
+      ]
+    },
+    "medialink": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_media_link_token"
+        },
+        {
+          "type": "STRING",
+          "value": "[["
+        },
+        {
+          "type": "FIELD",
+          "name": "filename",
+          "content": {
+            "type": "SYMBOL",
+            "name": "filename"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "|"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_file_option"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "]]"
+        }
+      ]
+    },
+    "filename": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\|\\[\\]]+"
+        }
+      }
+    },
+    "_file_option": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "file_size"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "file_alignment"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "file_format"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "file_link_option"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "file_alt_text"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "file_caption"
+          }
+        ]
+      }
+    },
+    "file_caption": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "text"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "wikilink"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_newline"
+          }
+        ]
+      }
+    },
+    "file_size": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\dpx"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\dx\\dpx"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "upright"
+          },
+          "named": true,
+          "value": "upright_option"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "upright=\\d*\\.?\\d"
+          }
+        }
+      ]
+    },
+    "file_alignment": {
+      "type": "PATTERN",
+      "value": "left|right|center|none"
+    },
+    "file_format": {
+      "type": "PREC",
+      "value": 4,
+      "content": {
+        "type": "PATTERN",
+        "value": "thumb|thumbnail|frame|frameless|border"
+      }
+    },
+    "file_link_option": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "link="
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "target",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "wikilink_page"
+                },
+                "named": true,
+                "value": "link_target"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "file_alt_text": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "alt="
+        },
+        {
+          "type": "FIELD",
+          "name": "alt",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              }
+            },
+            "named": true,
+            "value": "alt_text"
+          }
         }
       ]
     },
@@ -2822,6 +3037,14 @@
     {
       "type": "SYMBOL",
       "name": "_inline_text_base"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_wiki_link_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_media_link_token"
     }
   ],
   "inline": [],

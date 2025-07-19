@@ -134,7 +134,12 @@ const text_not_ending_with = (terminators) => {
 
 module.exports = grammar({
   name: "wikitext",
-  externals: ($) => [$.comment, $._inline_text_base],
+  externals: ($) => [
+    $.comment,
+    $._inline_text_base,
+    $._wiki_link_token,
+    $._media_link_token,
+  ],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [
     [$.paragraph, $._html_content],
@@ -171,6 +176,7 @@ module.exports = grammar({
         $.bold,
         $.italic,
         $.wikilink,
+        $.medialink,
         $.external_link,
         $.template,
         $.magic_word,
@@ -301,6 +307,7 @@ module.exports = grammar({
     // ==== Links ====
     wikilink: ($) =>
       seq(
+        $._wiki_link_token,
         "[[",
         field("target", $.wikilink_page),
         optional(seq("|", field("display", $._wikilink_display_content))),
@@ -331,6 +338,51 @@ module.exports = grammar({
         $.nowiki_inline_element,
         // No nested links easily in display text without complex escape logic
       ),
+
+    medialink: ($) =>
+      seq(
+        $._media_link_token,
+        "[[",
+        field("filename", $.filename),
+        repeat(seq("|", $._file_option)),
+        "]]",
+      ),
+
+    filename: ($) => token(prec(1, /[^\|\[\]]+/)),
+
+    _file_option: ($) =>
+      prec.left(
+        choice(
+          $.file_size,
+          $.file_alignment,
+          $.file_format,
+          $.file_link_option,
+          $.file_alt_text,
+          $.file_caption,
+        ),
+      ),
+    file_caption: ($) => repeat1(choice($.text, $.wikilink, $._newline)),
+
+    file_size: ($) =>
+      choice(
+        token(/\dpx/),
+        token(/\dx\dpx/),
+        alias("upright", $.upright_option),
+        token(/upright=\d*\.?\d/),
+      ),
+
+    file_alignment: ($) => /left|right|center|none/,
+
+    file_format: ($) => prec(4, /thumb|thumbnail|frame|frameless|border/),
+
+    file_link_option: ($) =>
+      seq(
+        "link=",
+        optional(field("target", alias($.wikilink_page, $.link_target))),
+      ),
+
+    file_alt_text: ($) =>
+      seq("alt=", field("alt", alias(repeat1($.text), $.alt_text))),
 
     external_link: ($) =>
       choice(

@@ -9,6 +9,8 @@
 enum TokenType {
   COMMENT,
   INLINE_TEXT_BASE,
+  WIKI_LINK_TOKEN,
+  MEDIA_LINK_TOKEN,
 };
 
 void *tree_sitter_wikitext_external_scanner_create() { return NULL; }
@@ -44,7 +46,6 @@ static inline bool consume_string(char *sequence, TSLexer *lexer) {
     }
     advance(lexer);
   }
-  advance(lexer);
   return true;
 }
 
@@ -372,6 +373,43 @@ static bool scan_inline_text_base(TSLexer *lexer) {
 
   return false;
 }
+// Scan for link opening patterns
+static bool scan_media_link_token(TSLexer *lexer) {
+  printf("Media symbols: %c \n", lexer->lookahead);
+  // Check for "File:" or "Image:" or "Media:"
+  if (lexer->lookahead == 'F') {
+    if (consume_string("File", lexer)) {
+      advance(lexer); // Skip ':'
+      return true;
+    }
+    printf("File not found\n");
+    return false;
+  }
+
+  if (lexer->lookahead == 'I') {
+    // Check for "Image:"
+    if (consume_string("Image", lexer)) {
+      advance(lexer); // Skip ':'
+      return true;
+    }
+    return false;
+  }
+
+  if (lexer->lookahead == 'M' || lexer->lookahead == 'm') {
+    // Check for "Media:"
+    if (consume_string("Media", lexer)) {
+      advance(lexer); // Skip ':'
+      return true;
+    }
+    return false;
+  }
+
+  return false;
+}
+
+static bool scan_wiki_link_token(TSLexer *lexer) {
+  return consume_string("[[", lexer);
+}
 
 // Add this function before tree_sitter_wikitext_external_scanner_scan
 static void dump_valid_symbols(const bool *valid_symbols) {
@@ -380,6 +418,10 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     printf("COMMENT\n");
   } else if (valid_symbols[INLINE_TEXT_BASE]) {
     printf("INLINE_TEXT_BASE\n");
+  } else if (valid_symbols[WIKI_LINK_TOKEN]) {
+    printf("WIKI_LINK_TOKEN\n");
+  } else if (valid_symbols[MEDIA_LINK_TOKEN]) {
+    printf("MEDIA_LINK_TOKEN\n");
   } else {
     printf("UNKNOWN\n");
   }
@@ -387,6 +429,27 @@ static void dump_valid_symbols(const bool *valid_symbols) {
 
 bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
                                                 const bool *valid_symbols) {
+  if (valid_symbols[MEDIA_LINK_TOKEN] || valid_symbols[WIKI_LINK_TOKEN]) {
+    bool found_link = false;
+    lexer->mark_end(lexer);
+    if (valid_symbols[WIKI_LINK_TOKEN] && scan_wiki_link_token(lexer)) {
+      lexer->result_symbol = WIKI_LINK_TOKEN;
+      printf("Wikilink is ok\n");
+      found_link = true;
+    }
+    if (found_link && valid_symbols[MEDIA_LINK_TOKEN] &&
+        scan_media_link_token(lexer)) {
+
+      printf("Media  is ok\n");
+
+      lexer->result_symbol = MEDIA_LINK_TOKEN;
+      return true;
+    }
+    if (found_link) {
+      return true;
+    };
+  }
+
   if (valid_symbols[COMMENT] && scan_comment(lexer)) {
     return true;
   }
@@ -394,6 +457,11 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
   if (valid_symbols[INLINE_TEXT_BASE] && scan_inline_text_base(lexer)) {
     return true;
   };
+
+  // if (valid_symbols[FILE_LINK_TOKEN] && scan_file_link_token(lexer)) {
+  //   lexer->result_symbol = FILE_LINK_TOKEN;
+  //   return true;
+  // }
   dump_valid_symbols(valid_symbols);
   return false;
 }
