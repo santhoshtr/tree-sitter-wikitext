@@ -139,6 +139,12 @@ module.exports = grammar({
     $._inline_text_base,
     $._wiki_link_token,
     $._media_link_token,
+    $.file_size_token,
+    $.file_alignment_token,
+    $.file_format_token,
+    $.file_link_token,
+    $.file_alt_token,
+    $._file_caption_token,
   ],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [
@@ -351,39 +357,16 @@ module.exports = grammar({
     filename: ($) => token(prec(1, /[^\|\[\]]+/)),
 
     _file_option: ($) =>
-      prec.left(
-        choice(
-          $.file_size,
-          $.file_alignment,
-          $.file_format,
-          $.file_link_option,
-          $.file_alt_text,
-          $.file_caption,
-        ),
-      ),
-    file_caption: ($) => repeat1(choice($.text, $.wikilink, $._newline)),
-
-    file_size: ($) =>
       choice(
-        token(/\dpx/),
-        token(/\dx\dpx/),
-        alias("upright", $.upright_option),
-        token(/upright=\d*\.?\d/),
+        $.file_size_token,
+        $.file_alignment_token,
+        $.file_format_token,
+        $.file_link_token,
+        $.file_alt_token,
+        seq($._file_caption_token, $.file_caption),
       ),
 
-    file_alignment: ($) => /left|right|center|none/,
-
-    file_format: ($) => prec(4, /thumb|thumbnail|frame|frameless|border/),
-
-    file_link_option: ($) =>
-      seq(
-        "link=",
-        optional(field("target", alias($.wikilink_page, $.link_target))),
-      ),
-
-    file_alt_text: ($) =>
-      seq("alt=", field("alt", alias(repeat1($.text), $.alt_text))),
-
+    file_caption: ($) => repeat1(choice($.text, $.wikilink, $._newline)),
     external_link: ($) =>
       choice(
         seq(

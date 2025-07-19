@@ -811,37 +811,42 @@
       }
     },
     "_file_option": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "file_size"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "file_alignment"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "file_format"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "file_link_option"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "file_alt_text"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "file_caption"
-          }
-        ]
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "file_size_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file_alignment_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file_format_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file_link_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file_alt_token"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_file_caption_token"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file_caption"
+            }
+          ]
+        }
+      ]
     },
     "file_caption": {
       "type": "REPEAT1",
@@ -862,108 +867,6 @@
           }
         ]
       }
-    },
-    "file_size": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\dpx"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\dx\\dpx"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "upright"
-          },
-          "named": true,
-          "value": "upright_option"
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "upright=\\d*\\.?\\d"
-          }
-        }
-      ]
-    },
-    "file_alignment": {
-      "type": "PATTERN",
-      "value": "left|right|center|none"
-    },
-    "file_format": {
-      "type": "PREC",
-      "value": 4,
-      "content": {
-        "type": "PATTERN",
-        "value": "thumb|thumbnail|frame|frameless|border"
-      }
-    },
-    "file_link_option": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "link="
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "target",
-              "content": {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "wikilink_page"
-                },
-                "named": true,
-                "value": "link_target"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "file_alt_text": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "alt="
-        },
-        {
-          "type": "FIELD",
-          "name": "alt",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "text"
-              }
-            },
-            "named": true,
-            "value": "alt_text"
-          }
-        }
-      ]
     },
     "external_link": {
       "type": "CHOICE",
@@ -3045,6 +2948,30 @@
     {
       "type": "SYMBOL",
       "name": "_media_link_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "file_size_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "file_alignment_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "file_format_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "file_link_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "file_alt_token"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_file_caption_token"
     }
   ],
   "inline": [],

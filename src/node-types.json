@@ -1,20 +1,5 @@
 [
   {
-    "type": "alt_text",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "bold",
     "named": true,
     "fields": {
@@ -383,22 +368,6 @@
     }
   },
   {
-    "type": "file_alt_text",
-    "named": true,
-    "fields": {
-      "alt": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "alt_text",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "file_caption",
     "named": true,
     "fields": {},
@@ -412,42 +381,6 @@
         },
         {
           "type": "wikilink",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "file_format",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "file_link_option",
-    "named": true,
-    "fields": {
-      "target": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "link_target",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "file_size",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "upright_option",
           "named": true
         }
       ]
@@ -1440,33 +1373,6 @@
     }
   },
   {
-    "type": "link_target",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "namespace_separator",
-          "named": true
-        },
-        {
-          "type": "page_name_segment",
-          "named": true
-        },
-        {
-          "type": "section_separator",
-          "named": true
-        },
-        {
-          "type": "template",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "list",
     "named": true,
     "fields": {},
@@ -1592,11 +1498,11 @@
       "required": false,
       "types": [
         {
-          "type": "file_alignment",
+          "type": "file_alignment_token",
           "named": true
         },
         {
-          "type": "file_alt_text",
+          "type": "file_alt_token",
           "named": true
         },
         {
@@ -1604,15 +1510,15 @@
           "named": true
         },
         {
-          "type": "file_format",
+          "type": "file_format_token",
           "named": true
         },
         {
-          "type": "file_link_option",
+          "type": "file_link_token",
           "named": true
         },
         {
-          "type": "file_size",
+          "type": "file_size_token",
           "named": true
         }
       ]
@@ -2461,10 +2367,6 @@
     "named": false
   },
   {
-    "type": "alt=",
-    "named": false
-  },
-  {
     "type": "comment",
     "named": true
   },
@@ -2477,7 +2379,23 @@
     "named": true
   },
   {
-    "type": "file_alignment",
+    "type": "file_alignment_token",
+    "named": true
+  },
+  {
+    "type": "file_alt_token",
+    "named": true
+  },
+  {
+    "type": "file_format_token",
+    "named": true
+  },
+  {
+    "type": "file_link_token",
+    "named": true
+  },
+  {
+    "type": "file_size_token",
     "named": true
   },
   {
@@ -2503,10 +2421,6 @@
   {
     "type": "lbrace_literal",
     "named": true
-  },
-  {
-    "type": "link=",
-    "named": false
   },
   {
     "type": "list_marker",
@@ -2558,10 +2472,6 @@
   },
   {
     "type": "template_name_part",
-    "named": true
-  },
-  {
-    "type": "upright_option",
     "named": true
   },
   {
