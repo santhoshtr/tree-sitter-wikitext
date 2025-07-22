@@ -172,7 +172,7 @@ module.exports = grammar({
         $.paragraph, // Must be low precedence
         $._blank_line, // Consumes blank lines separating blocks
       ),
-    _blank_line: ($) => /\n\s*\n/,
+    _blank_line: ($) => /\n\s*\n?/,
 
     // ==== Text and Inline Content ====
     _inline_content: ($) =>
