@@ -1,9 +1,7 @@
 ============================
 Sample paragraph from Simple wikipedia
 ============================
-
 The '''ergosphere''' is a place just outside the [[event horizon]] of a [[black hole]]. Its name was given by Remo Ruffini and [[John Archibald Wheeler]] in 1971 and is gotten from the Greek word ἔργον (ergon), which means "work". It got its name because it is possible to get [[energy]] and even [[mass]] from this place. In this place, it's impossible to stay in one place because of "[[frame-dragging]]." According to [[general relativity]], anything that spins will twist the [[spacetime]] around it. This is frame dragging. So, near a [[Rotation|rotating]] black hole, things start spin around it. For a spinning black hole, frame-dragging is so strong that to stay in one place, you'd have to move backward faster than the [[speed of light]], which is impossible.<ref>{{Cite book|title=Spacetime and geometry: an introduction to general relativity|last=Carroll|first=Sean M.|date=1973|publisher=Addison-Wesley|isbn=978-0-8053-8732-2|edition=Nachdr.|location=San Francisco Munich}}</ref>
-
 --------------------------------------------------------------------------------
 
 (source_file
@@ -32,9 +30,6 @@ The '''ergosphere''' is a place just outside the [[event horizon]] of a [[black 
       (wikilink_page
         (page_name_segment)))
     (text)
-    (punctuations
-      (single_quote))
-    (text)
     (wikilink
       (wikilink_page
         (page_name_segment)))
@@ -52,56 +47,35 @@ The '''ergosphere''' is a place just outside the [[event horizon]] of a [[black 
         (page_name_segment))
       (page_name_segment))
     (text)
-    (punctuations
-      (single_quote))
-    (text)
     (wikilink
       (wikilink_page
         (page_name_segment)))
     (text)
-    (html_inline_tag
-      (html_tag_name)
-      (template
-        (template_name
-          (template_name_part))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text)))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text)))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text)))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text)))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text)))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text)))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text)))
-        (template_argument
-          (template_param_value
-            (text))
-          (template_param_value
-            (text))))
-      (tag_name_closing))))
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_value
+          (text))))
+    (text)))

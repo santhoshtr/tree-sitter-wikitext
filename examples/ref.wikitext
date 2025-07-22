@@ -1,0 +1,2 @@
+Some ref <ref>{{Cite book|title=Spacetime and geometry: an introduction to general relativity|last=Carroll|first=Sean M.|date=1973|publisher=Addison-Wesley|isbn=978-0-8053-8732-2|edition=Nachdr.|location=San Francisco Munich}}</ref>
+

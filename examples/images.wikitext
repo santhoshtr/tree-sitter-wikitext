@@ -1,0 +1,2 @@
+[[File:filename.extension|options|caption]]
+[[File:filename.png|options|caption]]

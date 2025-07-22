@@ -1,0 +1,17 @@
+[[Title]]
+
+[[Title|Display text]]
+
+
+[[File:Kim Clijsters 2006.jpg]]
+
+[[File:Kim Clijsters 2006.jpg|thumb|left|Kim Clijsters was WTA Awards|WTA Player of the Year in 2005 and 2010]]
+
+[[File:Kim Clijsters 2006.jpg|thumb|left|[[Kim Clijsters was WTA Awards|WTA Player of the Year in 2005 and 2010]]]]
+[[File:Example.jpg|thumb|right|200px|alt=An example image|This is the caption]]
+[[Image:Logo.png|left|150px]]
+[[Media:Document.pdf|Download the PDF]]
+[[File:Animation.gif|frameless|center|link=Main Page]]
+
+[[File:Ann Dunham with father and children.jpg|thumb|left|Obama (right) with grandfather [[Stanley Armour Dunham]], mother [[Ann Dunham]], and half-sister [[Maya Soetoro-Ng|Maya Soetoro]], mid-1970s in [[Honolulu]]|alt=Photo of a young Obama sitting on grass with his grandfather, mother, and half-sister.]]
+

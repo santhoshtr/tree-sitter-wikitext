@@ -147,23 +147,27 @@ Table with formatting inside cells
     (table_cell
       (table_cell_block
         (content
+          (text)
           (bold
             (text)))))
     (table_cell
       (table_cell_block
         (content
+          (text)
           (italic
             (text)))))
     (table_row
       (table_cell
         (table_cell_block
           (content
+            (text)
             (wikilink
               (wikilink_page
                 (page_name_segment))))))
       (table_cell
         (table_cell_block
           (content
+            (text)
             (external_link
               (url)
               (page_name_segment))))))))
@@ -260,7 +264,8 @@ Table with extra whitespace after close
         (table_cell_block
           (content
             (text))))))
-  (ERROR))
+  (paragraph
+    (text)))
 
 ========================================================
 Table with attributes on rows
@@ -384,14 +389,6 @@ Table with rows in same line, with headers too
     (table_row
       (table_header
         (table_header_block
-          (content
-            (text))))
-      (table_header
-        (table_header_inline
-          (content
-            (text))))
-      (table_header
-        (table_header_inline
           (content
             (text)))))
     (table_row

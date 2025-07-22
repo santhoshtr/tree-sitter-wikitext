@@ -1,0 +1,151 @@
+================================================================================
+Simple File link
+================================================================================
+
+[[File:Kim Clijsters 2006.jpg]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename))))
+
+================================================================================
+File link with several attributes
+================================================================================
+
+[[File:Kim Clijsters 2006.jpg|thumb|left|Kim Clijsters was WTA Awards|WTA Player of the Year in 2005 and 2010]]
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename)
+      (file_format_token)
+      (file_alignment_token)
+      (file_caption
+        (text))
+      (file_caption
+        (text)))))
+
+================================================================================
+File link with caption as link
+================================================================================
+
+[[File:Kim Clijsters 2006.jpg|thumb|left|[[Kim Clijsters was WTA Awards|WTA Player of the Year in 2005 and 2010]]]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename)
+      (file_format_token)
+      (file_alignment_token)
+      (file_caption
+        (wikilink
+          (wikilink_page
+            (page_name_segment))
+          (page_name_segment))))))
+
+================================================================================
+File link with alt=
+================================================================================
+
+[[File:Example.jpg|thumb|right|200px|alt=An example image|This is the caption]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename)
+      (file_format_token)
+      (file_alignment_token)
+      (file_size_token)
+      (file_alt_token)
+      (file_caption
+        (text)))))
+
+================================================================================
+Image with alignment and size attributes
+================================================================================
+
+[[Image:Logo.png|left|150px]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename)
+      (file_alignment_token)
+      (file_size_token))))
+
+================================================================================
+Media with caption
+================================================================================
+
+[[Media:Document.pdf|Download the PDF]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename)
+      (file_caption
+        (text)))))
+
+================================================================================
+File with link=attribute
+================================================================================
+
+[[File:Animation.gif|frameless|center|link=Main Page]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename)
+      (file_format_token)
+      (file_alignment_token)
+      (file_caption
+        (text)))))
+
+================================================================================
+File with long and complex caption
+================================================================================
+
+[[File:Ann Dunham with father and children.jpg|thumb|left|Obama (right) with grandfather [[Stanley Armour Dunham]], mother [[Ann Dunham]], and half-sister [[Maya Soetoro-Ng|Maya Soetoro]], mid-1970s in [[Honolulu]]|alt=Photo of a young Obama sitting on grass with his grandfather, mother, and half-sister.]]
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (medialink
+      (filename)
+      (file_format_token)
+      (file_alignment_token)
+      (file_caption
+        (text)
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))
+        (text)
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))
+        (text)
+        (wikilink
+          (wikilink_page
+            (page_name_segment))
+          (page_name_segment))
+        (text)
+        (wikilink
+          (wikilink_page
+            (page_name_segment))))
+      (file_alt_token))))

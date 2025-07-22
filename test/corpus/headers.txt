@@ -236,14 +236,14 @@ Header with Special Characters
       (text)
       (heading_marker))))
 
-==================
+===============================
 Header at the End of Document
-==================
+===============================
 
 Some text.
 == Header at End ==
 
----
+------------------------------
 
 (source_file
   (paragraph

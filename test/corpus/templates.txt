@@ -15,7 +15,6 @@ Basic template
 ==================
 Template with unnamed parameters
 ==================
-
 {{Template|parameter1|parameter2}}
 
 ---
@@ -47,12 +46,8 @@ Template with named parameters
         (template_name_part))
       (template_argument
         (template_param_value
-          (text))
-        (template_param_value
           (text)))
       (template_argument
-        (template_param_value
-          (text))
         (template_param_value
           (text))))))
 
@@ -73,8 +68,6 @@ Template with mixed parameters
         (template_param_value
           (text)))
       (template_argument
-        (template_param_value
-          (text))
         (template_param_value
           (text))))))
 
@@ -114,8 +107,6 @@ Template with internal link in parameter value
         (template_name_part))
       (template_argument
         (template_param_value
-          (text))
-        (template_param_value
           (text)
           (wikilink
             (wikilink_page
@@ -128,7 +119,7 @@ Templates with complex content
 
 {{Template|This is text with '''bold''' and ''italic'' content}}
 
----
+---------------------------------------------------
 
 (source_file
   (paragraph
@@ -209,8 +200,6 @@ Multiple templates
         (template_name_part))
       (template_argument
         (template_param_value
-          (text))
-        (template_param_value
           (text))))))
 
 =====================================
@@ -228,16 +217,10 @@ Template with name having space in it
         (template_name_part))
       (template_argument
         (template_param_value
-          (text))
-        (template_param_value
           (text)))
       (template_argument
         (template_param_value
-          (text))
-        (template_param_value
           (text)))
       (template_argument
-        (template_param_value
-          (text))
         (template_param_value
           (text))))))

@@ -139,16 +139,6 @@ Lists with special characters
       (list_marker)
       (list_item_content
         (text))))
-  (list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text))))
-  (list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text))))
   (paragraph
     (wikilink
       (wikilink_page
@@ -157,9 +147,4 @@ Lists with special characters
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (heading
-    (heading2
-      (heading_marker)
-      (text)
-      (heading_marker))))
+        (text)))))

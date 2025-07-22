@@ -1,21 +1,20 @@
 ================================================================================
 Basic comments
 ================================================================================
-
-<!-- This is a comment -->
+<!-- This is a * comment -->
 Text outside comment
 <!-- Multi-line
      comment that spans
      several lines -->
 Text after multi-line comment
-
 --------------------------------------------------------------------------------
 
 (source_file
   (paragraph
     (comment))
   (paragraph
-    (text)
+    (text))
+  (paragraph
     (comment))
   (paragraph
     (text)))
@@ -38,25 +37,25 @@ Text between comments
 ================================================================================
 Comments with special characters
 ================================================================================
-
 <!-- Comment with * bold * markup -->
 <!-- Comment with [[ links ]] -->
 <!-- Comment with == headings == -->
 <!-- Comment with {| table |} syntax -->
-
 --------------------------------------------------------------------------------
 
 (source_file
   (paragraph
-    (comment)
-    (comment)
-    (comment)
+    (comment))
+  (paragraph
+    (comment))
+  (paragraph
+    (comment))
+  (paragraph
     (comment)))
 
 ================================================================================
 Comments within other elements
 ================================================================================
-
 == Heading <!-- with comment --> ==
 * List item <!-- comment in list -->
 * Second item
@@ -91,18 +90,17 @@ Text paragraph <!-- inline comment --> with comment.
 ================================================================================
 Comments at file boundaries
 ================================================================================
-
 <!-- Comment at the start -->
 Text in middle
 <!-- Comment at the end -->
-
 --------------------------------------------------------------------------------
 
 (source_file
   (paragraph
     (comment))
   (paragraph
-    (text)
+    (text))
+  (paragraph
     (comment)))
 
 ================================================================================

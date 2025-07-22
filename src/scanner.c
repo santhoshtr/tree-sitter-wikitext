@@ -373,15 +373,13 @@ static bool scan_inline_text_base(TSLexer *lexer) {
     if (lexer->lookahead == '[') {
       // Check if this is [[ (wikilink) or [ (external link)
       // This is [, check if it has matching ]
-      if (has_matching_brackets(lexer)) {
-        // Has matching ], so this should be handled as wikilink
-        break;
-      }
+      // if (has_matching_brackets(lexer)) {
+      // Has matching ], so this should be handled as wikilink
+      break;
+      //}
     }
     if (lexer->lookahead == ']') {
-      if (consume_string("]]", lexer)) {
-        break;
-      }
+      break;
     }
 
     if (lexer->lookahead == '{') {
@@ -456,14 +454,14 @@ static bool scan_inline_text_base(TSLexer *lexer) {
   return false;
 }
 // Scan for link opening patterns
-static bool scan_media_link_token(TSLexer *lexer) {
+static bool is_media_link_token(TSLexer *lexer) {
+  // NOTE: At this point '[[' check passed
   // Check for "File:" or "Image:" or "Media:"
   if (lexer->lookahead == 'F') {
     if (consume_string("File", lexer)) {
       advance(lexer); // Skip ':'
       return true;
     }
-    printf("File not found\n");
     return false;
   }
 
@@ -488,8 +486,17 @@ static bool scan_media_link_token(TSLexer *lexer) {
   return false;
 }
 
-static bool scan_wiki_link_token(TSLexer *lexer) {
-  return consume_string("[[", lexer);
+// Check if the lexer at current position can scan a wikilink_opening.
+static bool is_wiki_link_open_token(TSLexer *lexer) {
+  if (lexer->lookahead == '[') {
+    advance(lexer);
+
+    if (lexer->lookahead == '[') {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 // Add this function before tree_sitter_wikitext_external_scanner_scan
@@ -505,10 +512,10 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     printf("WIKI_LINK_TOKEN, ");
   }
   if (valid_symbols[MEDIA_LINK_TOKEN]) {
-    printf("MEDIA_LINK_TOKEN,");
+    printf("MEDIA_LINK_TOKEN, ");
   }
   if (valid_symbols[FILE_LINK_TOKEN]) {
-    printf("FILE_LINK_TOKEN,");
+    printf("FILE_LINK_TOKEN, ");
   }
   if (valid_symbols[FILE_ALIGNMENT_TOKEN]) {
     printf("FILE_ALIGNMENT_TOKEN,");
@@ -527,7 +534,7 @@ static void dump_valid_symbols(const bool *valid_symbols) {
 
 bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
                                                 const bool *valid_symbols) {
-  // dump_valid_symbols(valid_symbols);
+  /* dump_valid_symbols(valid_symbols); */
   // Handle file options in priority order (most specific first)
   if (valid_symbols[FILE_SIZE_TOKEN] && scan_file_size(lexer)) {
     return true;
@@ -553,19 +560,19 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
   if (valid_symbols[FILE_CAPTION_TOKEN] && scan_file_caption(lexer)) {
     return true;
   }
-
   switch (lexer->lookahead) {
   case '[':
     if (valid_symbols[MEDIA_LINK_TOKEN] || valid_symbols[WIKI_LINK_TOKEN]) {
       bool found_link = false;
+      // This is zero width token.
       lexer->mark_end(lexer);
-      if (valid_symbols[WIKI_LINK_TOKEN] && scan_wiki_link_token(lexer)) {
+      if (valid_symbols[WIKI_LINK_TOKEN] && is_wiki_link_open_token(lexer)) {
         lexer->result_symbol = WIKI_LINK_TOKEN;
         found_link = true;
       }
+      advance(lexer);
       if (found_link && valid_symbols[MEDIA_LINK_TOKEN] &&
-          scan_media_link_token(lexer)) {
-
+          is_media_link_token(lexer)) {
         lexer->result_symbol = MEDIA_LINK_TOKEN;
         return true;
       }

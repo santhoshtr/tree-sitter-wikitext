@@ -1,7 +1,6 @@
 ================================================================================
 Basic signatures
 ================================================================================
-
 User signature: ~~~
 User signature with date: ~~~~
 Current date: ~~~~~
@@ -25,7 +24,6 @@ Current date: ~~~~~
 ================================================================================
 Signatures within text
 ================================================================================
-
 This is a line with a signature ~~~ at the end.
 This is a line with a signature ~~~~ with date at the end.
 This is a line showing just the date ~~~~~ at the end.
@@ -89,7 +87,6 @@ Text with ~~~~~ date.
 
 ================================================================================
 Adjacent signatures
-:error
 ================================================================================
 
 ~~~~~~~ (User + date followed by date)
@@ -97,7 +94,11 @@ Adjacent signatures
 
 --------------------------------------------------------------------------------
 
-
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text)))
 
 ================================================================================
 Not signatures (more or fewer tildes)

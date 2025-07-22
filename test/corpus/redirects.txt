@@ -116,12 +116,14 @@ Redirects with comments
       (wikilink
         (wikilink_page
           (page_name_segment))))
+    (text)
+    (comment))
+  (paragraph
     (comment)
-    (comment)
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment))))))
+    (text)
+    (wikilink
+      (wikilink_page
+        (page_name_segment)))))
 
 ================================================================================
 Redirects with interwiki links

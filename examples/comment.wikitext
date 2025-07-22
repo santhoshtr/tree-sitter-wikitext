@@ -1,9 +1,12 @@
-<!-- This is a comment -->
+some <b>
+s [[link]]
+<!-- This is a * comment -->
+Text outside | comment
+<!-- Multi-line
+     comment that spans
+     several lines -->
+Text after multi-line < comment <ref> sds <ref>
 
-And some text after that
+This comment is closed <!-- what to do then? --> 
+This comment is not closed <!-- what to do then? 
 
-
-<!-- This is a > comment -->
-
-Some more text <!-- multi-line
-comment with - dashes -- and > stuff -->

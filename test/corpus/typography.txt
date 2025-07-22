@@ -22,7 +22,6 @@ Basic typography formatting
 ================================================================================
 Mixed formatting
 ================================================================================
-
 Normal '''bold''' normal
 Normal ''italic'' normal
 '''Bold with ''italic'' inside'''

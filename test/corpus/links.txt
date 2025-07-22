@@ -182,9 +182,8 @@ File Link
 
 (source_file
   (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+    (medialink
+      (filename))))
 
 ==================
 Image Link with Parameters
@@ -196,10 +195,12 @@ Image Link with Parameters
 
 (source_file
   (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment))
-      (page_name_segment))))
+    (medialink
+      (filename)
+      (file_format_token)
+      (file_alt_token)
+      (file_caption
+        (text)))))
 
 ==================
 Interwiki Link

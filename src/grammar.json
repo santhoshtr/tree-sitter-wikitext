@@ -52,7 +52,7 @@
     },
     "_blank_line": {
       "type": "PATTERN",
-      "value": "\\n\\s*\\n"
+      "value": "\\n\\s*\\n?"
     },
     "_inline_content": {
       "type": "CHOICE",
