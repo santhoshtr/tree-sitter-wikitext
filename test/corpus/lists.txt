@@ -9,17 +9,15 @@ Basic unordered lists
 --------------------------------------------------------------------------------
 
 (source_file
-  (list
+  (unordered_list
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (unordered_list_item
       (list_marker)
       (list_item_content
@@ -27,32 +25,30 @@ Basic unordered lists
 
 ================================================================================
 Nested unordered lists
+:error
 ================================================================================
 
 * Item 1
-  * Subitem 1.1
-  * Subitem 1.2
+** Subitem 1.1
+** Subitem 1.2
 * Item 2
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (list
+  (unordered_list
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (unordered_list_item
       (list_marker)
       (list_item_content
@@ -69,17 +65,15 @@ Basic ordered lists
 --------------------------------------------------------------------------------
 
 (source_file
-  (list
+  (ordered_list
     (ordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (ordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (ordered_list_item
       (list_marker)
       (list_item_content
@@ -87,32 +81,27 @@ Basic ordered lists
 
 ================================================================================
 Mixed ordered and unordered lists
+:error
 ================================================================================
 
 # Item 1
-  * Subitem 1.1
-  * Subitem 1.2
+#* Subitem 1.1
+#* Subitem 1.2
 # Item 2
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (list
+  (ordered_list
     (ordered_list_item
       (list_marker)
       (list_item_content
         (text))))
-  (list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text))))
-  (list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text))))
-  (list
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (ordered_list
     (ordered_list_item
       (list_marker)
       (list_item_content
@@ -129,22 +118,130 @@ Lists with special characters
 --------------------------------------------------------------------------------
 
 (source_file
-  (list
+  (unordered_list
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (list
+        (text)))
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment))))
-  (list
+        (text)
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))
     (unordered_list_item
       (list_marker)
       (list_item_content
         (text)))))
+
+============================================================
+Definition list
+:error
+============================================================
+; Definition lists
+; term : definition
+; semicolon plus term
+: colon plus definition
+-------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text)))
+
+=======================================
+Mixed definitions list
+:error
+=======================================
+; Mixed definition lists
+; item 1 : definition
+:; sub-item 1 plus term
+:: two colons plus definition
+:; sub-item 2 : colon plus definition
+; item 2 
+: back to the main list
+-----------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text)))
+
+===========================================================================
+Complex nesting or ordered and unordered items
+:error
+===========================================================================
+
+* Or create mixed lists
+*# and nest them
+*#* like this
+*#*; definitions
+*#*: work:
+*#*; apple
+*#*; banana
+*#*: fruits
+---------------------------------------------
+
+(source_file
+  (unordered_list_item
+    (list_marker)
+    (list_item_content
+      (text))
+    (list_marker
+      (ordered_list
+        (ordered_list_item
+          (list_marker)
+          (list_item_content
+            (text)))
+        (list_marker
+          (list_marker
+            (unordered_list_item
+              (list_marker)
+              (list_item_content
+                (text))
+              (list_marker
+                (list_marker
+                  (unordered_list_item
+                    (list_marker)
+                    (list_item_content
+                      (text))
+                    (list_marker
+                      (list_marker
+                        (unordered_list_item
+                          (list_marker)
+                          (list_item_content
+                            (text))
+                          (list_marker
+                            (list_marker
+                              (unordered_list_item
+                                (list_marker)
+                                (list_item_content
+                                  (text))
+                                (list_marker
+                                  (list_marker
+                                    (unordered_list_item
+                                      (list_marker)
+                                      (list_item_content
+                                        (text))
+                                      (list_marker
+                                        (list_marker
+                                          (list_marker
+                                            (list_item_content
+                                              (text))

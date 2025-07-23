@@ -66,15 +66,13 @@ Text with ~~~~~ date.
       (heading_marker)
       (text)
       (heading_marker)))
-  (list
+  (unordered_list
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (paragraph
-    (signature
-      (user_signature_with_date)))
-  (list
+        (text)
+        (signature
+          (user_signature_with_date))))
     (unordered_list_item
       (list_marker)
       (list_item_content
@@ -102,7 +100,6 @@ Adjacent signatures
 
 ================================================================================
 Not signatures (more or fewer tildes)
-:error
 ================================================================================
 
 Text with ~~ not a signature
@@ -110,4 +107,8 @@ Text with ~~~~~~ not a signature
 
 --------------------------------------------------------------------------------
 
-
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text)))

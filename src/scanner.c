@@ -428,11 +428,17 @@ static bool scan_inline_text_base(TSLexer *lexer) {
             }
         }
         // Do not allow these chars if they are at beginning of text.
-        if ((lexer->lookahead == '*' || lexer->lookahead == '#') &&
+        if ((lexer->lookahead == '*' || lexer->lookahead == '#' ||
+             lexer->lookahead == ';' || lexer->lookahead == ':') &&
             char_index == 0) {
             // should be handled separately
             break;
         }
+        /* if (lexer->lookahead == ':' && char_index > 0) {
+             break;
+        }
+        */
+
         if (lexer->lookahead == '<') {
             if (consume_string("<!--", lexer)) {
                 break;

@@ -164,7 +164,7 @@ module.exports = grammar({
       choice(
         $.heading,
         $.horizontal_rule,
-        $.list,
+        $._list,
         $.preformatted_block,
         $.table,
         $.html_block_tag, // HTML known to be block-level
@@ -523,22 +523,7 @@ module.exports = grammar({
         ),
       ),
     // ==== Lists ====
-    list: ($) =>
-      prec.left(
-        repeat1(
-          choice(
-            $.unordered_list_item,
-            $.ordered_list_item,
-            $.definition_term,
-            $.definition_data,
-          ),
-        ),
-      ),
-
-    _list_item_prefix_unordered: ($) => /\*+/,
-    _list_item_prefix_ordered: ($) => /#+/,
-    _list_item_prefix_definition_term: ($) => /;+/,
-    _list_item_prefix_definition_data: ($) => /:+/,
+    _list: ($) => choice($.unordered_list, $.ordered_list, $.definition_list),
 
     // Content of a list item can be complex, including nested lists or paragraphs
     list_item_content: ($) =>
@@ -546,48 +531,52 @@ module.exports = grammar({
         repeat1(
           choice(
             $._inline_content, // Inline content directly
-            $.list, // Nested list
-            // A paragraph node could also be here if list items can span multiple lines forming paragraphs
+            $._list, // Nested list
           ),
         ),
       ),
 
+    unordered_list: ($) => prec.right(repeat1($.unordered_list_item)),
     unordered_list_item: ($) =>
-      prec.left(
+      prec.right(
         seq(
-          alias($._list_item_prefix_unordered, $.list_marker),
+          alias("*", $.list_marker),
           field("content", $.list_item_content),
-          optional($._newline), // Items are typically one per line
+          $._newline, // Items are typically one per line
         ),
       ),
+    ordered_list: ($) => prec.right(repeat1($.ordered_list_item)),
     ordered_list_item: ($) =>
-      prec.left(
+      prec.right(
         seq(
-          alias($._list_item_prefix_ordered, $.list_marker),
+          alias("#", $.list_marker),
           field("content", $.list_item_content),
-          optional($._newline),
+          $._newline,
         ),
       ),
-    definition_term: ($) =>
-      prec.left(
+    definition_list: ($) =>
+      prec.right(repeat1(choice($.definition_list_item, $.definition_data))),
+    definition_list_item: ($) =>
+      prec.right(
         seq(
-          alias($._list_item_prefix_definition_term, $.list_marker),
+          alias(";", $.list_marker),
           field("term", $.list_item_content),
           optional(
             seq(
-              alias($._list_item_prefix_definition_data, $.list_marker), // term can be followed by data on same line
+              alias(":", $.list_marker),
               field("data", $.list_item_content),
+              optional($._newline),
             ),
           ),
-          optional($._newline),
+          $._newline,
         ),
       ),
     definition_data: ($) =>
-      prec.left(
+      prec.right(
         seq(
-          alias($._list_item_prefix_definition_data, $.list_marker),
+          alias(":", $.list_marker),
           field("data", $.list_item_content),
-          optional($._newline),
+          $._newline,
         ),
       ),
 

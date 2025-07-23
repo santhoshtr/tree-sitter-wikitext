@@ -269,7 +269,6 @@ Table with extra whitespace after close
 
 ========================================================
 Table with attributes on rows
-:error
 ========================================================
 
 {| class="wikitable"
@@ -288,7 +287,64 @@ Table with attributes on rows
 
 -----------------------------------------------------------------
 
-(source_file)
+(source_file
+  (table
+    (table_attribute
+      (html_attribute_name)
+      (html_attribute_value))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
+    (table_cell
+      (table_cell_block
+        (content
+          (text))))
+    (table_row
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))
+    (table_row
+      (table_attribute
+        (html_attribute_name)
+        (html_attribute_value))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text))))
+      (table_cell
+        (table_cell_block
+          (content
+            (text)))))))
 
 ===============================
 Table with rows in same line

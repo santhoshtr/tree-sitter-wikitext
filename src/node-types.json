@@ -268,7 +268,26 @@
     }
   },
   {
-    "type": "definition_term",
+    "type": "definition_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "definition_data",
+          "named": true
+        },
+        {
+          "type": "definition_list_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "definition_list_item",
     "named": true,
     "fields": {
       "data": {
@@ -855,6 +874,10 @@
             "named": true
           },
           {
+            "type": "definition_list",
+            "named": true
+          },
+          {
             "type": "entity",
             "named": true
           },
@@ -891,10 +914,6 @@
             "named": true
           },
           {
-            "type": "list",
-            "named": true
-          },
-          {
             "type": "magic_word",
             "named": true
           },
@@ -904,6 +923,10 @@
           },
           {
             "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "ordered_list",
             "named": true
           },
           {
@@ -932,6 +955,10 @@
           },
           {
             "type": "text",
+            "named": true
+          },
+          {
+            "type": "unordered_list",
             "named": true
           },
           {
@@ -993,6 +1020,10 @@
             "named": true
           },
           {
+            "type": "definition_list",
+            "named": true
+          },
+          {
             "type": "entity",
             "named": true
           },
@@ -1029,10 +1060,6 @@
             "named": true
           },
           {
-            "type": "list",
-            "named": true
-          },
-          {
             "type": "magic_word",
             "named": true
           },
@@ -1042,6 +1069,10 @@
           },
           {
             "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "ordered_list",
             "named": true
           },
           {
@@ -1070,6 +1101,10 @@
           },
           {
             "type": "text",
+            "named": true
+          },
+          {
+            "type": "unordered_list",
             "named": true
           },
           {
@@ -1131,6 +1166,10 @@
             "named": true
           },
           {
+            "type": "definition_list",
+            "named": true
+          },
+          {
             "type": "entity",
             "named": true
           },
@@ -1167,10 +1206,6 @@
             "named": true
           },
           {
-            "type": "list",
-            "named": true
-          },
-          {
             "type": "magic_word",
             "named": true
           },
@@ -1180,6 +1215,10 @@
           },
           {
             "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "ordered_list",
             "named": true
           },
           {
@@ -1208,6 +1247,10 @@
           },
           {
             "type": "text",
+            "named": true
+          },
+          {
+            "type": "unordered_list",
             "named": true
           },
           {
@@ -1373,33 +1416,6 @@
     }
   },
   {
-    "type": "list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "definition_data",
-          "named": true
-        },
-        {
-          "type": "definition_term",
-          "named": true
-        },
-        {
-          "type": "ordered_list_item",
-          "named": true
-        },
-        {
-          "type": "unordered_list_item",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "list_item_content",
     "named": true,
     "fields": {},
@@ -1417,6 +1433,10 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "definition_list",
           "named": true
         },
         {
@@ -1440,10 +1460,6 @@
           "named": true
         },
         {
-          "type": "list",
-          "named": true
-        },
-        {
           "type": "magic_word",
           "named": true
         },
@@ -1453,6 +1469,10 @@
         },
         {
           "type": "nowiki_inline_element",
+          "named": true
+        },
+        {
+          "type": "ordered_list",
           "named": true
         },
         {
@@ -1469,6 +1489,10 @@
         },
         {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         },
         {
@@ -1583,6 +1607,21 @@
         },
         {
           "type": "html_tag_open",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ordered_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ordered_list_item",
           "named": true
         }
       ]
@@ -1810,6 +1849,10 @@
       "required": false,
       "types": [
         {
+          "type": "definition_list",
+          "named": true
+        },
+        {
           "type": "heading",
           "named": true
         },
@@ -1826,7 +1869,7 @@
           "named": true
         },
         {
-          "type": "list",
+          "type": "ordered_list",
           "named": true
         },
         {
@@ -1839,6 +1882,10 @@
         },
         {
           "type": "table",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         }
       ]
@@ -2170,6 +2217,21 @@
     "type": "text",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "unordered_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "unordered_list_item",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "unordered_list_item",

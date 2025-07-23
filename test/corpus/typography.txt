@@ -72,22 +72,19 @@ Text with '''bold''' and ''italic'' inline.
       (heading_marker)
       (text)
       (heading_marker)))
-  (list
+  (unordered_list
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (paragraph
-    (bold
-      (text)))
-  (list
+        (text)
+        (bold
+          (text))))
     (unordered_list_item
       (list_marker)
       (list_item_content
-        (text))))
-  (paragraph
-    (italic
-      (text)))
+        (text)
+        (italic
+          (text)))))
   (paragraph
     (text)
     (bold
