@@ -21,3 +21,5 @@ see-templates: gen
     tree-sitter parse --cst examples/templates.wikitext -d| bat
 see-comments: gen
     tree-sitter parse --cst examples/comment.wikitext -d| bat
+see-media: gen
+    tree-sitter parse --cst examples/media.wikitext -d| bat
