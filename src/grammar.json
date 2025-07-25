@@ -2720,6 +2720,10 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "html_content_marker"
+        },
+        {
           "type": "STRING",
           "value": "<"
         },
@@ -2900,6 +2904,10 @@
     {
       "type": "SYMBOL",
       "name": "_template_param_name_value_marker"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "html_content_marker"
     }
   ],
   "inline": [],

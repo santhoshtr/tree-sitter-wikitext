@@ -19,6 +19,7 @@ enum TokenType {
     FILE_CAPTION_TOKEN,
     TEMPLATE_PARAM_VALUE_MARKER,
     TEMPLATE_PARAM_NAME_VALUE_MARKER,
+    HTML_CONTENT_MARKER
 };
 
 void *tree_sitter_wikitext_external_scanner_create() { return NULL; }
@@ -64,6 +65,11 @@ static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
         advance(lexer);
     }
     return count;
+}
+static bool is_valid_html_tag(TSLexer *lexer) {
+    // TODO: Implement as per
+    // https://www.mediawiki.org/wiki/Help:HTML_in_wikitext
+    return true;
 }
 
 static bool scan_file_size(TSLexer *lexer) {
@@ -558,6 +564,9 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     if (valid_symbols[TEMPLATE_PARAM_NAME_VALUE_MARKER]) {
         printf("TEMPLATE_PARAM_VALUE_MARKER");
     }
+    if (valid_symbols[HTML_CONTENT_MARKER]) {
+        printf("HTML_CONTENT_MARKER");
+    }
     printf("\n");
 }
 
@@ -626,6 +635,11 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
         break;
     case '<':
         if (valid_symbols[COMMENT] && scan_comment(lexer)) {
+            lexer->result_symbol = COMMENT;
+            return true;
+        }
+        if (valid_symbols[HTML_CONTENT_MARKER] && is_valid_html_tag(lexer)) {
+            lexer->result_symbol = HTML_CONTENT_MARKER;
             return true;
         }
         break;

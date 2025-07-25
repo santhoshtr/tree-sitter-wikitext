@@ -147,6 +147,7 @@ module.exports = grammar({
     $._file_caption_token,
     $._template_param_value_marker,
     $._template_param_name_value_marker,
+    $.html_content_marker,
   ],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
@@ -779,6 +780,7 @@ module.exports = grammar({
     _html_text: ($) => token(prec(-1, /[^<]+/)),
     html_tag: ($) =>
       seq(
+        $.html_content_marker,
         "<",
         field("name", $.html_tag_name),
         field("attributes", optional($._html_attributes_pattern_no_gt)),
