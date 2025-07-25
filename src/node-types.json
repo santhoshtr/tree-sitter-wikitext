@@ -864,15 +864,11 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
-          "type": "html_content_marker",
-          "named": true
-        },
-        {
-          "type": "tag_name_closing",
+          "type": "html_tag_name",
           "named": true
         }
       ]
@@ -1663,11 +1659,6 @@
     }
   },
   {
-    "type": "tag_name_closing",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "template",
     "named": true,
     "fields": {},
@@ -2061,10 +2052,6 @@
   },
   {
     "type": "html_attribute_name",
-    "named": true
-  },
-  {
-    "type": "html_content_marker",
     "named": true
   },
   {

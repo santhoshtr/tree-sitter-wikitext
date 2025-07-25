@@ -19,7 +19,8 @@ enum TokenType {
     FILE_CAPTION_TOKEN,
     TEMPLATE_PARAM_VALUE_MARKER,
     TEMPLATE_PARAM_NAME_VALUE_MARKER,
-    HTML_CONTENT_MARKER
+    HTML_TAG_OPEN_MARKER,
+    HTML_TAG_CLOSE_MARKER,
 };
 
 void *tree_sitter_wikitext_external_scanner_create() { return NULL; }
@@ -66,10 +67,101 @@ static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
     }
     return count;
 }
-static bool is_valid_html_tag(TSLexer *lexer) {
-    // TODO: Implement as per
-    // https://www.mediawiki.org/wiki/Help:HTML_in_wikitext
-    return true;
+
+static bool is_allowed_html_tag(const char *tag_name) {
+    // List of allowed HTML tags from MediaWiki documentation
+    static const char *allowed_tags[] = {
+        "abbr", "b", "bdi", "bdo", "big", "blockquote", "br", "caption", "cite",
+        "code", "col", "colgroup", "data", "dd", "del", "dfn", "div", "dl",
+        "dt", "em", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "ins", "kbd",
+        "li", "link", "mark", "meta", "ol", "p", "pre", "q", "rp", "rt", "ruby",
+        "s", "samp", "small", "span", "strong", "sub", "sup", "table", "td",
+        "th", "time", "tr", "u", "ul", "var", "wbr",
+        // Deprecated but still allowed tags
+        "center", "font", "rb", "rtc", "strike", "tt",
+        // References
+        "ref", NULL};
+
+    for (int i = 0; allowed_tags[i] != NULL; i++) {
+        if (strcmp(tag_name, allowed_tags[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+static bool is_valid_html_tag(TSLexer *lexer, bool is_closing) {
+    lexer->mark_end(lexer);
+    // Skip whitespace (though not typical in HTML)
+    while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+        advance(lexer);
+    }
+    // Extract tag name
+    char tag_name[32] = {0}; // Maximum reasonable tag name length
+    int tag_len = 0;
+
+    // Tag name must start with a letter
+    if (!((lexer->lookahead >= 'a' && lexer->lookahead <= 'z') ||
+          (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z'))) {
+        return false;
+    }
+
+    // Read tag name (letters, digits, hyphens)
+    while (tag_len < 31 && lexer->lookahead &&
+           ((lexer->lookahead >= 'a' && lexer->lookahead <= 'z') ||
+            (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z') ||
+            (lexer->lookahead >= '0' && lexer->lookahead <= '9') ||
+            lexer->lookahead == '-')) {
+
+        // Convert to lowercase for comparison
+        if (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z') {
+            tag_name[tag_len] = lexer->lookahead + ('a' - 'A');
+        } else {
+            tag_name[tag_len] = lexer->lookahead;
+        }
+        tag_len++;
+        advance(lexer);
+    }
+
+    if (tag_len == 0) {
+        return false;
+    }
+
+    tag_name[tag_len] = '\0';
+
+    // Check if tag is in allowed list
+    if (!is_allowed_html_tag(tag_name)) {
+        return false;
+    }
+
+    // Skip whitespace
+    while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
+           lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+        advance(lexer);
+    }
+
+    // For opening tags, we might have attributes or immediate closing
+    // Skip attributes (simplified - just look for valid characters until >
+    // or />)
+    if (!is_closing) {
+        while (lexer->lookahead && lexer->lookahead != '>' &&
+               lexer->lookahead != '/') {
+            // Very basic attribute parsing - just skip until we find > or />
+            advance(lexer);
+        }
+    }
+    if (is_closing) {
+        // Check for self-closing tag
+        if (lexer->lookahead == '/') {
+            advance(lexer);
+        }
+    }
+
+    if (lexer->lookahead == '>') {
+        return true;
+    }
+
+    return false;
 }
 
 static bool scan_file_size(TSLexer *lexer) {
@@ -564,7 +656,7 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     if (valid_symbols[TEMPLATE_PARAM_NAME_VALUE_MARKER]) {
         printf("TEMPLATE_PARAM_VALUE_MARKER");
     }
-    if (valid_symbols[HTML_CONTENT_MARKER]) {
+    if (valid_symbols[HTML_TAG_OPEN_MARKER]) {
         printf("HTML_CONTENT_MARKER");
     }
     printf("\n");
@@ -610,6 +702,16 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
             return true;
         }
     }
+    if (valid_symbols[HTML_TAG_OPEN_MARKER] &&
+        is_valid_html_tag(lexer, false)) {
+        lexer->result_symbol = HTML_TAG_OPEN_MARKER;
+        return true;
+    }
+    if (valid_symbols[HTML_TAG_CLOSE_MARKER] &&
+        is_valid_html_tag(lexer, true)) {
+        lexer->result_symbol = HTML_TAG_CLOSE_MARKER;
+        return true;
+    }
 
     switch (lexer->lookahead) {
     case '[':
@@ -636,10 +738,6 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
     case '<':
         if (valid_symbols[COMMENT] && scan_comment(lexer)) {
             lexer->result_symbol = COMMENT;
-            return true;
-        }
-        if (valid_symbols[HTML_CONTENT_MARKER] && is_valid_html_tag(lexer)) {
-            lexer->result_symbol = HTML_CONTENT_MARKER;
             return true;
         }
         break;

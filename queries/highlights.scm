@@ -59,6 +59,10 @@
   "|}"
   "["
   "]"
+  "<"
+  ">"
+  "</"
+  "/>"
 ] @punctuation.bracket
 
 [
@@ -88,7 +92,6 @@
 
 (html_tag
   (html_tag_name) @tag
-  (tag_name_closing) @tag
 )
 
 (paragraph

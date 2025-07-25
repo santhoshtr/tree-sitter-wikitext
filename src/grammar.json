@@ -2720,12 +2720,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "html_content_marker"
-        },
-        {
           "type": "STRING",
           "value": "<"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_html_tag_open_marker"
         },
         {
           "type": "FIELD",
@@ -2777,13 +2777,12 @@
                   "value": "</"
                 },
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "html_tag_name"
-                  },
-                  "named": true,
-                  "value": "tag_name_closing"
+                  "type": "SYMBOL",
+                  "name": "_html_tag_close_marker"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "html_tag_name"
                 },
                 {
                   "type": "STRING",
@@ -2907,7 +2906,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "html_content_marker"
+      "name": "_html_tag_open_marker"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_html_tag_close_marker"
     }
   ],
   "inline": [],
