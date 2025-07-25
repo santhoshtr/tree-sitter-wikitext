@@ -173,7 +173,6 @@ module.exports = grammar({
         $._list,
         $.preformatted_block,
         $.table,
-        $.html_tag,
         $.paragraph, // Must be low precedence
         $._blank_line, // Consumes blank lines separating blocks
       ),
@@ -271,7 +270,7 @@ module.exports = grammar({
         $.magic_word,
         $.signature,
         $.redirect,
-        $.html_inline_tag,
+        $.html_tag,
         $.entity,
         $.nowiki_inline_element, // <nowiki>content</nowiki> or <nowiki />
         // Everything else
@@ -334,8 +333,7 @@ module.exports = grammar({
           $.bold,
           $.italic,
           $.bold_italic,
-          $.html_inline_tag,
-          $.html_void_tag,
+          $.html_tag,
           $.nowiki_inline_element,
           // Cannot contain other headings or block elements easily
         ),
@@ -421,8 +419,7 @@ module.exports = grammar({
         $.bold,
         $.italic,
         $.bold_italic,
-        $.html_inline_tag,
-        $.html_void_tag,
+        $.html_tag,
         $.nowiki_inline_element,
         // No nested links easily in display text without complex escape logic
       ),
@@ -476,8 +473,7 @@ module.exports = grammar({
         $.bold,
         $.italic,
         $.bold_italic,
-        $.html_inline_tag,
-        $.html_void_tag,
+        $.html_tag,
         $.nowiki_inline_element,
       ),
 
@@ -781,45 +777,10 @@ module.exports = grammar({
       ),
 
     _html_text: ($) => token(prec(-1, /[^<]+/)),
-
     html_tag: ($) =>
-      prec.dynamic(
-        0,
-        choice(
-          // Generic HTML tag, try to match specific types first
-          $.html_block_tag,
-          $.html_inline_tag,
-          $.html_void_tag,
-        ),
-      ),
-
-    _html_generic_tag: ($) =>
       seq(
         "<",
         field("name", $.html_tag_name),
-        field("attributes", optional($._html_attributes_pattern_no_gt)),
-        choice(
-          seq(
-            ">",
-            field("content", repeat($._html_content)),
-            "</",
-            alias($.html_tag_name, $.tag_name_closing),
-            ">",
-          ), // Matched closing tag
-          "/>", // Self-closing
-        ),
-      ),
-
-    html_block_tag: ($) =>
-      seq(
-        "<",
-        field(
-          "name",
-          alias(
-            token(prec(1, new RegExp(HTML_TAGS_BLOCK.join("|"), "i"))),
-            $.html_tag_name,
-          ),
-        ),
         field("attributes", optional($._html_attributes_pattern_no_gt)),
         choice(
           seq(
@@ -833,43 +794,6 @@ module.exports = grammar({
           // but typically they are not. We allow it for robustness.
           "/>",
         ),
-      ),
-
-    html_inline_tag: ($) =>
-      seq(
-        "<",
-        field(
-          "name",
-          alias(
-            token(prec(1, new RegExp(HTML_TAGS_INLINE.join("|"), "i"))),
-            $.html_tag_name,
-          ),
-        ),
-        field("attributes", optional($._html_attributes_pattern_no_gt)),
-        choice(
-          seq(
-            ">",
-            field("content", repeat($._html_content)),
-            "</",
-            alias($.html_tag_name, $.tag_name_closing),
-            ">",
-          ),
-          "/>",
-        ),
-      ),
-
-    html_void_tag: ($) =>
-      seq(
-        "<",
-        field(
-          "name",
-          alias(
-            token(prec(1, new RegExp(HTML_TAGS_VOID.join("|"), "i"))),
-            $.html_tag_name,
-          ),
-        ),
-        field("attributes", optional($._html_attributes_pattern_no_gt)),
-        choice(">", "/>"), // Void tags can be <tag> or <tag />
       ),
 
     // An entity can be named, numeric (decimal), or numeric (hexacecimal). The

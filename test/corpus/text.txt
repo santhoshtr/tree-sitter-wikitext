@@ -52,7 +52,7 @@ The '''ergosphere''' is a place just outside the [[event horizon]] of a [[black 
         (wikilink_page
           (page_name_segment)))
       (text)
-      (html_inline_tag
+      (html_tag
         (html_tag_name)
         (template
           (template_name

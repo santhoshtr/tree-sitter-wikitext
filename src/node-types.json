@@ -28,7 +28,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -100,7 +100,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -187,7 +187,7 @@
           "named": true
         },
         {
-          "type": "html_inline_tag",
+          "type": "html_tag",
           "named": true
         },
         {
@@ -327,11 +327,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -414,11 +410,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -476,11 +468,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -538,11 +526,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -600,11 +584,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -662,11 +642,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -724,11 +700,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -797,239 +769,115 @@
     "fields": {}
   },
   {
-    "type": "html_block_tag",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "html_attribute",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "bold",
-            "named": true
-          },
-          {
-            "type": "bold_italic",
-            "named": true
-          },
-          {
-            "type": "comment",
-            "named": true
-          },
-          {
-            "type": "entity",
-            "named": true
-          },
-          {
-            "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "italic",
-            "named": true
-          },
-          {
-            "type": "magic_word",
-            "named": true
-          },
-          {
-            "type": "medialink",
-            "named": true
-          },
-          {
-            "type": "nowiki_inline_element",
-            "named": true
-          },
-          {
-            "type": "redirect",
-            "named": true
-          },
-          {
-            "type": "signature",
-            "named": true
-          },
-          {
-            "type": "template",
-            "named": true
-          },
-          {
-            "type": "text",
-            "named": true
-          },
-          {
-            "type": "wikilink",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "html_tag_name",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "tag_name_closing",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "html_inline_tag",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "html_attribute",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "bold",
-            "named": true
-          },
-          {
-            "type": "bold_italic",
-            "named": true
-          },
-          {
-            "type": "comment",
-            "named": true
-          },
-          {
-            "type": "entity",
-            "named": true
-          },
-          {
-            "type": "external_link",
-            "named": true
-          },
-          {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "italic",
-            "named": true
-          },
-          {
-            "type": "magic_word",
-            "named": true
-          },
-          {
-            "type": "medialink",
-            "named": true
-          },
-          {
-            "type": "nowiki_inline_element",
-            "named": true
-          },
-          {
-            "type": "redirect",
-            "named": true
-          },
-          {
-            "type": "signature",
-            "named": true
-          },
-          {
-            "type": "template",
-            "named": true
-          },
-          {
-            "type": "text",
-            "named": true
-          },
-          {
-            "type": "wikilink",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "html_tag_name",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "tag_name_closing",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "html_tag",
     "named": true,
-    "fields": {},
+    "fields": {
+      "attributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": " ",
+            "named": false
+          },
+          {
+            "type": "html_attribute",
+            "named": true
+          }
+        ]
+      },
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "bold",
+            "named": true
+          },
+          {
+            "type": "bold_italic",
+            "named": true
+          },
+          {
+            "type": "comment",
+            "named": true
+          },
+          {
+            "type": "entity",
+            "named": true
+          },
+          {
+            "type": "external_link",
+            "named": true
+          },
+          {
+            "type": "html_tag",
+            "named": true
+          },
+          {
+            "type": "italic",
+            "named": true
+          },
+          {
+            "type": "magic_word",
+            "named": true
+          },
+          {
+            "type": "medialink",
+            "named": true
+          },
+          {
+            "type": "nowiki_inline_element",
+            "named": true
+          },
+          {
+            "type": "redirect",
+            "named": true
+          },
+          {
+            "type": "signature",
+            "named": true
+          },
+          {
+            "type": "template",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          },
+          {
+            "type": "wikilink",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "html_tag_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "html_block_tag",
-          "named": true
-        },
-        {
-          "type": "html_inline_tag",
-          "named": true
-        },
-        {
-          "type": "html_void_tag",
+          "type": "tag_name_closing",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "html_tag_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "html_tag_open",
@@ -1044,36 +892,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "html_void_tag",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "html_attribute",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "html_tag_name",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -1105,7 +923,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -1181,7 +999,7 @@
           "named": true
         },
         {
-          "type": "html_inline_tag",
+          "type": "html_tag",
           "named": true
         },
         {
@@ -1411,7 +1229,7 @@
           "named": true
         },
         {
-          "type": "html_inline_tag",
+          "type": "html_tag",
           "named": true
         },
         {
@@ -1579,10 +1397,6 @@
         },
         {
           "type": "horizontal_rule",
-          "named": true
-        },
-        {
-          "type": "html_tag",
           "named": true
         },
         {
@@ -1944,7 +1758,7 @@
           "named": true
         },
         {
-          "type": "html_inline_tag",
+          "type": "html_tag",
           "named": true
         },
         {
@@ -2049,11 +1863,7 @@
             "named": true
           },
           {
-            "type": "html_inline_tag",
-            "named": true
-          },
-          {
-            "type": "html_void_tag",
+            "type": "html_tag",
             "named": true
           },
           {
@@ -2254,7 +2064,7 @@
     "named": true
   },
   {
-    "type": "html_tag_name",
+    "type": "html_void_tag",
     "named": true
   },
   {
