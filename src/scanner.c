@@ -728,11 +728,9 @@ static bool is_mediawiki_header(TSLexer *lexer) {
 
 static bool scan_inline_text_base(TSLexer *lexer) {
     int text_run_length = 0;
-    int char_index = -1;
 
     lexer->mark_end(lexer);
     while (lexer->lookahead) {
-        char_index++;
         // Check for special sequences that need matching
         if (lexer->lookahead == '[') {
             // Check if this is [[ (wikilink) or [ (external link)
@@ -784,7 +782,8 @@ static bool scan_inline_text_base(TSLexer *lexer) {
             }
         }
 
-        if (lexer->lookahead == '=' && char_index == 0) {
+        uint32_t col_index = lexer->get_column(lexer);
+        if (lexer->lookahead == '=' && col_index == 0) {
             // Check if this forms a MediaWiki header
             if (is_mediawiki_header(lexer)) {
                 // This is a MediaWiki header, should be handled separately
@@ -794,7 +793,7 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         // Do not allow these chars if they are at beginning of text.
         if ((lexer->lookahead == '*' || lexer->lookahead == '#' ||
              lexer->lookahead == ';' || lexer->lookahead == ':') &&
-            char_index == 0) {
+            col_index == 0) {
             // should be handled separately
             break;
         }
