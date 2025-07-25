@@ -7,10 +7,11 @@ Simple Internal Link
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ==================
 Internal Link with Label
@@ -21,11 +22,12 @@ Internal Link with Label
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment))
-      (page_name_segment))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))
+        (page_name_segment)))))
 
 ==================
 Internal Link with Namespace
@@ -36,10 +38,11 @@ Internal Link with Namespace
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ==================
 Internal Link with Namespace and Label
@@ -50,11 +53,12 @@ Internal Link with Namespace and Label
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      target: (wikilink_page
-        (page_name_segment))
-      display: (page_name_segment))))
+  (section
+    (paragraph
+      (wikilink
+        target: (wikilink_page
+          (page_name_segment))
+        display: (page_name_segment)))))
 
 ==================
 Internal Link with Anchor
@@ -65,10 +69,11 @@ Internal Link with Anchor
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ==================
 Internal Link with Anchor and Label
@@ -79,11 +84,12 @@ Internal Link with Anchor and Label
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment))
-      (page_name_segment))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))
+        (page_name_segment)))))
 
 ==================
 External Link (URL only)
@@ -94,9 +100,10 @@ External Link (URL only)
 ---
 
 (source_file
-  (paragraph
-    (external_link
-      (url))))
+  (section
+    (paragraph
+      (external_link
+        (url)))))
 
 ==================
 External Link with Label
@@ -107,10 +114,11 @@ External Link with Label
 ---
 
 (source_file
-  (paragraph
-    (external_link
-      (url)
-      (page_name_segment))))
+  (section
+    (paragraph
+      (external_link
+        (url)
+        (page_name_segment)))))
 
 ==================
 Bare URL
@@ -121,8 +129,9 @@ https://example.com
 ---
 
 (source_file
-  (paragraph
-    (text)))
+  (section
+    (paragraph
+      (text))))
 
 ==================
 Multiple Links
@@ -133,14 +142,15 @@ Multiple Links
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))
-    (text)
-    (external_link
-      (url)
-      (page_name_segment))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))
+      (text)
+      (external_link
+        (url)
+        (page_name_segment)))))
 
 ==================
 Nested Links Syntax (not valid in MediaWiki)
@@ -167,10 +177,11 @@ Category Link
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ==================
 File Link
@@ -181,9 +192,10 @@ File Link
 ---
 
 (source_file
-  (paragraph
-    (medialink
-      (filename))))
+  (section
+    (paragraph
+      (medialink
+        (filename)))))
 
 ==================
 Image Link with Parameters
@@ -194,13 +206,14 @@ Image Link with Parameters
 ---
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_format_token)
-      (file_alt_token)
-      (file_caption
-        (text)))))
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alt_token)
+        (file_caption
+          (text))))))
 
 ==================
 Interwiki Link
@@ -211,10 +224,11 @@ Interwiki Link
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))
 
 ==================
 Link with Subpage
@@ -225,7 +239,8 @@ Link with Subpage
 ---
 
 (source_file
-  (paragraph
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))

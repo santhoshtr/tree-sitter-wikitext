@@ -9,15 +9,16 @@ Basic typography formatting
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (bold
-      (text)))
-  (paragraph
-    (italic
-      (text)))
-  (paragraph
-    (bold_italic
-      (text))))
+  (section
+    (paragraph
+      (bold
+        (text)))
+    (paragraph
+      (italic
+        (text)))
+    (paragraph
+      (bold_italic
+        (text)))))
 
 ================================================================================
 Mixed formatting
@@ -30,28 +31,29 @@ Normal ''italic'' normal
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (text)
-    (bold
-      (text))
-    (text))
-  (paragraph
-    (text)
-    (italic
-      (text))
-    (text))
-  (paragraph
-    (bold
-      (text)
-      (italic
-        (text))
-      (text)))
-  (paragraph
-    (italic
+  (section
+    (paragraph
       (text)
       (bold
         (text))
-      (text))))
+      (text))
+    (paragraph
+      (text)
+      (italic
+        (text))
+      (text))
+    (paragraph
+      (bold
+        (text)
+        (italic
+          (text))
+        (text)))
+    (paragraph
+      (italic
+        (text)
+        (bold
+          (text))
+        (text)))))
 
 ================================================================================
 Typography in other contexts
@@ -67,32 +69,33 @@ Text with '''bold''' and ''italic'' inline.
 --------------------------------------------------------------------------------
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
-      (heading_marker)))
-  (unordered_list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)
-        (bold
-          (text))))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)
-        (italic
-          (text)))))
-  (paragraph
-    (text)
-    (bold
-      (text))
-    (text)
-    (italic
-      (text))
-    (text)))
+      (heading_marker))
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (bold
+            (text))))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (italic
+            (text)))))
+    (paragraph
+      (text)
+      (bold
+        (text))
+      (text)
+      (italic
+        (text))
+      (text))))
 
 ================================================================================
 Unclosed formatting
@@ -104,6 +107,7 @@ Unclosed formatting
 --------------------------------------------------------------------------------
 
 (source_file
+(section
   (ERROR
     (text)
-    (text)))
+    (text))))

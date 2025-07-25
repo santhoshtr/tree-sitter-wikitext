@@ -7,9 +7,10 @@ Simple File link
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename))))
+  (section
+    (paragraph
+      (medialink
+        (filename)))))
 
 ================================================================================
 File link with several attributes
@@ -21,15 +22,16 @@ File link with several attributes
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_format_token)
-      (file_alignment_token)
-      (file_caption
-        (text))
-      (file_caption
-        (text)))))
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alignment_token)
+        (file_caption
+          (text))
+        (file_caption
+          (text))))))
 
 ================================================================================
 File link with caption as link
@@ -40,16 +42,17 @@ File link with caption as link
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_format_token)
-      (file_alignment_token)
-      (file_caption
-        (wikilink
-          (wikilink_page
-            (page_name_segment))
-          (page_name_segment))))))
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alignment_token)
+        (file_caption
+          (wikilink
+            (wikilink_page
+              (page_name_segment))
+            (page_name_segment)))))))
 
 ================================================================================
 File link with alt=
@@ -60,15 +63,16 @@ File link with alt=
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_format_token)
-      (file_alignment_token)
-      (file_size_token)
-      (file_alt_token)
-      (file_caption
-        (text)))))
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alignment_token)
+        (file_size_token)
+        (file_alt_token)
+        (file_caption
+          (text))))))
 
 ================================================================================
 Image with alignment and size attributes
@@ -79,11 +83,12 @@ Image with alignment and size attributes
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_alignment_token)
-      (file_size_token))))
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_alignment_token)
+        (file_size_token)))))
 
 ================================================================================
 Media with caption
@@ -94,11 +99,12 @@ Media with caption
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_caption
-        (text)))))
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_caption
+          (text))))))
 
 ================================================================================
 File with link=attribute
@@ -109,13 +115,14 @@ File with link=attribute
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_format_token)
-      (file_alignment_token)
-      (file_caption
-        (text)))))
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alignment_token)
+        (file_caption
+          (text))))))
 
 ================================================================================
 File with long and complex caption
@@ -125,27 +132,28 @@ File with long and complex caption
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (medialink
-      (filename)
-      (file_format_token)
-      (file_alignment_token)
-      (file_caption
-        (text)
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))
-        (text)
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))
-        (text)
-        (wikilink
-          (wikilink_page
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alignment_token)
+        (file_caption
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))
             (page_name_segment))
-          (page_name_segment))
-        (text)
-        (wikilink
-          (wikilink_page
-            (page_name_segment))))
-      (file_alt_token))))
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))))
+        (file_alt_token)))))

@@ -9,19 +9,20 @@ Basic unordered lists
 --------------------------------------------------------------------------------
 
 (source_file
-  (unordered_list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))))
+  (section
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))))
 
 ================================================================================
 Nested unordered lists
@@ -65,19 +66,20 @@ Basic ordered lists
 --------------------------------------------------------------------------------
 
 (source_file
-  (ordered_list
-    (ordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (ordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (ordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))))
+  (section
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))))
 
 ================================================================================
 Mixed ordered and unordered lists
@@ -118,22 +120,23 @@ Lists with special characters
 --------------------------------------------------------------------------------
 
 (source_file
-  (unordered_list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))))
+  (section
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))))
 
 ============================================================
 Definition list

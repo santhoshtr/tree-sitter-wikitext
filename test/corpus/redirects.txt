@@ -10,26 +10,27 @@ Basic redirects
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment)))))
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment)))))
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment)))))
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment))))))
+  (section
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))))
 
 ================================================================================
 Redirects with namespaces
@@ -42,21 +43,22 @@ Redirects with namespaces
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment)))))
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment)))))
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment))))))
+  (section
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))))
 
 ================================================================================
 Redirects with section links
@@ -68,16 +70,17 @@ Redirects with section links
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment)))))
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment))))))
+  (section
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))))
 
 ================================================================================
 Invalid or malformed redirects
@@ -111,19 +114,20 @@ Redirects with comments
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (redirect
+  (section
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment))))
+      (text)
+      (comment))
+    (paragraph
+      (comment)
+      (text)
       (wikilink
         (wikilink_page
-          (page_name_segment))))
-    (text)
-    (comment))
-  (paragraph
-    (comment)
-    (text)
-    (wikilink
-      (wikilink_page
-        (page_name_segment)))))
+          (page_name_segment))))))
 
 ================================================================================
 Redirects with interwiki links
@@ -135,14 +139,15 @@ Redirects with interwiki links
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (namespace_separator)
-          (page_name_segment)))))
-  (paragraph
-    (redirect
-      (wikilink
-        (wikilink_page
-          (page_name_segment))))))
+  (section
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (namespace_separator)
+            (page_name_segment)))))
+    (paragraph
+      (redirect
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))))))

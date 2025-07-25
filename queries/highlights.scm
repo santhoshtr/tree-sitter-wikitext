@@ -44,7 +44,7 @@
 (template
   (template_name) @module
   (template_argument
-  (template_param_value) @variable.parameter
+  (template_param_name) @tag.attribute
   )
 )
 

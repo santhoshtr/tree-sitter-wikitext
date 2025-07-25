@@ -7,7 +7,8 @@ Level 1 Header
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading1
       (heading_marker)
       (text)
@@ -22,7 +23,8 @@ Level 2 Header
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -37,7 +39,8 @@ Level 3 Header
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading3
       (heading_marker)
       (text)
@@ -52,7 +55,8 @@ Level 4 Header
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading4
       (heading_marker)
       (text)
@@ -67,7 +71,8 @@ Level 5 Header
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading5
       (heading_marker)
       (text)
@@ -82,7 +87,8 @@ Level 6 Header
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading6
       (heading_marker)
       (text)
@@ -97,7 +103,8 @@ Header with Bold Text
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -112,7 +119,8 @@ Header with Italic Text
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -127,7 +135,8 @@ Header with Italic and Bold Text
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -142,7 +151,8 @@ Header with Link
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -157,7 +167,8 @@ Header with Mixed Formatting
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -174,21 +185,22 @@ Multiple Headers
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading1
       (heading_marker)
       (text)
-      (heading_marker)))
-  (heading
-    (heading2
-      (heading_marker)
-      (text)
-      (heading_marker)))
-  (heading
-    (heading3
-      (heading_marker)
-      (text)
-      (heading_marker))))
+      (heading_marker))
+    (section
+      (heading2
+        (heading_marker)
+        (text)
+        (heading_marker))
+      (section
+        (heading3
+          (heading_marker)
+          (text)
+          (heading_marker))))))
 
 ==================
 Header with Extra Spaces
@@ -199,7 +211,8 @@ Header with Extra Spaces
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -230,7 +243,8 @@ Header with Special Characters
 ---
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
@@ -246,9 +260,10 @@ Some text.
 ------------------------------
 
 (source_file
-  (paragraph
-    (text))
-  (heading
+  (section
+    (paragraph
+      (text)))
+  (section
     (heading2
       (heading_marker)
       (text)

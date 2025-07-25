@@ -8,18 +8,19 @@ Current date: ~~~~~
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (text)
-    (signature
-      (user_signature)))
-  (paragraph
-    (text)
-    (signature
-      (user_signature_with_date)))
-  (paragraph
-    (text)
-    (signature
-      (current_date))))
+  (section
+    (paragraph
+      (text)
+      (signature
+        (user_signature)))
+    (paragraph
+      (text)
+      (signature
+        (user_signature_with_date)))
+    (paragraph
+      (text)
+      (signature
+        (current_date)))))
 
 ================================================================================
 Signatures within text
@@ -31,21 +32,22 @@ This is a line showing just the date ~~~~~ at the end.
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (text)
-    (signature
-      (user_signature))
-    (text))
-  (paragraph
-    (text)
-    (signature
-      (user_signature_with_date))
-    (text))
-  (paragraph
-    (text)
-    (signature
-      (current_date))
-    (text)))
+  (section
+    (paragraph
+      (text)
+      (signature
+        (user_signature))
+      (text))
+    (paragraph
+      (text)
+      (signature
+        (user_signature_with_date))
+      (text))
+    (paragraph
+      (text)
+      (signature
+        (current_date))
+      (text))))
 
 ================================================================================
 Signatures in various contexts
@@ -61,27 +63,28 @@ Text with ~~~~~ date.
 --------------------------------------------------------------------------------
 
 (source_file
-  (heading
+  (section)
+  (section
     (heading2
       (heading_marker)
       (text)
-      (heading_marker)))
-  (unordered_list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)
-        (signature
-          (user_signature_with_date))))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text))))
-  (paragraph
-    (text)
-    (signature
-      (current_date))
-    (text)))
+      (heading_marker))
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (signature
+            (user_signature_with_date))))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))
+    (paragraph
+      (text)
+      (signature
+        (current_date))
+      (text))))
 
 ================================================================================
 Adjacent signatures
@@ -93,10 +96,11 @@ Adjacent signatures
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (text))
-  (paragraph
-    (text)))
+  (section
+    (paragraph
+      (text))
+    (paragraph
+      (text))))
 
 ================================================================================
 Not signatures (more or fewer tildes)
@@ -108,7 +112,8 @@ Text with ~~~~~~ not a signature
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (text))
-  (paragraph
-    (text)))
+  (section
+    (paragraph
+      (text))
+    (paragraph
+      (text))))

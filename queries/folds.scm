@@ -1,3 +1,2 @@
-(heading) @fold
+(section) @fold
 
-(comment) @fold

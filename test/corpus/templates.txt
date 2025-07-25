@@ -7,10 +7,11 @@ Basic template
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part)))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))))))
 
 ==================
 Template with unnamed parameters
@@ -20,16 +21,17 @@ Template with unnamed parameters
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_value
-          (text)))
-      (template_argument
-        (template_param_value
-          (text))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_value
+            (text)))))))
 
 ==================
 Template with named parameters
@@ -40,18 +42,19 @@ Template with named parameters
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text)))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))
 
 ==================
 Template with mixed parameters
@@ -62,17 +65,18 @@ Template with mixed parameters
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_value
-          (text)))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))
 
 ==================
 Template with internal link in parameter name
@@ -83,17 +87,18 @@ Template with internal link in parameter name
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_value
-          (text)
-          (wikilink
-            (wikilink_page
-              (page_name_segment))
-            (page_name_segment)))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)
+            (wikilink
+              (wikilink_page
+                (page_name_segment))
+              (page_name_segment))))))))
 
 ==================
 Template with internal link in parameter value
@@ -104,18 +109,19 @@ Template with internal link in parameter value
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text)
-          (wikilink
-            (wikilink_page
-              (page_name_segment))
-            (page_name_segment)))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)
+            (wikilink
+              (wikilink_page
+                (page_name_segment))
+              (page_name_segment))))))))
 
 ==================
 Templates with complex content
@@ -126,19 +132,20 @@ Templates with complex content
 ---------------------------------------------------
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_value
-          (text)
-          (bold
-            (text))
-          (text)
-          (italic
-            (text))
-          (text))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)
+            (bold
+              (text))
+            (text)
+            (italic
+              (text))
+            (text)))))))
 
 ==================
 Nested templates
@@ -149,18 +156,19 @@ Nested templates
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_value
-          (template
-            (template_name
-              (template_name_part))
-            (template_argument
-              (template_param_value
-                (text)))))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (template
+              (template_name
+                (template_name_part))
+              (template_argument
+                (template_param_value
+                  (text))))))))))
 
 ==================
 Templates in context
@@ -171,15 +179,16 @@ Some text before {{Template|param}} and some text after.
 ---
 
 (source_file
-  (paragraph
-    (text)
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_value
-          (text))))
-    (text)))
+  (section
+    (paragraph
+      (text)
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text))))
+      (text))))
 
 ==================
 Multiple templates
@@ -191,21 +200,22 @@ Multiple templates
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_value
-          (text)))))
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)))))
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))
 
 =====================================
 Template with name having space in it
@@ -216,24 +226,26 @@ Template with name having space in it
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text)))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text)))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))
+
 =====================================
-Template with values in new lines 
+Template with values in new lines
 =====================================
 
 {{Cite ref
@@ -245,19 +257,20 @@ Template with values in new lines
 ---
 
 (source_file
-  (paragraph
-    (template
-      (template_name
-        (template_name_part))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text)))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text)))
-      (template_argument
-        (template_param_name)
-        (template_param_value
-          (text))))))
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))

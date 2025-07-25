@@ -151,20 +151,28 @@ module.exports = grammar({
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [
     [$.paragraph, $._html_content],
-    [$._block_level_element, $._html_content],
+    [$._block_not_section, $._html_content],
     [$.nowiki_tag_block, $.nowiki_inline_element],
   ],
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)
     ["bold_italic_explicit", $.bold, $.italic],
-    [$._block_level_element, $.html_tag],
+    [$._block_not_section, $.html_tag],
     [$._inline_content, $.html_tag],
   ],
   rules: {
-    source_file: ($) => repeat($._block_level_element),
-    _block_level_element: ($) =>
+    source_file: ($) =>
+      seq(
+        alias(prec.right(repeat($._block_not_section)), $.section),
+        repeat($.section),
+      ),
+    // BLOCK STRUCTURE
+
+    // All blocks. Every block contains a trailing newline.
+    _block: ($) => choice($._block_not_section, $.section),
+    _block_not_section: ($) =>
       choice(
-        $.heading,
+        //$.heading,
         $.horizontal_rule,
         $._list,
         $.preformatted_block,
@@ -174,6 +182,84 @@ module.exports = grammar({
         $.paragraph, // Must be low precedence
         $._blank_line, // Consumes blank lines separating blocks
       ),
+    section: ($) =>
+      choice(
+        $._section1,
+        $._section2,
+        $._section3,
+        $._section4,
+        $._section5,
+        $._section6,
+      ),
+    _section1: ($) =>
+      prec.right(
+        seq(
+          $.heading1,
+          repeat(
+            choice(
+              alias(
+                choice(
+                  $._section6,
+                  $._section5,
+                  $._section4,
+                  $._section3,
+                  $._section2,
+                ),
+                $.section,
+              ),
+              $._block_not_section,
+            ),
+          ),
+        ),
+      ),
+    _section2: ($) =>
+      prec.right(
+        seq(
+          $.heading2,
+          repeat(
+            choice(
+              alias(
+                choice($._section6, $._section5, $._section4, $._section3),
+                $.section,
+              ),
+              $._block_not_section,
+            ),
+          ),
+        ),
+      ),
+    _section3: ($) =>
+      prec.right(
+        seq(
+          $.heading3,
+          repeat(
+            choice(
+              alias(choice($._section6, $._section5, $._section4), $.section),
+              $._block_not_section,
+            ),
+          ),
+        ),
+      ),
+    _section4: ($) =>
+      prec.right(
+        seq(
+          $.heading4,
+          repeat(
+            choice(
+              alias(choice($._section6, $._section5), $.section),
+              $._block_not_section,
+            ),
+          ),
+        ),
+      ),
+    _section5: ($) =>
+      prec.right(
+        seq(
+          $.heading5,
+          repeat(choice(alias($._section6, $.section), $._block_not_section)),
+        ),
+      ),
+    _section6: ($) => prec.right(seq($.heading6, repeat($._block_not_section))),
+
     _blank_line: ($) => /\n\s*\n?/,
     _pipe: ($) => token.immediate("|"),
     // ==== Text and Inline Content ====
@@ -714,7 +800,7 @@ module.exports = grammar({
       choice(
         $.html_tag,
         $._inline_content, // Allows MediaWiki markup inside HTML tags (often the case)
-        $._block_level_element, // Allows block MediaWiki markup inside HTML block tags
+        $._block_not_section, // Allows block MediaWiki markup inside HTML block tags
         alias($._html_text, $.text),
       ),
 

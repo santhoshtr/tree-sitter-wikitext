@@ -10,14 +10,15 @@ Text after multi-line comment
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (comment))
-  (paragraph
-    (text))
-  (paragraph
-    (comment))
-  (paragraph
-    (text)))
+  (section
+    (paragraph
+      (comment))
+    (paragraph
+      (text))
+    (paragraph
+      (comment))
+    (paragraph
+      (text))))
 
 ================================================================================
 Nested comments
@@ -30,14 +31,15 @@ Text between comments
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (comment)
-    (text))
-  (paragraph
-    (text))
-  (paragraph
-    (comment)
-    (text)))
+  (section
+    (paragraph
+      (comment)
+      (text))
+    (paragraph
+      (text))
+    (paragraph
+      (comment)
+      (text))))
 
 ================================================================================
 Comments with special characters
@@ -49,14 +51,15 @@ Comments with special characters
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (comment))
-  (paragraph
-    (comment))
-  (paragraph
-    (comment))
-  (paragraph
-    (comment)))
+  (section
+    (paragraph
+      (comment))
+    (paragraph
+      (comment))
+    (paragraph
+      (comment))
+    (paragraph
+      (comment))))
 
 ================================================================================
 Comments within other elements
@@ -70,25 +73,25 @@ Text paragraph <!-- inline comment --> with comment.
 --------------------------------------------------------------------------------
 
 (source_file
-  (heading
+  (section
     (heading2
       (heading_marker)
       (text)
-      (heading_marker)))
-  (unordered_list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)
-        (comment)))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text))))
-  (paragraph
-    (text)
-    (comment)
-    (text)))
+      (heading_marker))
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (comment)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))
+    (paragraph
+      (text)
+      (comment)
+      (text))))
 
 ================================================================================
 Comments at file boundaries
@@ -99,12 +102,13 @@ Text in middle
 --------------------------------------------------------------------------------
 
 (source_file
-  (paragraph
-    (comment))
-  (paragraph
-    (text))
-  (paragraph
-    (comment)))
+  (section
+    (paragraph
+      (comment))
+    (paragraph
+      (text))
+    (paragraph
+      (comment))))
 
 ================================================================================
 Comment-like syntax that isn't a comment
