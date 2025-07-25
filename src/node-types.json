@@ -1932,11 +1932,19 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
           "type": "external_link",
           "named": true
         },
         {
-          "type": "html_tag",
+          "type": "html_inline_tag",
           "named": true
         },
         {
@@ -1948,7 +1956,15 @@
           "named": true
         },
         {
+          "type": "medialink",
+          "named": true
+        },
+        {
           "type": "nowiki_inline_element",
+          "named": true
+        },
+        {
+          "type": "redirect",
           "named": true
         },
         {

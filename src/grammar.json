@@ -1826,47 +1826,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "wikilink"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "external_link"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "template"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "bold"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "italic"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "bold_italic"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "html_tag"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "magic_word"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "signature"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "nowiki_inline_element"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "text"
+            "name": "_inline_content"
           },
           {
             "type": "SYMBOL",
@@ -3131,14 +3091,6 @@
     }
   ],
   "conflicts": [
-    [
-      "paragraph",
-      "_html_content"
-    ],
-    [
-      "_block_not_section",
-      "_html_content"
-    ],
     [
       "nowiki_tag_block",
       "nowiki_inline_element"

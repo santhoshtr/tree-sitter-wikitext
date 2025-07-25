@@ -149,11 +149,7 @@ module.exports = grammar({
     $._template_param_name_value_marker,
   ],
   extras: (_) => ["\r", /\s/],
-  conflicts: ($) => [
-    [$.paragraph, $._html_content],
-    [$._block_not_section, $._html_content],
-    [$.nowiki_tag_block, $.nowiki_inline_element],
-  ],
+  conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)
     ["bold_italic_explicit", $.bold, $.italic],
@@ -584,22 +580,7 @@ module.exports = grammar({
     _text_no_pipes_braces_equals: ($) => token(prec(1, /[^\|{}=]+/)),
 
     template_param_value: ($) =>
-      repeat1(
-        choice(
-          $.wikilink,
-          $.external_link,
-          $.template, // Nested template in param value
-          $.bold,
-          $.italic,
-          $.bold_italic,
-          $.html_tag, // HTML tags can be in param values
-          $.magic_word,
-          $.signature,
-          $.nowiki_inline_element,
-          $.text,
-          $._blank_line,
-        ),
-      ),
+      repeat1(choice($._inline_content, $._blank_line)),
     // ==== Lists ====
     _list: ($) => choice($.unordered_list, $.ordered_list, $.definition_list),
 
