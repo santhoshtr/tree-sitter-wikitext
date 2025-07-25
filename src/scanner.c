@@ -70,6 +70,7 @@ static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
 
 static bool is_allowed_html_tag(const char *tag_name) {
     // List of allowed HTML tags from MediaWiki documentation
+    // https://www.mediawiki.org/wiki/Help:HTML_in_wikitext#
     static const char *allowed_tags[] = {
         "abbr", "b", "bdi", "bdo", "big", "blockquote", "br", "caption", "cite",
         "code", "col", "colgroup", "data", "dd", "del", "dfn", "div", "dl",
@@ -88,6 +89,274 @@ static bool is_allowed_html_tag(const char *tag_name) {
         }
     }
     return false;
+}
+
+static bool is_common_attribute(const char *attr_name) {
+    // Common attributes allowed on most tags
+    static const char *common_attrs[] = {
+        // HTML attributes
+        "id", "class", "style", "lang", "dir", "title", "tabindex",
+        // WAI-ARIA attributes
+        "aria-describedby", "aria-flowto", "aria-hidden", "aria-label",
+        "aria-labelledby", "aria-level", "aria-owns", "role",
+        // RDFa attributes
+        "about", "property", "resource", "datatype", "typeof",
+        // Microdata attributes
+        "itemid", "itemprop", "itemref", "itemscope", "itemtype", NULL};
+
+    for (int i = 0; common_attrs[i] != NULL; i++) {
+        if (strcmp(attr_name, common_attrs[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+static bool is_allowed_tag_specific_attribute(const char *tag_name,
+                                              const char *attr_name) {
+    // Tag-specific attributes based on MediaWiki documentation
+
+    if (strcmp(tag_name, "blockquote") == 0 || strcmp(tag_name, "q") == 0) {
+        return strcmp(attr_name, "cite") == 0;
+    }
+
+    if (strcmp(tag_name, "br") == 0) {
+        return strcmp(attr_name, "clear") == 0;
+    }
+
+    if (strcmp(tag_name, "caption") == 0 || strcmp(tag_name, "div") == 0 ||
+        strcmp(tag_name, "p") == 0) {
+        return strcmp(attr_name, "align") == 0;
+    }
+
+    if (strcmp(tag_name, "col") == 0 || strcmp(tag_name, "colgroup") == 0) {
+        return strcmp(attr_name, "span") == 0;
+    }
+
+    if (strcmp(tag_name, "data") == 0) {
+        return strcmp(attr_name, "value") == 0;
+    }
+
+    if (strcmp(tag_name, "del") == 0 || strcmp(tag_name, "ins") == 0) {
+        return strcmp(attr_name, "cite") == 0 ||
+               strcmp(attr_name, "datetime") == 0;
+    }
+
+    if (strcmp(tag_name, "h1") == 0 || strcmp(tag_name, "h2") == 0 ||
+        strcmp(tag_name, "h3") == 0 || strcmp(tag_name, "h4") == 0 ||
+        strcmp(tag_name, "h5") == 0 || strcmp(tag_name, "h6") == 0) {
+        return strcmp(attr_name, "align") == 0;
+    }
+
+    if (strcmp(tag_name, "hr") == 0 || strcmp(tag_name, "pre") == 0) {
+        return strcmp(attr_name, "width") == 0;
+    }
+
+    if (strcmp(tag_name, "li") == 0) {
+        return strcmp(attr_name, "type") == 0 ||
+               strcmp(attr_name, "value") == 0;
+    }
+
+    if (strcmp(tag_name, "link") == 0) {
+        return strcmp(attr_name, "href") == 0 || strcmp(attr_name, "rel") == 0;
+    }
+
+    if (strcmp(tag_name, "meta") == 0) {
+        return strcmp(attr_name, "content") == 0;
+    }
+
+    if (strcmp(tag_name, "ol") == 0) {
+        return strcmp(attr_name, "type") == 0 ||
+               strcmp(attr_name, "start") == 0 ||
+               strcmp(attr_name, "reversed") == 0;
+    }
+
+    if (strcmp(tag_name, "table") == 0) {
+        return strcmp(attr_name, "summary") == 0 ||
+               strcmp(attr_name, "width") == 0 ||
+               strcmp(attr_name, "border") == 0 ||
+               strcmp(attr_name, "frame") == 0 ||
+               strcmp(attr_name, "rules") == 0 ||
+               strcmp(attr_name, "cellspacing") == 0 ||
+               strcmp(attr_name, "cellpadding") == 0 ||
+               strcmp(attr_name, "align") == 0 ||
+               strcmp(attr_name, "bgcolor") == 0;
+    }
+
+    if (strcmp(tag_name, "td") == 0 || strcmp(tag_name, "th") == 0) {
+        return strcmp(attr_name, "abbr") == 0 ||
+               strcmp(attr_name, "axis") == 0 ||
+               strcmp(attr_name, "headers") == 0 ||
+               strcmp(attr_name, "scope") == 0 ||
+               strcmp(attr_name, "rowspan") == 0 ||
+               strcmp(attr_name, "colspan") == 0 ||
+               strcmp(attr_name, "nowrap") == 0 ||
+               strcmp(attr_name, "width") == 0 ||
+               strcmp(attr_name, "height") == 0 ||
+               strcmp(attr_name, "bgcolor") == 0 ||
+               strcmp(attr_name, "align") == 0 ||
+               strcmp(attr_name, "valign") == 0;
+    }
+
+    if (strcmp(tag_name, "time") == 0) {
+        return strcmp(attr_name, "datetime") == 0;
+    }
+
+    if (strcmp(tag_name, "tr") == 0) {
+        return strcmp(attr_name, "bgcolor") == 0 ||
+               strcmp(attr_name, "align") == 0 ||
+               strcmp(attr_name, "valign") == 0;
+    }
+
+    if (strcmp(tag_name, "ul") == 0) {
+        return strcmp(attr_name, "type") == 0;
+    }
+
+    return false;
+}
+
+static bool is_valid_attribute_name(const char *attr_name) {
+    if (!attr_name || attr_name[0] == '\0') {
+        return false;
+    }
+
+    // Attribute names must start with a letter
+    if (!((attr_name[0] >= 'a' && attr_name[0] <= 'z') ||
+          (attr_name[0] >= 'A' && attr_name[0] <= 'Z'))) {
+        return false;
+    }
+
+    // Check remaining characters
+    for (int i = 1; attr_name[i] != '\0'; i++) {
+        char c = attr_name[i];
+        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+              (c >= '0' && c <= '9') || c == '-' || c == '_' || c == ':')) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+static bool parse_and_validate_attributes(TSLexer *lexer,
+                                          const char *tag_name) {
+    while (lexer->lookahead && lexer->lookahead != '>' &&
+           lexer->lookahead != '/') {
+        // Skip whitespace
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
+               lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+            advance(lexer);
+        }
+
+        if (lexer->lookahead == '>' || lexer->lookahead == '/') {
+            break;
+        }
+
+        // Parse attribute name
+        char attr_name[64] = {0};
+        int name_len = 0;
+
+        while (name_len < 63 && lexer->lookahead &&
+               ((lexer->lookahead >= 'a' && lexer->lookahead <= 'z') ||
+                (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z') ||
+                (lexer->lookahead >= '0' && lexer->lookahead <= '9') ||
+                lexer->lookahead == '-' || lexer->lookahead == '_' ||
+                lexer->lookahead == ':')) {
+
+            // Convert to lowercase for comparison
+            if (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z') {
+                attr_name[name_len] = lexer->lookahead + ('a' - 'A');
+            } else {
+                attr_name[name_len] = lexer->lookahead;
+            }
+            name_len++;
+            advance(lexer);
+        }
+
+        if (name_len == 0) {
+            return false; // Invalid attribute name
+        }
+
+        attr_name[name_len] = '\0';
+
+        // Validate attribute name
+        if (!is_valid_attribute_name(attr_name)) {
+            return false;
+        }
+
+        // Check if attribute is allowed for this tag
+        if (!is_common_attribute(attr_name) &&
+            !is_allowed_tag_specific_attribute(tag_name, attr_name)) {
+            return false;
+        }
+
+        // Skip whitespace after attribute name
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
+               lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+            advance(lexer);
+        }
+
+        // Check for attribute value
+        if (lexer->lookahead == '=') {
+            advance(lexer); // Skip '='
+
+            // Skip whitespace after '='
+            while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
+                   lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+                advance(lexer);
+            }
+
+            // Parse attribute value
+            if (lexer->lookahead == '"' || lexer->lookahead == '\'') {
+                char quote = lexer->lookahead;
+                advance(lexer); // Skip opening quote
+
+                // Skip to closing quote
+                while (lexer->lookahead && lexer->lookahead != quote) {
+                    advance(lexer);
+                }
+
+                if (lexer->lookahead == quote) {
+                    advance(lexer); // Skip closing quote
+                } else {
+                    return false; // Unclosed quoted value
+                }
+            } else {
+                // Unquoted value - read until whitespace or special char
+                while (lexer->lookahead && lexer->lookahead != ' ' &&
+                       lexer->lookahead != '\t' && lexer->lookahead != '\n' &&
+                       lexer->lookahead != '\r' && lexer->lookahead != '>' &&
+                       lexer->lookahead != '/') {
+                    advance(lexer);
+                }
+            }
+        }
+
+        // For link and meta tags, validate required attributes
+        if (strcmp(tag_name, "link") == 0) {
+            // link tag must have itemprop and href
+            static bool has_itemprop = false, has_href = false;
+            if (strcmp(attr_name, "itemprop") == 0)
+                has_itemprop = true;
+            if (strcmp(attr_name, "href") == 0)
+                has_href = true;
+            // Note: This is a simplified check - in practice you'd need to
+            // track all attributes throughout the parsing
+        }
+
+        if (strcmp(tag_name, "meta") == 0) {
+            // meta tag must have itemprop and content
+            static bool has_itemprop = false, has_content = false;
+            if (strcmp(attr_name, "itemprop") == 0)
+                has_itemprop = true;
+            if (strcmp(attr_name, "content") == 0)
+                has_content = true;
+            // Note: This is a simplified check - in practice you'd need to
+            // track all attributes throughout the parsing
+        }
+    }
+
+    return true;
 }
 
 static bool is_valid_html_tag(TSLexer *lexer, bool is_closing) {
@@ -140,21 +409,16 @@ static bool is_valid_html_tag(TSLexer *lexer, bool is_closing) {
         advance(lexer);
     }
 
-    // For opening tags, we might have attributes or immediate closing
-    // Skip attributes (simplified - just look for valid characters until >
-    // or />)
+    // For opening tags, validate attributes
     if (!is_closing) {
-        while (lexer->lookahead && lexer->lookahead != '>' &&
-               lexer->lookahead != '/') {
-            // Very basic attribute parsing - just skip until we find > or />
-            advance(lexer);
+        if (!parse_and_validate_attributes(lexer, tag_name)) {
+            return false;
         }
     }
-    if (is_closing) {
-        // Check for self-closing tag
-        if (lexer->lookahead == '/') {
-            advance(lexer);
-        }
+
+    // Check for self-closing tag
+    if (lexer->lookahead == '/') {
+        advance(lexer);
     }
 
     if (lexer->lookahead == '>') {

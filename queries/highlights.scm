@@ -90,8 +90,9 @@
   (content) @text
 )
 
-(html_tag
-  (html_tag_name) @tag
+(html_attribute
+  (html_attribute_name) @attribute
+  (html_attribute_value) @string
 )
 
 (paragraph

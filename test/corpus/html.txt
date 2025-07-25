@@ -1,0 +1,1045 @@
+==================
+Basic HTML Tags
+==================
+
+<b>Bold text</b>
+<i>Italic text</i>
+<u>Underlined text</u>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))))
+
+==================
+HTML Tags with Common Attributes
+==================
+
+<div id="main" class="content">Text</div>
+<span style="color: red;">Red text</span>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))))
+
+==================
+Self-closing HTML Tags
+:error
+==================
+
+<br />
+<hr width="50%" />
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_open))
+      (html_tag
+        (html_tag_open)))))
+
+==================
+HTML Table Structure
+==================
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tr bgcolor="#cccccc">
+<th scope="col" width="100">Header 1</th>
+<th scope="col">Header 2</th>
+</tr>
+<tr>
+<td align="center" valign="top">Cell 1</td>
+<td rowspan="2" colspan="1">Cell 2</td>
+</tr>
+</table>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (html_tag
+            (html_tag_name)
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (text)
+            (html_tag_name))
+          (html_tag
+            (html_tag_name)
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (text)
+            (html_tag_name))
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (html_tag
+            (html_tag_name)
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (text)
+            (html_tag_name))
+          (html_tag
+            (html_tag_name)
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (text)
+            (html_tag_name))
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+HTML List Elements
+==================
+
+<ol type="1" start="5">
+<li value="5">First item</li>
+<li>Second item</li>
+</ol>
+
+<ul type="disc">
+<li>Bullet point</li>
+<li>Another bullet</li>
+</ul>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Semantic HTML Tags
+==================
+
+<abbr title="HyperText Markup Language">HTML</abbr>
+<cite>Book Title</cite>
+<code>function()</code>
+<kbd>Ctrl+C</kbd>
+<samp>Output text</samp>
+<var>variable</var>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))))
+
+==================
+HTML Headings with Align Attribute
+==================
+
+<h1 align="center">Centered Heading 1</h1>
+<h2 align="left">Left Heading 2</h2>
+<h3 align="right">Right Heading 3</h3>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))))
+
+==================
+Blockquote and Quote Elements
+==================
+
+<blockquote cite="https://example.com">
+This is a block quote with citation.
+</blockquote>
+
+<q cite="https://example.com">This is an inline quote.</q>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))))
+
+==================
+Date and Time Elements
+==================
+
+<time datetime="2023-12-25">Christmas Day</time>
+<data value="123">Product ID</data>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))))
+
+==================
+Text Modification Elements
+==================
+
+<del datetime="2023-01-01" cite="reason.html">Deleted text</del>
+<ins datetime="2023-01-02" cite="reason.html">Inserted text</ins>
+<mark>Highlighted text</mark>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))))
+
+==================
+Ruby Annotations
+==================
+
+<ruby>
+漢 <rp>(</rp><rt>kan</rt><rp>)</rp>
+字 <rp>(</rp><rt>ji</rt><rp>)</rp>
+</ruby>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (text)
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Definition Lists
+==================
+
+<dl>
+<dt>Term 1</dt>
+<dd>Definition 1</dd>
+<dt>Term 2</dt>
+<dd>Definition 2</dd>
+</dl>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (text)
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Bidirectional Text Elements
+==================
+
+<bdi>User input: العربية</bdi>
+<bdo dir="rtl">This text is right-to-left</bdo>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))))
+
+==================
+WAI-ARIA Attributes
+==================
+
+<div role="button" aria-label="Close dialog" aria-hidden="false">
+<span aria-describedby="help-text">Interactive element</span>
+</div>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (text)
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Microdata Attributes
+==================
+
+<div itemscope itemtype="http://schema.org/Person">
+<span itemprop="name">John Doe</span>
+<span itemprop="email">john@example.com</span>
+</div>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (text)
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Link Element with Required Attributes
+:error
+==================
+
+<link itemprop="url" href="https://example.com" title="Example">
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_open)))))
+
+==================
+Meta Element with Required Attributes
+:error
+==================
+
+<meta itemprop="datePublished" content="2023-12-25">
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_open)))))
+
+==================
+Preformatted Text
+:error
+==================
+
+<pre width="80">
+function hello() {
+    console.log("Hello World");
+}
+</pre>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_open)
+        (text)
+        (html_tag_close)))))
+
+==================
+Deprecated but Allowed Tags
+:error
+==================
+
+<center>Centered text</center>
+<font color="red" size="3">Red font</font>
+<big>Big text</big>
+<small>Small text</small>
+<strike>Strikethrough</strike>
+<tt>Teletype text</tt>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_open)
+        (text)
+        (html_tag_close))
+      (html_tag
+        (html_tag_open)
+        (text)
+        (html_tag_close))
+      (html_tag
+        (html_tag_open)
+        (text)
+        (html_tag_close))
+      (html_tag
+        (html_tag_open)
+        (text)
+        (html_tag_close))
+      (html_tag
+        (html_tag_open)
+        (text)
+        (html_tag_close))
+      (html_tag
+        (html_tag_open)
+        (text)
+        (html_tag_close)))))
+
+==================
+Column Groups and Columns
+:error
+==================
+
+<table>
+<colgroup span="2">
+<col span="1">
+<col span="1">
+</colgroup>
+<tr>
+<td>Cell 1</td>
+<td>Cell 2</td>
+</tr>
+</table>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_open)
+        (html_tag
+          (html_tag_open)
+          (html_tag
+            (html_tag_open))
+          (html_tag
+            (html_tag_open))
+          (html_tag_close))
+        (html_tag
+          (html_tag_open)
+          (html_tag
+            (html_tag_open)
+            (text)
+            (html_tag_close))
+          (html_tag
+            (html_tag_open)
+            (text)
+            (html_tag_close))
+          (html_tag_close))
+        (html_tag_close)))))
+
+==================
+Word Break Opportunities
+:error
+==================
+
+This is a very<wbr>long<wbr>word<wbr>that<wbr>might<wbr>need<wbr>breaking.
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_open))
+      (text)
+      (html_tag
+        (html_tag_open))
+      (text)
+      (html_tag
+        (html_tag_open))
+      (text)
+      (html_tag
+        (html_tag_open))
+      (text)
+      (html_tag
+        (html_tag_open))
+      (text)
+      (html_tag
+        (html_tag_open))
+      (text))))
+
+==================
+Subscript and Superscript
+==================
+
+H<sub>2</sub>O is water.
+E=mc<sup>2</sup> is Einstein's equation.
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name))
+      (text))
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name))
+      (text))))
+
+==================
+Strong and Emphasis
+==================
+
+<strong>Very important text</strong>
+<em>Emphasized text</em>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name)))))
+
+==================
+Definition Term
+==================
+
+<dfn title="HyperText Markup Language">HTML</dfn> is a markup language.
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name))
+      (text))))
+
+==================
+Strikethrough Text
+==================
+
+<s>This text is no longer accurate</s> but this text is current.
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name))
+      (text))))
+
+==================
+RDFa Attributes
+==================
+
+<div about="http://example.com/person1" typeof="foaf:Person">
+<span property="foaf:name" datatype="xsd:string">John Doe</span>
+<span property="foaf:age" resource="#age">30</span>
+</div>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (text)
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Mixed Content with HTML and Wikitext
+==================
+
+This is '''bold''' text with <em>HTML emphasis</em> and ''italic'' text.
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (bold
+        (text))
+      (text)
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name))
+      (text)
+      (italic
+        (text))
+      (text))))
+
+==================
+Nested HTML Tags
+==================
+
+<div class="outer">
+<span class="inner">
+<strong>Nested content</strong>
+</span>
+</div>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (html_tag
+            (html_tag_name)
+            (text)
+            (html_tag_name))
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Table Caption
+==================
+
+<table>
+<caption align="top">Table Caption</caption>
+<tr>
+<td>Data</td>
+</tr>
+</table>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_tag
+          (html_tag_name)
+          (html_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (text)
+          (html_tag_name))
+        (html_tag
+          (html_tag_name)
+          (html_tag
+            (html_tag_name)
+            (text)
+            (html_tag_name))
+          (html_tag_name))
+        (html_tag_name)))))
+
+==================
+Line Breaks with Clear
+:error
+==================
+
+Some text before<br clear="left">text after line break.
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_open))
+      (text))))
+
+==================
+Paragraph with Alignment
+==================
+
+<p align="justify">This paragraph is justified to both left and right margins.</p>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))))
+
+==================
+Invalid HTML Tags (Should Not Parse)
+:error
+==================
+
+<script>alert('xss')</script>
+<style>body { color: red; }</style>
+<iframe src="evil.html"></iframe>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (text)
+      (text))))
+
+==================
+HTML Tags with Invalid Attributes (Should Not Parse)
+:error
+==================
+
+<div onclick="alert('xss')" onload="hack()">Invalid attributes</div>
+<img src="image.jpg" onerror="alert('xss')">
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (text))))
+
+==================
+Malformed HTML Tags (Should Not Parse)
+:error
+==================
+
+<div class="unclosed
+<span>Missing closing bracket
+<>Empty tag name</>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (text)
+      (text))))
