@@ -2114,8 +2114,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "template_param_name",
+          "named": true
+        },
         {
           "type": "template_param_value",
           "named": true
@@ -2147,12 +2151,17 @@
     }
   },
   {
+    "type": "template_param_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "template_param_value",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "bold",
@@ -2175,23 +2184,11 @@
           "named": true
         },
         {
-          "type": "lbrace_literal",
-          "named": true
-        },
-        {
           "type": "magic_word",
           "named": true
         },
         {
           "type": "nowiki_inline_element",
-          "named": true
-        },
-        {
-          "type": "pipe_literal",
-          "named": true
-        },
-        {
-          "type": "rbrace_literal",
           "named": true
         },
         {
@@ -2481,10 +2478,6 @@
     "named": true
   },
   {
-    "type": "lbrace_literal",
-    "named": true
-  },
-  {
     "type": "list_marker",
     "named": true
   },
@@ -2505,19 +2498,11 @@
     "named": true
   },
   {
-    "type": "pipe_literal",
-    "named": true
-  },
-  {
     "type": "pre",
     "named": false
   },
   {
     "type": "raw_text",
-    "named": true
-  },
-  {
-    "type": "rbrace_literal",
     "named": true
   },
   {

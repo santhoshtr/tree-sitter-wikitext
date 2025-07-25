@@ -17,6 +17,8 @@ enum TokenType {
     FILE_LINK_TOKEN,
     FILE_ALT_TOKEN,
     FILE_CAPTION_TOKEN,
+    TEMPLATE_PARAM_VALUE_MARKER,
+    TEMPLATE_PARAM_NAME_VALUE_MARKER,
 };
 
 void *tree_sitter_wikitext_external_scanner_create() { return NULL; }
@@ -505,6 +507,19 @@ static bool is_wiki_link_open_token(TSLexer *lexer) {
 
     return false;
 }
+static bool is_template_param_name_value_pair(TSLexer *lexer) {
+    while (lexer->lookahead) {
+        if (lexer->lookahead == '=') {
+            return true;
+        }
+        if (lexer->lookahead == '|' || lexer->lookahead == '[' ||
+            lexer->lookahead == '{' || lexer->lookahead == '\n') {
+            break;
+        }
+        advance(lexer);
+    }
+    return false;
+}
 
 // Add this function before tree_sitter_wikitext_external_scanner_scan
 static void dump_valid_symbols(const bool *valid_symbols) {
@@ -535,6 +550,12 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     }
     if (valid_symbols[FILE_CAPTION_TOKEN]) {
         printf("FILE_CAPTION_TOKEN,");
+    }
+    if (valid_symbols[TEMPLATE_PARAM_VALUE_MARKER]) {
+        printf("TEMPLATE_PARAM_VALUE_MARKER");
+    }
+    if (valid_symbols[TEMPLATE_PARAM_NAME_VALUE_MARKER]) {
+        printf("TEMPLATE_PARAM_VALUE_MARKER");
     }
     printf("\n");
 }
@@ -567,6 +588,19 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
     if (valid_symbols[FILE_CAPTION_TOKEN] && scan_file_caption(lexer)) {
         return true;
     }
+    if (valid_symbols[TEMPLATE_PARAM_VALUE_MARKER] &&
+        valid_symbols[TEMPLATE_PARAM_NAME_VALUE_MARKER]) {
+
+        lexer->mark_end(lexer);
+        if (is_template_param_name_value_pair(lexer)) {
+            lexer->result_symbol = TEMPLATE_PARAM_NAME_VALUE_MARKER;
+            return true;
+        } else {
+            lexer->result_symbol = TEMPLATE_PARAM_VALUE_MARKER;
+            return true;
+        }
+    }
+
     switch (lexer->lookahead) {
     case '[':
         if (valid_symbols[MEDIA_LINK_TOKEN] || valid_symbols[WIKI_LINK_TOKEN]) {

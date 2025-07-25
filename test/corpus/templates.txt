@@ -45,9 +45,11 @@ Template with named parameters
       (template_name
         (template_name_part))
       (template_argument
+        (template_param_name)
         (template_param_value
           (text)))
       (template_argument
+        (template_param_name)
         (template_param_value
           (text))))))
 
@@ -68,6 +70,7 @@ Template with mixed parameters
         (template_param_value
           (text)))
       (template_argument
+        (template_param_name)
         (template_param_value
           (text))))))
 
@@ -106,6 +109,7 @@ Template with internal link in parameter value
       (template_name
         (template_name_part))
       (template_argument
+        (template_param_name)
         (template_param_value
           (text)
           (wikilink
@@ -199,6 +203,7 @@ Multiple templates
       (template_name
         (template_name_part))
       (template_argument
+        (template_param_name)
         (template_param_value
           (text))))))
 
@@ -216,11 +221,43 @@ Template with name having space in it
       (template_name
         (template_name_part))
       (template_argument
+        (template_param_name)
         (template_param_value
           (text)))
       (template_argument
+        (template_param_name)
         (template_param_value
           (text)))
       (template_argument
+        (template_param_name)
+        (template_param_value
+          (text))))))
+=====================================
+Template with values in new lines 
+=====================================
+
+{{Cite ref
+|url=someurl
+|title=some title
+|language=en
+}}
+
+---
+
+(source_file
+  (paragraph
+    (template
+      (template_name
+        (template_name_part))
+      (template_argument
+        (template_param_name)
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_name)
+        (template_param_value
+          (text)))
+      (template_argument
+        (template_param_name)
         (template_param_value
           (text))))))

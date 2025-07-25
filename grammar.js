@@ -145,6 +145,8 @@ module.exports = grammar({
     $.file_link_token,
     $.file_alt_token,
     $._file_caption_token,
+    $._template_param_value_marker,
+    $._template_param_name_value_marker,
   ],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [
@@ -173,7 +175,7 @@ module.exports = grammar({
         $._blank_line, // Consumes blank lines separating blocks
       ),
     _blank_line: ($) => /\n\s*\n?/,
-
+    _pipe: ($) => token.immediate("|"),
     // ==== Text and Inline Content ====
     _inline_content: ($) =>
       choice(
@@ -482,9 +484,16 @@ module.exports = grammar({
 
     template_argument: ($) =>
       seq(
-        "|",
-        optional($.template_param_value),
-        optional(seq("=", $.template_param_value)),
+        $._pipe,
+        choice(
+          seq($._template_param_value_marker, $.template_param_value),
+          seq(
+            $._template_param_name_value_marker,
+            $.template_param_name,
+            "=",
+            $.template_param_value,
+          ),
+        ),
       ),
     template_param_name: ($) => $._text_no_pipes_braces_equals,
 
@@ -493,8 +502,6 @@ module.exports = grammar({
     template_param_value: ($) =>
       repeat1(
         choice(
-          // Text for param value, avoid | and }}
-          // This is where most inline content can appear within a template
           $.wikilink,
           $.external_link,
           $.template, // Nested template in param value
@@ -506,20 +513,7 @@ module.exports = grammar({
           $.signature,
           $.nowiki_inline_element,
           $.text,
-          // token(prec(1, /[^=\[\]{}\|]+/)),
-          // General text content within the parameter value.
-          // This token will match sequences of characters that are NOT |, {, }, or newline.
-          // It has lower precedence to allow specific tokens/rules to match first.
-          //alias($._param_value_text_content, $.text),
-
-          // If a single |, {, or } is encountered that wasn't part of the above
-          // constructs (e.g., not `{{..}}`, not the `|` that separates arguments for $.template_argument),
-          // then parse it as a literal character.
-          // These have slightly higher precedence than the general text to be picked
-          // when a single one of these characters is found.
-          alias(token(prec(0, "|")), $.pipe_literal), // Literal pipe character within a value
-          alias(token(prec(0, "{")), $.lbrace_literal), // Literal open brace within a value
-          alias(token(prec(0, "}")), $.rbrace_literal), // Literal close brace within a value
+          $._blank_line,
         ),
       ),
     // ==== Lists ====
