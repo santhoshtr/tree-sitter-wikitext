@@ -177,8 +177,7 @@ module.exports = grammar({
         $._list,
         $.preformatted_block,
         $.table,
-        $.html_block_tag, // HTML known to be block-level
-        $.html_tag, // Generic HTML tag (could be block or inline, parsed as block here)
+        $.html_tag,
         $.paragraph, // Must be low precedence
         $._blank_line, // Consumes blank lines separating blocks
       ),
@@ -276,8 +275,7 @@ module.exports = grammar({
         $.magic_word,
         $.signature,
         $.redirect,
-        $.html_inline_tag, // HTML known to be inline
-        $.html_void_tag, // E.g. <br />, <hr />
+        $.html_inline_tag,
         $.entity,
         $.nowiki_inline_element, // <nowiki>content</nowiki> or <nowiki />
         // Everything else
@@ -793,15 +791,12 @@ module.exports = grammar({
         field("name", $.html_attribute_name),
         optional(seq("=", field("value", $.html_attribute_value))),
       ),
-    _html_attributes_pattern_no_gt: ($) =>
-      repeat1(choice($.html_attribute, /\s+/)),
+    _html_attributes_pattern_no_gt: ($) => repeat1(seq(" ", $.html_attribute)),
 
     _html_content: ($) =>
       choice(
-        $.html_tag,
         $._inline_content, // Allows MediaWiki markup inside HTML tags (often the case)
-        $._block_not_section, // Allows block MediaWiki markup inside HTML block tags
-        alias($._html_text, $.text),
+        $._blank_line,
       ),
 
     _html_text: ($) => token(prec(-1, /[^<]+/)),
@@ -814,7 +809,6 @@ module.exports = grammar({
           $.html_block_tag,
           $.html_inline_tag,
           $.html_void_tag,
-          $._html_generic_tag, // Fallback
         ),
       ),
 

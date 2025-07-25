@@ -442,9 +442,10 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         */
 
         if (lexer->lookahead == '<') {
-            if (consume_string("<!--", lexer)) {
-                break;
-            }
+            /* if (consume_string("<!--", lexer)) { */
+            /*     break; */
+            /* } */
+            break;
         }
         // FIXME:This should be properly handled - tables and html
         if (lexer->lookahead == '|' || lexer->lookahead == '\n') {

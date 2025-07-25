@@ -23,3 +23,5 @@ see-comments: gen
     tree-sitter parse --cst examples/comment.wikitext -d| bat
 see-lists: gen
     tree-sitter parse --cst examples/lists.wikitext -d| bat
+see-html: gen
+    tree-sitter parse --cst examples/html.wikitext -d| bat
