@@ -157,3 +157,55 @@ File with long and complex caption
             (wikilink_page
               (page_name_segment))))
         (file_alt_token)))))
+
+=================================================================================
+File caption can be any valid inline content
+=================================================================================
+
+[[File:Wappers - Episodes from September Days 1830 on the Place de l’Hôtel de Ville in Brussels.JPG|thumb|left|<span style="white-space:nowrap;">''Episode of the [[Belgian Revolution]] of 1830''</span> (1834), <span style="white-space:nowrap;">by [[Egide Charles Gustave Wappers]],</span> <span style="white-space:nowrap;">[[Royal Museums of Fine Arts of Belgium|Museum of Ancient Art, Brussels]]</span>]]
+
+----------------------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alignment_token)
+        (file_caption
+          (html_tag
+            (html_tag_name)
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (italic
+              (text)
+              (wikilink
+                (wikilink_page
+                  (page_name_segment)))
+              (text))
+            (html_tag_name))
+          (text)
+          (html_tag
+            (html_tag_name)
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (text)
+            (wikilink
+              (wikilink_page
+                (page_name_segment)))
+            (text)
+            (html_tag_name))
+          (text)
+          (html_tag
+            (html_tag_name)
+            (html_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (wikilink
+              (wikilink_page
+                (page_name_segment))
+              (page_name_segment))
+            (html_tag_name)))))))
