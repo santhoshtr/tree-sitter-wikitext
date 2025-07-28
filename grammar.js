@@ -550,7 +550,7 @@ module.exports = grammar({
     table: ($) =>
       seq(
         "{|",
-        optional(repeat1($.table_attribute)),
+        optional(repeat1(choice($.table_attribute, $.template))),
         "\n",
         optional($.tablecaption),
         optional(alias(repeat1($.table_header), $.colheaders)),

@@ -1544,6 +1544,10 @@
         {
           "type": "tablecaption",
           "named": true
+        },
+        {
+          "type": "template",
+          "named": true
         }
       ]
     }

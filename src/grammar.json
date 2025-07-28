@@ -2170,8 +2170,17 @@
             {
               "type": "REPEAT1",
               "content": {
-                "type": "SYMBOL",
-                "name": "table_attribute"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "table_attribute"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "template"
+                  }
+                ]
               }
             },
             {
