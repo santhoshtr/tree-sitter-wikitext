@@ -211,6 +211,9 @@ static bool is_allowed_tag_specific_attribute(const char *tag_name,
     if (strcmp(tag_name, "ul") == 0) {
         return strcmp(attr_name, "type") == 0;
     }
+    if (strcmp(tag_name, "ref") == 0) {
+        return strcmp(attr_name, "name") == 0;
+    }
 
     return false;
 }

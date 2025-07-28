@@ -325,7 +325,7 @@ module.exports = grammar({
         seq($._file_caption_token, $.file_caption),
       ),
 
-    file_caption: ($) => repeat1(choice($.text, $.wikilink, $._newline)),
+    file_caption: ($) => repeat1(choice($._inline_content, $._newline)),
     external_link: ($) =>
       choice(
         seq(

@@ -1151,11 +1151,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "text"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "wikilink"
+            "name": "_inline_content"
           },
           {
             "type": "SYMBOL",
