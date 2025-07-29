@@ -2715,10 +2715,6 @@
         {
           "type": "SYMBOL",
           "name": "_blank_line"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_list"
         }
       ]
     },
