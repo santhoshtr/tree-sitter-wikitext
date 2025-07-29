@@ -50,8 +50,14 @@ unsigned tree_sitter_wikitext_external_scanner_serialize(void *payload,
     return 1;
 }
 
-void tree_sitter_wikitext_external_scanner_deserialize(void *p, const char *b,
-                                                       unsigned n) {}
+void tree_sitter_wikitext_external_scanner_deserialize(void *payload,
+                                                       const char *buffer,
+                                                       unsigned length) {
+    Scanner *scanner = (Scanner *)payload;
+    if (length == 0)
+        return;
+    scanner->self_closing_html_tag = buffer[0];
+}
 
 static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
