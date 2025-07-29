@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-wikitext
+module github.com/santhoshtr/tree-sitter-wikitext
 
 go 1.22
 
