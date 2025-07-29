@@ -1050,3 +1050,69 @@ Malformed HTML Tags (Should Not Parse)
       (text)
       (text)
       (text))))
+
+======================================================
+List and templates inside html tag
+======================================================
+<noinclude>
+{{Infobox element/element navigation|symbol=Na}}
+{{Template reference list}}
+One of these is a [[WP:REFNAME|named reference]]. It may be cited in the containing article as
+*<nowiki><ref name="CIAAW2016" /></nowiki> for the source ''Atomic weights of the elements 2013'' (from subtemplates used by {{tl|Infobox element}})
+{{documentation|1=Template:Infobox element/doc}}
+[[Category:Templates that generate named references]]
+</noinclude>
+
+---------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (template
+          (template_name
+            (template_name_part))
+          (template_argument
+            (template_param_name)
+            (template_param_value
+              (text))))
+        (template
+          (template_name
+            (template_name_part)))
+        (text)
+        (wikilink
+          (wikilink_page
+            (page_name_segment))
+          (page_name_segment))
+        (text)
+        (unordered_list
+          (unordered_list_item
+            (list_marker)
+            (list_item_content
+              (nowiki_inline_element
+                (html_tag_open)
+                (raw_text)
+                (html_tag_close))
+              (text)
+              (italic
+                (text))
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text))))
+              (text))))
+        (template
+          (template_name
+            (template_name_part))
+          (template_argument
+            (template_param_name)
+            (template_param_value
+              (text))))
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))
+        (html_tag_name)))))

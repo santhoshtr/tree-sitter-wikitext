@@ -661,6 +661,7 @@ module.exports = grammar({
       choice(
         $._inline_content, // Allows MediaWiki markup inside HTML tags (often the case)
         $._blank_line,
+        $._list,
       ),
 
     html_tag: ($) => choice($._self_closing_tag, $._html_generic_tag),

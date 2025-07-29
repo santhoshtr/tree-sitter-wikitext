@@ -117,6 +117,8 @@ static bool is_allowed_html_tag(const char *tag_name) {
         "center", "font", "rb", "rtc", "strike", "tt",
         // self_closing_tags
         "br", "meta", "hr",
+        // Wiki specific markup
+        "noinclude",
         // References
         "ref", NULL};
 
@@ -466,6 +468,9 @@ static bool is_valid_html_tag(Scanner *scanner, TSLexer *lexer,
 
     // Check for self-closing tag
     if (lexer->lookahead == '/') {
+        if (!is_closing) {
+            scanner->self_closing_html_tag = 1;
+        }
         advance(lexer);
     }
 
@@ -845,15 +850,7 @@ static bool scan_inline_text_base(TSLexer *lexer) {
             // should be handled separately
             break;
         }
-        /* if (lexer->lookahead == ':' && char_index > 0) {
-             break;
-        }
-        */
-
         if (lexer->lookahead == '<') {
-            /* if (consume_string("<!--", lexer)) { */
-            /*     break; */
-            /* } */
             break;
         }
         // FIXME:This should be properly handled - tables and html
