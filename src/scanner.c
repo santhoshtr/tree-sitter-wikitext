@@ -1,6 +1,6 @@
 
+#include "tree_sitter/alloc.h"
 #include "tree_sitter/parser.h"
-
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -21,15 +21,33 @@ enum TokenType {
     TEMPLATE_PARAM_NAME_VALUE_MARKER,
     HTML_TAG_OPEN_MARKER,
     HTML_TAG_CLOSE_MARKER,
+    HTML_SELF_CLOSING_TAG_MARKER,
 };
 
-void *tree_sitter_wikitext_external_scanner_create() { return NULL; }
+typedef struct {
+    uint8_t self_closing_html_tag;
 
-void tree_sitter_wikitext_external_scanner_destroy(void *p) {}
+} Scanner;
+
+static inline void reset_state(Scanner *scanner) {
+    scanner->self_closing_html_tag = 0;
+}
+
+void *tree_sitter_wikitext_external_scanner_create() {
+    Scanner *scanner = ts_calloc(1, sizeof(Scanner));
+    return scanner;
+}
+
+void tree_sitter_wikitext_external_scanner_destroy(void *payload) {
+    Scanner *scanner = (Scanner *)payload;
+    ts_free(scanner);
+}
 
 unsigned tree_sitter_wikitext_external_scanner_serialize(void *payload,
                                                          char *buffer) {
-    return 0;
+    Scanner *scanner = (Scanner *)payload;
+    buffer[0] = (char)scanner->self_closing_html_tag;
+    return 1;
 }
 
 void tree_sitter_wikitext_external_scanner_deserialize(void *p, const char *b,
@@ -68,6 +86,17 @@ static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
     return count;
 }
 
+static bool is_allowed_self_closing_html_tag(const char *tag_name) {
+    static const char *self_closing_tags[] = {"br", "hr", "meta", NULL};
+
+    for (int i = 0; self_closing_tags[i] != NULL; i++) {
+        if (strcmp(tag_name, self_closing_tags[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 static bool is_allowed_html_tag(const char *tag_name) {
     // List of allowed HTML tags from MediaWiki documentation
     // https://www.mediawiki.org/wiki/Help:HTML_in_wikitext#
@@ -75,11 +104,13 @@ static bool is_allowed_html_tag(const char *tag_name) {
         "abbr", "b", "bdi", "bdo", "big", "blockquote", "br", "caption", "cite",
         "code", "col", "colgroup", "data", "dd", "del", "dfn", "div", "dl",
         "dt", "em", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "ins", "kbd",
-        "li", "link", "mark", "meta", "ol", "p", "pre", "q", "rp", "rt", "ruby",
-        "s", "samp", "small", "span", "strong", "sub", "sup", "table", "td",
-        "th", "time", "tr", "u", "ul", "var", "wbr",
+        "li", "link", "mark", "ol", "p", "pre", "q", "rp", "rt", "ruby", "s",
+        "samp", "small", "span", "strong", "sub", "sup", "table", "td", "th",
+        "time", "tr", "u", "ul", "var", "wbr",
         // Deprecated but still allowed tags
         "center", "font", "rb", "rtc", "strike", "tt",
+        // self_closing_tags
+        "br", "meta", "hr",
         // References
         "ref", NULL};
 
@@ -335,7 +366,7 @@ static bool parse_and_validate_attributes(TSLexer *lexer,
             }
         }
 
-        // For link and meta tags, validate required attributes
+        // For link and mmeeta tags, validate required attributes
         if (strcmp(tag_name, "link") == 0) {
             // link tag must have itemprop and href
             static bool has_itemprop = false, has_href = false;
@@ -362,7 +393,8 @@ static bool parse_and_validate_attributes(TSLexer *lexer,
     return true;
 }
 
-static bool is_valid_html_tag(TSLexer *lexer, bool is_closing) {
+static bool is_valid_html_tag(Scanner *scanner, TSLexer *lexer,
+                              bool is_closing) {
     lexer->mark_end(lexer);
     // Skip whitespace (though not typical in HTML)
     while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
@@ -400,10 +432,19 @@ static bool is_valid_html_tag(TSLexer *lexer, bool is_closing) {
     }
 
     tag_name[tag_len] = '\0';
-
+    printf("Tag name is %s ", tag_name);
     // Check if tag is in allowed list
     if (!is_allowed_html_tag(tag_name)) {
         return false;
+    }
+
+    if (is_allowed_self_closing_html_tag(tag_name)) {
+        // set it in scanner
+        scanner->self_closing_html_tag = 1;
+        printf(", self closing %d\n", scanner->self_closing_html_tag);
+    } else {
+
+        scanner->self_closing_html_tag = 0;
     }
 
     // Skip whitespace
@@ -425,9 +466,11 @@ static bool is_valid_html_tag(TSLexer *lexer, bool is_closing) {
     }
 
     if (lexer->lookahead == '>') {
+        printf("ok\n");
         return true;
     }
 
+    printf(", failed\n");
     return false;
 }
 
@@ -925,11 +968,15 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     if (valid_symbols[HTML_TAG_OPEN_MARKER]) {
         printf("HTML_CONTENT_MARKER");
     }
+    if (valid_symbols[HTML_SELF_CLOSING_TAG_MARKER]) {
+        printf("HTML_SELF_CLOSING_TAG_MARKER");
+    }
     printf("\n");
 }
 
 bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
                                                 const bool *valid_symbols) {
+    Scanner *scanner = (Scanner *)payload;
     /* dump_valid_symbols(valid_symbols); */
     // Handle file options in priority order (most specific first)
     if (valid_symbols[FILE_SIZE_TOKEN] && scan_file_size(lexer)) {
@@ -968,13 +1015,22 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
             return true;
         }
     }
-    if (valid_symbols[HTML_TAG_OPEN_MARKER] &&
-        is_valid_html_tag(lexer, false)) {
-        lexer->result_symbol = HTML_TAG_OPEN_MARKER;
-        return true;
+
+    if (valid_symbols[HTML_TAG_OPEN_MARKER] ||
+        valid_symbols[HTML_SELF_CLOSING_TAG_MARKER]) {
+        reset_state(scanner);
+        if (is_valid_html_tag(scanner, lexer, false)) {
+            if (scanner->self_closing_html_tag == 1) {
+                lexer->result_symbol = HTML_SELF_CLOSING_TAG_MARKER;
+            } else {
+                lexer->result_symbol = HTML_TAG_OPEN_MARKER;
+            }
+            reset_state(scanner);
+            return true;
+        }
     }
     if (valid_symbols[HTML_TAG_CLOSE_MARKER] &&
-        is_valid_html_tag(lexer, true)) {
+        is_valid_html_tag(scanner, lexer, true)) {
         lexer->result_symbol = HTML_TAG_CLOSE_MARKER;
         return true;
     }

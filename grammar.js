@@ -27,6 +27,7 @@ module.exports = grammar({
     $._template_param_name_value_marker,
     $._html_tag_open_marker,
     $._html_tag_close_marker,
+    $._html_self_closing_tag_marker,
   ],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
@@ -550,7 +551,7 @@ module.exports = grammar({
     table: ($) =>
       seq(
         "{|",
-        optional(repeat1(choice($.table_attribute, $.template))),
+        optional(repeat1(choice($.table_attribute, $.template, "|"))),
         "\n",
         optional($.tablecaption),
         optional(alias(repeat1($.table_header), $.colheaders)),
@@ -656,8 +657,17 @@ module.exports = grammar({
         $._blank_line,
       ),
 
-    _html_text: ($) => token(prec(-1, /[^<]+/)),
-    html_tag: ($) =>
+    html_tag: ($) => choice($._self_closing_tag, $._html_generic_tag),
+    _self_closing_tag: ($) =>
+      seq(
+        "<",
+        $._html_self_closing_tag_marker,
+        field("name", $.html_tag_name),
+        field("attributes", optional($._html_attributes_pattern_no_gt)),
+        choice(">", "/>"),
+      ),
+
+    _html_generic_tag: ($) =>
       seq(
         "<",
         $._html_tag_open_marker,

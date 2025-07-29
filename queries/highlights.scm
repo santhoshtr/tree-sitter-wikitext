@@ -62,7 +62,6 @@
   "<"
   ">"
   "</"
-  "/>"
 ] @punctuation.bracket
 
 [

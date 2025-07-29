@@ -586,7 +586,6 @@ Link Element with Required Attributes
 
 ==================
 Meta Element with Required Attributes
-:error
 ==================
 
 <meta itemprop="datePublished" content="2023-12-25">
@@ -597,7 +596,13 @@ Meta Element with Required Attributes
   (section
     (paragraph
       (html_tag
-        (html_tag_open)))))
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))))))
 
 ==================
 Preformatted Text
@@ -958,7 +963,6 @@ Table Caption
 
 ==================
 Line Breaks with Clear
-:error
 ==================
 
 Some text before<br clear="left">text after line break.
@@ -970,7 +974,10 @@ Some text before<br clear="left">text after line break.
     (paragraph
       (text)
       (html_tag
-        (html_tag_open))
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value)))
       (text))))
 
 ==================
