@@ -274,3 +274,39 @@ Template with values in new lines
           (template_param_name)
           (template_param_value
             (text)))))))
+
+===================================================
+Templates with list as param value
+===================================================
+
+{{template name 
+| children={{childlist|
+* Child value1
+* Child value 2
+}}
+}}
+-----------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (template
+              (template_name
+                (template_name_part))
+              (template_argument
+                (template_param_value
+                  (unordered_list
+                    (unordered_list_item
+                      (list_marker)
+                      (list_item_content
+                        (text)))
+                    (unordered_list_item
+                      (list_marker)
+                      (list_item_content
+                        (text)))))))))))))

@@ -1801,6 +1801,10 @@
           "named": true
         },
         {
+          "type": "definition_list",
+          "named": true
+        },
+        {
           "type": "entity",
           "named": true
         },
@@ -1829,6 +1833,10 @@
           "named": true
         },
         {
+          "type": "ordered_list",
+          "named": true
+        },
+        {
           "type": "redirect",
           "named": true
         },
@@ -1842,6 +1850,10 @@
         },
         {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         },
         {

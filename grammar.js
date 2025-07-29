@@ -457,7 +457,13 @@ module.exports = grammar({
     _text_no_pipes_braces_equals: ($) => token(prec(1, /[^\|{}=]+/)),
 
     template_param_value: ($) =>
-      repeat1(choice($._inline_content, $._blank_line)),
+      repeat1(
+        choice(
+          $._inline_content,
+          $._list, // Nested list
+          $._blank_line,
+        ),
+      ),
     // ==== Lists ====
     _list: ($) => choice($.unordered_list, $.ordered_list, $.definition_list),
 
