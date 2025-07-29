@@ -438,7 +438,6 @@ static bool is_valid_html_tag(Scanner *scanner, TSLexer *lexer,
     }
 
     tag_name[tag_len] = '\0';
-    printf("Tag name is %s ", tag_name);
     // Check if tag is in allowed list
     if (!is_allowed_html_tag(tag_name)) {
         return false;
@@ -447,7 +446,6 @@ static bool is_valid_html_tag(Scanner *scanner, TSLexer *lexer,
     if (is_allowed_self_closing_html_tag(tag_name)) {
         // set it in scanner
         scanner->self_closing_html_tag = 1;
-        printf(", self closing %d\n", scanner->self_closing_html_tag);
     } else {
 
         scanner->self_closing_html_tag = 0;
@@ -472,11 +470,9 @@ static bool is_valid_html_tag(Scanner *scanner, TSLexer *lexer,
     }
 
     if (lexer->lookahead == '>') {
-        printf("ok\n");
         return true;
     }
 
-    printf(", failed\n");
     return false;
 }
 
