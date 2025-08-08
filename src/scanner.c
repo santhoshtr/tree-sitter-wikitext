@@ -117,6 +117,8 @@ static bool is_allowed_html_tag(const char *tag_name) {
         "center", "font", "rb", "rtc", "strike", "tt",
         // self_closing_tags
         "br", "meta", "hr",
+        // wiki specific markup
+        "noinclude",
         // References
         "ref", NULL};
 
