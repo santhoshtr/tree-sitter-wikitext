@@ -22,15 +22,18 @@ enum TokenType {
     HTML_TAG_OPEN_MARKER,
     HTML_TAG_CLOSE_MARKER,
     HTML_SELF_CLOSING_TAG_MARKER,
+    UNORDERED_LIST_MARKER,
+    ORDERED_LIST_MARKER,
 };
 
 typedef struct {
     uint8_t self_closing_html_tag;
-
+    uint8_t list_level;
 } Scanner;
 
 static inline void reset_state(Scanner *scanner) {
     scanner->self_closing_html_tag = 0;
+    scanner->list_level = 0;
 }
 
 void *tree_sitter_wikitext_external_scanner_create() {
@@ -47,7 +50,8 @@ unsigned tree_sitter_wikitext_external_scanner_serialize(void *payload,
                                                          char *buffer) {
     Scanner *scanner = (Scanner *)payload;
     buffer[0] = (char)scanner->self_closing_html_tag;
-    return 1;
+    buffer[1] = (char)scanner->list_level;
+    return 2;
 }
 
 void tree_sitter_wikitext_external_scanner_deserialize(void *payload,
@@ -57,6 +61,7 @@ void tree_sitter_wikitext_external_scanner_deserialize(void *payload,
     if (length == 0)
         return;
     scanner->self_closing_html_tag = buffer[0];
+    scanner->list_level = buffer[1];
 }
 
 static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
@@ -776,7 +781,7 @@ static bool is_mediawiki_header(TSLexer *lexer) {
     return false;
 }
 
-static bool scan_inline_text_base(TSLexer *lexer) {
+static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
     int text_run_length = 0;
 
     lexer->mark_end(lexer);
@@ -844,7 +849,6 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         if ((lexer->lookahead == '*' || lexer->lookahead == '#' ||
              lexer->lookahead == ';' || lexer->lookahead == ':') &&
             col_index == 0) {
-            // should be handled separately
             break;
         }
         /* if (lexer->lookahead == ':' && char_index > 0) {
@@ -862,6 +866,9 @@ static bool scan_inline_text_base(TSLexer *lexer) {
         if (lexer->lookahead == '|' || lexer->lookahead == '\n') {
             // should be handled separately
             break;
+        }
+        if (col_index == 0) {
+            scanner->list_level = 0;
         }
         advance(lexer);
         text_run_length++;
@@ -975,6 +982,12 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     if (valid_symbols[HTML_SELF_CLOSING_TAG_MARKER]) {
         printf("HTML_SELF_CLOSING_TAG_MARKER");
     }
+    if (valid_symbols[ORDERED_LIST_MARKER]) {
+        printf("ORDERED_LIST_MARKER");
+    }
+    if (valid_symbols[UNORDERED_LIST_MARKER]) {
+        printf("UNORDERED_LIST_MARKER");
+    }
     printf("\n");
 }
 
@@ -1061,6 +1074,34 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
             };
         }
         break;
+    case '*':
+    case '#':
+        if (valid_symbols[UNORDERED_LIST_MARKER] ||
+            valid_symbols[ORDERED_LIST_MARKER]) {
+            int level = 0;
+            uint32_t col_index = lexer->get_column(lexer);
+            if (col_index > 0) {
+                return false;
+            }
+            while (lexer->lookahead == '*' || lexer->lookahead == '#') {
+                if (lexer->lookahead == '*') {
+                    lexer->result_symbol = UNORDERED_LIST_MARKER;
+                }
+                if (lexer->lookahead == '#') {
+                    lexer->result_symbol = ORDERED_LIST_MARKER;
+                }
+                level++;
+                advance(lexer);
+                lexer->mark_end(lexer);
+            }
+            if (scanner->list_level <= level) {
+                scanner->list_level = level;
+            } else {
+                return true;
+            }
+            return true;
+        }
+        break;
     case '<':
         if (valid_symbols[COMMENT] && scan_comment(lexer)) {
             lexer->result_symbol = COMMENT;
@@ -1068,7 +1109,8 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
         }
         break;
     default:
-        if (valid_symbols[INLINE_TEXT_BASE] && scan_inline_text_base(lexer)) {
+        if (valid_symbols[INLINE_TEXT_BASE] &&
+            scan_inline_text_base(scanner, lexer)) {
             return true;
         };
     }

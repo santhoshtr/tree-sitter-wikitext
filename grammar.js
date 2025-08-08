@@ -28,6 +28,8 @@ module.exports = grammar({
     $._html_tag_open_marker,
     $._html_tag_close_marker,
     $._html_self_closing_tag_marker,
+    $.unordered_list_marker,
+    $.ordered_list_marker,
   ],
   extras: (_) => ["\r", /\s/],
   conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
@@ -482,7 +484,7 @@ module.exports = grammar({
     unordered_list_item: ($) =>
       prec.right(
         seq(
-          alias("*", $.list_marker),
+          alias($.unordered_list_marker, $.list_marker),
           field("content", $.list_item_content),
           $._newline, // Items are typically one per line
         ),
@@ -491,7 +493,7 @@ module.exports = grammar({
     ordered_list_item: ($) =>
       prec.right(
         seq(
-          alias("#", $.list_marker),
+          alias($.ordered_list_marker, $.list_marker),
           field("content", $.list_item_content),
           $._newline,
         ),

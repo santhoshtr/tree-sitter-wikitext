@@ -11,26 +11,35 @@ Basic redirects
 
 (source_file
   (section
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))))
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))))))))
 
 ================================================================================
 Redirects with namespaces
@@ -44,21 +53,27 @@ Redirects with namespaces
 
 (source_file
   (section
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))))
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (medialink
+            (filename)))))))
 
 ================================================================================
 Redirects with section links
@@ -71,16 +86,21 @@ Redirects with section links
 
 (source_file
   (section
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))))
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))))))))
 
 ================================================================================
 Invalid or malformed redirects
@@ -115,13 +135,16 @@ Redirects with comments
 
 (source_file
   (section
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment))))
-      (text)
-      (comment))
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))
+          (text)
+          (comment))))
     (paragraph
       (comment)
       (text)
@@ -140,14 +163,19 @@ Redirects with interwiki links
 
 (source_file
   (section
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (namespace_separator)
-            (page_name_segment)))))
-    (paragraph
-      (redirect
-        (wikilink
-          (wikilink_page
-            (page_name_segment)))))))
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (namespace_separator)
+              (page_name_segment)))))
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))))))))

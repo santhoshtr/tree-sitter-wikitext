@@ -1876,8 +1876,8 @@
           {
             "type": "ALIAS",
             "content": {
-              "type": "STRING",
-              "value": "*"
+              "type": "SYMBOL",
+              "name": "unordered_list_marker"
             },
             "named": true,
             "value": "list_marker"
@@ -1917,8 +1917,8 @@
           {
             "type": "ALIAS",
             "content": {
-              "type": "STRING",
-              "value": "#"
+              "type": "SYMBOL",
+              "name": "ordered_list_marker"
             },
             "named": true,
             "value": "list_marker"
@@ -2980,6 +2980,14 @@
     {
       "type": "SYMBOL",
       "name": "_html_self_closing_tag_marker"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "unordered_list_marker"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ordered_list_marker"
     }
   ],
   "inline": [],

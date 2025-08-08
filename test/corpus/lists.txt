@@ -26,7 +26,6 @@ Basic unordered lists
 
 ================================================================================
 Nested unordered lists
-:skip
 ================================================================================
 
 * Item 1
@@ -37,23 +36,24 @@ Nested unordered lists
 --------------------------------------------------------------------------------
 
 (source_file
-  (unordered_list
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))
-    (unordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))))
+  (section
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))))
 
 ================================================================================
 Basic ordered lists
@@ -83,7 +83,6 @@ Basic ordered lists
 
 ================================================================================
 Mixed ordered and unordered lists
-:skip
 ================================================================================
 
 # Item 1
@@ -94,20 +93,26 @@ Mixed ordered and unordered lists
 --------------------------------------------------------------------------------
 
 (source_file
-  (ordered_list
-    (ordered_list_item
-      (list_marker)
-      (list_item_content
-        (text))))
-  (paragraph
-    (text))
-  (paragraph
-    (text))
-  (ordered_list
-    (ordered_list_item
-      (list_marker)
-      (list_item_content
-        (text)))))
+  (section
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))))
 
 ================================================================================
 Lists with special characters
