@@ -1,14 +1,5 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
-// Helper for text that should not greedily consume terminators
-const text_not_ending_with = (terminators) => {
-  // Construct a regex that matches any character NOT in terminators,
-  // or any character in terminators NOT followed by another character in terminators (if applicable)
-  // This is a simplification; complex cases might need more sophisticated lookaheads.
-  // For now, a simple negated character class is often sufficient if terminators are single characters.
-  const pattern = `[^${terminators.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\n]+`;
-  return token(pattern);
-};
 
 module.exports = grammar({
   name: "wikitext",
@@ -164,12 +155,6 @@ module.exports = grammar({
     text: ($) => prec(-2, $._inline_text_base),
 
     // More specific text tokens for contexts where fewer delimiters apply
-    _text_no_brackets_pipes: ($) => text_not_ending_with("\\[\\]|{}"),
-    _text_no_pipes_braces: ($) => text_not_ending_with("|{}"),
-    _text_no_square_brackets: ($) => text_not_ending_with("\\[\\]"),
-    _text_no_curly_braces: ($) => text_not_ending_with("{}"),
-    _text_no_equals: ($) => text_not_ending_with("="),
-    _text_no_bar: ($) => text_not_ending_with("|"),
     _text_no_newline: ($) => token(/[^\n]+/),
 
     single_quote_text: ($) =>

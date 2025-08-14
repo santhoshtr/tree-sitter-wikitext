@@ -435,48 +435,6 @@
         "name": "_inline_text_base"
       }
     },
-    "_text_no_brackets_pipes": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "[^\\\\\\[\\\\\\]\\|\\{\\}\\n]+"
-      }
-    },
-    "_text_no_pipes_braces": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "[^\\|\\{\\}\\n]+"
-      }
-    },
-    "_text_no_square_brackets": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "[^\\\\\\[\\\\\\]\\n]+"
-      }
-    },
-    "_text_no_curly_braces": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "[^\\{\\}\\n]+"
-      }
-    },
-    "_text_no_equals": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "[^=\\n]+"
-      }
-    },
-    "_text_no_bar": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "[^\\|\\n]+"
-      }
-    },
     "_text_no_newline": {
       "type": "TOKEN",
       "content": {
