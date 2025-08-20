@@ -1,47 +1,52 @@
 {
-	"name": "tree-sitter-wikitext",
-	"version": "0.1.0",
-	"description": "A tree-sitter parser for wikitext documents.",
-	"main": "bindings/node",
-	"types": "bindings/node",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"install": "node-gyp-build",
-		"lint": "npx @biomejs/biome format --write grammar.js",
-		"prebuildify": "prebuildify --napi --strip"
-	},
-	"keywords": ["tree-sitter", "wikitext", "parser"],
-	"files": [
-		"grammar.js",
-		"binding.gyp",
-		"prebuilds/**",
-		"bindings/node/*",
-		"queries/*",
-		"src/**"
-	],
-	"author": "Miel Peeters",
-	"license": "ISC",
-	"dependencies": {
-		"node-addon-api": "^7.1.0",
-		"node-gyp-build": "^4.8.0"
-	},
-	"peerDependencies": {
-		"tree-sitter": "^0.21.0"
-	},
-	"peerDependenciesMeta": {
-		"tree_sitter": {
-			"optional": true
-		}
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"prebuildify": "^6.0.0",
-		"tree-sitter-cli": "^0.24.0"
-	},
-	"tree-sitter": [
-		{
-			"scope": "source.wikitext",
-			"injection-regex": "^wikitext$"
-		}
-	]
+  "name": "tree-sitter-wikitext",
+  "version": "0.1.0",
+  "description": "A tree-sitter parser for wikitext documents.",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "scripts": {
+    "install": "node-gyp-build",
+    "lint": "npx @biomejs/biome format --write grammar.js",
+    "prebuildify": "prebuildify --napi --strip",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
+  },
+  "keywords": ["tree-sitter", "wikitext", "parser"],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "author": {
+    "name": "Santhosh Thottingal",
+    "email": "santhosh.thottingal@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^8.2.2",
+    "node-gyp-build": "^4.8.2"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.25.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.wikitext",
+      "injection-regex": "^wikitext$"
+    }
+  ]
 }
