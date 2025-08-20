@@ -41,10 +41,12 @@
   (url) @markup.link.url
   (page_name_segment)? @markup.link.label
 )
+
 (template
   (template_name) @module
   (template_argument
-  (template_param_name) @tag.attribute
+  (template_param_name)? @tag.attribute
+  (template_param_value)? @string
   )
 )
 
