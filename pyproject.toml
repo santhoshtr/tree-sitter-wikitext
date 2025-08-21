@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -14,16 +14,28 @@ classifiers = [
   "Topic :: Text Processing :: Linguistic",
   "Typing :: Typed",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license.text = "MIT"
 readme = "README.md"
-
+authors = [
+  { name = "Santhosh Thottingal", email = "santhosh.thottingal@gmail.com" },
+]
 [project.urls]
-Homepage = "https://github.com/tree-sitter/tree-sitter-wikitext"
+Homepage = "https://github.com/santhoshtr/tree-sitter-wikitext"
 
 [project.optional-dependencies]
-core = ["tree-sitter~=0.22"]
+core = ["tree-sitter~=0.25"]
 
 [tool.cibuildwheel]
-build = "cp39-*"
+build = "cp310-*"
 build-frontend = "build"
+[tool.setuptools]
+package-dir = {"" = "bindings/python"}
+
+[tool.setuptools.packages.find]
+where = ["bindings/python"]
+
+[tool.setuptools.package-data]
+tree_sitter_wikitext = ["*.pyi", "py.typed"]
+"tree_sitter_wikitext.queries" = ["*.scm"]
+
