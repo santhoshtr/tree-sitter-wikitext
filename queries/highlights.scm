@@ -1,5 +1,5 @@
 ;; Highlighting rules for Wikitext
-
+;; Refer https://neovim.io/doc/user/treesitter.html
 ;; Highlight headings
 (heading1
   (heading_marker) @punctuation.special
