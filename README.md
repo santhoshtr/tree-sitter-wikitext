@@ -61,6 +61,213 @@ The parser can be embedded in applications written in various languages. For exa
 - **Node.js**: Import the parser as a Node.js module.
 - **Rust**: Use the `tree-sitter` crate to integrate the parser.
 
+### Example: Parsing Wikitext in Python
+
+First, install the required dependencies:
+
+```bash
+pip install tree-sitter
+```
+
+Then use the parser in your Python code:
+
+```python
+from tree_sitter import Language, Parser
+import tree_sitter_wikitext as tswikitext
+
+# Create a language object
+WIKITEXT_LANGUAGE = Language(tswikitext.language(), "wikitext")
+
+# Create a parser
+parser = Parser()
+parser.set_language(WIKITEXT_LANGUAGE)
+
+# Parse some wikitext
+source_code = b"""
+== Introduction ==
+This is a '''bold''' text with ''italic'' formatting.
+
+* List item 1
+* List item 2
+
+[[Link to another page]]
+"""
+
+tree = parser.parse(source_code)
+
+# Print the syntax tree
+print(tree.root_node().sexp())
+
+# Walk through the tree
+def walk_tree(node, depth=0):
+    indent = "  " * depth
+    print(f"{indent}{node.type}: {node.text.decode('utf-8')[:50]}")
+    for child in node.children:
+        walk_tree(child, depth + 1)
+
+walk_tree(tree.root_node())
+
+# Query for specific nodes (e.g., all headings)
+query = WIKITEXT_LANGUAGE.query("""
+(heading) @heading
+""")
+
+captures = query.captures(tree.root_node())
+for node, capture_name in captures:
+    print(f"Found {capture_name}: {node.text.decode('utf-8').strip()}")
+```
+
+### Example: Parsing Wikitext in Node.js
+
+First, install the parser:
+
+```bash
+npm install tree-sitter tree-sitter-wikitext
+```
+
+Then use it in your Node.js application:
+
+```javascript
+const Parser = require('tree-sitter');
+const Wikitext = require('tree-sitter-wikitext');
+
+// Create a parser
+const parser = new Parser();
+parser.setLanguage(Wikitext);
+
+// Parse some wikitext
+const sourceCode = `
+== Introduction ==
+This is a '''bold''' text with ''italic'' formatting.
+
+* List item 1
+* List item 2
+
+[[Link to another page]]
+`;
+
+const tree = parser.parse(sourceCode);
+
+// Print the syntax tree
+console.log(tree.rootNode.toString());
+
+// Walk through the tree
+function walkTree(node, depth = 0) {
+    const indent = "  ".repeat(depth);
+    console.log(`${indent}${node.type}: ${node.text.substring(0, 50)}`);
+    
+    for (const child of node.children) {
+        walkTree(child, depth + 1);
+    }
+}
+
+walkTree(tree.rootNode);
+
+// Query for specific nodes
+const query = Wikitext.query(`
+(heading) @heading
+(bold) @bold
+(italic) @italic
+(link) @link
+`);
+
+const captures = query.captures(tree.rootNode);
+captures.forEach(capture => {
+    console.log(`Found ${capture.name}: ${capture.node.text.trim()}`);
+});
+
+// Find all headings
+function findHeadings(node) {
+    const headings = [];
+    
+    if (node.type === 'heading') {
+        headings.push({
+            level: node.children.filter(c => c.type === 'heading_marker')[0]?.text.length || 2,
+            text: node.text.replace(/^=+\s*|\s*=+$/g, '').trim()
+        });
+    }
+    
+    for (const child of node.children) {
+        headings.push(...findHeadings(child));
+    }
+    
+    return headings;
+}
+
+const headings = findHeadings(tree.rootNode);
+console.log('Headings found:', headings);
+```
+
+### Advanced Usage in Node.js
+
+For more advanced use cases, you can create incremental parsers and handle large documents:
+
+```javascript
+const Parser = require('tree-sitter');
+const Wikitext = require('tree-sitter-wikitext');
+
+class WikitextProcessor {
+    constructor() {
+        this.parser = new Parser();
+        this.parser.setLanguage(Wikitext);
+    }
+    
+    parseDocument(content) {
+        return this.parser.parse(content);
+    }
+    
+    updateDocument(oldTree, content, startIndex, oldEndIndex, newEndIndex) {
+        // For incremental parsing
+        oldTree.edit({
+            startIndex,
+            oldEndIndex,
+            newEndIndex,
+            startPosition: { row: 0, column: startIndex },
+            oldEndPosition: { row: 0, column: oldEndIndex },
+            newEndPosition: { row: 0, column: newEndIndex }
+        });
+        
+        return this.parser.parse(content, oldTree);
+    }
+    
+    extractMetadata(tree) {
+        const metadata = {
+            headings: [],
+            links: [],
+            templates: [],
+            categories: []
+        };
+        
+        // Implementation would depend on your specific grammar rules
+        // This is a simplified example
+        function traverse(node) {
+            switch (node.type) {
+                case 'heading':
+                    metadata.headings.push(node.text.trim());
+                    break;
+                case 'link':
+                    metadata.links.push(node.text.trim());
+                    break;
+                // Add more cases based on your grammar
+            }
+            
+            for (const child of node.children) {
+                traverse(child);
+            }
+        }
+        
+        traverse(tree.rootNode);
+        return metadata;
+    }
+}
+
+// Usage
+const processor = new WikitextProcessor();
+const tree = processor.parseDocument(sourceCode);
+const metadata = processor.extractMetadata(tree);
+console.log('Document metadata:', metadata);
+```
+
 ### Example: Parsing Wikitext in Rust
 
 ```rust
