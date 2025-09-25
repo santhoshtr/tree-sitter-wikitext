@@ -10,6 +10,7 @@ on:
       - bindings/**
       - binding.gyp
       - .github/**
+      - setup.py
 
   pull_request:
     paths:
