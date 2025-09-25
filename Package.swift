@@ -13,7 +13,8 @@ let package = Package(
         .package(name: "SwiftTreeSitter", url: "https://github.com/tree-sitter/swift-tree-sitter", from: "0.9.0"),
     ],
     targets: [
-        .target(name: "TreeSitterWikitext",
+        .target(
+            name: "TreeSitterWikitext",
             path: ".",
             sources: sources,
             exclude: [

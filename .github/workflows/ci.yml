@@ -11,6 +11,7 @@ on:
       - binding.gyp
       - .github/**
       - setup.py
+      - Package.swift
 
   pull_request:
     paths:
