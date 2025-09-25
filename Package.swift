@@ -16,7 +16,6 @@ let package = Package(
         .target(
             name: "TreeSitterWikitext",
             path: ".",
-            sources: sources,
             exclude: [
                 "Cargo.toml",
                 "Makefile",
@@ -40,6 +39,7 @@ let package = Package(
                 ".gitattributes",
                 ".gitmodules",
             ],
+            sources: sources,
             resources: [
                 .copy("queries")
             ],
