@@ -1,0 +1,112 @@
+{{Infobox element
+|name=sodium
+|number=11
+|symbol=Na
+|abundance=
+|abundance in earth's crust=
+|abundance in oceans=
+|abundance in solar system=
+|left=[[neon]]
+|right=[[magnesium]]
+|above=[[lithium|Li]]
+|below=[[potassium|K]]
+|category=alkali metal
+|category comment=
+|group=1
+|period=3
+|block=s
+|appearance=silvery white metallic
+|image name=Na (Sodium).jpg
+|electron configuration=&#91;[[neon|Ne]]&#93; 3s<sup>1</sup>
+|electrons per shell=2, 8, 1
+|phase=solid
+|phase comment=
+|density gplstp=
+|density gpcm3nrt=0.968
+|density gpcm3nrt 2=
+|density gpcm3mp=0.927
+|melting point K=370.944
+|melting point C=97.794
+|melting point F=208.029
+|boiling point K=1156.090
+|boiling point C=882.940
+|boiling point F=1621.292
+|triple point K=
+|triple point kPa=
+|critical point K=2573
+|critical point MPa=35
+|critical point comment=''(extrapolated)''
+|heat fusion=2.60
+|heat fusion 2=
+|heat vaporization=97.42
+|heat capacity=28.230
+|vapor pressure 1=554
+|vapor pressure 10=617
+|vapor pressure 100=697
+|vapor pressure 1 k=802
+|vapor pressure 10 k=946
+|vapor pressure 100 k=1153
+|vapor pressure comment=
+|crystal structure=body-centered cubic
+|oxidation states='''+1''', −1
+|oxidation states comment=(a&nbsp;strongly [[base (chemistry)|basic]] oxide)
+|electronegativity=0.93
+|number of ionization energies=4
+|ionization energy 1=495.8
+|ionization energy 2=4562
+|ionization energy 3=6910.3
+|atomic radius=186
+|atomic radius calculated=
+|covalent radius=166±9
+|Van der Waals radius=227
+|magnetic ordering=[[paramagnetism|paramagnetic]]
+|magnetic ordering ref=<ref>[http://www-d0.fnal.gov/hardware/cal/lvps_info/engineering/elementmagn.pdf Magnetic susceptibility of the elements and inorganic compounds], in {{RubberBible86th}}</ref>
+|electrical resistivity unit prefix=n
+|electrical resistivity at 0=
+|electrical resistivity at 20=47.7
+|thermal conductivity=142
+|thermal conductivity 2=
+|thermal diffusivity=
+|thermal expansion=
+|thermal expansion at 25=71
+|speed of sound=
+|speed of sound rod at 20=3200
+|speed of sound rod at r.t.=
+|Young's modulus=10
+|Shear modulus=3.3
+|Bulk modulus=6.3
+|Poisson ratio=
+|Mohs hardness=0.5
+|Vickers hardness=
+|Brinell hardness=0.69
+|CAS number=7440-23-5
+|magnetic susceptibility= +16.0·10<sup>−6</sup>
+|magnetic susceptibility ref= &#x20;(298&nbsp;K)<ref>{{Cite book|title=CRC, Handbook of Chemistry and Physics|last=Weast|first=Robert|publisher=Chemical Rubber Company Publishing|year=1984|isbn=0-8493-0464-4|location=Boca Raton, Florida|pages=E110|quote=|via=}}</ref>
+|isotopes=
+{{infobox element/isotopes decay | mn=22 | sym=Na | na=[[trace radioisotope|trace]] | hl=2.602&nbsp;y | dm=[[beta decay|β<sup>+</sup>]]
+|de=1.820 | link1=neon-22 | pn=22 | ps=Ne}}
+{{infobox element/isotopes stable | mn=23 | sym=Na | na=100% | n=12 |firstlinks=yes}}
+{{infobox element/isotopes decay |mn=24 |sym=Na |na=trace |hl=14.96&nbsp;h |dm=[[beta decay|β<sup>−</sup>]] |de=5.515 |link1=magnesium-24 |pn=24 |ps=Mg}}
+|isotopes comment=
+|predicted by=
+|prediction date=
+|discovery and first isolation by=[[Humphry Davy]]
+|discovery date=1807
+|named by=
+|named date=
+|history comment label=
+|history comment=
+|QID=Q658
+}}<!--
+
+-->
+
+<noinclude>
+{{Infobox element/element navigation|symbol=Na}}
+{{Template reference list}}
+One of these is a [[WP:REFNAME|named reference]]. It may be cited in the containing article as
+*<nowiki><ref name="CIAAW2016" /></nowiki> for the source ''Atomic weights of the elements 2013'' (from subtemplates used by {{tl|Infobox element}})
+{{documentation|1=Template:Infobox element/doc}}
+[[Category:Templates that generate named references]]
+</noinclude>
+

@@ -1,0 +1,19 @@
+Lorem = Ipusm text
+
+==== head 4 ====
+
+Another text > [ 
+An enity &name; not an & enity 
+
+One [[more]] Another. 
+
+te 
+
+* template {{testing}}
+This is signature ~~~
+
+This is not a signature ~~~~~~~~~~~~~~~~~
+
+This is '''bold'''. This is 'ok'
+
+Start {{Template|parameter1|parameter2}}

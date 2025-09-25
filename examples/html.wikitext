@@ -1,0 +1,21 @@
+<b id="id">content
+[[link]]</b>
+
+self closing <br>
+This is a paragraph.<p>This is a continuation of the paragraph. But it appears after an empty line due to the &lt;p&gt; and &lt;/p&gt; tags.</p>
+
+<ref>{{tmp|paragraph}};</ref>
+
+<meta content="metaname"/>
+
+<center>Centered text</center>
+<font>Red font</font>
+<big>Big text</big>
+<small>Small text</small>
+<strike>Strikethrough</strike>
+<tt>Teletype text</tt>
+
+<br/>
+
+[[Text after break  <br>(Dutch: Brussel) <br>(French: Bruxelles) <br>(German: Brüssel) <br>Text after break]]
+

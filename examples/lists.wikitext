@@ -1,0 +1,26 @@
+== Heading ==
+
+* List item 1
+* List item 2
+** Nest unorderded item
+
+
+# numbered list
+## nested ordered 
+# another numnered list
+
+
+; Definition lists
+; term : definition
+; semicolon plus term
+: colon plus definition
+
+* Or create mixed lists
+*# and nest them
+*#* like this
+*#*; definitions
+*#*: work:
+*#*; apple
+*#*; banana
+*#*: fruits
+* end item
