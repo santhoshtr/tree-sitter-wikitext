@@ -100,4 +100,8 @@
   (italic) @markup.italic
   (bold) @markup.strong
 )
-
+; Spell check
+[
+  (comment)
+  (content)
+] @spell
