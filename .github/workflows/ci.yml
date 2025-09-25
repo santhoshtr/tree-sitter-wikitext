@@ -3,15 +3,6 @@ name: CI
 on:
   push:
     branches: [main]
-    paths:
-      - grammar.js
-      - src/**
-      - test/**
-      - bindings/**
-      - binding.gyp
-      - .github/**
-      - setup.py
-      - Package.swift
 
   pull_request:
     paths:
