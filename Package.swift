@@ -45,7 +45,7 @@ let package = Package(
             ],
             publicHeadersPath: "bindings/swift",
             cSettings: [.headerSearchPath("src")]
-        )
+        ),
         .testTarget(
             name: "TreeSitterWikitextTests",
             dependencies: [
