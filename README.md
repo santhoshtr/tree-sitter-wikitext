@@ -1,5 +1,10 @@
 # Tree-Sitter Wikitext Parser
 
+[![PyPI Version](https://img.shields.io/pypi/v/tree-sitter-wikitext.svg)](https://pypi.org/project/tree-sitter-wikitext/)
+[![npm Version](https://img.shields.io/npm/v/tree-sitter-wikitext.svg)](https://www.npmjs.com/package/tree-sitter-wikitext)
+[![crates.io Version](https://img.shields.io/crates/v/tree-sitter-wikitext.svg)](https://crates.io/crates/tree-sitter-wikitext)
+
+
 This repository contains the implementation of a **Tree-Sitter** parser for **Wikitext**, a markup language used by MediaWiki.
 
 Try the parse in the [playground](https://tree-sitter-wikitext.toolforge.org/)
@@ -155,7 +160,7 @@ console.log(tree.rootNode.toString());
 function walkTree(node, depth = 0) {
     const indent = "  ".repeat(depth);
     console.log(`${indent}${node.type}: ${node.text.substring(0, 50)}`);
-    
+
     for (const child of node.children) {
         walkTree(child, depth + 1);
     }
@@ -179,18 +184,18 @@ captures.forEach(capture => {
 // Find all headings
 function findHeadings(node) {
     const headings = [];
-    
+
     if (node.type === 'heading') {
         headings.push({
             level: node.children.filter(c => c.type === 'heading_marker')[0]?.text.length || 2,
             text: node.text.replace(/^=+\s*|\s*=+$/g, '').trim()
         });
     }
-    
+
     for (const child of node.children) {
         headings.push(...findHeadings(child));
     }
-    
+
     return headings;
 }
 
@@ -211,11 +216,11 @@ class WikitextProcessor {
         this.parser = new Parser();
         this.parser.setLanguage(Wikitext);
     }
-    
+
     parseDocument(content) {
         return this.parser.parse(content);
     }
-    
+
     updateDocument(oldTree, content, startIndex, oldEndIndex, newEndIndex) {
         // For incremental parsing
         oldTree.edit({
@@ -226,10 +231,10 @@ class WikitextProcessor {
             oldEndPosition: { row: 0, column: oldEndIndex },
             newEndPosition: { row: 0, column: newEndIndex }
         });
-        
+
         return this.parser.parse(content, oldTree);
     }
-    
+
     extractMetadata(tree) {
         const metadata = {
             headings: [],
@@ -237,7 +242,7 @@ class WikitextProcessor {
             templates: [],
             categories: []
         };
-        
+
         // Implementation would depend on your specific grammar rules
         // This is a simplified example
         function traverse(node) {
@@ -250,12 +255,12 @@ class WikitextProcessor {
                     break;
                 // Add more cases based on your grammar
             }
-            
+
             for (const child of node.children) {
                 traverse(child);
             }
         }
-        
+
         traverse(tree.rootNode);
         return metadata;
     }
