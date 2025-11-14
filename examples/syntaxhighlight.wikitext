@@ -1,0 +1,43 @@
+== Quick Sort ==
+
+Following [[python]] code illustrates how to do quick sort.
+
+<syntaxhighlight lang="python" line start="3" highlight="1,5-7">
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr  # Base case: an array with 0 or 1 element is already sorted
+
+    pivot = arr[len(arr) // 2]  # Choosing the middle element as the pivot
+    left = [x for x in arr if x < pivot]  # Elements smaller than the pivot
+    middle = [x for x in arr if x == pivot]  # Elements equal to the pivot
+    right = [x for x in arr if x > pivot]  # Elements greater than the pivot
+
+    return quicksort(left) + middle + quicksort(right)
+</syntaxhighlight>
+
+In [[javascript]], it is as below:
+
+<syntaxhighlight lang="javascript" line>
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr; // Base case: arrays with 0 or 1 element are already sorted
+  }
+
+  const pivot = arr[arr.length - 1]; // Choose the last element as the pivot
+  const left = [];
+  const right = [];
+
+  // Partition the array around the pivot
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
+    }
+  }
+
+  // Recursively sort the left and right sub-arrays and combine them with the pivot
+  return [...quickSort(left), pivot, ...quickSort(right)];
+}
+</syntaxhighlight>
+

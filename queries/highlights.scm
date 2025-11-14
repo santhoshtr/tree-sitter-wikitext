@@ -96,6 +96,10 @@
   (html_attribute_value) @string
 )
 
+(syntaxhighlight
+  (code_language) @attribute
+)
+
 (paragraph
   (italic) @markup.italic
   (bold) @markup.strong

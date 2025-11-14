@@ -49,6 +49,7 @@ module.exports = grammar({
         $.table,
         $.paragraph, // Must be low precedence
         $._blank_line, // Consumes blank lines separating blocks
+        $.syntaxhighlight,
       ),
     section: ($) =>
       choice(
@@ -679,6 +680,18 @@ module.exports = grammar({
           // but typically they are not. We allow it for robustness.
           "/>",
         ),
+      ),
+
+    code_language: ($) => /[a-zA-Z0-9_-]+/, // e.g., python, javascript
+
+    syntaxhighlight: ($) =>
+      seq(
+        "<syntaxhighlight",
+        optional(seq("lang", "=", '"', $.code_language, '"')),
+        repeat($.html_attribute),
+        ">",
+        repeat(alias(token(/.+/), $.code)),
+        "</syntaxhighlight>",
       ),
 
     // An entity can be named, numeric (decimal), or numeric (hexacecimal). The

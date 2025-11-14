@@ -1468,6 +1468,10 @@
           "named": true
         },
         {
+          "type": "syntaxhighlight",
+          "named": true
+        },
+        {
           "type": "table",
           "named": true
         },
@@ -1512,6 +1516,29 @@
       "types": [
         {
           "type": "section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "syntaxhighlight",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "code",
+          "named": true
+        },
+        {
+          "type": "code_language",
+          "named": true
+        },
+        {
+          "type": "html_attribute",
           "named": true
         }
       ]
@@ -2051,6 +2078,14 @@
     "named": false
   },
   {
+    "type": "</syntaxhighlight>",
+    "named": false
+  },
+  {
+    "type": "<syntaxhighlight",
+    "named": false
+  },
+  {
     "type": "=",
     "named": false
   },
@@ -2073,6 +2108,14 @@
   {
     "type": "]]",
     "named": false
+  },
+  {
+    "type": "code",
+    "named": true
+  },
+  {
+    "type": "code_language",
+    "named": true
   },
   {
     "type": "comment",
@@ -2129,6 +2172,10 @@
   {
     "type": "html_void_tag",
     "named": true
+  },
+  {
+    "type": "lang",
+    "named": false
   },
   {
     "type": "list_marker",

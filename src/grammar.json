@@ -69,6 +69,10 @@
         {
           "type": "SYMBOL",
           "name": "_blank_line"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "syntaxhighlight"
         }
       ]
     },
@@ -2818,6 +2822,82 @@
               "value": "/>"
             }
           ]
+        }
+      ]
+    },
+    "code_language": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9_-]+"
+    },
+    "syntaxhighlight": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<syntaxhighlight"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "lang"
+                },
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "STRING",
+                  "value": "\""
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "code_language"
+                },
+                {
+                  "type": "STRING",
+                  "value": "\""
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "html_attribute"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": ".+"
+              }
+            },
+            "named": true,
+            "value": "code"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "</syntaxhighlight>"
         }
       ]
     },

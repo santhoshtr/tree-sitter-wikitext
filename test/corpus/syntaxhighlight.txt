@@ -1,0 +1,45 @@
+==============================
+Syntax highlight test
+==============================
+Following [[python]] code illustrates how to do quick sort.
+
+<syntaxhighlight lang="python" line start="3" highlight="1,5-7">
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr  # Base case: an array with 0 or 1 element is already sorted
+
+    pivot = arr[len(arr) // 2]  # Choosing the middle element as the pivot
+    left = [x for x in arr if x < pivot]  # Elements smaller than the pivot
+    middle = [x for x in arr if x == pivot]  # Elements equal to the pivot
+    right = [x for x in arr if x > pivot]  # Elements greater than the pivot
+
+    return quicksort(left) + middle + quicksort(right)
+</syntaxhighlight>
+--------------------------
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))
+      (text))
+    (syntaxhighlight
+      (code_language)
+      (html_attribute
+        (html_attribute_name))
+      (html_attribute
+        (html_attribute_name)
+        (html_attribute_value))
+      (html_attribute
+        (html_attribute_name)
+        (html_attribute_value))
+      (code)
+      (code)
+      (code)
+      (code)
+      (code)
+      (code)
+      (code)
+      (code))))
