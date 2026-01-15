@@ -286,7 +286,7 @@ static bool is_valid_attribute_name(const char *attr_name) {
 }
 
 static bool parse_and_validate_attributes(TSLexer *lexer,
-                                          const char *tag_name) {
+                                           const char *tag_name) {
     while (lexer->lookahead && lexer->lookahead != '>' &&
            lexer->lookahead != '/') {
         // Skip whitespace
@@ -378,29 +378,6 @@ static bool parse_and_validate_attributes(TSLexer *lexer,
                 }
             }
         }
-
-        // For link and mmeeta tags, validate required attributes
-        if (strcmp(tag_name, "link") == 0) {
-            // link tag must have itemprop and href
-            static bool has_itemprop = false, has_href = false;
-            if (strcmp(attr_name, "itemprop") == 0)
-                has_itemprop = true;
-            if (strcmp(attr_name, "href") == 0)
-                has_href = true;
-            // Note: This is a simplified check - in practice you'd need to
-            // track all attributes throughout the parsing
-        }
-
-        if (strcmp(tag_name, "meta") == 0) {
-            // meta tag must have itemprop and content
-            static bool has_itemprop = false, has_content = false;
-            if (strcmp(attr_name, "itemprop") == 0)
-                has_itemprop = true;
-            if (strcmp(attr_name, "content") == 0)
-                has_content = true;
-            // Note: This is a simplified check - in practice you'd need to
-            // track all attributes throughout the parsing
-        }
     }
 
     return true;
@@ -491,7 +468,6 @@ static bool scan_file_size(TSLexer *lexer) {
     }
 
     if (digits > 0 && consume_string("px", lexer)) {
-        consume_string("px", lexer);
         lexer->result_symbol = FILE_SIZE_TOKEN;
         return true;
     }
@@ -520,8 +496,11 @@ static bool scan_file_format(TSLexer *lexer) {
 static bool scan_file_link(TSLexer *lexer) {
     if (consume_string("link=", lexer)) {
         // Consume until | or ]]
-        while (lexer->lookahead && lexer->lookahead != '|' &&
-               !(lexer->lookahead == ']' && lexer->lookahead == ']')) {
+        while (lexer->lookahead && lexer->lookahead != '|') {
+            if (lexer->lookahead == ']') {
+                // Check if this is end of link
+                break;
+            }
             advance(lexer);
         }
         lexer->result_symbol = FILE_LINK_TOKEN;
@@ -533,8 +512,11 @@ static bool scan_file_link(TSLexer *lexer) {
 static bool scan_file_alt(TSLexer *lexer) {
     if (consume_string("alt=", lexer)) {
         // Consume until | or ]]
-        while (lexer->lookahead && lexer->lookahead != '|' &&
-               !(lexer->lookahead == ']' && lexer->lookahead == ']')) {
+        while (lexer->lookahead && lexer->lookahead != '|') {
+            if (lexer->lookahead == ']') {
+                // Check if this is end of link
+                break;
+            }
             advance(lexer);
         }
         lexer->result_symbol = FILE_ALT_TOKEN;
@@ -569,6 +551,7 @@ static bool scan_comment(TSLexer *lexer) {
                 lexer->result_symbol = COMMENT;
                 return true;
             }
+            __attribute__((fallthrough));
         default:
             dashes = 0;
         }
@@ -579,9 +562,6 @@ static bool scan_comment(TSLexer *lexer) {
 
 // Helper function to check if a character sequence forms a valid HTML entity
 static bool is_html_entity(TSLexer *lexer) {
-    // Save current position
-    uint32_t saved_position = lexer->get_column(lexer);
-
     // Skip the '&'
     advance(lexer);
 
@@ -633,27 +613,6 @@ static bool is_html_entity(TSLexer *lexer) {
     return false;
 }
 
-// Helper function to check if '[' has a matching ']'
-static bool has_matching_brackets(TSLexer *lexer) {
-    int bracket_count = 1;
-
-    advance(lexer);
-    while (lexer->lookahead) {
-        if (lexer->lookahead == '[') {
-            bracket_count++;
-        } else if (lexer->lookahead == ']') {
-            bracket_count--;
-        } else if (lexer->lookahead == '\n') {
-            // Brackets typically don't span multiple lines in wikitext
-            break;
-        }
-        if (bracket_count == 0) {
-            break;
-        }
-        advance(lexer);
-    }
-    return bracket_count == 0;
-}
 
 // Helper function to check if consecutive '~' make up signature
 //
@@ -697,8 +656,6 @@ static bool is_bold_italic(TSLexer *lexer) {
 }
 
 static bool is_opening_template(TSLexer *lexer) {
-    int double_brace_count = 1;
-    int line_count = 0;
     advance(lexer); // Skip the first '{'
 
     if (lexer->lookahead != '{') {
@@ -706,17 +663,6 @@ static bool is_opening_template(TSLexer *lexer) {
     }
     return true;
 }
-static bool is_closing_template(TSLexer *lexer) {
-    int double_brace_count = 1;
-    int line_count = 0;
-    advance(lexer); // Skip the first '{'
-
-    if (lexer->lookahead != '}') {
-        return false; // Not a double brace
-    }
-    return true;
-}
-
 // Helper function to check if '=' forms a MediaWiki header
 // MediaWiki headers: = Header =, == Header ==, === Header ===, etc.
 static bool is_mediawiki_header(TSLexer *lexer) {
@@ -788,12 +734,8 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
     while (lexer->lookahead) {
         // Check for special sequences that need matching
         if (lexer->lookahead == '[') {
-            // Check if this is [[ (wikilink) or [ (external link)
-            // This is [, check if it has matching ]
-            // if (has_matching_brackets(lexer)) {
-            // Has matching ], so this should be handled as wikilink
+            // '[' marks potential wikilink or external link, should be handled separately
             break;
-            //}
         }
         if (lexer->lookahead == ']') {
             break;
@@ -802,7 +744,7 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
         if (lexer->lookahead == '{') {
             // Check if this is {{
             if (is_opening_template(lexer)) {
-                // Has matching }}, so this should be handled as template
+                // Has opening {}, so this should be handled as template
                 break;
             }
         }
@@ -816,7 +758,7 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
 
         if (lexer->lookahead == '~') {
             if (is_signature(lexer)) {
-                // This is an signature, should be handled separately
+                // This is a signature, should be handled separately
                 break;
             }
         }
@@ -830,9 +772,9 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
         }
 
         if (lexer->lookahead == '\'') {
-            // Check if this forms an bold or italic
+            // Check if this forms bold or italic
             if (is_bold_italic(lexer)) {
-                // This is a bold or italic , should be handled separately
+                // This is a bold or italic marker, should be handled separately
                 break;
             }
         }
@@ -851,20 +793,13 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
             col_index == 0) {
             break;
         }
-        /* if (lexer->lookahead == ':' && char_index > 0) {
-             break;
-        }
-        */
 
         if (lexer->lookahead == '<') {
-            /* if (consume_string("<!--", lexer)) { */
-            /*     break; */
-            /* } */
+            // '<' marks potential HTML tags or comments
             break;
         }
-        // FIXME:This should be properly handled - tables and html
+        // Tables and pipes should be handled separately
         if (lexer->lookahead == '|' || lexer->lookahead == '\n') {
-            // should be handled separately
             break;
         }
         if (col_index == 0) {
@@ -940,7 +875,10 @@ static bool is_template_param_name_value_pair(TSLexer *lexer) {
     return false;
 }
 
-// Add this function before tree_sitter_wikitext_external_scanner_scan
+// Debug utility function to print valid symbols (currently unused)
+// Kept for debugging purposes but not called in production code
+// Uncomment the call in tree_sitter_wikitext_external_scanner_scan to use
+#ifdef DEBUG_SCANNER
 static void dump_valid_symbols(const bool *valid_symbols) {
     printf("Valid symbols: ");
     if (valid_symbols[COMMENT]) {
@@ -990,6 +928,7 @@ static void dump_valid_symbols(const bool *valid_symbols) {
     }
     printf("\n");
 }
+#endif
 
 bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
                                                 const bool *valid_symbols) {

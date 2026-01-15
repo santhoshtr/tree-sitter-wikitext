@@ -132,7 +132,7 @@ module.exports = grammar({
     _blank_line: ($) => /\n\s*\n?/,
     _pipe: ($) => token.immediate("|"),
     // ==== Text and Inline Content ====
-     _inline_content: ($) =>
+    _inline_content: ($) =>
       choice(
         $.comment,
         $.bold_italic, // Must come before bold and italic
