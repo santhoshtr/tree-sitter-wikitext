@@ -25,3 +25,18 @@ see-lists: gen
     tree-sitter parse --cst examples/lists.wikitext -d| bat
 see-html: gen
     tree-sitter parse --cst examples/html.wikitext -d| bat
+test-bindings:
+    # Ref https://github.com/tree-sitter/parser-test-action/
+    cargo build --all-features
+    cargo test -q --all-features --no-fail-fast
+    npm install
+    node --test bindings/node/*_test.js
+    pip install -e .
+    python -munittest discover -v -s bindings/python/tests
+    cd bindings/go
+    go get -t
+    go test -v
+    cd ../..
+    swift build --build-tests
+    swift test --skip-build -q
+
