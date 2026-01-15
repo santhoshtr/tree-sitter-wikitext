@@ -1,0 +1,362 @@
+==================
+Basic PLURAL function with number
+==================
+
+{{PLURAL:1|singular|plural}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+PLURAL with variable parameter
+==================
+
+{{PLURAL:count|is|are}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+GENDER parser function
+==================
+
+{{GENDER:username|male|female|neutral}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+int (localization) function
+==================
+
+{{int:message-name}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (param_text))))))
+
+==================
+Hash-based #if function
+==================
+
+{{#if:condition|then text|else text}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_hash
+          (function_prefix)
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+#switch parser function
+==================
+
+{{#switch:value|a=option a|b=option b|default}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_hash
+          (function_prefix)
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_name)
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_name)
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+#expr parser function
+==================
+
+{{#expr:(2+3)*4}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_hash
+          (function_prefix)
+          (parser_function_name)
+          (function_delimiter)
+          (param_text))))))
+
+==================
+Parser function with nested template
+==================
+
+{{PLURAL:{{#expr:1+1}}|is|are}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (parser_function
+            (parser_function_hash
+              (function_prefix)
+              (parser_function_name)
+              (function_delimiter)
+              (param_text)))
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+Parser function with nested template in argument
+==================
+
+{{PLURAL:1|is {{Template}}|are {{Template}}}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_value
+              (text)
+              (template
+                name: (template_name
+                  (template_name_part)))))
+          (template_argument
+            (template_param_value
+              (text)
+              (template
+                name: (template_name
+                  (template_name_part))))))))))
+
+==================
+Regular template with colon (namespace)
+==================
+
+{{Template:Name|param}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+Template without colon still works
+==================
+
+{{MyTemplate|arg1|arg2}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (template
+        name: (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_value
+            (text)))))))
+
+==================
+#if with empty condition
+==================
+
+{{#if:|yes|no}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_hash
+          (function_prefix)
+          (parser_function_name)
+          (function_delimiter)
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+
+==================
+Parser function with spaces around delimiter
+==================
+
+{{PLURAL : 5 | one | many }}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_colon
+          (parser_function_name)
+          (function_delimiter)
+          (param_text)
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+#if with empty condition
+==================
+
+{{#if:|yes|no}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_hash
+          (function_prefix)
+          (parser_function_name)
+          (function_delimiter)
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))
+
+==================
+Nested parser functions in first parameter
+==================
+
+{{#if:{{#if:inner|yes|no}}|outer yes|outer no}}
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (parser_function
+        (parser_function_hash
+          (function_prefix)
+          (parser_function_name)
+          (function_delimiter)
+          (parser_function
+            (parser_function_hash
+              (function_prefix)
+              (parser_function_name)
+              (function_delimiter)
+              (param_text)
+              (template_argument
+                (template_param_value
+                  (text)))
+              (template_argument
+                (template_param_value
+                  (text)))))
+          (template_argument
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_value
+              (text))))))))

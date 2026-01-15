@@ -132,7 +132,7 @@ module.exports = grammar({
     _blank_line: ($) => /\n\s*\n?/,
     _pipe: ($) => token.immediate("|"),
     // ==== Text and Inline Content ====
-    _inline_content: ($) =>
+     _inline_content: ($) =>
       choice(
         $.comment,
         $.bold_italic, // Must come before bold and italic
@@ -141,6 +141,7 @@ module.exports = grammar({
         $.wikilink,
         $.medialink,
         $.external_link,
+        $.parser_function, // Must come before template
         $.template,
         $.magic_word,
         $.signature,
@@ -414,16 +415,74 @@ module.exports = grammar({
 
     // ==== Templates ====
     template: ($) =>
-      seq("{{", $.template_name, repeat($.template_argument), "}}"),
+      seq(
+        "{{",
+        field("name", $.template_name),
+        repeat($.template_argument),
+        "}}",
+      ),
 
     template_name: ($) =>
       seq(
-        // Text for template name, avoid | and }}. But space is allowed.
-        // Can also contain other templates if they are part of the name (complex case)
-        alias($._text_no_pipes_braces_colon_hash_equals, $.template_name_part), // Colon for magic words like {{PAGENAMEE}}, hash for parser functions, equals for parameter default
-        optional(alias(token.immediate(prec(1, ":")), $.template_name_colon)),
-        optional(alias(token.immediate(prec(1, "#")), $.template_name_hash)),
+        alias($._text_no_pipes_braces_colon_hash_equals, $.template_name_part),
+        // Templates optionally have a colon (namespace) but nothing after it before |
+        // OR hash but nothing after it before |
+        // If there IS content after : or #, it's a parser function (handled separately)
+        optional(choice(
+          alias(token.immediate(prec(1, ":")), $.template_name_colon),
+          alias(token.immediate(prec(1, "#")), $.template_name_hash),
+        )),
       ),
+
+    // ==== Parser Functions ====
+    // Parser functions like {{PLURAL:value|opts}} and {{#if:condition|then}}
+    // Must come before template in choices to have priority
+    parser_function: ($) =>
+      choice(
+        $.parser_function_colon,
+        $.parser_function_hash,
+      ),
+
+    // Colon-based parser functions: {{PLURAL:$1|is|are}}
+    parser_function_colon: ($) =>
+      seq(
+        "{{",
+        alias($._text_no_pipes_braces_colon_hash_equals, $.parser_function_name),
+        alias(token.immediate(prec(2, ":")), $.function_delimiter),
+        repeat(  // Changed from repeat1 to allow empty first parameter
+          choice(
+            alias($._text_no_pipes_braces, $.param_text),
+            $.parser_function, // Nested parser functions
+            $.template, // Nested templates
+            $.wikilink, // Nested links
+          ),
+        ),
+        repeat($.template_argument),
+        "}}",
+      ),
+
+    // Hash-based parser functions: {{#if:condition|then|else}}
+    parser_function_hash: ($) =>
+      seq(
+        "{{",
+        alias(token.immediate(prec(2, "#")), $.function_prefix),
+        alias($._text_no_pipes_braces_colon_hash_equals, $.parser_function_name),
+        alias(token.immediate(prec(2, ":")), $.function_delimiter),
+        repeat(  // Changed from repeat1 to allow empty first parameter
+          choice(
+            alias($._text_no_pipes_braces, $.param_text),
+            $.parser_function, // Nested parser functions
+            $.template, // Nested templates
+            $.wikilink, // Nested links
+          ),
+        ),
+        repeat($.template_argument),
+        "}}",
+      ),
+
+    _text_no_pipes_braces: ($) =>
+      token(prec(1, /[^\|{}]+/)),
+
     _text_no_pipes_braces_colon_hash_equals: ($) =>
       token(prec(1, /[^\|{}:#=]+/)), // Allow spaces in name. But not in the beginning.
 

@@ -399,6 +399,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "parser_function"
+        },
+        {
+          "type": "SYMBOL",
           "name": "template"
         },
         {
@@ -1609,8 +1613,12 @@
           "value": "{{"
         },
         {
-          "type": "SYMBOL",
-          "name": "template_name"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "template_name"
+          }
         },
         {
           "type": "REPEAT",
@@ -1641,44 +1649,41 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
                   "content": {
-                    "type": "STRING",
-                    "value": ":"
-                  }
-                }
-              },
-              "named": true,
-              "value": "template_name_colon"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "STRING",
+                        "value": ":"
+                      }
+                    }
+                  },
+                  "named": true,
+                  "value": "template_name_colon"
+                },
+                {
+                  "type": "ALIAS",
                   "content": {
-                    "type": "STRING",
-                    "value": "#"
-                  }
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "STRING",
+                        "value": "#"
+                      }
+                    }
+                  },
+                  "named": true,
+                  "value": "template_name_hash"
                 }
-              },
-              "named": true,
-              "value": "template_name_hash"
+              ]
             },
             {
               "type": "BLANK"
@@ -1686,6 +1691,194 @@
           ]
         }
       ]
+    },
+    "parser_function": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "parser_function_colon"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parser_function_hash"
+        }
+      ]
+    },
+    "parser_function_colon": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{{"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_text_no_pipes_braces_colon_hash_equals"
+          },
+          "named": true,
+          "value": "parser_function_name"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 2,
+              "content": {
+                "type": "STRING",
+                "value": ":"
+              }
+            }
+          },
+          "named": true,
+          "value": "function_delimiter"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_text_no_pipes_braces"
+                },
+                "named": true,
+                "value": "param_text"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "parser_function"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "template"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "wikilink"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "template_argument"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}}"
+        }
+      ]
+    },
+    "parser_function_hash": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{{"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 2,
+              "content": {
+                "type": "STRING",
+                "value": "#"
+              }
+            }
+          },
+          "named": true,
+          "value": "function_prefix"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_text_no_pipes_braces_colon_hash_equals"
+          },
+          "named": true,
+          "value": "parser_function_name"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 2,
+              "content": {
+                "type": "STRING",
+                "value": ":"
+              }
+            }
+          },
+          "named": true,
+          "value": "function_delimiter"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_text_no_pipes_braces"
+                },
+                "named": true,
+                "value": "param_text"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "parser_function"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "template"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "wikilink"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "template_argument"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}}"
+        }
+      ]
+    },
+    "_text_no_pipes_braces": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\|{}]+"
+        }
+      }
     },
     "_text_no_pipes_braces_colon_hash_equals": {
       "type": "TOKEN",
