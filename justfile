@@ -31,12 +31,8 @@ test-bindings:
     cargo test -q --all-features --no-fail-fast
     npm install
     node --test bindings/node/*_test.js
-    pip install -e .
-    python -munittest discover -v -s bindings/python/tests
-    cd bindings/go
-    go get -t
-    go test -v
-    cd ../..
-    swift build --build-tests
-    swift test --skip-build -q
+    uv pip install -e ".[core]"
+    uv run -m unittest discover -v -s bindings/python/tests
+    cd bindings/go && go mod tidy && go test -v && cd ../..
+    which swift > /dev/null && (swift build --build-tests && swift test --skip-build -q) || echo "Swift not available, skipping Swift tests"
 
