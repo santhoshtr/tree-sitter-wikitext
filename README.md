@@ -77,15 +77,15 @@ pip install tree-sitter
 Then use the parser in your Python code:
 
 ```python
-from tree_sitter import Language, Parser
+from tree_sitter import Language, Parser, Query, QueryCursor
 import tree_sitter_wikitext as tswikitext
 
 # Create a language object
-WIKITEXT_LANGUAGE = Language(tswikitext.language(), "wikitext")
+WIKITEXT_LANGUAGE = Language(tswikitext.language())
 
 # Create a parser
-parser = Parser()
-parser.set_language(WIKITEXT_LANGUAGE)
+parser = Parser(WIKITEXT_LANGUAGE)
+
 
 # Parse some wikitext
 source_code = b"""
@@ -101,7 +101,7 @@ This is a '''bold''' text with ''italic'' formatting.
 tree = parser.parse(source_code)
 
 # Print the syntax tree
-print(tree.root_node().sexp())
+print(tree.root_node)
 
 # Walk through the tree
 def walk_tree(node, depth=0):
@@ -110,17 +110,18 @@ def walk_tree(node, depth=0):
     for child in node.children:
         walk_tree(child, depth + 1)
 
-walk_tree(tree.root_node())
+walk_tree(tree.root_node)
 
 # Query for specific nodes (e.g., all headings)
-query = WIKITEXT_LANGUAGE.query("""
-(heading) @heading
+query = Query(WIKITEXT_LANGUAGE,
+    """
+(heading2) @heading
 """)
 
-captures = query.captures(tree.root_node())
-for node, capture_name in captures:
-    print(f"Found {capture_name}: {node.text.decode('utf-8').strip()}")
-```
+query_cursor = QueryCursor(query)
+captures = query_cursor.captures(tree.root_node)
+for  capture_name in captures:
+    print(f"Found {capture_name}: {captures[capture_name][0].text.decode('utf-8').strip()}")```
 
 ### Example: Parsing Wikitext in Node.js
 
