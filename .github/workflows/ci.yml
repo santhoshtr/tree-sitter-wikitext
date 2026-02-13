@@ -38,6 +38,7 @@ jobs:
           test-python: true
           test-go: true
           test-swift: ${{ matrix.os != 'ubuntu-latest' }}
+          node-version: '22.x'
       - name: Parse examples
         uses: tree-sitter/parse-action@v4
         with:
