@@ -1050,3 +1050,20 @@ Malformed HTML Tags (Should Not Parse)
       (text)
       (text)
       (text))))
+
+==================
+Self-closing tag with unquoted attribute (issue #6)
+==================
+
+<ref name=UTHRCh8/>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))))))
