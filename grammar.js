@@ -706,7 +706,10 @@ module.exports = grammar({
         field("name", $.html_attribute_name),
         optional(seq("=", field("value", $.html_attribute_value))),
       ),
-    _html_attributes_pattern_no_gt: ($) => repeat1(seq(" ", $.html_attribute)),
+    // Attributes are separated by whitespace, which `extras` already skips; an
+    // explicit leading space would also match the space before a self-closing
+    // `/>` and spuriously start an empty attribute.
+    _html_attributes_pattern_no_gt: ($) => repeat1($.html_attribute),
 
     _html_content: ($) =>
       choice(

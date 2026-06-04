@@ -2871,17 +2871,8 @@
     "_html_attributes_pattern_no_gt": {
       "type": "REPEAT1",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": " "
-          },
-          {
-            "type": "SYMBOL",
-            "name": "html_attribute"
-          }
-        ]
+        "type": "SYMBOL",
+        "name": "html_attribute"
       }
     },
     "_html_content": {

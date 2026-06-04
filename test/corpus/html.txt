@@ -59,7 +59,6 @@ HTML Tags with Common Attributes
 
 ==================
 Self-closing HTML Tags
-:error
 ==================
 
 <br />
@@ -71,9 +70,13 @@ Self-closing HTML Tags
   (section
     (paragraph
       (html_tag
-        (html_tag_open))
+        (html_tag_name)))
+    (paragraph
       (html_tag
-        (html_tag_open)))))
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))))))
 
 ==================
 HTML Table Structure
@@ -1056,6 +1059,23 @@ Self-closing tag with unquoted attribute (issue #6)
 ==================
 
 <ref name=UTHRCh8/>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))))))
+
+==================
+Self-closing tag with space before slash
+==================
+
+<ref name="astm-tpt" />
 
 ---
 
