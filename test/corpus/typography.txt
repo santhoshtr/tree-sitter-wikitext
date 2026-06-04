@@ -108,6 +108,11 @@ Unclosed formatting
 
 (source_file
 (section
-  (ERROR
-    (text)
-    (text))))
+  (paragraph
+    (bold
+      (text)
+      (MISSING "'''")))
+  (paragraph
+    (italic
+      (text)
+      (MISSING "''")))))
