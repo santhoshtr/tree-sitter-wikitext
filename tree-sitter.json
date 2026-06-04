@@ -3,9 +3,11 @@
     {
       "name": "wikitext",
       "camelcase": "WIKITEXT",
-      "scope": "source.json",
+      "scope": "source.wikitext",
       "path": ".",
-      "file-types": ["wikitext"],
+      "file-types": [
+        "wikitext"
+      ],
       "highlights": "queries/highlights.scm"
     }
   ],
@@ -20,7 +22,7 @@
       }
     ],
     "links": {
-      "repository": "https://github.com/santhoshtr//tree-sitter-wikitext"
+      "repository": "https://github.com/santhoshtr/tree-sitter-wikitext"
     }
   },
   "bindings": {
