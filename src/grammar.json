@@ -3074,25 +3074,38 @@
           "value": ">"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "TOKEN",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": ".+"
-              }
+                "type": "SYMBOL",
+                "name": "_syntaxhighlight_content"
+              },
+              "named": true,
+              "value": "code"
             },
-            "named": true,
-            "value": "code"
-          }
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
           "value": "</syntaxhighlight>"
         }
       ]
+    },
+    "_syntaxhighlight_content": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC_RIGHT",
+        "value": 0,
+        "content": {
+          "type": "PATTERN",
+          "value": "(?:[^<]|<[^/]|<\\/[^s]|<\\/s[^y]|<\\/sy[^n]|<\\/syn[^t]|<\\/synt[^a]|<\\/synta[^x]|<\\/syntax[^h]|<\\/syntaxh[^i]|<\\/syntaxhi[^g]|<\\/syntaxhig[^h]|<\\/syntaxhigh[^l]|<\\/syntaxhighl[^i]|<\\/syntaxhighli[^g]|<\\/syntaxhighlig[^h]|<\\/syntaxhighligh[^t]|<\\/syntaxhighlight[^>])+"
+        }
+      }
     },
     "entity": {
       "type": "PATTERN",

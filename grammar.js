@@ -751,8 +751,16 @@ module.exports = grammar({
         optional(seq("lang", "=", '"', $.code_language, '"')),
         repeat($.html_attribute),
         ">",
-        repeat(alias(token(/.+/), $.code)),
+        optional(alias($._syntaxhighlight_content, $.code)),
         "</syntaxhighlight>",
+      ),
+    // Body is verbatim source up to the closing tag — matched as one raw token
+    // (no lookahead in tree-sitter's lexer), mirroring _pre_content / _nowiki_content.
+    _syntaxhighlight_content: ($) =>
+      token(
+        prec.right(
+          /(?:[^<]|<[^/]|<\/[^s]|<\/s[^y]|<\/sy[^n]|<\/syn[^t]|<\/synt[^a]|<\/synta[^x]|<\/syntax[^h]|<\/syntaxh[^i]|<\/syntaxhi[^g]|<\/syntaxhig[^h]|<\/syntaxhigh[^l]|<\/syntaxhighl[^i]|<\/syntaxhighli[^g]|<\/syntaxhighlig[^h]|<\/syntaxhighligh[^t]|<\/syntaxhighlight[^>])+/,
+        ),
       ),
 
     // An entity can be named, numeric (decimal), or numeric (hexacecimal). The
