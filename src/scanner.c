@@ -256,7 +256,12 @@ static bool is_allowed_tag_specific_attribute(const char *tag_name,
         return strcmp(attr_name, "type") == 0;
     }
     if (strcmp(tag_name, "ref") == 0) {
-        return strcmp(attr_name, "name") == 0;
+        // Cite extension attributes for <ref>
+        return strcmp(attr_name, "name") == 0 ||
+               strcmp(attr_name, "group") == 0 ||
+               strcmp(attr_name, "follow") == 0 ||
+               strcmp(attr_name, "dir") == 0 ||
+               strcmp(attr_name, "extends") == 0;
     }
 
     return false;

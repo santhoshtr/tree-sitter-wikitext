@@ -1087,3 +1087,45 @@ Self-closing tag with space before slash
         (html_attribute
           (html_attribute_name)
           (html_attribute_value))))))
+
+==================
+ref tag with group attribute
+==================
+
+<ref name="x" group="lower-alpha" />
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))))))
+
+==================
+ref tag with group and content
+==================
+
+<ref group="note" follow="abc">See below</ref>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (text)
+        (html_tag_name)))))
