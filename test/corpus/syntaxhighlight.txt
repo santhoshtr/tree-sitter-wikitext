@@ -35,11 +35,4 @@ def quicksort(arr):
       (html_attribute
         (html_attribute_name)
         (html_attribute_value))
-      (code)
-      (code)
-      (code)
-      (code)
-      (code)
-      (code)
-      (code)
       (code))))

@@ -22,7 +22,7 @@ module.exports = grammar({
     $.unordered_list_marker,
     $.ordered_list_marker,
   ],
-  extras: (_) => ["\r", /\s/],
+  extras: (_) => [/[ \t\r]/],
   conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)
@@ -637,6 +637,7 @@ module.exports = grammar({
         "!!",
         // optional(seq(repeat1($.table_attribute), "|")),
         alias($._table_node, $.content),
+        optional($._newline), // consume the line-terminating newline (no longer an extra)
       ),
 
     table_header: ($) =>
@@ -657,6 +658,7 @@ module.exports = grammar({
         "||",
         // optional(seq(repeat1($.table_attribute), "|")),
         alias($._table_node, $.content),
+        optional($._newline), // consume the line-terminating newline (no longer an extra)
       ),
 
     table_cell: ($) =>
@@ -751,8 +753,16 @@ module.exports = grammar({
         optional(seq("lang", "=", '"', $.code_language, '"')),
         repeat($.html_attribute),
         ">",
-        repeat(alias(token(/.+/), $.code)),
+        optional(alias($._syntaxhighlight_content, $.code)),
         "</syntaxhighlight>",
+      ),
+    // Body is verbatim source up to the closing tag — matched as one raw token
+    // (no lookahead in tree-sitter's lexer), mirroring _pre_content / _nowiki_content.
+    _syntaxhighlight_content: ($) =>
+      token(
+        prec.right(
+          /(?:[^<]|<[^/]|<\/[^s]|<\/s[^y]|<\/sy[^n]|<\/syn[^t]|<\/synt[^a]|<\/synta[^x]|<\/syntax[^h]|<\/syntaxh[^i]|<\/syntaxhi[^g]|<\/syntaxhig[^h]|<\/syntaxhigh[^l]|<\/syntaxhighl[^i]|<\/syntaxhighli[^g]|<\/syntaxhighlig[^h]|<\/syntaxhighligh[^t]|<\/syntaxhighlight[^>])+/,
+        ),
       ),
 
     // An entity can be named, numeric (decimal), or numeric (hexacecimal). The
