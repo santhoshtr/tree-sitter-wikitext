@@ -460,77 +460,114 @@ static bool is_valid_html_tag(Scanner *scanner, TSLexer *lexer,
     return false;
 }
 
-static bool scan_file_size(TSLexer *lexer) {
-    int digits = 0;
-    while (lexer->lookahead >= '0' && lexer->lookahead <= '9') {
-        advance(lexer);
-        digits++;
-    }
-
-    if (digits > 0 && consume_string("px", lexer)) {
-        lexer->result_symbol = FILE_SIZE_TOKEN;
-        return true;
-    }
-    return false;
-}
-
-static bool scan_file_alignment(TSLexer *lexer) {
-    if (consume_string("left", lexer) || consume_string("right", lexer) ||
-        consume_string("center", lexer) || consume_string("none", lexer)) {
-        lexer->result_symbol = FILE_ALIGNMENT_TOKEN;
-        return true;
-    }
-    return false;
-}
-
-static bool scan_file_format(TSLexer *lexer) {
-    if (consume_string("thumb", lexer) || consume_string("thumbnail", lexer) ||
-        consume_string("frameless", lexer) || consume_string("framed", lexer) ||
-        consume_string("frame", lexer)) {
-        lexer->result_symbol = FILE_FORMAT_TOKEN;
-        return true;
-    }
-    return false;
-}
-
-static bool scan_file_link(TSLexer *lexer) {
-    if (consume_string("link=", lexer)) {
-        // Consume until | or ]]
-        while (lexer->lookahead && lexer->lookahead != '|') {
-            if (lexer->lookahead == ']') {
-                // Check if this is end of link
-                break;
-            }
-            advance(lexer);
-        }
-        lexer->result_symbol = FILE_LINK_TOKEN;
-        return true;
-    }
-    return false;
-}
-
-static bool scan_file_alt(TSLexer *lexer) {
-    if (consume_string("alt=", lexer)) {
-        // Consume until | or ]]
-        while (lexer->lookahead && lexer->lookahead != '|') {
-            if (lexer->lookahead == ']') {
-                // Check if this is end of link
-                break;
-            }
-            advance(lexer);
-        }
-        lexer->result_symbol = FILE_ALT_TOKEN;
-        return true;
-    }
-    return false;
-}
-
-static bool scan_file_caption(TSLexer *lexer) {
-    // this is zero width
+// Scan a single file/media link option, i.e. the text between two '|'
+// separators inside [[File:...|...]].
+//
+// All six option tokens are valid at the same position, so we classify the
+// option in a single pass rather than trying one matcher after another. This
+// matters because the lexer cannot rewind: the previous approach advanced the
+// lexer while attempting each option and never reset on failure, so a failed
+// match corrupted the position for the matchers tried afterwards (e.g. "left"
+// consuming the 'l' of "link=", "thumb" matching the prefix of "thumbnail", or
+// the digit run of a malformed size being left behind).
+//
+// The caption is the zero-width fallback: we mark_end at the option start
+// before any lookahead, so when nothing else matches the caption token stays
+// empty and the grammar parses the caption content itself. On a definite match
+// we advance over the option text and mark_end again at its end.
+static bool scan_file_option(TSLexer *lexer, const bool *valid_symbols) {
+    // Zero-width position for the caption fallback.
     lexer->mark_end(lexer);
-    // file caption is last item in media
-    lexer->result_symbol = FILE_CAPTION_TOKEN;
-    return true;
+
+    // Size: <digits> [ ('x'|'X') <digits> ] "px"
+    if (valid_symbols[FILE_SIZE_TOKEN] && lexer->lookahead >= '0' &&
+        lexer->lookahead <= '9') {
+        while (lexer->lookahead >= '0' && lexer->lookahead <= '9') {
+            advance(lexer);
+        }
+        if (lexer->lookahead == 'x' || lexer->lookahead == 'X') {
+            advance(lexer);
+            while (lexer->lookahead >= '0' && lexer->lookahead <= '9') {
+                advance(lexer);
+            }
+        }
+        if (lexer->lookahead == 'p') {
+            advance(lexer);
+            if (lexer->lookahead == 'x') {
+                advance(lexer);
+                lexer->mark_end(lexer);
+                lexer->result_symbol = FILE_SIZE_TOKEN;
+                return true;
+            }
+        }
+        // Not a valid size; fall back to treating the option as a caption.
+        if (valid_symbols[FILE_CAPTION_TOKEN]) {
+            lexer->result_symbol = FILE_CAPTION_TOKEN;
+            return true;
+        }
+        return false;
+    }
+
+    // Read a leading run of lowercase letters: an alignment/format keyword, or
+    // the name part of "link=" / "alt=".
+    char keyword[16] = {0};
+    int len = 0;
+    while (len < 15 && lexer->lookahead >= 'a' && lexer->lookahead <= 'z') {
+        keyword[len++] = (char)lexer->lookahead;
+        advance(lexer);
+    }
+    keyword[len] = '\0';
+
+    if (len > 0) {
+        if (lexer->lookahead == '=') {
+            if (valid_symbols[FILE_LINK_TOKEN] && strcmp(keyword, "link") == 0) {
+                advance(lexer); // '='
+                while (lexer->lookahead && lexer->lookahead != '|' &&
+                       lexer->lookahead != ']') {
+                    advance(lexer);
+                }
+                lexer->mark_end(lexer);
+                lexer->result_symbol = FILE_LINK_TOKEN;
+                return true;
+            }
+            if (valid_symbols[FILE_ALT_TOKEN] && strcmp(keyword, "alt") == 0) {
+                advance(lexer); // '='
+                while (lexer->lookahead && lexer->lookahead != '|' &&
+                       lexer->lookahead != ']') {
+                    advance(lexer);
+                }
+                lexer->mark_end(lexer);
+                lexer->result_symbol = FILE_ALT_TOKEN;
+                return true;
+            }
+        }
+
+        if (valid_symbols[FILE_ALIGNMENT_TOKEN] &&
+            (strcmp(keyword, "left") == 0 || strcmp(keyword, "right") == 0 ||
+             strcmp(keyword, "center") == 0 || strcmp(keyword, "none") == 0)) {
+            lexer->mark_end(lexer);
+            lexer->result_symbol = FILE_ALIGNMENT_TOKEN;
+            return true;
+        }
+
+        if (valid_symbols[FILE_FORMAT_TOKEN] &&
+            (strcmp(keyword, "thumb") == 0 ||
+             strcmp(keyword, "thumbnail") == 0 ||
+             strcmp(keyword, "frame") == 0 || strcmp(keyword, "framed") == 0 ||
+             strcmp(keyword, "frameless") == 0)) {
+            lexer->mark_end(lexer);
+            lexer->result_symbol = FILE_FORMAT_TOKEN;
+            return true;
+        }
+    }
+
+    // Anything else is the caption (zero-width marker; the grammar parses the
+    // caption content that follows).
+    if (valid_symbols[FILE_CAPTION_TOKEN]) {
+        lexer->result_symbol = FILE_CAPTION_TOKEN;
+        return true;
+    }
+    return false;
 }
 
 static bool scan_comment(TSLexer *lexer) {
@@ -934,29 +971,11 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
                                                 const bool *valid_symbols) {
     Scanner *scanner = (Scanner *)payload;
     /* dump_valid_symbols(valid_symbols); */
-    // Handle file options in priority order (most specific first)
-    if (valid_symbols[FILE_SIZE_TOKEN] && scan_file_size(lexer)) {
-        return true;
-    }
-
-    if (valid_symbols[FILE_ALIGNMENT_TOKEN] && scan_file_alignment(lexer)) {
-        return true;
-    }
-
-    if (valid_symbols[FILE_FORMAT_TOKEN] && scan_file_format(lexer)) {
-        return true;
-    }
-
-    if (valid_symbols[FILE_LINK_TOKEN] && scan_file_link(lexer)) {
-        return true;
-    }
-
-    if (valid_symbols[FILE_ALT_TOKEN] && scan_file_alt(lexer)) {
-        return true;
-    }
-
-    // Caption should be last (least specific)
-    if (valid_symbols[FILE_CAPTION_TOKEN] && scan_file_caption(lexer)) {
+    // Handle file/media link options in a single pass (see scan_file_option).
+    if ((valid_symbols[FILE_SIZE_TOKEN] || valid_symbols[FILE_ALIGNMENT_TOKEN] ||
+         valid_symbols[FILE_FORMAT_TOKEN] || valid_symbols[FILE_LINK_TOKEN] ||
+         valid_symbols[FILE_ALT_TOKEN] || valid_symbols[FILE_CAPTION_TOKEN]) &&
+        scan_file_option(lexer, valid_symbols)) {
         return true;
     }
     if (valid_symbols[TEMPLATE_PARAM_VALUE_MARKER] &&
