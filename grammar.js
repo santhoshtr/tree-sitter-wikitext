@@ -22,7 +22,7 @@ module.exports = grammar({
     $.unordered_list_marker,
     $.ordered_list_marker,
   ],
-  extras: (_) => ["\r", /\s/],
+  extras: (_) => [/[ \t\r]/],
   conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)

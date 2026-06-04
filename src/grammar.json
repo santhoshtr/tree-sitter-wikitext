@@ -3101,12 +3101,8 @@
   },
   "extras": [
     {
-      "type": "STRING",
-      "value": "\r"
-    },
-    {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[ \\t\\r]"
     }
   ],
   "conflicts": [
