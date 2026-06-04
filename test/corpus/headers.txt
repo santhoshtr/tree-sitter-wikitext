@@ -220,19 +220,17 @@ Header with Extra Spaces
 
 ==================
 Unbalanced Headers (Not Valid in MediaWiki)
-:error
 ==================
 
 == Unbalanced Header ===
 
 ---
 
-(document
-  (heading
-    (h2
-      (text)))
-  (text)
-  (newline))
+(source_file
+  (section
+    (paragraph
+      (text)
+      (text))))
 
 ==================
 Header with Special Characters
@@ -268,3 +266,21 @@ Some text.
       (heading_marker)
       (text)
       (heading_marker))))
+
+================================================================================
+Non-header line starting with = preserves inline constructs
+================================================================================
+
+==See [[Page]]=x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (text)
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))
+      (text))))

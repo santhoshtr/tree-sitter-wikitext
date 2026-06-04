@@ -700,18 +700,16 @@ static bool is_opening_template(TSLexer *lexer) {
     }
     return true;
 }
-// Helper function to check if '=' forms a MediaWiki header
+// Decide whether the rest of a line forms a MediaWiki header, given that the
+// `initial_equals` leading '=' have already been consumed by the caller.
 // MediaWiki headers: = Header =, == Header ==, === Header ===, etc.
-static bool is_mediawiki_header(TSLexer *lexer) {
-    // Count initial '=' characters
-    int initial_equals = 1;
-    advance(lexer); // Skip the first '='
-
-    while (lexer->lookahead == '=') {
-        initial_equals++;
-        advance(lexer);
-    }
-
+//
+// This advances the lexer past the line body but never calls mark_end, so the
+// caller keeps full control of the token boundary. The body scan deliberately
+// consumes any characters (including '[', '{', '<') because a heading may
+// legitimately contain links/templates (e.g. == [[Link]] ==); soundness of the
+// caller relies on it discarding these advances when this returns true.
+static bool is_heading_remainder(TSLexer *lexer, int initial_equals) {
     // Must have at least one non-'=' character (the header text)
     if (lexer->lookahead == '\n' || lexer->lookahead == '\0') {
         return false;
@@ -818,11 +816,27 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
 
         uint32_t col_index = lexer->get_column(lexer);
         if (lexer->lookahead == '=' && col_index == 0) {
-            // Check if this forms a MediaWiki header
-            if (is_mediawiki_header(lexer)) {
-                // This is a MediaWiki header, should be handled separately
-                break;
+            // Consume the leading '=' run; this is the most we can emit as text
+            // if the line is not a heading. mark_end pins the token here so the
+            // header check below (which advances past the body to find a
+            // matching trailing '=') cannot fold the body into the token.
+            int equals = 0;
+            while (lexer->lookahead == '=') {
+                advance(lexer);
+                equals++;
             }
+            lexer->mark_end(lexer);
+            if (is_heading_remainder(lexer, equals)) {
+                // Valid heading: emit no inline text so the grammar lexes the
+                // heading markers. Returning false discards the advances above
+                // and resets the lexer to the start of the line.
+                return false;
+            }
+            // Not a heading: emit just the '=' run. The body's constructs
+            // (links, templates, ...) are recognised on the following scans,
+            // with their break checks intact.
+            lexer->result_symbol = INLINE_TEXT_BASE;
+            return true;
         }
         // Do not allow these chars if they are at beginning of text.
         if ((lexer->lookahead == '*' || lexer->lookahead == '#' ||
