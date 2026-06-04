@@ -2,7 +2,7 @@
   "name": "tree-sitter-wikitext",
   "version": "0.1.1",
   "description": "A tree-sitter parser for wikitext documents.",
-  "repository": "https://github.com/santhoshtr/tree-sitter-javascript",
+  "repository": "https://github.com/santhoshtr/tree-sitter-wikitext",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
@@ -13,7 +13,11 @@
     "start": "tree-sitter playground",
     "test": "node --test bindings/node/*_test.js"
   },
-  "keywords": ["tree-sitter", "wikitext", "parser"],
+  "keywords": [
+    "tree-sitter",
+    "wikitext",
+    "parser"
+  ],
   "files": [
     "grammar.js",
     "tree-sitter.json",
