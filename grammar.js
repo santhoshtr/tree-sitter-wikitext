@@ -637,6 +637,7 @@ module.exports = grammar({
         "!!",
         // optional(seq(repeat1($.table_attribute), "|")),
         alias($._table_node, $.content),
+        optional($._newline), // consume the line-terminating newline (no longer an extra)
       ),
 
     table_header: ($) =>
@@ -657,6 +658,7 @@ module.exports = grammar({
         "||",
         // optional(seq(repeat1($.table_attribute), "|")),
         alias($._table_node, $.content),
+        optional($._newline), // consume the line-terminating newline (no longer an extra)
       ),
 
     table_cell: ($) =>
