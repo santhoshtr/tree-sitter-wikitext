@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "node-addon-api": "^8.5.0",
+    "node-addon-api": "^8.8.0",
     "node-gyp-build": "^4.8.4"
   },
   "peerDependencies": {
@@ -46,9 +46,9 @@
     }
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "^2.4.16",
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.25.0"
+    "tree-sitter-cli": "^0.26.9"
   },
   "tree-sitter": [
     {
