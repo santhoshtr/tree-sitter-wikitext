@@ -695,7 +695,9 @@ module.exports = grammar({
       choice(
         seq('"', field("value_text", optional(token(prec(1, /[^"]*/)))), '"'),
         seq("'", field("value_text", optional(token(prec(1, /[^']*/)))), "'"),
-        field("value_text", token(prec(1, /[^\s"'=<>`]+/))), // Unquoted
+        // `/` is excluded so a trailing `/>` self-close is not swallowed into an
+        // unquoted value (issue #6); matches the scanner's attribute validation.
+        field("value_text", token(prec(1, /[^\s"'=<>`\/]+/))), // Unquoted
       ),
     html_attribute: ($) =>
       seq(
