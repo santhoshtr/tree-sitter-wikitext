@@ -42,6 +42,17 @@
   (page_name_segment)? @markup.link.label
 )
 
+(medialink (filename) @markup.link.url)
+[
+  (file_format_token)
+  (file_alignment_token)
+] @keyword
+(file_size_token) @number
+[
+  (file_alt_token)
+  (file_link_token)
+] @attribute
+
 (template
   (template_name) @module
   (template_argument
