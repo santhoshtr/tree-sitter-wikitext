@@ -90,3 +90,35 @@ The '''ergosphere''' is a place just outside the [[event horizon]] of a [[black 
             (template_param_value
               (text))))
         (html_tag_name)))))
+
+============================
+Literal angle bracket in template parameter value (DOI)
+============================
+{{cite|doi=10.1002/40:21<4062::AID-ANIE4062>3.0|pmid=12}}
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))
+
+============================
+Literal angle bracket in plain text
+============================
+a < b and c<4 are math, not tags
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (text))))

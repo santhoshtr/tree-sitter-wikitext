@@ -112,7 +112,6 @@ Text in middle
 
 ================================================================================
 Comment-like syntax that isn't a comment
-:error
 ================================================================================
 
 Text with < and > characters
@@ -121,10 +120,10 @@ Text with <!- not quite a comment ->
 
 --------------------------------------------------------------------------------
 
-(document
-  (paragraph
-    (text))
-  (paragraph
-    (text))
-  (paragraph
-    (text)))
+(source_file
+  (section
+    (paragraph
+      (text))
+    (paragraph
+      (text)
+      (text))))
