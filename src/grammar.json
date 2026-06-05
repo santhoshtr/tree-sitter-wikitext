@@ -1909,8 +1909,16 @@
                   "name": "_template_param_value_marker"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "template_param_value"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "template_param_value"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 }
               ]
             },

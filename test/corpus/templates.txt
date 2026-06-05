@@ -310,3 +310,27 @@ Templates with list as param value
                       (list_marker)
                       (list_item_content
                         (text)))))))))))))
+
+==================
+Empty positional template arguments
+==================
+{{bartable|10,400||0.01||background:red;}}
+-----------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)))
+        (template_argument)
+        (template_argument
+          (template_param_value
+            (text)))
+        (template_argument)
+        (template_argument
+          (template_param_value
+            (text)))))))

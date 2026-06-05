@@ -490,7 +490,9 @@ module.exports = grammar({
       seq(
         $._pipe,
         choice(
-          seq($._template_param_value_marker, $.template_param_value),
+          // The value is optional so empty positional arguments (the "||" in
+          // "{{bartable|10,400||0.01}}") parse instead of erroring.
+          seq($._template_param_value_marker, optional($.template_param_value)),
           seq(
             $._template_param_name_value_marker,
             $.template_param_name,
