@@ -937,7 +937,12 @@ static bool is_template_param_name_value_pair(TSLexer *lexer) {
             return true;
         }
         if (lexer->lookahead == '|' || lexer->lookahead == '[' ||
-            lexer->lookahead == '{' || lexer->lookahead == '\n') {
+            lexer->lookahead == '{' || lexer->lookahead == '}' ||
+            lexer->lookahead == '\n') {
+            // '}' closes the template, so an '=' beyond it belongs to an outer
+            // scope; without this a positional argument such as the "2" in
+            // "{{chem|O|2}}" is misread as a parameter name when an '=' appears
+            // later in the surrounding text.
             break;
         }
         advance(lexer);

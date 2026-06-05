@@ -334,3 +334,23 @@ Empty positional template arguments
         (template_argument
           (template_param_value
             (text)))))))
+
+==================
+Positional argument not misread as name when '=' follows the template
+==================
+{{chem|O|2}} foo name=x
+-----------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_value
+            (text))))
+      (text))))
