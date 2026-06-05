@@ -244,3 +244,32 @@ Link with Subpage
       (wikilink
         (wikilink_page
           (page_name_segment))))))
+
+==================
+Literal square brackets that are not a link
+==================
+
+word [or] another [whom] here
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text))))
+
+==================
+Bracketed text alongside a real external link
+==================
+
+see [not a link] and [https://example.com here]
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (external_link
+        (url)
+        (page_name_segment)))))

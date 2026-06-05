@@ -767,6 +767,33 @@ static bool is_heading_remainder(TSLexer *lexer, int initial_equals) {
     return false;
 }
 
+// Starting at the character after a '[', try to match the URL scheme of an
+// external link ("http://" or "https://"). Advances over the matched prefix and
+// returns true only on a full match. Every scheme character is also an ordinary
+// text character, so on a partial (failed) match the caller can simply fold the
+// consumed characters into the surrounding text run.
+static bool match_url_scheme(TSLexer *lexer) {
+    const char *scheme = "http";
+    for (const char *p = scheme; *p; p++) {
+        if (lexer->lookahead != *p) {
+            return false;
+        }
+        advance(lexer);
+    }
+    if (lexer->lookahead == 's') {
+        advance(lexer);
+    }
+    if (lexer->lookahead != ':') {
+        return false;
+    }
+    advance(lexer);
+    if (lexer->lookahead != '/') {
+        return false;
+    }
+    advance(lexer);
+    return lexer->lookahead == '/';
+}
+
 static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
     int text_run_length = 0;
 
@@ -774,11 +801,29 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
     while (lexer->lookahead) {
         // Check for special sequences that need matching
         if (lexer->lookahead == '[') {
-            // '[' marks potential wikilink or external link, should be handled separately
-            break;
+            // '[' begins a link only as "[[" (wikilink/media link) or
+            // "[http(s)://" (external link); MediaWiki treats any other '[' as
+            // a literal character (e.g. "[or]" in prose). Advancing to peek is
+            // safe: on the markup branch mark_end has not moved past '[', so
+            // the over-advance is discarded on return.
+            advance(lexer);
+            if (lexer->lookahead == '[' || match_url_scheme(lexer)) {
+                break;
+            }
+            text_run_length++;
+            lexer->mark_end(lexer);
+            continue;
         }
         if (lexer->lookahead == ']') {
-            break;
+            // "]]" can close a wikilink/media link (or a file caption), so end
+            // the run there. A lone ']' is a literal character.
+            advance(lexer);
+            if (lexer->lookahead == ']') {
+                break;
+            }
+            text_run_length++;
+            lexer->mark_end(lexer);
+            continue;
         }
 
         if (lexer->lookahead == '{') {
