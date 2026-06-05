@@ -862,6 +862,14 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
                 // This is a bold or italic marker, should be handled separately
                 break;
             }
+            // is_bold_italic advanced over the quote run while probing and it
+            // was not a valid marker (a lone apostrophe, e.g. "companion'|" at
+            // the end of a template parameter). Fold the consumed quote(s) into
+            // the text run; mark_end here so they are emitted rather than left
+            // unconsumable.
+            text_run_length++;
+            lexer->mark_end(lexer);
+            continue;
         }
 
         uint32_t col_index = lexer->get_column(lexer);

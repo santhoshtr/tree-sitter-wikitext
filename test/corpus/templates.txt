@@ -354,3 +354,24 @@ Positional argument not misread as name when '=' follows the template
           (template_param_value
             (text))))
       (text))))
+
+==================
+Lone apostrophe at end of template parameter value
+==================
+{{cite|title=loyal companion'|url=y}}
+-----------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))
