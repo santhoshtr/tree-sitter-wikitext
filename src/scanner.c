@@ -851,8 +851,22 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
         }
 
         if (lexer->lookahead == '<') {
-            // '<' marks potential HTML tags or comments
-            break;
+            // A '<' begins markup only when followed by a letter (tag), '/'
+            // (closing tag) or '!' (comment) — this mirrors MediaWiki's
+            // tokenizer. Any other '<' is a literal character (e.g. the
+            // "40:21<4062" in a DOI), so keep it in the text run. We advance to
+            // peek the next character; on the markup branch mark_end has not
+            // moved past '<', so the over-advance is discarded on return.
+            advance(lexer);
+            int32_t after = lexer->lookahead;
+            if (after == '/' || after == '!' ||
+                (after >= 'a' && after <= 'z') ||
+                (after >= 'A' && after <= 'Z')) {
+                break;
+            }
+            text_run_length++;
+            lexer->mark_end(lexer);
+            continue;
         }
         // Tables and pipes should be handled separately
         if (lexer->lookahead == '|' || lexer->lookahead == '\n') {
@@ -1080,9 +1094,32 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
         }
         break;
     case '<':
-        if (valid_symbols[COMMENT] && scan_comment(lexer)) {
-            lexer->result_symbol = COMMENT;
-            return true;
+        if (valid_symbols[COMMENT]) {
+            if (scan_comment(lexer)) {
+                lexer->result_symbol = COMMENT;
+                return true;
+            }
+            // scan_comment consumed the leading '<' before failing on input
+            // that is not "<!--", so the lexer now sits on the character after
+            // it. Fall through to classify that character.
+        } else if (valid_symbols[INLINE_TEXT_BASE]) {
+            advance(lexer); // consume the leading '<' ourselves
+        } else {
+            break;
+        }
+        // A letter or '/' after '<' is a (possibly invalid) tag the grammar
+        // must handle, so decline. Otherwise the '<' is a literal character (a
+        // stray '<' starting a text run, e.g. a DOI value); emit it — and any
+        // text that follows — as inline text so parsing does not stall.
+        if (valid_symbols[INLINE_TEXT_BASE]) {
+            int32_t after = lexer->lookahead;
+            if (after != '/' && !(after >= 'a' && after <= 'z') &&
+                !(after >= 'A' && after <= 'Z')) {
+                lexer->mark_end(lexer);
+                scan_inline_text_base(scanner, lexer);
+                lexer->result_symbol = INLINE_TEXT_BASE;
+                return true;
+            }
         }
         break;
     default:
