@@ -253,3 +253,77 @@ Complex nesting or ordered and unordered items
                                           (list_marker
                                             (list_item_content
                                               (text))
+
+================================================================================
+List nested inside a <ref> tag (deferred — see review.md A12)
+:skip
+================================================================================
+
+<ref>intro
+* one
+* two</ref>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (unordered_list
+          (unordered_list_item
+            (list_marker)
+            (list_item_content
+              (text)))
+          (unordered_list_item
+            (list_marker)
+            (list_item_content
+              (text))))
+        (html_tag_name)))))
+
+================================================================================
+List of templates inside a <ref>, closing tag abutting last item (deferred)
+:skip
+================================================================================
+
+Text.<ref>{{x|a}}
+* {{y|b}}
+* {{z|c}}</ref>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_name)
+        (template
+          (template_name
+            (template_name_part))
+          (template_argument
+            (template_param_value
+              (text))))
+        (unordered_list
+          (unordered_list_item
+            (list_marker)
+            (list_item_content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text))))))
+          (unordered_list_item
+            (list_marker)
+            (list_item_content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))))))
+        (html_tag_name)))))
