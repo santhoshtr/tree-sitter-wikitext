@@ -2000,7 +2000,7 @@
       ]
     },
     "list_item_content": {
-      "type": "PREC_LEFT",
+      "type": "PREC_RIGHT",
       "value": 0,
       "content": {
         "type": "REPEAT1",
@@ -2023,11 +2023,41 @@
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "SYMBOL",
-          "name": "unordered_list_item"
-        }
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "unordered_list_item"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_newline"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "unordered_list_item"
+                }
+              ]
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
       }
     },
     "unordered_list_item": {
@@ -2052,10 +2082,6 @@
               "type": "SYMBOL",
               "name": "list_item_content"
             }
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_newline"
           }
         ]
       }
@@ -2064,11 +2090,41 @@
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "SYMBOL",
-          "name": "ordered_list_item"
-        }
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "ordered_list_item"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_newline"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "ordered_list_item"
+                }
+              ]
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
       }
     },
     "ordered_list_item": {
@@ -2093,10 +2149,6 @@
               "type": "SYMBOL",
               "name": "list_item_content"
             }
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_newline"
           }
         ]
       }
@@ -2889,6 +2941,10 @@
         {
           "type": "SYMBOL",
           "name": "_inline_content"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_list"
         },
         {
           "type": "SYMBOL",

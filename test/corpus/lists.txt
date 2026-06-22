@@ -194,7 +194,6 @@ Mixed definitions list
 
 ===========================================================================
 Complex nesting or ordered and unordered items
-:error
 ===========================================================================
 
 * Or create mixed lists
@@ -208,55 +207,45 @@ Complex nesting or ordered and unordered items
 ---------------------------------------------
 
 (source_file
-  (unordered_list_item
-    (list_marker)
-    (list_item_content
-      (text))
-    (list_marker
-      (ordered_list
-        (ordered_list_item
-          (list_marker)
-          (list_item_content
-            (text)))
-        (list_marker
-          (list_marker
-            (unordered_list_item
-              (list_marker)
-              (list_item_content
-                (text))
-              (list_marker
-                (list_marker
-                  (unordered_list_item
-                    (list_marker)
-                    (list_item_content
-                      (text))
-                    (list_marker
-                      (list_marker
-                        (unordered_list_item
-                          (list_marker)
-                          (list_item_content
-                            (text))
-                          (list_marker
-                            (list_marker
-                              (unordered_list_item
-                                (list_marker)
-                                (list_item_content
-                                  (text))
-                                (list_marker
-                                  (list_marker
-                                    (unordered_list_item
-                                      (list_marker)
-                                      (list_item_content
-                                        (text))
-                                      (list_marker
-                                        (list_marker
-                                          (list_marker
-                                            (list_item_content
-                                              (text))
+  (section
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))
+    (ordered_list
+      (ordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))
+    (unordered_list
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text)))
+      (unordered_list_item
+        (list_marker)
+        (list_item_content
+          (text))))))
 
 ================================================================================
-List nested inside a <ref> tag (deferred — see review.md A12)
-:skip
+List nested inside a <ref> tag (A12)
 ================================================================================
 
 <ref>intro
@@ -283,8 +272,7 @@ List nested inside a <ref> tag (deferred — see review.md A12)
         (html_tag_name)))))
 
 ================================================================================
-List of templates inside a <ref>, closing tag abutting last item (deferred)
-:skip
+List of templates inside a <ref>, closing tag abutting last item (A12)
 ================================================================================
 
 Text.<ref>{{x|a}}
@@ -327,3 +315,60 @@ Text.<ref>{{x|a}}
                   (template_param_value
                     (text)))))))
         (html_tag_name)))))
+
+================================================================================
+Ordered list inside a <ref> tag (A12)
+================================================================================
+
+<ref>See:
+# first
+# second</ref>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (ordered_list
+          (ordered_list_item
+            (list_marker)
+            (list_item_content
+              (text)))
+          (ordered_list_item
+            (list_marker)
+            (list_item_content
+              (text))))
+        (html_tag_name)))))
+
+================================================================================
+List inside a <ref> with text following the closing tag (A12)
+================================================================================
+
+A<ref>x
+* {{a|b}}</ref> tail.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_name)
+        (text)
+        (unordered_list
+          (unordered_list_item
+            (list_marker)
+            (list_item_content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))))))
+        (html_tag_name))
+      (text))))

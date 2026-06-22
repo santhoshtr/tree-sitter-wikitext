@@ -516,9 +516,12 @@ module.exports = grammar({
     // ==== Lists ====
     _list: ($) => choice($.unordered_list, $.ordered_list, $.definition_list),
 
-    // Content of a list item can be complex, including nested lists or paragraphs
+    // Content of a list item can be complex, including nested lists or paragraphs.
+    // `prec.right` keeps the content greedy: inline constructs later on the same
+    // line (e.g. a `[[link]]` after some text) are pulled into the item rather than
+    // ending the item early — important since the newline is now a separator (A12).
     list_item_content: ($) =>
-      prec.left(
+      prec.right(
         repeat1(
           choice(
             $._inline_content, // Inline content directly
@@ -527,22 +530,37 @@ module.exports = grammar({
         ),
       ),
 
-    unordered_list: ($) => prec.right(repeat1($.unordered_list_item)),
+    // Newline is an item *separator*; the final newline is optional so a list can
+    // end either at a blank line / EOF (consuming its newline) or right at a closing
+    // tag like `</ref>` where the last item has no trailing newline (A12).
+    unordered_list: ($) =>
+      prec.right(
+        seq(
+          $.unordered_list_item,
+          repeat(seq($._newline, $.unordered_list_item)),
+          optional($._newline),
+        ),
+      ),
     unordered_list_item: ($) =>
       prec.right(
         seq(
           alias($.unordered_list_marker, $.list_marker),
           field("content", $.list_item_content),
-          $._newline, // Items are typically one per line
         ),
       ),
-    ordered_list: ($) => prec.right(repeat1($.ordered_list_item)),
+    ordered_list: ($) =>
+      prec.right(
+        seq(
+          $.ordered_list_item,
+          repeat(seq($._newline, $.ordered_list_item)),
+          optional($._newline),
+        ),
+      ),
     ordered_list_item: ($) =>
       prec.right(
         seq(
           alias($.ordered_list_marker, $.list_marker),
           field("content", $.list_item_content),
-          $._newline,
         ),
       ),
     definition_list: ($) =>
@@ -716,6 +734,7 @@ module.exports = grammar({
     _html_content: ($) =>
       choice(
         $._inline_content, // Allows MediaWiki markup inside HTML tags (often the case)
+        $._list, // Block lists inside a tag, e.g. a `* {{harvnb}}` run in <ref> (A12)
         $._blank_line,
       ),
 
