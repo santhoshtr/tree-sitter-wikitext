@@ -282,3 +282,26 @@ Block table inside a file caption
                 (table_cell_block
                   (content
                     (text)))))))))))
+
+================================================================================
+Alt text containing a wikilink
+================================================================================
+
+[[File:X.jpg|thumb|alt=a [[Resurrection of Jesus|risen]] b|''Cap'' by [[Ivanov]]]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alt_token)
+        (file_caption
+          (italic
+            (text))
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment))))))))

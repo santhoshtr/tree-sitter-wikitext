@@ -541,6 +541,25 @@ static bool scan_file_option(TSLexer *lexer, const bool *valid_symbols) {
                 advance(lexer); // '='
                 while (lexer->lookahead && lexer->lookahead != '|' &&
                        lexer->lookahead != ']') {
+                    // Skip a nested wikilink "[[ … ]]" wholesale so its internal
+                    // '|' and ']]' do not end the (otherwise plain-text) alt value,
+                    // e.g. alt=a [[Resurrection of Jesus|risen]] b.
+                    if (lexer->lookahead == '[') {
+                        advance(lexer);
+                        if (lexer->lookahead == '[') {
+                            advance(lexer);
+                            while (lexer->lookahead && lexer->lookahead != ']') {
+                                advance(lexer);
+                            }
+                            if (lexer->lookahead == ']') {
+                                advance(lexer);
+                            }
+                            if (lexer->lookahead == ']') {
+                                advance(lexer);
+                            }
+                        }
+                        continue;
+                    }
                     advance(lexer);
                 }
                 lexer->mark_end(lexer);
