@@ -36,3 +36,5 @@ test-bindings:
     cd bindings/go && go mod tidy && go test -v && cd ../..
     which swift > /dev/null && (swift build --build-tests && swift test --skip-build -q) || echo "Swift not available, skipping Swift tests"
 
+install:
+    cp wikitext.so ~/.config/nvim/parser/wikitext.so
