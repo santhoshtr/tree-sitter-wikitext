@@ -2,6 +2,10 @@ default:
     @just --choose
 test: gen
     tree-sitter test
+# Parse every file under examples/; prints only files that contain errors and
+# exits non-zero if any do (clean parses produce no output).
+test-examples: gen
+    tree-sitter parse -q examples/*.wikitext
 playground: gen wasm
     tree-sitter playground
 
