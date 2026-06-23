@@ -1004,3 +1004,74 @@ Header cells with attributes, a template cell, and an empty cell
                     (text)))))))
         (table_header
           (table_header_block))))))
+
+========================================================
+List inside a table cell
+:skip
+========================================================
+
+{|
+|-
+|
+* [[Adidas]]
+* [[Nike]]
+|}
+
+-----------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (table_row
+        (table_cell
+          (table_cell_block
+            (content
+              (unordered_list
+                (unordered_list_item
+                  (list_marker)
+                  (list_item_content
+                    (wikilink
+                      (wikilink_page
+                        (page_name_segment)))))
+                (unordered_list_item
+                  (list_marker)
+                  (list_item_content
+                    (wikilink
+                      (wikilink_page
+                        (page_name_segment)))))))))))))
+
+========================================================
+Block content (paragraphs and a template) inside a table cell
+:skip
+========================================================
+
+{|
+|-
+|Para one
+
+{{Ordered list
+| a
+| b
+}}
+|}
+
+-----------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (table_row
+        (table_cell
+          (table_cell_block
+            (content
+              (paragraph
+                (text))
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))
+                (template_argument
+                  (template_param_value
+                    (text)))))))))))

@@ -253,3 +253,33 @@ File size with width and height
       (medialink
         (filename)
         (file_size_token)))))
+
+================================================================================
+Block table inside a file caption
+:skip
+================================================================================
+
+[[File:x.png|thumb|Voting results
+
+{|
+|-
+|a
+|}
+]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_caption
+          (text)
+          (table
+            (table_row
+              (table_cell
+                (table_cell_block
+                  (content
+                    (text)))))))))))

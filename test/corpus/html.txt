@@ -1219,3 +1219,29 @@ Text <ref> sds <ref>
     (html_tag_name)
     (text)
     (html_tag_name)))
+
+==================
+Block table inside a div
+:skip
+==================
+
+<div>
+{|
+|-
+|a
+|}
+</div>
+
+---
+
+(source_file
+  (section
+    (html_tag
+      (html_tag_name)
+      (table
+        (table_row
+          (table_cell
+            (table_cell_block
+              (content
+                (text))))))
+      (html_tag_name))))
