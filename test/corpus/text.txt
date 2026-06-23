@@ -122,3 +122,31 @@ a < b and c<4 are math, not tags
   (section
     (paragraph
       (text))))
+
+============================
+Literal square bracket at start of text run
+============================
+[a b] c
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (text))))
+
+============================
+Literal square bracket at start of a template parameter value
+============================
+{{cite|quote=[a b] c}}
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))

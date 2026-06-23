@@ -1104,23 +1104,34 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
     switch (lexer->lookahead) {
     case '[':
         if (valid_symbols[MEDIA_LINK_TOKEN] || valid_symbols[WIKI_LINK_TOKEN]) {
-            bool found_link = false;
-            // This is zero width token.
+            // Zero-width link-opening marker (mark_end pins it at the '['). The
+            // probes below advance only to look ahead.
             lexer->mark_end(lexer);
             if (valid_symbols[WIKI_LINK_TOKEN] &&
                 is_wiki_link_open_token(lexer)) {
                 lexer->result_symbol = WIKI_LINK_TOKEN;
-                found_link = true;
-            }
-            advance(lexer);
-            if (found_link && valid_symbols[MEDIA_LINK_TOKEN] &&
-                is_media_link_token(lexer)) {
-                lexer->result_symbol = MEDIA_LINK_TOKEN;
+                advance(lexer); // consume the second '[' before the media probe
+                if (valid_symbols[MEDIA_LINK_TOKEN] &&
+                    is_media_link_token(lexer)) {
+                    lexer->result_symbol = MEDIA_LINK_TOKEN;
+                }
                 return true;
             }
-            if (found_link) {
-                return true;
-            };
+            // Not "[[": is_wiki_link_open_token consumed the single '['. If an
+            // external-link scheme follows ("[http(s)://"), decline so the grammar
+            // lexes the external_link (the advances here are discarded on return).
+            if (match_url_scheme(lexer)) {
+                return false;
+            }
+        }
+        // A literal '[' (not "[[" or "[http://", e.g. the "[a b] c" in a citation
+        // quote): the '[' is an ordinary character. Consume the run as inline text
+        // rather than leave it to error. The token spans from the '[' (the scan
+        // start) regardless of how far the probes above advanced.
+        if (valid_symbols[INLINE_TEXT_BASE] &&
+            scan_inline_text_base(scanner, lexer)) {
+            lexer->result_symbol = INLINE_TEXT_BASE;
+            return true;
         }
         break;
     case '*':
