@@ -848,6 +848,14 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
                 // This is a signature, should be handled separately
                 break;
             }
+            // is_signature advanced over the whole tilde run while probing and it
+            // was not a valid 3/4/5 signature (e.g. a long "~~~~~~" run, or a lone
+            // '~'). Fold the consumed tildes into the text run; without this they
+            // are left unconsumable when the run ends the line (mirrors the '' and
+            // '<'/'[' cases).
+            text_run_length++;
+            lexer->mark_end(lexer);
+            continue;
         }
 
         if (lexer->lookahead == '&') {
