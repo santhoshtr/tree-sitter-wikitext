@@ -1129,3 +1129,39 @@ ref tag with group and content
           (html_attribute_value))
         (text)
         (html_tag_name)))))
+
+==================
+Asterisk as inline content inside a tag (not a list marker)
+==================
+
+x<sup>*</sup>y
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name))
+      (text))))
+
+==================
+Hash as inline content inside a tag (not a list marker)
+==================
+
+a<sub>#1</sub>b
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (html_tag
+        (html_tag_name)
+        (text)
+        (html_tag_name))
+      (text))))

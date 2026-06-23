@@ -1125,13 +1125,10 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
         break;
     case '*':
     case '#':
-        if (valid_symbols[UNORDERED_LIST_MARKER] ||
-            valid_symbols[ORDERED_LIST_MARKER]) {
+        if ((valid_symbols[UNORDERED_LIST_MARKER] ||
+             valid_symbols[ORDERED_LIST_MARKER]) &&
+            lexer->get_column(lexer) == 0) {
             int level = 0;
-            uint32_t col_index = lexer->get_column(lexer);
-            if (col_index > 0) {
-                return false;
-            }
             while (lexer->lookahead == '*' || lexer->lookahead == '#') {
                 if (lexer->lookahead == '*') {
                     lexer->result_symbol = UNORDERED_LIST_MARKER;
@@ -1143,11 +1140,15 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
                 advance(lexer);
                 lexer->mark_end(lexer);
             }
-            if (scanner->list_level <= level) {
-                scanner->list_level = level;
-            } else {
-                return true;
-            }
+            scanner->list_level = level;
+            return true;
+        }
+        // A '*'/'#' that is not a list marker here — not at column 0, or lists are
+        // not valid in this context (e.g. a literal '*' inside <sup>...</sup>) — is
+        // ordinary inline text. Without this fallback the character is left
+        // unconsumed and the parse errors.
+        if (valid_symbols[INLINE_TEXT_BASE] &&
+            scan_inline_text_base(scanner, lexer)) {
             return true;
         }
         break;
