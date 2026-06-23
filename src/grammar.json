@@ -431,6 +431,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "math"
+        },
+        {
+          "type": "SYMBOL",
           "name": "text"
         }
       ]
@@ -1568,6 +1572,116 @@
             "value": "\\s*\\/>"
           }
         ]
+      }
+    },
+    "math": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_math_open_tag"
+          },
+          "named": true,
+          "value": "html_tag_open"
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_math_content"
+                },
+                "named": true,
+                "value": "raw_text"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_math_close_tag"
+          },
+          "named": true,
+          "value": "html_tag_close"
+        }
+      ]
+    },
+    "_math_open_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "math"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_html_attributes_pattern_no_gt"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
+    },
+    "_math_close_tag": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "</"
+          },
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "math"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ">"
+          }
+        ]
+      }
+    },
+    "_math_content": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC_RIGHT",
+        "value": 0,
+        "content": {
+          "type": "PATTERN",
+          "value": "(?:[^<]|<[^/]|<\\/[^m]|<\\/m[^a]|<\\/ma[^t]|<\\/mat[^h]|<\\/math[^>])+"
+        }
       }
     },
     "preformatted_line_block": {

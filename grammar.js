@@ -149,6 +149,7 @@ module.exports = grammar({
         $.html_tag,
         $.entity,
         $.nowiki_inline_element, // <nowiki>content</nowiki> or <nowiki />
+        $.math, // <math>…TeX…</math> — raw body, not wikitext
         // Everything else
         $.text,
       ),
@@ -400,6 +401,31 @@ module.exports = grammar({
       ),
     _nowiki_void_tag: ($) =>
       token(seq("<", token.immediate("nowiki"), /\s*\/>/)),
+
+    // <math> is a MediaWiki extension tag whose body is TeX/LaTeX, not wikitext
+    // (e.g. `<math chem>\ce{Fe}_{1-x}</math>`); its `{}`, `_`, `\` must not be
+    // parsed as templates/markup. Modelled with a raw body like nowiki/pre. The
+    // `chem` form is just a bare attribute, handled by the shared attribute rule.
+    math: ($) =>
+      seq(
+        alias($._math_open_tag, $.html_tag_open),
+        field("content", optional(alias($._math_content, $.raw_text))),
+        alias($._math_close_tag, $.html_tag_close),
+      ),
+    _math_open_tag: ($) =>
+      seq(
+        "<",
+        token.immediate("math"),
+        optional($._html_attributes_pattern_no_gt),
+        ">",
+      ),
+    _math_close_tag: ($) => token(seq("</", token.immediate("math"), ">")),
+    _math_content: ($) =>
+      token(
+        prec.right(
+          /(?:[^<]|<[^/]|<\/[^m]|<\/m[^a]|<\/ma[^t]|<\/mat[^h]|<\/math[^>])+/,
+        ),
+      ),
 
     preformatted_line_block: ($) =>
       prec.left(

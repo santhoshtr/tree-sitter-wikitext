@@ -1165,3 +1165,41 @@ a<sub>#1</sub>b
         (text)
         (html_tag_name))
       (text))))
+
+==================
+Math tag with raw LaTeX body
+==================
+
+x <math>a^2+b^2</math> y
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (math
+        (html_tag_open)
+        (raw_text)
+        (html_tag_close))
+      (text))))
+
+==================
+Math tag with chem attribute and TeX that looks like wikitext
+==================
+
+as <math chem>\ce{Fe}_{1-x}\ce{O}</math>, where
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (math
+        (html_tag_open
+          (html_attribute
+            (html_attribute_name)))
+        (raw_text)
+        (html_tag_close))
+      (text))))

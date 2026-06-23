@@ -40,6 +40,10 @@
             "named": true
           },
           {
+            "type": "math",
+            "named": true
+          },
+          {
             "type": "medialink",
             "named": true
           },
@@ -113,6 +117,10 @@
           },
           {
             "type": "magic_word",
+            "named": true
+          },
+          {
+            "type": "math",
             "named": true
           },
           {
@@ -204,6 +212,10 @@
         },
         {
           "type": "magic_word",
+          "named": true
+        },
+        {
+          "type": "math",
           "named": true
         },
         {
@@ -420,6 +432,10 @@
         },
         {
           "type": "magic_word",
+          "named": true
+        },
+        {
+          "type": "math",
           "named": true
         },
         {
@@ -891,6 +907,10 @@
             "named": true
           },
           {
+            "type": "math",
+            "named": true
+          },
+          {
             "type": "medialink",
             "named": true
           },
@@ -1015,6 +1035,10 @@
             "named": true
           },
           {
+            "type": "math",
+            "named": true
+          },
+          {
             "type": "medialink",
             "named": true
           },
@@ -1095,6 +1119,10 @@
           "named": true
         },
         {
+          "type": "math",
+          "named": true
+        },
+        {
           "type": "medialink",
           "named": true
         },
@@ -1132,6 +1160,36 @@
         },
         {
           "type": "wikilink",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "math",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "raw_text",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "html_tag_close",
+          "named": true
+        },
+        {
+          "type": "html_tag_open",
           "named": true
         }
       ]
@@ -1326,6 +1384,10 @@
         },
         {
           "type": "magic_word",
+          "named": true
+        },
+        {
+          "type": "math",
           "named": true
         },
         {
@@ -2000,6 +2062,10 @@
           "named": true
         },
         {
+          "type": "math",
+          "named": true
+        },
+        {
           "type": "medialink",
           "named": true
         },
@@ -2344,6 +2410,10 @@
   {
     "type": "magic_word",
     "named": true
+  },
+  {
+    "type": "math",
+    "named": false
   },
   {
     "type": "namespace_separator",
