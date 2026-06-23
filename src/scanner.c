@@ -90,6 +90,21 @@ static inline bool consume_string(char *sequence, TSLexer *lexer) {
     return true;
 }
 
+// Like consume_string but matches a run of Unicode code points, needed for
+// non-ASCII keywords (e.g. localized namespace names) where one code point is
+// several UTF-8 bytes. On a mismatch the lexer is left advanced; callers use this
+// only while producing a zero-width marker, so the advances are discarded.
+static inline bool consume_codepoints(const int32_t *codepoints, unsigned length,
+                                      TSLexer *lexer) {
+    for (unsigned i = 0; i < length; i++) {
+        if (lexer->lookahead != codepoints[i]) {
+            return false;
+        }
+        advance(lexer);
+    }
+    return true;
+}
+
 static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
     uint8_t count = 0;
     while (lexer->lookahead == c) {
@@ -1002,6 +1017,26 @@ static bool is_media_link_token(TSLexer *lexer) {
     if (lexer->lookahead == 'M' || lexer->lookahead == 'm') {
         // Check for "Media:"
         if (consume_string("Media", lexer)) {
+            advance(lexer); // Skip ':'
+            return true;
+        }
+        return false;
+    }
+
+    // Localized Malayalam namespaces: പ്രമാണം (File), ചിത്രം (Image).
+    if (lexer->lookahead == 0x0d2a) { // പ
+        static const int32_t pramanam[] = {0x0d2a, 0x0d4d, 0x0d30, 0x0d2e,
+                                           0x0d3e, 0x0d23, 0x0d02};
+        if (consume_codepoints(pramanam, 7, lexer)) {
+            advance(lexer); // Skip ':'
+            return true;
+        }
+        return false;
+    }
+    if (lexer->lookahead == 0x0d1a) { // ച
+        static const int32_t chithram[] = {0x0d1a, 0x0d3f, 0x0d24,
+                                           0x0d4d, 0x0d30, 0x0d02};
+        if (consume_codepoints(chithram, 6, lexer)) {
             advance(lexer); // Skip ':'
             return true;
         }
