@@ -150,3 +150,16 @@ Literal square bracket at start of a template parameter value
           (template_param_name)
           (template_param_value
             (text)))))))
+
+============================
+Literal pipe in paragraph text
+============================
+Text outside | comment
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (text)
+      (text)
+      (text))))

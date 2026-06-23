@@ -258,8 +258,18 @@ module.exports = grammar({
     // A paragraph is a sequence of inline content, not starting with a block marker,
     // and terminated by a blank line or another block element.
     // This is tricky. It often has low precedence.
+    // A bare `|` is a literal character in body text (e.g. "a | b"); it is a
+    // delimiter only inside templates/tables/links, which have their own rules, so
+    // accept it as text at the paragraph level (not in the shared `_inline_content`,
+    // where it would swallow template-argument separators).
     paragraph: ($) =>
-      prec(-4, seq(repeat1($._inline_content), choice($._newline, $._eof))),
+      prec(
+        -4,
+        seq(
+          repeat1(choice($._inline_content, alias("|", $.text))),
+          choice($._newline, $._eof),
+        ),
+      ),
     _newline: ($) => "\n",
     _eof: ($) => token(prec(-10, "\0")), // special token for end of file, defined by tree-sitter
 
