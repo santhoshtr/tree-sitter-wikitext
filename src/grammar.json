@@ -905,12 +905,20 @@
                   "value": "|"
                 },
                 {
-                  "type": "FIELD",
-                  "name": "display",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_wikilink_display_content"
-                  }
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "display",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "_wikilink_display_content"
+                      }
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 }
               ]
             },

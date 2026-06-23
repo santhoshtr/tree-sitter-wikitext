@@ -273,3 +273,22 @@ see [not a link] and [https://example.com here]
       (external_link
         (url)
         (page_name_segment)))))
+
+================================================================================
+Pipe trick (empty display after pipe)
+================================================================================
+
+[[kingdom (biology)|]] and [[Help:Pipe|]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment)))
+      (text)
+      (wikilink
+        (wikilink_page
+          (page_name_segment))))))

@@ -279,7 +279,9 @@ module.exports = grammar({
         $._wiki_link_token,
         "[[",
         field("target", $.wikilink_page),
-        optional(seq("|", field("display", $._wikilink_display_content))),
+        // Display is optional after the `|`: `[[Page|]]` is MediaWiki's "pipe
+        // trick", where the label is auto-derived from the page name.
+        optional(seq("|", optional(field("display", $._wikilink_display_content)))),
         "]]",
       ),
     wikilink_page: ($) =>
