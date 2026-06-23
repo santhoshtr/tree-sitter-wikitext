@@ -335,3 +335,33 @@ Localized Malayalam File/Image namespace media links
         (file_format_token)
         (file_caption
           (text))))))
+
+================================================================================
+Localized German File/Image namespace media links
+================================================================================
+
+[[Datei:X.jpg|thumb|left|a [[b]] c]]
+
+[[Bild:Y.jpg|thumb|caption]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_alignment_token)
+        (file_caption
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))
+          (text))))
+    (paragraph
+      (medialink
+        (filename)
+        (file_format_token)
+        (file_caption
+          (text))))))

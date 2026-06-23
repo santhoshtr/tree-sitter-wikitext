@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "namespace_names.h"
+
 enum TokenType {
     COMMENT,
     INLINE_TEXT_BASE,
@@ -83,21 +85,6 @@ static inline bool consume_string(char *sequence, TSLexer *lexer) {
     unsigned length = strlen(sequence);
     for (unsigned i = 0; i < length; i++) {
         if (lexer->lookahead != sequence[i]) {
-            return false;
-        }
-        advance(lexer);
-    }
-    return true;
-}
-
-// Like consume_string but matches a run of Unicode code points, needed for
-// non-ASCII keywords (e.g. localized namespace names) where one code point is
-// several UTF-8 bytes. On a mismatch the lexer is left advanced; callers use this
-// only while producing a zero-width marker, so the advances are discarded.
-static inline bool consume_codepoints(const int32_t *codepoints, unsigned length,
-                                      TSLexer *lexer) {
-    for (unsigned i = 0; i < length; i++) {
-        if (lexer->lookahead != codepoints[i]) {
             return false;
         }
         advance(lexer);
@@ -993,56 +980,80 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
 
     return false;
 }
+// Encode a code point as UTF-8 into out (must hold >= 4 bytes); return length.
+static inline unsigned utf8_encode(int32_t c, char *out) {
+    if (c < 0x80) {
+        out[0] = (char)c;
+        return 1;
+    }
+    if (c < 0x800) {
+        out[0] = (char)(0xC0 | (c >> 6));
+        out[1] = (char)(0x80 | (c & 0x3F));
+        return 2;
+    }
+    if (c < 0x10000) {
+        out[0] = (char)(0xE0 | (c >> 12));
+        out[1] = (char)(0x80 | ((c >> 6) & 0x3F));
+        out[2] = (char)(0x80 | (c & 0x3F));
+        return 3;
+    }
+    out[0] = (char)(0xF0 | (c >> 18));
+    out[1] = (char)(0x80 | ((c >> 12) & 0x3F));
+    out[2] = (char)(0x80 | ((c >> 6) & 0x3F));
+    out[3] = (char)(0x80 | (c & 0x3F));
+    return 4;
+}
+
 // Scan for link opening patterns
 static bool is_media_link_token(TSLexer *lexer) {
-    // NOTE: At this point '[[' check passed
-    // Check for "File:" or "Image:" or "Media:"
-    if (lexer->lookahead == 'F') {
-        if (consume_string("File", lexer)) {
-            advance(lexer); // Skip ':'
-            return true;
+    // NOTE: At this point '[[' check passed. Accumulate the namespace prefix up
+    // to ':' and look it up in the generated MEDIA_NAMESPACES table, which holds
+    // every File/Media namespace name and alias across MediaWiki's languages.
+    // Normalization here must match scripts/gen-namespaces.py: '_' -> ' ' and an
+    // ASCII first letter upper-cased (MediaWiki is first-letter insensitive).
+    char buf[128];
+    unsigned len = 0;
+    while (true) {
+        int32_t c = lexer->lookahead;
+        if (c == ':') {
+            break;
         }
+        // A namespace prefix never contains these; bail before scanning further.
+        if (c == 0 || c == '\n' || c == '[' || c == ']' || c == '|' ||
+            c == '{' || c == '}' || c == '#' || c == '<') {
+            return false;
+        }
+        if (c == '_') {
+            c = ' ';
+        }
+        if (len + 4 > sizeof(buf)) {
+            return false;
+        }
+        len += utf8_encode(c, buf + len);
+        advance(lexer);
+    }
+    if (len == 0) {
         return false;
+    }
+    buf[len] = '\0';
+    if (buf[0] >= 'a' && buf[0] <= 'z') {
+        buf[0] -= 'a' - 'A';
     }
 
-    if (lexer->lookahead == 'I') {
-        // Check for "Image:"
-        if (consume_string("Image", lexer)) {
+    unsigned lo = 0, hi = MEDIA_NAMESPACES_COUNT;
+    while (lo < hi) {
+        unsigned mid = (lo + hi) / 2;
+        int cmp = strcmp(buf, MEDIA_NAMESPACES[mid]);
+        if (cmp == 0) {
             advance(lexer); // Skip ':'
             return true;
         }
-        return false;
-    }
-
-    if (lexer->lookahead == 'M' || lexer->lookahead == 'm') {
-        // Check for "Media:"
-        if (consume_string("Media", lexer)) {
-            advance(lexer); // Skip ':'
-            return true;
+        if (cmp < 0) {
+            hi = mid;
+        } else {
+            lo = mid + 1;
         }
-        return false;
     }
-
-    // Localized Malayalam namespaces: പ്രമാണം (File), ചിത്രം (Image).
-    if (lexer->lookahead == 0x0d2a) { // പ
-        static const int32_t pramanam[] = {0x0d2a, 0x0d4d, 0x0d30, 0x0d2e,
-                                           0x0d3e, 0x0d23, 0x0d02};
-        if (consume_codepoints(pramanam, 7, lexer)) {
-            advance(lexer); // Skip ':'
-            return true;
-        }
-        return false;
-    }
-    if (lexer->lookahead == 0x0d1a) { // ച
-        static const int32_t chithram[] = {0x0d1a, 0x0d3f, 0x0d24,
-                                           0x0d4d, 0x0d30, 0x0d02};
-        if (consume_codepoints(chithram, 6, lexer)) {
-            advance(lexer); // Skip ':'
-            return true;
-        }
-        return false;
-    }
-
     return false;
 }
 

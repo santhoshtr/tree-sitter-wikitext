@@ -14,6 +14,10 @@ wasm: gen
 gen:
     tree-sitter generate
     tree-sitter build
+# Regenerate src/namespace_names.h from MediaWiki core's localized File/Media
+# namespace data. Run when MediaWiki adds languages or namespace aliases.
+gen-namespaces:
+    python3 scripts/gen-namespaces.py
 
 see: gen
     tree-sitter parse --cst examples/sample.wikitext | bat
