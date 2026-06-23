@@ -1,0 +1,421 @@
+{{Short description|Indo-Aryan language spoken in India}}
+{{Redirect-distinguish|Magadhi language|Magadhi Prakrit}}
+{{more citations needed|date=March 2019}}
+{{EngvarB|date=October 2023}}
+{{Use dmy dates|date=October 2023}}
+{{Infobox language
+| name             = Magahi
+| altname          = Magadhi
+| nativename       = {{hlist|
+ | {{nowrap|मगही}}
+}}
+| image            = Magahi language.svg
+| imagecaption     = The word "Magahi" written in Devanagari script
+| imagealt         = Magahi
+| states           = [[India]] and [[Nepal]]
+| region           = [[Magadha (region)|Magadha]] (southern [[Bihar]], northern [[Jharkhand]], and northwestern [[West Bengal]]),<ref>{{Cite web|url=https://archive.org/details/rosettaproject_mag_detail-1/mode/2up|title=Magahi or Magadhi|last=Grierson|first=G.A.|website=Internet Archive|year=1927}}</ref><ref>{{Cite web|url=https://www.omniglot.com/writing/magahi.htm|title=Magahi|website=Omniglot}}</ref><ref>{{Cite web|url=https://www.longdom.org/articles/magahi-and-magadh-language-and-people.pdf|title=Magahi and Magadh: Language and the People|last=Atreya|first=Lata|website=Global Journal of Interdisciplinary Social Sciences}}</ref> [[Terai]] region of Eastern [[Nepal]]
+| ethnicity        = [[Magahi people|Magahi]]
+| speakers         = 12.7&nbsp;million
+| date             = 2011 census
+| speakers2        = (additional speakers counted under Hindi)
+| ref              = <ref name="ethnologue.com">{{Cite web |url=https://www.ethnologue.com/language/mag|title=Magahi|website=ethnologue}}</ref><ref name="census2011">{{cite web |date=2011 |title=Abstract of Speakers' Strength of Languages and Mother Tongues - 2011 |url=https://censusindia.gov.in/nada/index.php/catalog/42458/download/46089/C-16_25062018.pdf |work=Office of the Registrar General & Census Commissioner, India |page=6 |access-date=22 September 2024}}</ref>
+| minority         = India
+* [[Jharkhand]]{{efn|additional official language of Jharkhand}}<ref>{{Cite web|url=https://www.prabhatkhabar.com/news/ranchi/jharkhand-raghubar-das-cabinet-decision-maithili-bhojpuri-angika-magahi-second-language/1135878.html |title=झारखंड : रघुवर कैबिनेट से मगही, भोजपुरी, मैथिली व अंगिका को द्वितीय भाषा का दर्जा |website= [[Prabhat Khabar]]|date=21 March 2018 |access-date=17 November 2018 |language=hi}}</ref>
+| ancestor         = [[Magadhi Prakrit]]
+| ancestor2        = Magadhan [[Apabhraṃśa]]
+| ancestor3        = [[Abahattha]]
+| familycolor      = Indo-European
+| fam2             = [[Indo-Iranian languages|Indo-Iranian]]
+| fam3             = [[Indo-Aryan languages|Indo-Aryan]]
+| fam4             = [[Eastern Indo-Aryan languages|Eastern Zone (Magadhan)]]
+| fam5             = [[Bihari languages|Bihari]]
+| dia1             = Southern Magahi
+| dia2             = Northern Magahi
+| dia3             = Central Magahi
+| script           = [[Devanagari]] <br/>[[Kaithi]] (formerly) <br/>
+[[Bengali alphabet|Bengali]] (historically in Manbhum and Hazaribagh) <ref name="f511">{{cite book | last1=Jain | first1=Danesh | last2=Cardona | first2=George | title=The Indo-Aryan Languages | publisher=Routledge | date=2007-07-26 | isbn=978-1-135-79710-2 | url=https://books.google.com/books?id=iUHfBQAAQBAJ | access-date=2025-08-03 | page=549|quote=In one sense, Magahi is written in four scripts, Devanagari, Kaithi, and also Bangla and Oriya. Bangla and Oriya scripts are employed in writing the forms of eastern Magahi current in the Manbhum area, such as Purulia but also in the southeastern part of the Hazaribagh district that borders on the Manbhum region. The Oriya script is used, expectedly, in areas where it coexists with Oriya, such as Mayurbhanj.}}</ref><br/>
+[[Oriya script|Oriya]] (historically in Mayurbhanj)
+| iso2             = mag
+| iso3             = mag
+| glotto           = maga1260
+| glottorefname    = Magahi
+| map              = Distribution of Magahi language.png
+| mapcaption       = {{align|center|Magahi speaking region}}
+}}
+
+'''Magahi''' ({{Script|Kthi|𑂧𑂏𑂯𑂲}}), also known as '''Magadhi''' ({{Script|Kthi|𑂧𑂏𑂡𑂲}}), is an [[Indo-Aryan language]] spoken in [[Bihar]], [[Jharkhand]], and parts of  [[West Bengal]] and [[Odisha]] in [[East India|eastern India]],<ref name="Magahi01">{{cite book | url=https://books.google.com/books?id=p3N81Di9EN8C&q=magahi+people&pg=PA6 | title=Magahī Phonology: A Descriptive Study | access-date=4 November 2018| pages=6| isbn=9788180695254 | last1=Prasad | first1=Saryoo | year=2008 | publisher=Concept Publishing Company }}</ref><ref name="Magahi02">{{cite book | url=https://books.google.com/books?id=SylBHS8IJAUC&q=magahi+people&pg=PA91 | title=Language, Religion and Politics in North India | access-date=4 November 2018| pages=93| isbn=9780595343942 | last1=Brass | first1=Paul R. | year=2005 | publisher=iUniverse }}</ref> and in the [[Terai]] region of [[Nepal]].<ref>{{Cite book |url=https://www.ethnologue.com/language/mag |chapter=Magahi |title=Ethnologue: Languages of the World|editor-last=Eberhard|editor-first=David M.|editor-last2= Simons|editor-first2=Gary F.|editor-last3=Fennig|editor-first3=Charles D.|date=2021|publisher=SIL International|location= Dallas, Texas|edition=Twenty-fourth|access-date=2 January 2025|url-access=subscription}}</ref> [[Magadhi Prakrit]] was the ancestor of Magahi, from which the latter's name derives.<ref>{{cite web|last1=Kishore |first1=Roshan |url=http://www.livemint.com/Leisure/Nl73WC1JA8d6KVybBycNlM/How-a-Bihari-lost-his-mother-tongue-to-Hindi.html|title=How a Bihari lost his mother tongue to Hindi|work=mint |date=22 September 2017}}</ref>
+
+It has a very rich and old tradition of folk songs and stories. It is spoken in approximately twelve districts of [[Bihar]] ([[Gaya district|Gaya]], [[Patna district|Patna]], [[Jehanabad district|Jehanabad]], [[Aurangabad district, Bihar|Aurangabad]], [[Nalanda district|Nalanda]], [[Sheikhpura district|Sheikhpura]], [[Nawada district|Nawada]], [[Lakhisarai district|Lakhisarai]], [[Arwal district|Arwal]], [[Jamui district|Jamui]] and in some parts of Banka), twelve districts of [[Jharkhand]] ([[Hazaribagh district|Hazaribag]], [[Palamu district|Palamu]], [[Chatra district|Chatra]], [[Koderma district|Koderma]], [[Jamtara district|Jamtara]], [[Bokaro district|Bokaro]], [[Dhanbad district|Dhanbad]], [[Giridih district|Giridih]], Deoghar, Garhwa, Latehar, Chatra) and in [[West Bengal]]'s [[Malda district]].<ref>{{Cite book|url=https://books.google.com/books?id=sl_dDVctycgC&q=angika+in+west+bengal&pg=PA481|title=International Encyclopedia of Linguistics: 4-Volume Set|last=Frawley|first=William|access-date=8 November 2018|publisher=Oxford University Press, USA|isbn=9780195139778|language=en|date=May 2003}}</ref> 
+
+Magahi derived from the ancient [[Magadhi Prakrit]], which was created in the ancient kingdom of [[Magadha (Mahajanapada)|Magadha]], the core of which was the area south of the [[Ganges]] and east of [[Son River]].
+
+Though the number of speakers in Magahi is about 12.7&nbsp;million, it has not been constitutionally recognised in India. In Bihar, Hindi is the language used for educational and official matters.<ref name="diehardindian.com">{{cite web|url=http://www.diehardindian.com/demogrph/moredemo/histlang.htm |title=History of Indian Languages |publisher=Diehardindian.com |access-date=29 February 2012 |url-status=dead |archive-url=https://web.archive.org/web/20120226234832/http://www.diehardindian.com/demogrph/moredemo/histlang.htm |archive-date=26 February 2012 }}</ref> Magahi was legally absorbed under Hindi in the 1961 Census.<ref name="books.google.co.in">{{cite conference
+  | last = Verma
+  | first = Mahandra K.
+  | title = Language Endangerment and Indian languages : An exploration and a critique
+  | year = 2001
+ | book-title = Linguistic Structure and Language Dynamics in South Asia
+  | isbn = 9788120817654
+ | url = https://books.google.com/books?id=tcfJY7kANo8C&q=awadhi+and+magahi+languages&pg=PA5
+  }}</ref><ref>{{cite book |title=Magahi Folklore and Folk Tales |first=Sheela |last=Verma |publisher=Manohar |date=2008 |page=31 |isbn=9788173048043 |quote=Aryani (1965), on the basis of several data, estimated the number of Magahi speakers at approximately 9,900,000 for 1951. Surprisingly enough, the 1971 census figures show only 6,638,495 speakers for Magahi. This discrepancy can be understood in the context of the socio-linguistic phenomenon of educated urban speakers naming their language of schooling, Hindi, as their mother-tongue. Obviously, the number of Magahi speakers did not really decline between 1951 and 1971 but was simply swallowed up by the census figures for Hindi.}}</ref>
+
+==History==
+{{See also|Magadhi Prakrit|Pali|Sadri language}}
+
+The ancestor of Magahi, [[Magadhi Prakrit]], formed in the Indian subcontinent. These regions were part of the ancient kingdom of [[Magadha (Mahajanapada)|Magadha]], the core of which was the area of [[Bihar]] south of the river [[Ganges|Ganga]].
+
+The name ''Magahi'' is directly derived from the word Magadhi.<ref>Jain Dhanesh, [[George Cardona|Cardona George]], ''The Indo-Aryan Languages'', pp449</ref>
+
+The development of the Magahi language into its current form is unknown. However, according to linguists, Magahi along with [[Assamese language|Assamese]], [[Bengali language|Bengali]], [[Bhojpuri language|Bhojpuri]], [[Maithili language|Maithili]] and [[Odia language|Odia]] originated from the Magadhi Prakrit during the 8th to 11th centuries. These different, but sister dialects differentiated themselves and took their own course of growth and development. But it is not certain when exactly it took place. It was probably such an unidentified period during which modern Indian languages begin to take modern shape. By the end of the 12th century, the development of [[Middle Indo-Aryan languages#Apabhramsa|Apabhramsa]] reached its climax. The distinct shape of Magadhi can be seen in the ''Dohakosha'' written by Sarahapa and Kauhapa.
+
+Magadhi had a setback due to the transition period of the Magadha administration.<ref>Maitra Asim, ''Magahi Culture'', Cosmo Publications, New Delhi (1983), pp. 64.</ref> Traditionally, strolling bards recite long epic poems in this dialect, and it was because of this that the word "Magadhi" came to mean "a bard". [[Devanagari]] is the most widely used script in present times, while [[Bengali alphabet|Bengali]] and [[Odia script]]s are also used in some regions and Magahi's old script was Kaithi script.<ref>{{cite book |title=Magahi Folklore and Folk Tales |first=Sheela |last=Verma |publisher=Manohar |date=2008 |page=28 |quote=Hindi is the formal language of the region, used in schools and law courts. Magahi today employs the Devanagari script borrowed directly from Hindi in place of the Kaithi script used earlier. |isbn=9788173048043}}</ref><ref>{{cite book |title=Magahi Folklore and Folk Tales |first=Sheela |last=Verma |publisher=Manohar |date=2008 |pages=31–32 |isbn=9788173048043}}</ref> The pronunciation in Magahi is not as broad as in Maithili and there are a number of verbal forms for each person.<ref name="Maithili and Magahi">{{Cite web|url=http://www.bihar.ws/info/Bihari-Languages/Maithili-and-Magahi.html|title=Maithili and Magahi|access-date=10 January 2020|archive-url=https://web.archive.org/web/20120723144641/http://bihar.ws/info/Bihari-Languages/Maithili-and-Magahi.html|archive-date=23 July 2012|url-status=dead}}</ref> Historically, Magahi had no famous written literature. There are many popular songs throughout the area in which the language is spoken, and strolling bards recite various long epic poems which are known more or less over the whole of Northern India. In the Magahi speaking area, folk singers sing a good number of ballads.
+
+The first success in spreading Hindi occurred in Bihar in 1881, when Hindi displaced [[Urdu]] as the official language of the province. After independence, Hindi was given the sole official status through the Bihar Official Language Act, 1950,<ref>[[Paul Brass|Brass Paul R.]], ''The Politics of India Since Independence'', Cambridge University Press, pp. 183</ref> ignoring the state's own languages.
+
+==Geographical distribution==
+There are several dialects of Magahi. It is spoken in the area which formed the core of the ancient kingdom of [[Magadha (Mahajanapada)|Magadha]] - the modern districts of [[Patna District|Patna]], [[Nalanda District|Nalanda]], [[Gaya District|Gaya]], [[Jehanabad District|Jehanabad]], [[Arwal District|Arwal]], [[Aurangabad District, Bihar|Aurangabad]], [[Lakhisarai District|Lakhisarai]], [[Sheikhpura District|Sheikhpura]] and [[Nawada District|Nawada]]. Magahi is bounded on the north by [[Maithili language|Maithili]] spoken in [[Mithila (region)|Mithila]] across the Ganga. On the west it is bounded by the [[Bhojpuri language|Bhojpuri]] and on the northeast it is bounded by [[Angika]]. A blend of [[Magahi]] known as [[Khortha language|Khortha]] is spoken by non-tribal populace in [[North Chotanagpur division]] of [[Jharkhand]] which comprises districts of [[Bokaro district|Bokaro]], [[Chatra district|Chatra]], [[Palamu district|Palamu]], [[Dhanbad]], [[Giridih]], [[Hazaribagh]], [[Koderma]] and [[Ramgarh district|Ramgarh]]. People of Southern Bihar and Northern Jharkhand are mostly speakers of Magahi.<ref>Verma, Sheela (2003). "Magahi". In Jain Dhanesh, Cardona George, ''The Indo-Aryan Languages''. London: Routledge.</ref> Magahi is also spoken in [[Malda district]] of [[West Bengal]].<ref name="Magahi01"/><ref name="Magahi02"/><ref>{{cite book |title=Magahi Folklore and Folk Tales |first=Sheela |last=Verma |publisher=Manohar |date=2008 |pages=29–30 |isbn=9788173048043}}</ref> According to 2011 Census, there were approximately 12.7 million Magahi speakers.<ref name="census2011"/> Apart from India it is spoken in various districts of south eastern [[Nepal]].<ref>{{Cite web |title=2011 Nepal Census, Social Characteristics Tables |url=https://cbs.gov.np/wp-content/upLoads/2018/12/Volume05Part02.pdf |url-status=dead |archive-url=https://web.archive.org/web/20230314170005/https://cbs.gov.np/wp-content/upLoads/2018/12/Volume05Part02.pdf |archive-date=14 March 2023 |access-date=15 September 2019}}</ref>
+
+== Phonology ==
+
+=== Consonants ===
+{| class="wikitable" style="text-align:center"
+! colspan="2" |
+![[Labial consonant|Labial]]
+![[Dental consonant|Dental]]/<br />[[Alveolar consonant|Alveolar]]
+![[Retroflex consonant|Retroflex]]
+![[Postalveolar consonant|Post-alv.]]/<br />[[Palatal consonant|Palatal]]
+![[Velar consonant|Velar]]
+![[Glottal consonant|Glottal]]
+|-
+! rowspan="2" |[[Nasal consonant|Nasal]]
+!{{small|[[Voice (phonetics)|voiced]]}}
+|{{IPAlink|m}}
+|{{IPAlink|n}}
+|
+|
+|{{IPAlink|ŋ}}
+|
+|-
+!{{small|[[Breathy voice|breathy]]}}
+|{{IPAlink|mʱ}}
+|{{IPAlink|nʱ}}
+|
+|
+|
+|
+|-
+! rowspan="4" |[[Stop consonant|Stop]]/<br />[[Affricate consonant|Affricate]]
+!{{small|[[Voicelessness|voiceless]]}}
+|{{IPAlink|p}}
+|{{IPAlink|t}}
+|{{IPAlink|ʈ}}
+|{{IPAlink|tʃ}}
+|{{IPAlink|k}}
+|
+|-
+!{{small|[[Aspirated consonant|aspirated]]}}
+|{{IPAlink|pʰ}}
+|{{IPAlink|tʰ}}
+|{{IPAlink|ʈʰ}}
+|{{IPAlink|tʃʰ}}
+|{{IPAlink|kʰ}}
+|
+|-
+!{{small|[[Voice (phonetics)|voiced]]}}
+|{{IPAlink|b}}
+|{{IPAlink|d}}
+|{{IPAlink|ɖ}}
+|{{IPAlink|dʒ}}
+|{{IPAlink|ɡ}}
+|
+|-
+!{{small|[[Breathy voice|breathy]]}}
+|{{IPAlink|bʱ}}
+|{{IPAlink|dʱ}}
+|{{IPAlink|ɖʱ}}
+|{{IPAlink|dʒʱ}}
+|{{IPAlink|ɡʱ}}
+|
+|-
+! colspan="2" |[[Fricative consonant|Fricative]]
+|
+|{{IPAlink|s}}
+|
+|
+|
+|{{IPAlink|h}}
+|-
+! rowspan="2" |[[Approximant consonant|Approximant]]
+!{{small|[[Voice (phonetics)|voiced]]}}
+|{{IPAlink|w}}
+|{{IPAlink|l}}
+|
+|{{IPAlink|j}}
+|
+|
+|-
+!{{small|[[Breathy voice|breathy]]}}
+|
+|{{IPAlink|lʱ}}
+|
+|
+|
+|
+|-
+! rowspan="2" |[[Tap consonant|Tap]]
+!{{small|[[Voice (phonetics)|voiced]]}}
+|
+|{{IPAlink|ɾ}}
+|{{IPAlink|ɽ}}
+|
+|
+|
+|-
+!{{small|[[Breathy voice|breathy]]}}
+|
+|{{IPAlink|ɾʱ}}
+|{{IPAlink|ɽʱ}}
+|
+|
+|
+|}
+
+=== Vowels ===
+{| class="wikitable" style="text-align:center"
+!
+![[Front vowel|Front]]
+![[Central vowel|Central]]
+![[Back vowel|Back]]
+|- align="center"
+![[High vowel|High]]
+|{{IPAlink|i}}
+|
+|{{IPAlink|u}}
+|- align="center"
+![[Mid vowel|Mid]]
+|{{IPAlink|e}}
+|{{IPAlink|ə}}
+|{{IPAlink|o}}
+|- align="center"
+![[Low vowel|Low]]
+|
+| colspan="2" |{{IPAlink|aː}}
+|-
+![[Diphthong]]s
+|{{IPA|əi}}
+|
+|{{IPA|əu}}
+|}
+
+* {{IPA|/i, u/}} may also be heard as lower {{IPA|[ɪ, ʊ]}} in shortened positions.<ref name="Magahi01" />
+* {{IPA|/e, o/}} may also be heard as lower {{IPA|[ɛ, ɔ]}} in more initial positions.<ref>{{Cite book |last=Sinha |first=Anil Chandra |title=Phonology and morphology of a Magahi dialect |publisher=Poona: Deccan College |year=1966}}</ref>
+* {{IPA|/ə/}} can also be heard as {{IPA|[ʌ]}} in more stressed positions.<ref>{{Cite book |last=Verma |first=Sheela |title=Magahi |publisher=London: London & New York: Routledge. |year=2003 |location=In George Cardona and Dhanesh Jain (eds.), The Indo-Aryan Languages |pages=498–514}}</ref>
+
+===Kinship terms===
+Some common kinship terms:
+{| class="wikitable"
+!Sr. No.
+!Magahi Word
+!IPA Pronunciation
+!English Word
+|-
+|1
+|बाप
+|[baːp]
+|Father
+|-
+|2
+|माई
+|[maː.i]
+|Mother
+|-
+|3
+|लइका
+|[lə.ɪ.kaː]
+|Son
+|-
+|4
+|लइकी
+|[lə.ɪ.kiː]
+|Daughter
+|-
+|5
+|भइया
+|[bʰə.jaː]
+|Elder Brother
+|-
+|6
+|भौजी
+|[bʰəʊ.dʒiː]
+|Sister-in-law (brother's wife)
+|-
+|7
+|दीदी
+|[diː.diː]
+|Elder Sister
+|-
+|8
+|बहिनिया
+|[bə.hi.ni.jaː]
+|Younger Sister
+|-
+|9
+|दादा
+|[daː.daː]
+|Paternal Grandfather
+|-
+|10
+|दादी
+|[daː.diː]
+|Paternal Grandmother
+|-
+|11
+|नाना
+|[naː.naː]
+|Maternal Grandfather
+|-
+|12
+|नानी
+|[naː.niː]
+|Maternal Grandmother
+|-
+|13
+|मरद
+|[mə.rəd]
+|Husband
+|-
+|14
+|मेहरारू
+|[me.hə.raː.ruː]
+|Wife
+|-
+|15
+|सास
+|[saːs]
+|Mother-in-law
+|-
+|16
+|ससुर
+|[sə.suɾ]
+|Father-in-law
+|-
+|17
+|देबर
+|[de.bəɾ]
+|Brother-in-law (husband's younger brother)
+|-
+|18
+|जेठ
+|[dʒeʈʰ]
+|Husband’s Elder Brother
+|-
+|19
+|ननद
+|[nənəd]
+|Husband’s Sister
+|-
+|20
+|बहू
+|[bə.huː]
+|Daughter-in-law
+|-
+|22
+|चाचा
+|[tʃaː.tʃaː]
+|Paternal Uncle (Younger)
+|-
+|24
+|चाची
+|[tʃaː.tʃiː]
+|Aunt (Younger Uncle's Wife)
+|-
+|25
+|मामा
+|[maː.maː]
+|Maternal Uncle
+|-
+|26
+|मामी
+|[maː.miː]
+|Maternal Uncle’s Wife
+|-
+|27
+|मौसी
+|[məʊ.siː]
+|Maternal Aunt
+|-
+|28
+|मौसा
+|[məʊ.saː]
+|Maternal Aunt’s Husband
+|-
+|29
+|फूफी
+|[pʰuː.pʰiː]
+|Paternal Aunt
+|-
+|30
+|फूफा
+|[pʰuː.pʰaː]
+|Paternal Aunt’s Husband
+|-
+|31
+|भतीजा
+|[bʰə.t̪iː.dʒaː]
+|Nephew
+|-
+|32
+|भतीजी
+|[bʰə.t̪iː.dʒiː]
+|Niece
+|}
+
+==See also==
+*[[Magahi culture|Culture of Magadh Region]]
+*[[Culture of Bhojpuri Region]]
+*[[Culture of Mithila Region]]
+*[[Culture of Angika Region]]
+* [[Pāli]], the canonical language of Theravada Buddhism traditionally associated with the language of Magadhi
+*[[Phool Bahadur]]
+*''[[Bhaiyaa]]''
+
+==Notes==
+{{notelist}}
+
+==References==
+{{Reflist}}
+
+==Further reading==
+{{refbegin}}
+* Munishwar Jha. "Magadhi And Its Formation," Calcutta Sanskrit College Research Series, 1967, 256 pp
+* Saryu Prasad - "A Descriptive Study of Magahi Phonology", PhD thesis submitted to Patna University.
+** {{cite book |url=https://books.google.com/books?id=p3N81Di9EN8C&pg=PA6|title=Magahī Phonology: A Descriptive Study | access-date=11 February 2025 |isbn=9788180695254 |last1=Prasad |first1=Saryoo |location=New Delhi |publisher=Concept Publishing Company |year=2008 }}
+* A.C. Sinha (1966) - "Phonology and Morphology of a Magahi Dialect", PhD awarded by the University of Poona.(now Pune)
+* G.A. Grierson. Essays on Bihari Declension and Conjugation, Journal of the Asiatic Society of Bengal, vol. iii, pp.&nbsp;119–159
+* Hoernle, A.F. Rudolf & Grierson, G.A. A Comparative Dictionary of the Bihari Language.
+* Prasad, Swarnlata (1959). Juncture and Aitch in Magahi. Indian Linguistics, Turner Jubilee Volume, 1959 pp.&nbsp;118–124.
+* Sweta Sinha (2014) - "The Prosody of Stress and Rhythm in Magahi", PhD thesis submitted to Jawaharlal Nehru University, New Delhi.
+* Sweta Sinha (2018)- "Magahi Prosody", Bahri Publications: New Delhi. {{ISBN|978-93-83469-14-7}}.
+{{refend}}
+
+==External links==
+{{Incubator|mag}}
+*[https://www.sites.google.com/site/bihargatha/the-history-of-the-dialects-folk-and-proverbs/the-historical-magahi-dialect Magahi - A Historical language] {{Webarchive|url=https://web.archive.org/web/20201027124645/https://sites.google.com/site/bihargatha/the-history-of-the-dialects-folk-and-proverbs/the-historical-magahi-dialect |date=27 October 2020 }}
+*[https://web.archive.org/web/20070311232843/http://www.jainworld.com/scriptures/ Jain Scriptures]
+*[https://archive.org/details/rosettaproject_mag_detail-1 Magahi Detailed Description by Grierson, G.A.]
+*[https://books.google.com/books?id=p3N81Di9EN8C Magahī Phonology: A Descriptive Study by Saryoo Prasad]
+
+{{Bihari languages}}
+{{Languages of India}}
+{{Authority control}}
+
+{{DEFAULTSORT:Magahi Language}}
+[[Category:Magahi language]]
+[[Category:Bihari languages]]
+[[Category:Eastern Indo-Aryan languages]]
+[[Category:Languages of Bihar]]
+[[Category:Languages of Jharkhand]]
+[[Category:Languages of West Bengal]]
+[[Category:Languages of Madhesh Province]]
+[[Category:Languages written in Devanagari]]
+[[Category:Languages listed as Hindi dialects in latest census]]
