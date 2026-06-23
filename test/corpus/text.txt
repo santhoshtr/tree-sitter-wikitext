@@ -163,3 +163,20 @@ Text outside | comment
       (text)
       (text)
       (text))))
+
+============================
+Ampersand that is not an entity, before a delimiter
+============================
+{{cite|publisher=B&H}}
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_name)
+          (template_param_value
+            (text)))))))

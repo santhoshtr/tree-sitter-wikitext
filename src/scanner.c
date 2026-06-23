@@ -864,6 +864,13 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
                 // This is an HTML entity, should be handled separately
                 break;
             }
+            // is_html_entity advanced over the probed characters and it was not a
+            // valid entity (e.g. the "&H" in "B&H"). Fold them into the text run;
+            // without this they are left unconsumable when a delimiter follows
+            // (e.g. "B&H}}"). Mirrors the ''/'<'/'['/'~' cases.
+            text_run_length++;
+            lexer->mark_end(lexer);
+            continue;
         }
 
         if (lexer->lookahead == '\'') {
