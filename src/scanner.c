@@ -619,7 +619,8 @@ static bool scan_comment(TSLexer *lexer) {
                 lexer->result_symbol = COMMENT;
                 return true;
             }
-            __attribute__((fallthrough));
+            dashes = 0;
+            break;
         default:
             dashes = 0;
         }
