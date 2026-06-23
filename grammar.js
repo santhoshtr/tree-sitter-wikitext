@@ -25,7 +25,13 @@ module.exports = grammar({
     $._table_cell_plain_marker,
   ],
   extras: (_) => [/[ \t\r]/],
-  conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
+  conflicts: ($) => [
+    [$.nowiki_tag_block, $.nowiki_inline_element],
+    // After a cell marker + content, a newline may end the cell or begin a block
+    // list that is the cell's content; let GLR decide by the next line (a list
+    // marker vs. a `|`/`!`/`|}`).
+    [$._cell_body],
+  ],
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)
     ["bold_italic_explicit", $.bold, $.italic],
@@ -722,6 +728,9 @@ module.exports = grammar({
     // zero-width markers at the cell-content start saying whether such a run is
     // present; committing to a branch this way stops the greedy inline-text token
     // from swallowing the attributes as content. Content is optional (empty cells).
+    // Inline content on the marker line, optionally followed by a block list on the
+    // lines below (e.g. `|` then a `* …` run), the common shape in sponsor/credits
+    // tables. The newline between the marker line and the list is consumed here.
     _cell_body: ($) =>
       choice(
         seq(
@@ -729,10 +738,12 @@ module.exports = grammar({
           repeat1($.table_attribute),
           "|",
           optional(alias($._table_node, $.content)),
+          optional(seq($._newline, $._list)),
         ),
         seq(
           $._table_cell_plain_marker,
           optional(alias($._table_node, $.content)),
+          optional(seq($._newline, $._list)),
         ),
       ),
     table_header_block: ($) => seq("!", $._cell_body, optional($._newline)),

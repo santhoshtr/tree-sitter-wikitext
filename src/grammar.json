@@ -2864,6 +2864,27 @@
                   "type": "BLANK"
                 }
               ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_list"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
@@ -2885,6 +2906,27 @@
                   },
                   "named": true,
                   "value": "content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_list"
+                    }
+                  ]
                 },
                 {
                   "type": "BLANK"
@@ -3547,6 +3589,9 @@
     [
       "nowiki_tag_block",
       "nowiki_inline_element"
+    ],
+    [
+      "_cell_body"
     ]
   ],
   "precedences": [

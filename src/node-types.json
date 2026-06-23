@@ -1980,7 +1980,19 @@
           "named": true
         },
         {
+          "type": "definition_list",
+          "named": true
+        },
+        {
+          "type": "ordered_list",
+          "named": true
+        },
+        {
           "type": "table_attribute",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         }
       ]
@@ -1999,7 +2011,19 @@
           "named": true
         },
         {
+          "type": "definition_list",
+          "named": true
+        },
+        {
+          "type": "ordered_list",
+          "named": true
+        },
+        {
           "type": "table_attribute",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         }
       ]
@@ -2037,7 +2061,19 @@
           "named": true
         },
         {
+          "type": "definition_list",
+          "named": true
+        },
+        {
+          "type": "ordered_list",
+          "named": true
+        },
+        {
           "type": "table_attribute",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         }
       ]
@@ -2056,7 +2092,19 @@
           "named": true
         },
         {
+          "type": "definition_list",
+          "named": true
+        },
+        {
+          "type": "ordered_list",
+          "named": true
+        },
+        {
           "type": "table_attribute",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         }
       ]
