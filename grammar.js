@@ -765,7 +765,9 @@ module.exports = grammar({
         $.table_cell_inline, // || separated
         $.table_cell_block, // | separated
       ),
-    _table_node: ($) => repeat1(choice($._inline_content)),
+    // Cell/caption content. `_blank_line` lets a cell hold blank-line-separated
+    // blocks (e.g. a paragraph then a `{{Ordered list}}` template).
+    _table_node: ($) => repeat1(choice($._inline_content, $._blank_line)),
     table_row: ($) =>
       seq(
         "|-",

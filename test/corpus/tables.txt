@@ -1042,7 +1042,6 @@ List inside a table cell
 
 ========================================================
 Block content (paragraphs and a template) inside a table cell
-:skip
 ========================================================
 
 {|
@@ -1064,8 +1063,7 @@ Block content (paragraphs and a template) inside a table cell
         (table_cell
           (table_cell_block
             (content
-              (paragraph
-                (text))
+              (text)
               (template
                 (template_name
                   (template_name_part))

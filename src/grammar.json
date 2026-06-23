@@ -3071,6 +3071,10 @@
           {
             "type": "SYMBOL",
             "name": "_inline_content"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_blank_line"
           }
         ]
       }
