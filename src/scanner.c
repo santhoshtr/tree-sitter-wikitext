@@ -126,6 +126,9 @@ static bool is_allowed_html_tag(const char *tag_name) {
         "br", "meta", "hr",
         // wiki specific markup
         "noinclude",
+        // Extension tag whose body is wikitext with significant line breaks; the
+        // generic tag path handles its multi-line inline content.
+        "poem",
         // References
         "ref", NULL};
 

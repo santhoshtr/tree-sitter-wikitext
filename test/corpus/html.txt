@@ -1245,3 +1245,26 @@ Block table inside a div
                 (content
                   (text))))))
         (html_tag_name)))))
+
+==================
+Poem extension tag
+==================
+
+<poem>
+first verse
+second [[verse]]
+</poem>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (text)
+        (text)
+        (wikilink
+          (wikilink_page
+            (page_name_segment)))
+        (html_tag_name)))))
