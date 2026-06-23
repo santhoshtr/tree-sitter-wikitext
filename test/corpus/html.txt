@@ -1203,3 +1203,19 @@ as <math chem>\ce{Fe}_{1-x}\ce{O}</math>, where
         (raw_text)
         (html_tag_close))
       (text))))
+
+==================
+Unclosed ref tag is an error (malformed input)
+:error
+==================
+
+Text <ref> sds <ref>
+
+---
+
+(source_file
+  (ERROR
+    (text)
+    (html_tag_name)
+    (text)
+    (html_tag_name)))
