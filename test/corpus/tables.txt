@@ -1073,3 +1073,36 @@ Block content (paragraphs and a template) inside a table cell
                 (template_argument
                   (template_param_value
                     (text)))))))))))
+
+========================================================
+Text after a multi-line template inside a table cell
+:skip
+========================================================
+
+{|
+|-
+|Para
+
+{{Ordered list
+| a
+}}
+If, after applying criteria.
+|}
+
+-----------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (table_row
+        (table_cell
+          (table_cell_block
+            (content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text))))
+              (text))))))))
