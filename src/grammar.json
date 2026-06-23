@@ -2864,27 +2864,6 @@
                   "type": "BLANK"
                 }
               ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "_newline"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "_list"
-                    }
-                  ]
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
             }
           ]
         },
@@ -2911,22 +2890,69 @@
                   "type": "BLANK"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    "_data_cell_body": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_table_cell_attribute_marker"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "table_attribute"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "|"
             },
             {
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "_newline"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "_list"
-                    }
-                  ]
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_cell_content"
+                  },
+                  "named": true,
+                  "value": "content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_table_cell_plain_marker"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_cell_content"
+                  },
+                  "named": true,
+                  "value": "content"
                 },
                 {
                   "type": "BLANK"
@@ -2936,6 +2962,30 @@
           ]
         }
       ]
+    },
+    "_cell_content": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_inline_content"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_list"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_blank_line"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_newline"
+          }
+        ]
+      }
     },
     "table_header_block": {
       "type": "SEQ",
@@ -3009,7 +3059,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_cell_body"
+          "name": "_data_cell_body"
         },
         {
           "type": "CHOICE",
@@ -3034,7 +3084,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_cell_body"
+          "name": "_data_cell_body"
         },
         {
           "type": "CHOICE",
@@ -3595,7 +3645,7 @@
       "nowiki_inline_element"
     ],
     [
-      "_cell_body"
+      "_data_cell_body"
     ]
   ],
   "precedences": [

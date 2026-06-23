@@ -1024,21 +1024,22 @@ List inside a table cell
       (table_row
         (table_cell
           (table_cell_block
-            (unordered_list
-              (unordered_list_item
-                (list_marker)
-                (list_item_content
-                  (text)
-                  (wikilink
-                    (wikilink_page
-                      (page_name_segment)))))
-              (unordered_list_item
-                (list_marker)
-                (list_item_content
-                  (text)
-                  (wikilink
-                    (wikilink_page
-                      (page_name_segment))))))))))))
+            (content
+              (unordered_list
+                (unordered_list_item
+                  (list_marker)
+                  (list_item_content
+                    (text)
+                    (wikilink
+                      (wikilink_page
+                        (page_name_segment)))))
+                (unordered_list_item
+                  (list_marker)
+                  (list_item_content
+                    (text)
+                    (wikilink
+                      (wikilink_page
+                        (page_name_segment)))))))))))))
 
 ========================================================
 Block content (paragraphs and a template) inside a table cell
@@ -1076,7 +1077,6 @@ Block content (paragraphs and a template) inside a table cell
 
 ========================================================
 Text after a multi-line template inside a table cell
-:skip
 ========================================================
 
 {|

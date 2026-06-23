@@ -195,6 +195,10 @@
           "named": true
         },
         {
+          "type": "definition_list",
+          "named": true
+        },
+        {
           "type": "entity",
           "named": true
         },
@@ -227,6 +231,10 @@
           "named": true
         },
         {
+          "type": "ordered_list",
+          "named": true
+        },
+        {
           "type": "parser_function",
           "named": true
         },
@@ -244,6 +252,10 @@
         },
         {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         },
         {
@@ -1980,19 +1992,7 @@
           "named": true
         },
         {
-          "type": "definition_list",
-          "named": true
-        },
-        {
-          "type": "ordered_list",
-          "named": true
-        },
-        {
           "type": "table_attribute",
-          "named": true
-        },
-        {
-          "type": "unordered_list",
           "named": true
         }
       ]
@@ -2011,19 +2011,7 @@
           "named": true
         },
         {
-          "type": "definition_list",
-          "named": true
-        },
-        {
-          "type": "ordered_list",
-          "named": true
-        },
-        {
           "type": "table_attribute",
-          "named": true
-        },
-        {
-          "type": "unordered_list",
           "named": true
         }
       ]
@@ -2061,19 +2049,7 @@
           "named": true
         },
         {
-          "type": "definition_list",
-          "named": true
-        },
-        {
-          "type": "ordered_list",
-          "named": true
-        },
-        {
           "type": "table_attribute",
-          "named": true
-        },
-        {
-          "type": "unordered_list",
           "named": true
         }
       ]
@@ -2092,19 +2068,7 @@
           "named": true
         },
         {
-          "type": "definition_list",
-          "named": true
-        },
-        {
-          "type": "ordered_list",
-          "named": true
-        },
-        {
           "type": "table_attribute",
-          "named": true
-        },
-        {
-          "type": "unordered_list",
           "named": true
         }
       ]

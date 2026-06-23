@@ -27,10 +27,10 @@ module.exports = grammar({
   extras: (_) => [/[ \t\r]/],
   conflicts: ($) => [
     [$.nowiki_tag_block, $.nowiki_inline_element],
-    // After a cell marker + content, a newline may end the cell or begin a block
-    // list that is the cell's content; let GLR decide by the next line (a list
-    // marker vs. a `|`/`!`/`|}`).
-    [$._cell_body],
+    // In a data cell, a newline after content may continue the cell (more block
+    // content on the next line) or end it; let GLR decide by the next line (more
+    // content vs. a `|`/`!`/`|}` delimiter).
+    [$._data_cell_body],
   ],
   precedences: ($) => [
     // Precedence for ''''' (bold italic) vs ''' (bold) and '' (italic)
@@ -728,9 +728,8 @@ module.exports = grammar({
     // zero-width markers at the cell-content start saying whether such a run is
     // present; committing to a branch this way stops the greedy inline-text token
     // from swallowing the attributes as content. Content is optional (empty cells).
-    // Inline content on the marker line, optionally followed by a block list on the
-    // lines below (e.g. `|` then a `* …` run), the common shape in sponsor/credits
-    // tables. The newline between the marker line and the list is consumed here.
+    // `_cell_body` (headers, caption) keeps inline content; `_data_cell_body` (data
+    // cells) additionally admits block content spanning continuation lines.
     _cell_body: ($) =>
       choice(
         seq(
@@ -738,13 +737,35 @@ module.exports = grammar({
           repeat1($.table_attribute),
           "|",
           optional(alias($._table_node, $.content)),
-          optional(seq($._newline, $._list)),
         ),
         seq(
           $._table_cell_plain_marker,
           optional(alias($._table_node, $.content)),
-          optional(seq($._newline, $._list)),
         ),
+      ),
+    _data_cell_body: ($) =>
+      choice(
+        seq(
+          $._table_cell_attribute_marker,
+          repeat1($.table_attribute),
+          "|",
+          optional(alias($._cell_content, $.content)),
+        ),
+        seq(
+          $._table_cell_plain_marker,
+          optional(alias($._cell_content, $.content)),
+        ),
+      ),
+    // Data-cell content may span the lines below the `|` marker until the next
+    // cell/row delimiter — a list, blank-line-separated blocks, or just more text
+    // (e.g. a paragraph, a `{{Ordered list}}`, then more text). The `_newline`
+    // carries the content across continuation lines; data cells are only ever
+    // followed by `|`-prefixed delimiters, which break the inline-text run, so the
+    // content stops there. The conflict on `_data_cell_body` lets a newline either
+    // continue the cell or end it.
+    _cell_content: ($) =>
+      repeat1(
+        choice($._inline_content, $._list, $._blank_line, $._newline),
       ),
     table_header_block: ($) => seq("!", $._cell_body, optional($._newline)),
     table_header_inline: ($) =>
@@ -756,9 +777,9 @@ module.exports = grammar({
         $.table_header_block, // ! separated
       ),
 
-    table_cell_block: ($) => seq("|", $._cell_body, optional($._newline)),
+    table_cell_block: ($) => seq("|", $._data_cell_body, optional($._newline)),
     table_cell_inline: ($) =>
-      seq("||", $._cell_body, optional($._newline)),
+      seq("||", $._data_cell_body, optional($._newline)),
 
     table_cell: ($) =>
       choice(
