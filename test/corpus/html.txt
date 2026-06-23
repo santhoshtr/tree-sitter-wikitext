@@ -1222,7 +1222,6 @@ Text <ref> sds <ref>
 
 ==================
 Block table inside a div
-:skip
 ==================
 
 <div>
@@ -1236,12 +1235,13 @@ Block table inside a div
 
 (source_file
   (section
-    (html_tag
-      (html_tag_name)
-      (table
-        (table_row
-          (table_cell
-            (table_cell_block
-              (content
-                (text))))))
-      (html_tag_name))))
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (table
+          (table_row
+            (table_cell
+              (table_cell_block
+                (content
+                  (text))))))
+        (html_tag_name)))))

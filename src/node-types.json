@@ -1063,6 +1063,10 @@
             "named": true
           },
           {
+            "type": "table",
+            "named": true
+          },
+          {
             "type": "template",
             "named": true
           },

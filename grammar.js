@@ -802,6 +802,7 @@ module.exports = grammar({
       choice(
         $._inline_content, // Allows MediaWiki markup inside HTML tags (often the case)
         $._list, // Block lists inside a tag, e.g. a `* {{harvnb}}` run in <ref> (A12)
+        $.table, // Block table inside a tag, e.g. a `{|…|}` wrapped in a <div>
         $._blank_line,
       ),
 
