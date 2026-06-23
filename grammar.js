@@ -52,6 +52,7 @@ module.exports = grammar({
         $.paragraph, // Must be low precedence
         $._blank_line, // Consumes blank lines separating blocks
         $.syntaxhighlight,
+        $.gallery,
       ),
     section: ($) =>
       choice(
@@ -440,6 +441,34 @@ module.exports = grammar({
           /(?:[^<]|<[^/]|<\/[^m]|<\/m[^a]|<\/ma[^t]|<\/mat[^h]|<\/math[^>])+/,
         ),
       ),
+
+    // <gallery> is a MediaWiki extension tag. Its body is not wikitext but a list
+    // of one item per line: a bare filename, optionally followed by `|` and a
+    // wikitext caption, e.g. `File:Cow.jpg|A [[cow]]`. Blank lines are ignored.
+    gallery: ($) =>
+      seq(
+        alias($._gallery_open_tag, $.html_tag_open),
+        repeat(choice($.gallery_item, $._newline)),
+        alias($._gallery_close_tag, $.html_tag_close),
+      ),
+    _gallery_open_tag: ($) =>
+      seq(
+        "<",
+        token.immediate("gallery"),
+        optional($._html_attributes_pattern_no_gt),
+        ">",
+      ),
+    _gallery_close_tag: ($) => token(seq("</", token.immediate("gallery"), ">")),
+    gallery_item: ($) =>
+      seq(
+        field("file", $.gallery_filename),
+        optional(seq("|", field("caption", $.gallery_caption))),
+        $._newline,
+      ),
+    // Filename runs to the `|` separator or end of line; `<` is excluded so the
+    // closing `</gallery>` is never swallowed into a filename.
+    gallery_filename: ($) => token(/[^|\n<]+/),
+    gallery_caption: ($) => repeat1($._inline_content),
 
     preformatted_line_block: ($) =>
       prec.left(

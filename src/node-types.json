@@ -474,6 +474,134 @@
     }
   },
   {
+    "type": "gallery",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "gallery_item",
+          "named": true
+        },
+        {
+          "type": "html_tag_close",
+          "named": true
+        },
+        {
+          "type": "html_tag_open",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "gallery_caption",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "bold_italic",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "external_link",
+          "named": true
+        },
+        {
+          "type": "html_tag",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "magic_word",
+          "named": true
+        },
+        {
+          "type": "math",
+          "named": true
+        },
+        {
+          "type": "medialink",
+          "named": true
+        },
+        {
+          "type": "nowiki_inline_element",
+          "named": true
+        },
+        {
+          "type": "parser_function",
+          "named": true
+        },
+        {
+          "type": "redirect",
+          "named": true
+        },
+        {
+          "type": "signature",
+          "named": true
+        },
+        {
+          "type": "template",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "wikilink",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "gallery_item",
+    "named": true,
+    "fields": {
+      "caption": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "gallery_caption",
+            "named": true
+          }
+        ]
+      },
+      "file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "gallery_filename",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "heading1",
     "named": true,
     "fields": {
@@ -1627,6 +1755,10 @@
           "named": true
         },
         {
+          "type": "gallery",
+          "named": true
+        },
+        {
           "type": "heading1",
           "named": true
         },
@@ -2393,6 +2525,14 @@
   },
   {
     "type": "function_prefix",
+    "named": true
+  },
+  {
+    "type": "gallery",
+    "named": false
+  },
+  {
+    "type": "gallery_filename",
     "named": true
   },
   {

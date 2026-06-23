@@ -1,0 +1,74 @@
+================================================================================
+Basic gallery
+================================================================================
+
+<gallery>
+File:A.jpg|Caption A
+File:B.jpg|Caption with [[link]]
+</gallery>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (gallery
+      (html_tag_open)
+      (gallery_item
+        (gallery_filename)
+        (gallery_caption
+          (text)))
+      (gallery_item
+        (gallery_filename)
+        (gallery_caption
+          (text)
+          (wikilink
+            (wikilink_page
+              (page_name_segment)))))
+      (html_tag_close))))
+
+================================================================================
+Gallery with unquoted and quoted attributes
+================================================================================
+
+<gallery class=center widths=220 caption="[[FAO]] data">
+File:A.jpg|Cap
+</gallery>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (gallery
+      (html_tag_open
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value)))
+      (gallery_item
+        (gallery_filename)
+        (gallery_caption
+          (text)))
+      (html_tag_close))))
+
+================================================================================
+Gallery item without a caption
+================================================================================
+
+<gallery>
+File:A.jpg
+</gallery>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (gallery
+      (html_tag_open)
+      (gallery_item
+        (gallery_filename))
+      (html_tag_close))))
