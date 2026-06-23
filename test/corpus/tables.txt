@@ -312,10 +312,9 @@ Table with attributes on rows
             (text))))
       (table_cell
         (table_cell_block
-          (content
-            (text))))
-      (table_cell
-        (table_cell_block
+          (table_attribute
+            (html_attribute_name)
+            (html_attribute_value))
           (content
             (text))))
       (table_row
@@ -329,10 +328,9 @@ Table with attributes on rows
               (text))))
         (table_cell
           (table_cell_block
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)))))
       (table_row
@@ -349,10 +347,9 @@ Table with attributes on rows
               (text))))
         (table_cell
           (table_cell_block
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text))))))))
 
@@ -546,89 +543,9 @@ Table with template as table attributes
               (text))))
         (table_cell
           (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
-            (content
-              (text)
-              (template
-                (template_name
-                  (template_name_part))
-                (template_argument
-                  (template_param_value
-                    (text)))
-                (template_argument
-                  (template_param_value
-                    (text))))
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text)
-              (comment)))))
-      (table_row
-        (table_cell
-          (table_cell_block
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
-            (content
-              (text)
-              (template
-                (template_name
-                  (template_name_part))
-                (template_argument
-                  (template_param_value
-                    (text)))
-                (template_argument
-                  (template_param_value
-                    (text))))
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text)))))
-      (table_row
-        (table_cell
-          (table_cell_block
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)
               (template
@@ -665,49 +582,9 @@ Table with template as table attributes
               (text))))
         (table_cell
           (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
-            (content
-              (text)
-              (template
-                (template_name
-                  (template_name_part))
-                (template_argument
-                  (template_param_value
-                    (text)))
-                (template_argument
-                  (template_param_value
-                    (text))))
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text)))))
-      (table_row
-        (table_cell
-          (table_cell_block
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)
               (template
@@ -743,10 +620,9 @@ Table with template as table attributes
               (text))))
         (table_cell
           (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)
               (template
@@ -783,49 +659,9 @@ Table with template as table attributes
               (text))))
         (table_cell
           (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
-            (content
-              (text)
-              (template
-                (template_name
-                  (template_name_part))
-                (template_argument
-                  (template_param_value
-                    (text)))
-                (template_argument
-                  (template_param_value
-                    (text))))
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text)))))
-      (table_row
-        (table_cell
-          (table_cell_block
-            (content
-              (text))))
-        (table_cell
-          (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)
               (template
@@ -861,10 +697,9 @@ Table with template as table attributes
               (text))))
         (table_cell
           (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)
               (template
@@ -900,10 +735,162 @@ Table with template as table attributes
               (text))))
         (table_cell
           (table_cell_inline
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))
+                (template_argument
+                  (template_param_value
+                    (text))))
+              (text))))
+        (table_cell
+          (table_cell_inline
             (content
               (text))))
         (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text)
+              (comment)))))
+      (table_row
+        (table_cell
           (table_cell_block
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))
+                (template_argument
+                  (template_param_value
+                    (text))))
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text)))))
+      (table_row
+        (table_cell
+          (table_cell_block
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))
+                (template_argument
+                  (template_param_value
+                    (text))))
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text)))))
+      (table_row
+        (table_cell
+          (table_cell_block
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))
+                (template_argument
+                  (template_param_value
+                    (text))))
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (content
+              (text)))))
+      (table_row
+        (table_cell
+          (table_cell_block
+            (content
+              (text))))
+        (table_cell
+          (table_cell_inline
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)
               (template
@@ -942,10 +929,9 @@ Table with template as table attributes
               (text))))
         (table_cell
           (table_cell_inline
-            (content
-              (text))))
-        (table_cell
-          (table_cell_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
             (content
               (text)
               (template
@@ -975,3 +961,46 @@ Table with template as table attributes
             (content
               (text)
               (comment))))))))
+
+========================================================
+Header cells with attributes, a template cell, and an empty cell
+========================================================
+
+{|
+|- class="sortbottom"
+! style="text-align:right;"|Total
+! {{Lang|nl|x}}
+!
+|}
+
+-----------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (table_row
+        (table_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (table_header
+          (table_header_block
+            (table_attribute
+              (html_attribute_name)
+              (html_attribute_value))
+            (content
+              (text))))
+        (table_header
+          (table_header_block
+            (content
+              (text)
+              (template
+                (template_name
+                  (template_name_part))
+                (template_argument
+                  (template_param_value
+                    (text)))
+                (template_argument
+                  (template_param_value
+                    (text)))))))
+        (table_header
+          (table_header_block))))))

@@ -21,6 +21,8 @@ module.exports = grammar({
     $._html_self_closing_tag_marker,
     $.unordered_list_marker,
     $.ordered_list_marker,
+    $._table_cell_attribute_marker,
+    $._table_cell_plain_marker,
   ],
   extras: (_) => [/[ \t\r]/],
   conflicts: ($) => [[$.nowiki_tag_block, $.nowiki_inline_element]],
@@ -671,20 +673,27 @@ module.exports = grammar({
     _table_attribute_text: ($) => token(prec(-1, /[^\n\|!}]+/)),
     tablecaption: ($) => seq("|+", alias($._table_node, $.content), "\n"),
 
-    table_header_block: ($) =>
-      seq(
-        "!",
-        // optional(seq(repeat1($.table_attribute), "|")),
-        alias($._table_node, $.content),
-        optional($._newline),
+    // A cell may carry HTML attributes before its content, separated by a single
+    // `|`, e.g. `! style="text-align:right;"|Total`. The scanner emits one of two
+    // zero-width markers at the cell-content start saying whether such a run is
+    // present; committing to a branch this way stops the greedy inline-text token
+    // from swallowing the attributes as content. Content is optional (empty cells).
+    _cell_body: ($) =>
+      choice(
+        seq(
+          $._table_cell_attribute_marker,
+          repeat1($.table_attribute),
+          "|",
+          optional(alias($._table_node, $.content)),
+        ),
+        seq(
+          $._table_cell_plain_marker,
+          optional(alias($._table_node, $.content)),
+        ),
       ),
+    table_header_block: ($) => seq("!", $._cell_body, optional($._newline)),
     table_header_inline: ($) =>
-      seq(
-        "!!",
-        // optional(seq(repeat1($.table_attribute), "|")),
-        alias($._table_node, $.content),
-        optional($._newline), // consume the line-terminating newline (no longer an extra)
-      ),
+      seq("!!", $._cell_body, optional($._newline)),
 
     table_header: ($) =>
       choice(
@@ -692,20 +701,9 @@ module.exports = grammar({
         $.table_header_block, // ! separated
       ),
 
-    table_cell_block: ($) =>
-      seq(
-        "|",
-        // optional(seq(repeat1($.table_attribute), "|")),
-        alias($._table_node, $.content),
-        optional($._newline),
-      ),
+    table_cell_block: ($) => seq("|", $._cell_body, optional($._newline)),
     table_cell_inline: ($) =>
-      seq(
-        "||",
-        // optional(seq(repeat1($.table_attribute), "|")),
-        alias($._table_node, $.content),
-        optional($._newline), // consume the line-terminating newline (no longer an extra)
-      ),
+      seq("||", $._cell_body, optional($._newline)),
 
     table_cell: ($) =>
       choice(
@@ -745,7 +743,9 @@ module.exports = grammar({
         seq("'", field("value_text", optional(token(prec(1, /[^']*/)))), "'"),
         // `/` is excluded so a trailing `/>` self-close is not swallowed into an
         // unquoted value (issue #6); matches the scanner's attribute validation.
-        field("value_text", token(prec(1, /[^\s"'=<>`\/]+/))), // Unquoted
+        // `|` is excluded so the separator in an unquoted table cell attribute
+        // (`|align=left| content`) is not swallowed into the value.
+        field("value_text", token(prec(1, /[^\s"'=<>`\/|]+/))), // Unquoted
       ),
     html_attribute: ($) =>
       seq(

@@ -24,6 +24,8 @@ enum TokenType {
     HTML_SELF_CLOSING_TAG_MARKER,
     UNORDERED_LIST_MARKER,
     ORDERED_LIST_MARKER,
+    TABLE_CELL_ATTRIBUTE_MARKER,
+    TABLE_CELL_PLAIN_MARKER,
 };
 
 typedef struct {
@@ -1003,6 +1005,41 @@ static bool is_template_param_name_value_pair(TSLexer *lexer) {
     return false;
 }
 
+// A table cell may carry HTML attributes before its content, separated by a single
+// `|`, e.g. `! style="text-align:right;"|Total`. Looking ahead from the start of a
+// cell's content, report whether such an attribute run is present: an `=` (the
+// attribute syntax) appears before a single `|` separator, and we do not first hit
+// a newline (end of cell), a template/link (`{`/`[`, whose `|` is internal), or a
+// `||`/`!!` (the inline cell/header separator — the cell has no attributes).
+static bool has_cell_attributes(TSLexer *lexer) {
+    bool seen_equals = false;
+    while (lexer->lookahead) {
+        int32_t c = lexer->lookahead;
+        if (c == '\n' || c == '{' || c == '[' || c == '}') {
+            return false;
+        }
+        if (c == '=') {
+            seen_equals = true;
+        }
+        if (c == '|') {
+            advance(lexer);
+            if (lexer->lookahead == '|') {
+                return false; // `||` is the inline cell separator, not an attr sep
+            }
+            return seen_equals;
+        }
+        if (c == '!') {
+            advance(lexer);
+            if (lexer->lookahead == '!') {
+                return false; // `!!` is the inline header separator
+            }
+            continue;
+        }
+        advance(lexer);
+    }
+    return false;
+}
+
 // Debug utility function to print valid symbols (currently unused)
 // Kept for debugging purposes but not called in production code
 // Uncomment the call in tree_sitter_wikitext_external_scanner_scan to use
@@ -1080,6 +1117,22 @@ bool tree_sitter_wikitext_external_scanner_scan(void *payload, TSLexer *lexer,
             lexer->result_symbol = TEMPLATE_PARAM_VALUE_MARKER;
             return true;
         }
+    }
+    // At the start of a table cell's content, emit a zero-width marker saying
+    // whether an HTML attribute run (`name=value … |`) precedes the content. Always
+    // emitting one of the two markers (never falling through) keeps the lexer
+    // position clean despite has_cell_attributes advancing to look ahead, and
+    // commits the parser to a branch before the greedy inline-text token can swallow
+    // the attributes as content. Mirrors the template-param marker pair.
+    if (valid_symbols[TABLE_CELL_ATTRIBUTE_MARKER] &&
+        valid_symbols[TABLE_CELL_PLAIN_MARKER]) {
+        lexer->mark_end(lexer);
+        if (has_cell_attributes(lexer)) {
+            lexer->result_symbol = TABLE_CELL_ATTRIBUTE_MARKER;
+        } else {
+            lexer->result_symbol = TABLE_CELL_PLAIN_MARKER;
+        }
+        return true;
     }
 
     if (valid_symbols[HTML_TAG_OPEN_MARKER] ||
