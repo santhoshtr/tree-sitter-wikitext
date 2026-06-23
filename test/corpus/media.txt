@@ -256,7 +256,6 @@ File size with width and height
 
 ================================================================================
 Block table inside a file caption
-:skip
 ================================================================================
 
 [[File:x.png|thumb|Voting results

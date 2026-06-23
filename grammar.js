@@ -331,7 +331,10 @@ module.exports = grammar({
         seq($._file_caption_token, $.file_caption),
       ),
 
-    file_caption: ($) => repeat1(choice($._inline_content, $._newline)),
+    // A caption may contain a block table (rendered inside the thumb box), e.g. a
+    // legend `{|…|}` after the caption text.
+    file_caption: ($) =>
+      repeat1(choice($._inline_content, $.table, $._newline)),
     external_link: ($) =>
       choice(
         seq(

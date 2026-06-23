@@ -1151,6 +1151,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "table"
+          },
+          {
+            "type": "SYMBOL",
             "name": "_newline"
           }
         ]
