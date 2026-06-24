@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-wikitext
 HOMEPAGE_URL := https://github.com/tree-sitter/tree-sitter-wikitext
-VERSION := 0.1.2
+VERSION := 0.1.3
 
 # repository
 SRC_DIR := src
