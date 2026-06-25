@@ -1301,3 +1301,17 @@ Onlyinclude transclusion tag wrapping a list
                 (wikilink_page
                   (page_name_segment))))))
         (html_tag_name)))))
+
+==================
+Self-closing references tag
+==================
+
+<references/>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)))))

@@ -132,7 +132,7 @@ static bool is_allowed_html_tag(const char *tag_name) {
         // generic tag path handles its multi-line inline content.
         "poem",
         // References
-        "ref", NULL};
+        "ref", "references", NULL};
 
     for (int i = 0; allowed_tags[i] != NULL; i++) {
         if (strcmp(tag_name, allowed_tags[i]) == 0) {
