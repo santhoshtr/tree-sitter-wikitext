@@ -3412,6 +3412,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "syntaxhighlight"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_blank_line"
         }
       ]

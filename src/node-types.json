@@ -1083,6 +1083,10 @@
             "named": true
           },
           {
+            "type": "syntaxhighlight",
+            "named": true
+          },
+          {
             "type": "table",
             "named": true
           },

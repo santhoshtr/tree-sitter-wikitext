@@ -36,3 +36,23 @@ def quicksort(arr):
         (html_attribute_name)
         (html_attribute_value))
       (code))))
+
+================================================================================
+Syntaxhighlight inside a div
+================================================================================
+
+<div><syntaxhighlight lang="python">
+print(1)
+</syntaxhighlight></div>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (syntaxhighlight
+          (code_language)
+          (code))
+        (html_tag_name)))))

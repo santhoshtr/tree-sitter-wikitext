@@ -848,6 +848,7 @@ module.exports = grammar({
         $._list, // Block lists inside a tag, e.g. a `* {{harvnb}}` run in <ref> (A12)
         $.table, // Block table inside a tag, e.g. a `{|…|}` wrapped in a <div>
         $.gallery, // Block gallery inside a tag, e.g. `<center><gallery>…</gallery></center>`
+        $.syntaxhighlight, // e.g. `<div><syntaxhighlight>…</syntaxhighlight></div>`
         $._blank_line,
       ),
 
