@@ -1039,6 +1039,10 @@
             "named": true
           },
           {
+            "type": "gallery",
+            "named": true
+          },
+          {
             "type": "html_tag",
             "named": true
           },
@@ -2386,6 +2390,10 @@
         },
         {
           "type": "page_name_segment",
+          "named": true
+        },
+        {
+          "type": "parser_function",
           "named": true
         },
         {

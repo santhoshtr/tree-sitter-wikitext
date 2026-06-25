@@ -953,6 +953,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "parser_function"
+          },
+          {
+            "type": "SYMBOL",
             "name": "template"
           },
           {
@@ -3401,6 +3405,10 @@
         {
           "type": "SYMBOL",
           "name": "table"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gallery"
         },
         {
           "type": "SYMBOL",

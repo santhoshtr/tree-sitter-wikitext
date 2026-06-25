@@ -292,3 +292,23 @@ Pipe trick (empty display after pipe)
       (wikilink
         (wikilink_page
           (page_name_segment))))))
+
+================================================================================
+Parser function in a link target
+================================================================================
+
+[[Category:{{subst:PAGENAME}}]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (wikilink
+        (wikilink_page
+          (page_name_segment)
+          (parser_function
+            (parser_function_colon
+              (parser_function_name)
+              (function_delimiter)
+              (param_text))))))))

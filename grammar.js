@@ -295,6 +295,7 @@ module.exports = grammar({
       repeat1(
         choice(
           alias($._text_no_brackets_pipes_colon_hash, $.page_name_segment), // Colon for namespace, hash for section
+          $.parser_function, // Must come before template; e.g. [[Category:{{subst:PAGENAME}}]]
           $.template, // Templates can be in link targets/pages
           alias(token.immediate(prec(1, ":")), $.namespace_separator), // for interwiki/category
           alias(token.immediate(prec(1, "#")), $.section_separator),
@@ -846,6 +847,7 @@ module.exports = grammar({
         $._inline_content, // Allows MediaWiki markup inside HTML tags (often the case)
         $._list, // Block lists inside a tag, e.g. a `* {{harvnb}}` run in <ref> (A12)
         $.table, // Block table inside a tag, e.g. a `{|…|}` wrapped in a <div>
+        $.gallery, // Block gallery inside a tag, e.g. `<center><gallery>…</gallery></center>`
         $._blank_line,
       ),
 

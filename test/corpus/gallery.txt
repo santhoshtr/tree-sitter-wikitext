@@ -72,3 +72,27 @@ File:A.jpg
       (gallery_item
         (gallery_filename))
       (html_tag_close))))
+
+================================================================================
+Gallery inside a center tag
+================================================================================
+
+<center><gallery>
+File:A.jpg|cap
+</gallery></center>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (gallery
+          (html_tag_open)
+          (gallery_item
+            (gallery_filename)
+            (gallery_caption
+              (text)))
+          (html_tag_close))
+        (html_tag_name)))))
