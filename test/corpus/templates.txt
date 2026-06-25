@@ -375,3 +375,23 @@ Lone apostrophe at end of template parameter value
           (template_param_name)
           (template_param_value
             (text)))))))
+
+==================
+Equals-sign magic word
+==================
+{{nowrap|x {{=}} y}}
+-----------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (template
+        (template_name
+          (template_name_part))
+        (template_argument
+          (template_param_value
+            (text)
+            (template
+              (template_name
+                (template_name_part)))
+            (text)))))))

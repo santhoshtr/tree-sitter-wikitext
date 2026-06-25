@@ -1928,61 +1928,75 @@
       ]
     },
     "template_name": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_text_no_pipes_braces_colon_hash_equals"
-          },
-          "named": true,
-          "value": "template_name_part"
-        },
-        {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_text_no_pipes_braces_colon_hash_equals"
+              },
+              "named": true,
+              "value": "template_name_part"
+            },
             {
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
                       "content": {
-                        "type": "STRING",
-                        "value": ":"
-                      }
+                        "type": "IMMEDIATE_TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "STRING",
+                            "value": ":"
+                          }
+                        }
+                      },
+                      "named": true,
+                      "value": "template_name_colon"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "IMMEDIATE_TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "STRING",
+                            "value": "#"
+                          }
+                        }
+                      },
+                      "named": true,
+                      "value": "template_name_hash"
                     }
-                  },
-                  "named": true,
-                  "value": "template_name_colon"
+                  ]
                 },
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "STRING",
-                        "value": "#"
-                      }
-                    }
-                  },
-                  "named": true,
-                  "value": "template_name_hash"
+                  "type": "BLANK"
                 }
               ]
-            },
-            {
-              "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "="
+          },
+          "named": true,
+          "value": "template_name_part"
         }
       ]
     },

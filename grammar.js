@@ -501,15 +501,21 @@ module.exports = grammar({
       ),
 
     template_name: ($) =>
-      seq(
-        alias($._text_no_pipes_braces_colon_hash_equals, $.template_name_part),
-        // Templates optionally have a colon (namespace) but nothing after it before |
-        // OR hash but nothing after it before |
-        // If there IS content after : or #, it's a parser function (handled separately)
-        optional(choice(
-          alias(token.immediate(prec(1, ":")), $.template_name_colon),
-          alias(token.immediate(prec(1, "#")), $.template_name_hash),
-        )),
+      choice(
+        seq(
+          alias($._text_no_pipes_braces_colon_hash_equals, $.template_name_part),
+          // Templates optionally have a colon (namespace) but nothing after it before |
+          // OR hash but nothing after it before |
+          // If there IS content after : or #, it's a parser function (handled separately)
+          optional(choice(
+            alias(token.immediate(prec(1, ":")), $.template_name_colon),
+            alias(token.immediate(prec(1, "#")), $.template_name_hash),
+          )),
+        ),
+        // `{{=}}` is a MediaWiki magic word that outputs a literal `=` (sibling of
+        // `{{!}}` for `|`). `=` is excluded from the name pattern above because it
+        // separates `name=value` arguments, so the bare magic word needs its own arm.
+        alias("=", $.template_name_part),
       ),
 
     // ==== Parser Functions ====
