@@ -630,7 +630,6 @@ function hello() {
 
 ==================
 Deprecated but Allowed Tags
-:error
 ==================
 
 <center>Centered text</center>
@@ -646,29 +645,40 @@ Deprecated but Allowed Tags
   (section
     (paragraph
       (html_tag
-        (html_tag_open)
+        (html_tag_name)
         (text)
-        (html_tag_close))
+        (html_tag_name)))
+    (paragraph
       (html_tag
-        (html_tag_open)
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))
         (text)
-        (html_tag_close))
+        (html_tag_name)))
+    (paragraph
       (html_tag
-        (html_tag_open)
+        (html_tag_name)
         (text)
-        (html_tag_close))
+        (html_tag_name)))
+    (paragraph
       (html_tag
-        (html_tag_open)
+        (html_tag_name)
         (text)
-        (html_tag_close))
+        (html_tag_name)))
+    (paragraph
       (html_tag
-        (html_tag_open)
+        (html_tag_name)
         (text)
-        (html_tag_close))
+        (html_tag_name)))
+    (paragraph
       (html_tag
-        (html_tag_open)
+        (html_tag_name)
         (text)
-        (html_tag_close)))))
+        (html_tag_name)))))
 
 ==================
 Column Groups and Columns

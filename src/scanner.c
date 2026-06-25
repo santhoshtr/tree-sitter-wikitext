@@ -193,6 +193,12 @@ static bool is_allowed_tag_specific_attribute(const char *tag_name,
                strcmp(attr_name, "datetime") == 0;
     }
 
+    if (strcmp(tag_name, "font") == 0) {
+        return strcmp(attr_name, "color") == 0 ||
+               strcmp(attr_name, "size") == 0 ||
+               strcmp(attr_name, "face") == 0;
+    }
+
     if (strcmp(tag_name, "h1") == 0 || strcmp(tag_name, "h2") == 0 ||
         strcmp(tag_name, "h3") == 0 || strcmp(tag_name, "h4") == 0 ||
         strcmp(tag_name, "h5") == 0 || strcmp(tag_name, "h6") == 0) {
