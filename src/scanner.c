@@ -127,7 +127,7 @@ static bool is_allowed_html_tag(const char *tag_name) {
         // self_closing_tags
         "br", "meta", "hr",
         // wiki specific markup
-        "noinclude",
+        "noinclude", "onlyinclude",
         // Extension tag whose body is wikitext with significant line breaks; the
         // generic tag path handles its multi-line inline content.
         "poem",
