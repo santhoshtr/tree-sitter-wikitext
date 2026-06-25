@@ -1303,6 +1303,31 @@ Onlyinclude transclusion tag wrapping a list
         (html_tag_name)))))
 
 ==================
+Includeonly transclusion tag wrapping a list
+==================
+
+<includeonly>
+* [[a]]
+</includeonly>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (unordered_list
+          (unordered_list_item
+            (list_marker)
+            (list_item_content
+              (text)
+              (wikilink
+                (wikilink_page
+                  (page_name_segment))))))
+        (html_tag_name)))))
+
+==================
 Self-closing references tag
 ==================
 
