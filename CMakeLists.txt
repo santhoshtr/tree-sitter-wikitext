@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(tree-sitter-wikitext
         VERSION "0.1.3"
         DESCRIPTION "WIKITEXT grammar for tree-sitter"
-        HOMEPAGE_URL "https://github.com/santhoshtr/tree-sitter-wikitext"
+        HOMEPAGE_URL "https://github.com/wikimedia/tree-sitter-wikitext"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)

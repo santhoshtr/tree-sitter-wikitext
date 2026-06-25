@@ -2,7 +2,7 @@
   "name": "tree-sitter-wikitext",
   "version": "0.1.3",
   "description": "A tree-sitter parser for wikitext documents.",
-  "repository": "https://github.com/santhoshtr/tree-sitter-wikitext",
+  "repository": "https://github.com/wikimedia/tree-sitter-wikitext",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {

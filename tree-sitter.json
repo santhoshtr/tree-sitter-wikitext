@@ -22,7 +22,7 @@
       }
     ],
     "links": {
-      "repository": "https://github.com/santhoshtr/tree-sitter-wikitext"
+      "repository": "https://github.com/wikimedia/tree-sitter-wikitext"
     }
   },
   "bindings": {

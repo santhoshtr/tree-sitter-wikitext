@@ -41,7 +41,7 @@ Tree-Sitter is a powerful parser generator tool and incremental parsing library.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/santhoshtr/tree-sitter-wikitext.git
+   git clone https://github.com/wikimedia/tree-sitter-wikitext.git
    cd tree-sitter-wikitext
    ```
 

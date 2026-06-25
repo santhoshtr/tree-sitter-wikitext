@@ -21,7 +21,7 @@ authors = [
   { name = "Santhosh Thottingal", email = "santhosh.thottingal@gmail.com" },
 ]
 [project.urls]
-Homepage = "https://github.com/santhoshtr/tree-sitter-wikitext"
+Homepage = "https://github.com/wikimedia/tree-sitter-wikitext"
 
 [project.optional-dependencies]
 core = ["tree-sitter~=0.25"]

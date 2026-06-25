@@ -1,3 +1,3 @@
-module github.com/santhoshtr/tree-sitter-wikitext
+module github.com/wikimedia/tree-sitter-wikitext
 
 go 1.24

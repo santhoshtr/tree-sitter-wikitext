@@ -1,4 +1,4 @@
-module github.com/santhoshtr/tree-sitter-wikitext/bindings/go
+module github.com/wikimedia/tree-sitter-wikitext/bindings/go
 
 go 1.24.0
 
