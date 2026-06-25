@@ -1,3 +1,0 @@
-
-[core]
-tree-sitter~=0.21
