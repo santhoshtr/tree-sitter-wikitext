@@ -1350,3 +1350,20 @@ Self-closing references tag
     (paragraph
       (html_tag
         (html_tag_name)))))
+
+==================
+Self-closing references tag with group attribute
+==================
+
+<references group="N"/>
+
+---
+
+(source_file
+  (section
+    (paragraph
+      (html_tag
+        (html_tag_name)
+        (html_attribute
+          (html_attribute_name)
+          (html_attribute_value))))))

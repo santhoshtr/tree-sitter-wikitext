@@ -277,6 +277,12 @@ static bool is_allowed_tag_specific_attribute(const char *tag_name,
                strcmp(attr_name, "extends") == 0;
     }
 
+    if (strcmp(tag_name, "references") == 0) {
+        // Cite extension attributes for <references>
+        return strcmp(attr_name, "group") == 0 ||
+               strcmp(attr_name, "responsive") == 0;
+    }
+
     return false;
 }
 
