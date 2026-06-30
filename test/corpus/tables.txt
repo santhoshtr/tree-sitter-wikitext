@@ -1131,3 +1131,30 @@ Table caption with style attribute
         (content
           (text)))
       (table_row))))
+
+================================================================================
+Table caption with style attribute after row separator
+================================================================================
+
+{| class="wikitable"
+|-
+|+ style="text-align:center;"| Caption text
+|-
+|}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (table_attribute
+        (html_attribute_name)
+        (html_attribute_value))
+      (table_row
+        (tablecaption
+          (table_attribute
+            (html_attribute_name)
+            (html_attribute_value))
+          (content
+            (text))))
+      (table_row))))

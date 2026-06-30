@@ -815,6 +815,7 @@ module.exports = grammar({
         "|-",
         optional(repeat1($.table_attribute)),
         "\n",
+        optional($.tablecaption),
         optional(repeat1($.table_header)),
         repeat($.table_cell),
       ),
