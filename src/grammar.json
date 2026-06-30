@@ -3066,7 +3066,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_cell_body"
+          "name": "_data_cell_body"
         },
         {
           "type": "CHOICE",

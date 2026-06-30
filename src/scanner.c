@@ -952,7 +952,8 @@ static bool scan_inline_text_base(Scanner *scanner, TSLexer *lexer) {
         }
         // Do not allow these chars if they are at beginning of text.
         if ((lexer->lookahead == '*' || lexer->lookahead == '#' ||
-             lexer->lookahead == ';' || lexer->lookahead == ':') &&
+             lexer->lookahead == ';' || lexer->lookahead == ':' ||
+             lexer->lookahead == '!') &&
             col_index == 0) {
             break;
         }

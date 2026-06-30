@@ -749,8 +749,8 @@ module.exports = grammar({
     // zero-width markers at the cell-content start saying whether such a run is
     // present; committing to a branch this way stops the greedy inline-text token
     // from swallowing the attributes as content. Content is optional (empty cells).
-    // `_cell_body` (headers, caption) keeps inline content; `_data_cell_body` (data
-    // cells) additionally admits block content spanning continuation lines.
+    // `_cell_body` (caption) keeps inline content; `_data_cell_body` (headers and
+    // data cells) admits block content spanning continuation lines.
     _cell_body: ($) =>
       choice(
         seq(
@@ -788,7 +788,7 @@ module.exports = grammar({
       repeat1(
         choice($._inline_content, $._list, $._blank_line, $._newline),
       ),
-    table_header_block: ($) => seq("!", $._cell_body, optional($._newline)),
+    table_header_block: ($) => seq("!", $._data_cell_body, optional($._newline)),
     table_header_inline: ($) =>
       seq("!!", $._cell_body, optional($._newline)),
 

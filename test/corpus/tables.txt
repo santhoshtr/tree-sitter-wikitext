@@ -1003,7 +1003,8 @@ Header cells with attributes, a template cell, and an empty cell
                   (template_param_value
                     (text)))))))
         (table_header
-          (table_header_block))))))
+          (table_header_block
+            (content)))))))
 
 ========================================================
 List inside a table cell
@@ -1157,4 +1158,57 @@ Table caption with style attribute after row separator
             (html_attribute_value))
           (content
             (text))))
+      (table_row))))
+
+================================================================================
+Table header with continuation line before row separator
+================================================================================
+
+{|
+! World production
+(tons)
+|-
+|}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (colheaders
+        (table_header
+          (table_header_block
+            (content
+              (text)
+              (text)))))
+      (table_row))))
+
+================================================================================
+Multiple table headers with continuation lines
+================================================================================
+
+{|
+! Header A
+continuation A
+! Header B
+continuation B
+|-
+|}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (colheaders
+        (table_header
+          (table_header_block
+            (content
+              (text)
+              (text))))
+        (table_header
+          (table_header_block
+            (content
+              (text)
+              (text)))))
       (table_row))))
