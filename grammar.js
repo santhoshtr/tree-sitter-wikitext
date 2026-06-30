@@ -742,7 +742,7 @@ module.exports = grammar({
     // table structure delimiters (\n, |, !, }).
     // It serves as a fallback for non-HTML attributes within the table declaration.
     _table_attribute_text: ($) => token(prec(-1, /[^\n\|!}]+/)),
-    tablecaption: ($) => seq("|+", alias($._table_node, $.content), "\n"),
+    tablecaption: ($) => seq("|+", $._cell_body, "\n"),
 
     // A cell may carry HTML attributes before its content, separated by a single
     // `|`, e.g. `! style="text-align:right;"|Total`. The scanner emits one of two

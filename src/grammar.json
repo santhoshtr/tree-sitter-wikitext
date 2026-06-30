@@ -2888,13 +2888,8 @@
           "value": "|+"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_table_node"
-          },
-          "named": true,
-          "value": "content"
+          "type": "SYMBOL",
+          "name": "_cell_body"
         },
         {
           "type": "STRING",

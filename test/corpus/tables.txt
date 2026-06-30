@@ -1106,3 +1106,28 @@ If, after applying criteria.
                   (template_param_value
                     (text))))
               (text))))))))
+
+================================================================================
+Table caption with style attribute
+================================================================================
+
+{| class="wikitable"
+|+ style="text-align:center;"| Caption text
+|-
+|}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (table
+      (table_attribute
+        (html_attribute_name)
+        (html_attribute_value))
+      (tablecaption
+        (table_attribute
+          (html_attribute_name)
+          (html_attribute_value))
+        (content
+          (text)))
+      (table_row))))
