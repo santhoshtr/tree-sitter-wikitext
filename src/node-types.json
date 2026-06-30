@@ -389,6 +389,10 @@
         "required": false,
         "types": [
           {
+            "type": "template",
+            "named": true
+          },
+          {
             "type": "url",
             "named": true
           }

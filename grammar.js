@@ -358,6 +358,20 @@ module.exports = grammar({
           field("display", repeat1($._external_link_display_content)),
           "]",
         ),
+        seq(
+          // Unnamed external link with template URL
+          "[",
+          field("url", $.template),
+          "]",
+        ),
+        seq(
+          // Named external link with template URL
+          "[",
+          field("url", $.template),
+          /\s+/, // Must have space
+          field("display", repeat1($._external_link_display_content)),
+          "]",
+        ),
         field("url_bare", $.url_bare), // Bare URLs are also links
       ),
     url: ($) => token(/https?:\/\/[^ \]\n]+/), // Basic URL regex

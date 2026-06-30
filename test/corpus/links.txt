@@ -312,3 +312,28 @@ Parser function in a link target
               (parser_function_name)
               (function_delimiter)
               (param_text))))))))
+
+================================================================================
+External link with template as URL
+================================================================================
+
+[{{geonameslink|gnid=1149361|name=foo}} Display text]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (paragraph
+      (external_link
+        url: (template
+          name: (template_name
+            (template_name_part))
+          (template_argument
+            (template_param_name)
+            (template_param_value
+              (text)))
+          (template_argument
+            (template_param_name)
+            (template_param_value
+              (text))))
+        display: (page_name_segment)))))
