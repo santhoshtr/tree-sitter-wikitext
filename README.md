@@ -13,6 +13,48 @@ Try the parse in the [playground](https://tree-sitter-wikitext.toolforge.org/)
 
 Tree-Sitter is a powerful parser generator tool and incremental parsing library. It is designed to build concrete syntax trees for source files and efficiently update them as the source changes. This project leverages Tree-Sitter to parse Wikitext, enabling structured analysis and manipulation of MediaWiki content.
 
+## How it compares to Parsoid and mwparserfromhell
+
+If you are new to the MediaWiki ecosystem, the key question is *syntax vs. semantics*: do you
+want the structure of the markup as written, or the final rendered output?
+
+- **tree-sitter-wikitext** (this project) gives you the **structure of the source text**. It does
+  not expand templates, fetch pages, or produce HTML — it tells you *where* the headings, links,
+  templates and tables are in the markup. It is fast, incremental, error-tolerant, and callable
+  from six languages.
+- **[mwparserfromhell](https://github.com/earwig/mwparserfromhell)** is the closest relative. It
+  is also a syntax-level, source-faithful parser, but it is Python-only and builds a mutable tree
+  aimed at *editing* wikitext (it powers Pywikibot). Like this project, it does **not** expand
+  templates or render HTML.
+- **[Parsoid](https://www.mediawiki.org/wiki/Parsoid)** is the outlier. It is MediaWiki's
+  bidirectional wikitext↔HTML engine (PHP, shipped in core), it **expands templates** and emits
+  annotated HTML/DOM that round-trips back to wikitext. It needs a MediaWiki context to run and
+  powers VisualEditor. Use it when you need the *rendered* article, not the raw structure.
+
+|                       | tree-sitter-wikitext            | mwparserfromhell          | Parsoid                          |
+| --------------------- | ------------------------------- | ------------------------- | -------------------------------- |
+| Output                | Concrete syntax tree of source  | Mutable tree of source    | Rendered HTML/DOM + annotations  |
+| Level                 | Syntax                          | Syntax                    | Semantics (final output)         |
+| Expands templates?    | No                              | No                        | Yes (needs MediaWiki)            |
+| Languages             | C, Python, Node.js, Rust, Go, Swift | Python                | PHP (HTTP API)                   |
+| Incremental re-parse  | Yes                             | No                        | No                               |
+| Best for              | Editor tooling, structural analysis | Bots editing wikitext | Faithful rendering, round-tripping |
+
+## Typical use cases
+
+- **Editor tooling**: syntax highlighting, code folding, and document outlines (see the Neovim
+  setup below). The incremental parser re-parses only the edited region on each keystroke.
+- **Structural extraction at scale**: pull out every heading, link, template, or table from a dump
+  without standing up a MediaWiki install — in whichever of the six languages fits your pipeline.
+- **Linting and validation**: detect unbalanced markup (`'''`, `[[ ]]`, `{{ }}`, tables) because
+  the tree surfaces error nodes instead of silently rendering past them.
+- **Language servers and live-editing tools**: build go-to-definition, structural selection, or
+  refactoring on top of the tree.
+
+If your task instead needs the *rendered* page — expanded templates, generated HTML, or
+round-tripping edits back to wikitext — reach for Parsoid; for Python-based bot edits to the raw
+markup, mwparserfromhell is the more direct fit.
+
 ## Features
 
 - **Incremental Parsing**: Efficiently updates syntax trees as the source changes.
@@ -26,7 +68,7 @@ Tree-Sitter is a powerful parser generator tool and incremental parsing library.
 - **`bindings/`**: Language-specific bindings for Python, Go, Node.js, Rust, and Swift.
 - **`grammar.js`**: Defines the grammar for Wikitext.
 - **`queries/`**: Contains Tree-Sitter query files for extracting specific syntax patterns.
-- **`tests/`**: Unit tests for validating the parser's functionality.
+- **`test/corpus/`**: Corpus tests for validating the parser's functionality.
 
 ## Installation
 
@@ -120,8 +162,9 @@ query = Query(WIKITEXT_LANGUAGE,
 
 query_cursor = QueryCursor(query)
 captures = query_cursor.captures(tree.root_node)
-for  capture_name in captures:
-    print(f"Found {capture_name}: {captures[capture_name][0].text.decode('utf-8').strip()}")```
+for capture_name in captures:
+    print(f"Found {capture_name}: {captures[capture_name][0].text.decode('utf-8').strip()}")
+```
 
 ### Example: Parsing Wikitext in Node.js
 
@@ -135,6 +178,7 @@ Then use it in your Node.js application:
 
 ```javascript
 const Parser = require('tree-sitter');
+const { Query } = require('tree-sitter');
 const Wikitext = require('tree-sitter-wikitext');
 
 // Create a parser
@@ -170,11 +214,12 @@ function walkTree(node, depth = 0) {
 walkTree(tree.rootNode);
 
 // Query for specific nodes
-const query = Wikitext.query(`
-(heading) @heading
+const query = new Query(Wikitext, `
+(heading2) @heading
 (bold) @bold
 (italic) @italic
-(link) @link
+(wikilink) @wikilink
+(external_link) @external_link
 `);
 
 const captures = query.captures(tree.rootNode);
@@ -182,14 +227,14 @@ captures.forEach(capture => {
     console.log(`Found ${capture.name}: ${capture.node.text.trim()}`);
 });
 
-// Find all headings
+// Find all headings (heading levels are separate node types: heading1 .. heading6)
 function findHeadings(node) {
     const headings = [];
 
-    if (node.type === 'heading') {
+    if (/^heading[1-6]$/.test(node.type)) {
         headings.push({
-            level: node.children.filter(c => c.type === 'heading_marker')[0]?.text.length || 2,
-            text: node.text.replace(/^=+\s*|\s*=+$/g, '').trim()
+            level: Number(node.type.slice('heading'.length)),
+            text: node.text.trim().replace(/^=+|=+$/g, '').trim()
         });
     }
 
@@ -240,21 +285,28 @@ class WikitextProcessor {
         const metadata = {
             headings: [],
             links: [],
-            templates: [],
-            categories: []
+            templates: []
         };
 
-        // Implementation would depend on your specific grammar rules
-        // This is a simplified example
+        // Node names come from the grammar (see queries/*.scm). Categories are not a
+        // separate node — they are wikilinks whose page name starts with "Category:".
         function traverse(node) {
             switch (node.type) {
-                case 'heading':
+                case 'heading1':
+                case 'heading2':
+                case 'heading3':
+                case 'heading4':
+                case 'heading5':
+                case 'heading6':
                     metadata.headings.push(node.text.trim());
                     break;
-                case 'link':
+                case 'wikilink':
+                case 'external_link':
                     metadata.links.push(node.text.trim());
                     break;
-                // Add more cases based on your grammar
+                case 'template':
+                    metadata.templates.push(node.text.trim());
+                    break;
             }
 
             for (const child of node.children) {
